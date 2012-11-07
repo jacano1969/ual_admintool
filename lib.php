@@ -17,7 +17,7 @@ function do_login($username, $password)
     }
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT record_id, username, FROM staff_login where username=$username AND password=$password")) {
+    if ($result = $mysqli->query("SELECT record_id, username, FROM staff_login where username='$username' AND password='$password'")) {
         
         $ADMINUSER->id=$result->record_id;
         $ADMINUSER->username=$result->username;
