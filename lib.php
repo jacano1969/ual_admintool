@@ -10,7 +10,7 @@ function do_login($username, $password)
     $is_user=false;    
     
     // connect to db
-    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->pass, $CFG->db_name);
+    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
@@ -18,6 +18,8 @@ function do_login($username, $password)
     
     // check if user can log in
     if ($result = $mysqli->query("SELECT record_id, username, FROM staff_login where username='$username' AND password='$password'")) {
+        
+        session_regenerate_id(true);
         
         $ADMINUSER->id=$result->record_id;
         $ADMINUSER->username=$result->username;
@@ -30,6 +32,7 @@ function do_login($username, $password)
         // check staff tale for username
             // add staff username to user_login table with default password
                 // login new user
+                    // session_regenerate_id(true);
                     // $is_user=true;
         $is_user=false;
     }
