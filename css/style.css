@@ -8,7 +8,7 @@
 #login-page input {display: block; margin-bottom: 5px;}
 #login-page input[type=text] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page input[type=password] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
-#login-page fieldset {width: 45%; background: #ffffff; padding: 20px;}
+#login-page fieldset {width: 45%; background: #ffffff; padding: 20px; border: 3px solid #CCCCCC; border-radius: 6px 6px 6px 6px;}
 #login-page legend {font-weight: bold; font-size: 0.9em;}
 #login-page .submit {display: inline-block; float: right; margin-right: 10px; background-color: #cccccc; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page .submit.down {display: inline-block; float: right; margin-right: 10px; background-color: #ffffff; border:2px groove #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
@@ -22,7 +22,7 @@
 #home-page input {display: inline; margin-bottom: 5px; margin-right: 2px;}
 #home-page input[type=text] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page input[type=password] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
-#home-page fieldset {background: #ffffff;}
+#home-page fieldset {background: #ffffff; border: 3px solid #CCCCCC; border-radius: 6px 6px 6px 6px;}
 #home-page legend {font-weight: bold; font-size: 0.9em;}
 #home-page .submit {display: inline-block; background-color: #cccccc; border:2px ridge #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page .submit.down {display: inline-block; background-color: #ffffff; border:2px groove #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
