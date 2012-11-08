@@ -24,11 +24,11 @@ function do_login($username, $password) {
         } else {
             
             while ($row = $result->fetch_object()) {
-                $_SESSION['userid']=$row->record_id;
-                $_SESSION['username']=$row->username;
+                $_SESSION['USERID']=$row->record_id;
+                $_SESSION['USERNAME']=$row->username;
             }
             
-                $is_user=true;
+            $is_user=true;
         }
         
         /* free result set */
@@ -66,7 +66,7 @@ function do_logout() {
 
 function is_logged_in() {
     //session_start(); 
-    if(isset($_SESSION['userid'])) {
+    if(isset($_SESSION['USERID'])) {
         return true;
     } else {
         return false;
