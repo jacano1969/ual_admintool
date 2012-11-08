@@ -11,7 +11,7 @@
             require_once('lib.php');
             do_login($username,$password);
         } else {
-            $error=0;
+            $error=2;
         }
     } else {
         $error=0;
@@ -45,7 +45,7 @@
                         case 0 :    break;
                         case 1 :    echo '<div id="error" class="error">Incorrect username or password.</div>';
                                     break;
-                        case 2 :    echo '<div id="error" class="error">Please log in.</div>';
+                        case 2 :    echo '<div id="error" class="error">Please log in with a username and password.</div>';
                                     break;
                         case 3 :    echo '<div id="error" class="error">Your session has expired.  Please log in.</div>';
                                     break;
