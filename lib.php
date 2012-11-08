@@ -17,15 +17,13 @@ function do_login($username, $password) {
     
     // check if user can log in
     if ($result = $mysqli->query("SELECT record_id, username FROM staff_login where username='$username' AND password='$password'")) {
-        session_start();
+        //session_start();
         
         if($result->num_rows==0) {
             $is_user=false;
         } else {
             
             while ($row = $result->fetch_object()) {
-                session_register('userid');
-                session_register('username');
                 $_SESSION['userid']=$row->record_id;
                 $_SESSION['username']=$row->username;
             }
@@ -60,8 +58,6 @@ function do_login($username, $password) {
 
 function do_logout() {
     session_start();
-    session_unregister('userid');
-    session_unregister('username');
     session_destroy();
     header('Location: login.php');
     exit;
@@ -69,7 +65,7 @@ function do_logout() {
 
 
 function is_logged_in() {
-    session_start(); 
+    //session_start(); 
     if(isset($_SESSION['userid'])) {
         return true;
     } else {
