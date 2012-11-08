@@ -118,12 +118,13 @@ function search($record_type, $search_text) {
 function show_home() {
     
     $home = '<body id="home-page">';
+    $home .= '<div class="container">';
+    $home .= '<fieldset>';
+    $home .= '<legend>';
     $home .= 'Welcome ' . get_logged_in_user($_SESSION['USERID']);
-    $home .= '<form name="logout" action="index.php" method="post">';
-    $home .= '<input type="hidden" name="action" value="logout">';
-    $home .= '<input type="submit" value="Log out">';
-    $home .= '</form>';
-    $home .= '</body>';
+    $home .= '</legend>';
+    
+    $home .= show_navigation();
     
     return $home;    
 }
@@ -143,6 +144,21 @@ function show_header() {
     return $header;
 }
 
+function show_navigation() {
+    
+    $navigation = '';
+    $navigation .= '<form name="navigation" action="index.php" method="post">';
+    $navigation .= '<input type="hidden" name="action">';
+    $navigation .= '<input type="submit" value="Add" onclick="this.form.action.value='add';">';
+    $navigation .= '<input type="submit" value="Update" onclick="this.form.action.value='update';">';
+    $navigation .= '<input type="submit" value="Delete" onclick="this.form.action.value='delete';">';
+    $navigation .= '<input type="submit" value="Search" onclick="this.form.action.value='search';">';
+    $navigation .= '<input type="submit" value="Log out" onclick="this.form.action.value='logout';">';
+    $navigation .= '</div>';
+    $navigation .= '</form>';
+    
+    return $navigation;
+}
 
 function show_footer() {
     

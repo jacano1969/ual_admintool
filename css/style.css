@@ -13,3 +13,17 @@
 #login-page .submit {display: inline-block; float: right; margin-right: 10px; background-color: #cccccc; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page .submit.down {display: inline-block; float: right; margin-right: 10px; background-color: #ffffff; border:2px groove #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page .error {color: #ff0000; font-weight: bold; font-size: 0.8em;}
+
+
+#home-page {background: #E0E0E0; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 1.0em;}
+#home-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px;}
+#home-page label {font-size: 0.8em;}
+#home-page form {margin-top: 10px;}
+#home-page input {display: block; margin-bottom: 5px;}
+#home-page input[type=text] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page input[type=password] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page fieldset {background: #ffffff;}
+#home-page legend {font-weight: bold; font-size: 0.9em;}
+#home-page .submit {display: inline-block; float: right; margin-right: 10px; background-color: #cccccc; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page .submit.down {display: inline-block; float: right; margin-right: 10px; background-color: #ffffff; border:2px groove #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page .error {color: #ff0000; font-weight: bold; font-size: 0.8em;}
