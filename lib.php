@@ -52,6 +52,8 @@ function do_login($username, $password)
 
 
 function do_logout() {
+    require_once('dbconfig.php');
+    
     global $ADMINUSER;
      
     $ADMINUSER=null;
@@ -60,6 +62,7 @@ function do_logout() {
 
 
 function is_logged_in(){
+    require_once('dbconfig.php');
     
     global $ADMINUSER;
     
