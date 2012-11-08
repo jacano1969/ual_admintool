@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     if(!empty($_POST['username']) && !empty($_POST['password'])) {
         $username=stripcslashes($_POST['username']);
         $password=stripcslashes($_POST['password']);

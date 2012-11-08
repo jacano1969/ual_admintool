@@ -24,6 +24,8 @@ function do_login($username, $password) {
         } else {
             
             while ($row = $result->fetch_object()) {
+                session_register('userid');
+                session_register('username');
                 $_SESSION['userid']=$row->record_id;
                 $_SESSION['username']=$row->username;
             }
@@ -57,7 +59,9 @@ function do_login($username, $password) {
 
 
 function do_logout() {
-    session_start(); 
+    session_start();
+    session_unregister('userid');
+    session_unregister('username');
     session_destroy();
     header('Location: login.php');
     exit;
