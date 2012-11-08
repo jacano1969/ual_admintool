@@ -1,7 +1,7 @@
 <?php
 
-session_name("ualadmintool");
 session_start();
+echo session_id();
 
 require_once('lib.php');
 

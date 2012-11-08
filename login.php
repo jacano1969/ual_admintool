@@ -1,6 +1,6 @@
 <?php
-    session_name("ualadmintool");
     session_start();
+    echo session_id();
 
     if(!empty($_POST['username']) && !empty($_POST['password'])) {
         $username=stripcslashes($_POST['username']);
