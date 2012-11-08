@@ -55,8 +55,8 @@
                     ?>
                     <label for="username">Username:</label><input type="text" name="username" id="username">
                     <label for="password">Password:</label><input type="password" name="password" id="password">
-                    <input type="submit" value="Ok" class="submit" onmousedown="this.className='submit down';" onmouseup="this.className='submit';">
-                    <input type="submit" value="Cancel" onclick="this.form.reset();return false;" class="submit" onmousedown="this.className='submit down';" onmouseup="this.className='submit';">
+                    <input type="submit" value="Ok" class="submit" onmouseout="this.className=\'submit\';" onmousedown="this.className='submit down';" onmouseup="this.className='submit';">
+                    <input type="submit" value="Cancel" onclick="this.form.reset();return false;" class="submit" onmouseout="this.className=\'submit\';" onmousedown="this.className='submit down';" onmouseup="this.className='submit';">
                 </form>
             </fieldset>
         </div>
