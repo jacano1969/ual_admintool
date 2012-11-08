@@ -9,7 +9,10 @@ $CFG->db_name='dev_ualmis';
 $CFG->db_user='spider';
 $CFG->db_pass='mwfumtrb';
 
-unset($ADMINUSER);
-global $ADMINUSER;
-$ADMINUSER = new stdClass();
+/*$CFG->db_host='localhost';
+$CFG->db_name='dev_ualmis';
+$CFG->db_user='root';
+$CFG->db_pass='';
+*/
+
 

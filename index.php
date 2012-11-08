@@ -52,6 +52,8 @@ if(is_logged_in()){
     
     // show footer
     echo show_footer();
+} else {
+    header('Location: login.php');
 }
 
 

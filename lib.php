@@ -1,11 +1,9 @@
 <?php 
 
+require_once('dbconfig.php');
 
-function do_login($username, $password)
-{
-    require_once('dbconfig.php');
-    
-    global $CFG, $ADMINUSER;
+function do_login($username, $password) {
+    global $CFG;
     
     $is_user=false;    
     
@@ -18,17 +16,22 @@ function do_login($username, $password)
     
     // check if user can log in
     if ($result = $mysqli->query("SELECT record_id, username FROM staff_login where username='$username' AND password='$password'")) {
+        session_start();
         
-        session_regenerate_id(true);
-        
-        while ($row = mysql_fetch_assoc($result)) {
-            $ADMINUSER->id=$row->record_id;
-            $ADMINUSER->username=$row->username;
+        if($result->num_rows==0) {
+            $is_user=false;
+        } else {
+            
+            while ($row = $result->fetch_object()) {
+                $_SESSION['userid']=$row->record_id;
+                $_SESSION['username']=$row->username;
+            }
+            
+                $is_user=true;
         }
         
         /* free result set */
         $result->close();
-        $is_user=true;
     } else {
         // TODO:
         // check staff tale for username
@@ -43,39 +46,27 @@ function do_login($username, $password)
     if($is_user==true) {
         // redirect to index page
         header('Location: index.php');
+    } else {
+        // incorrect username or password
+        header('Location: login.php?error=1');
         exit;
     }
-    
-    // incorrect username or password
-    header('Location: login.php?error=1');
 }
 
 
 function do_logout() {
-    require_once('dbconfig.php');
-    
-    global $ADMINUSER;
-     
-    $ADMINUSER=null;
-    header('Location: index.php');    
+    session_start(); 
+    session_destroy();
+    header('Location: login.php');    
 }
 
 
-function is_logged_in(){
-    require_once('dbconfig.php');
-    
-    global $ADMINUSER;
-    
-    if(!empty($ADMINUSER)) {
-        if(!empty($ADMINUSER->id)) {
-            return true;
-        } else {
-            // user data/session error
-            header('Location: login.php?error=3');
-        }
-    }else {
-        // user not logged in
-        header('Location: login.php');
+function is_logged_in() {
+    session_start(); 
+    if(isset($_SESSION['userid'])) {
+        return true;
+    } else {
+        return false;
     }
 }
 
