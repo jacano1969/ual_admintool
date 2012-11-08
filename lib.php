@@ -159,6 +159,8 @@ function show_footer() {
 //
 
 function get_logged_in_user($userid) {
+    global $CFG;
+    
     // connect to db
     $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
