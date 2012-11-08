@@ -12,6 +12,7 @@ function do_login($username, $password) {
     
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
+        exit;
     }
     
     // check if user can log in
@@ -46,6 +47,7 @@ function do_login($username, $password) {
     if($is_user==true) {
         // redirect to index page
         header('Location: index.php');
+        exit;
     } else {
         // incorrect username or password
         header('Location: login.php?error=1');
@@ -57,7 +59,8 @@ function do_login($username, $password) {
 function do_logout() {
     session_start(); 
     session_destroy();
-    header('Location: login.php');    
+    header('Location: login.php');
+    exit;
 }
 
 
