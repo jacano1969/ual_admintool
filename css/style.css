@@ -24,6 +24,6 @@
 #home-page input[type=password] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page fieldset {background: #ffffff;}
 #home-page legend {font-weight: bold; font-size: 0.9em;}
-#home-page .submit {display: inline-block; float: right; margin-right: 10px; background-color: #cccccc; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
-#home-page .submit.down {display: inline-block; float: right; margin-right: 10px; background-color: #ffffff; border:2px groove #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page .submit {display: inline-block; background-color: #cccccc; border:2px ridge #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page .submit.down {display: inline-block; background-color: #ffffff; border:2px groove #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page .error {color: #ff0000; font-weight: bold; font-size: 0.8em;}
