@@ -117,7 +117,8 @@ function search($record_type, $search_text) {
  */
 function show_home() {
     
-    $home = '<body id="home-page">';
+    $home = '';
+    $home .= '<body id="home-page">';
     $home .= '<div class="container">';
     $home .= '<fieldset>';
     $home .= '<legend>';
@@ -125,6 +126,7 @@ function show_home() {
     $home .= '</legend>';
     
     $home .= show_navigation();
+    $home .= '</fieldset>';
     
     return $home;    
 }
@@ -133,7 +135,7 @@ function show_home() {
 function show_header() {
     
     $header = '';
-    $header = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
+    $header .= '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
     $header .= '<html lang="en" dir="ltr">';
     $header .= '<head>';
     $header .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">';
@@ -149,16 +151,17 @@ function show_navigation() {
     $navigation = '';
     $navigation .= '<form name="navigation" action="index.php" method="post">';
     $navigation .= '<input type="hidden" name="action">';
-    $navigation .= '<input type="submit" value="Add" onclick="this.form.action.value='add';">';
-    $navigation .= '<input type="submit" value="Update" onclick="this.form.action.value='update';">';
-    $navigation .= '<input type="submit" value="Delete" onclick="this.form.action.value='delete';">';
-    $navigation .= '<input type="submit" value="Search" onclick="this.form.action.value='search';">';
-    $navigation .= '<input type="submit" value="Log out" onclick="this.form.action.value='logout';">';
+    $navigation .= '<input type="submit" value="Add" onclick="this.form.action.value=\'add\';">';
+    $navigation .= '<input type="submit" value="Update" onclick="this.form.action.value=\'update\';">';
+    $navigation .= '<input type="submit" value="Delete" onclick="this.form.action.value=\'delete\';">';
+    $navigation .= '<input type="submit" value="Search" onclick="this.form.action.value=\'search\';">';
+    $navigation .= '<input type="submit" value="Log out" onclick="this.form.action.value=\'logout\';">';
     $navigation .= '</div>';
     $navigation .= '</form>';
     
     return $navigation;
 }
+
 
 function show_footer() {
     
