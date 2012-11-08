@@ -151,11 +151,11 @@ function show_navigation() {
     $navigation = '';
     $navigation .= '<form name="navigation" action="index.php" method="post">';
     $navigation .= '<input type="hidden" name="action">';
-    $navigation .= '<input type="submit" value="Add" onclick="this.form.action.value=\'add\';">';
-    $navigation .= '<input type="submit" value="Update" onclick="this.form.action.value=\'update\';">';
-    $navigation .= '<input type="submit" value="Delete" onclick="this.form.action.value=\'delete\';">';
-    $navigation .= '<input type="submit" value="Search" onclick="this.form.action.value=\'search\';">';
-    $navigation .= '<input type="submit" value="Log out" onclick="this.form.action.value=\'logout\';">';
+    $navigation .= '<input type="submit" class="submit" value="Add" onclick="this.form.action.value=\'add\';">';
+    $navigation .= '<input type="submit" class="submit" value="Update" onclick="this.form.action.value=\'update\';">';
+    $navigation .= '<input type="submit" class="submit" value="Delete" onclick="this.form.action.value=\'delete\';">';
+    $navigation .= '<input type="submit" class="submit" value="Search" onclick="this.form.action.value=\'search\';">';
+    $navigation .= '<input type="submit" class="submit" value="Log out" onclick="this.form.action.value=\'logout\';">';
     $navigation .= '</div>';
     $navigation .= '</form>';
     
