@@ -2,8 +2,8 @@
     if(!empty($_POST['username']) && !empty($_POST['password'])) {
         $username=stripcslashes($_POST['username']);
         $password=stripcslashes($_POST['password']);
-        $username=mysql_real_escape_string($username);
-        $password=mysql_real_escape_string($password);
+        $username=htmlspecialchars($username, ENT_QUOTES, "ISO-8859-1");
+        $password=htmlspecialchars($password, ENT_QUOTES, "ISO-8859-1");
         
         if($username !='' && $password !='') {
             require_once('lib.php');
