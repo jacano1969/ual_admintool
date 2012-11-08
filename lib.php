@@ -17,8 +17,6 @@ function do_login($username, $password) {
     
     // check if user can log in
     if ($result = $mysqli->query("SELECT record_id, username FROM staff_login where username='$username' AND password='$password'")) {
-        //session_start();
-        
         if($result->num_rows==0) {
             $is_user=false;
         } else {
@@ -38,7 +36,6 @@ function do_login($username, $password) {
         // check staff tale for username
             // add staff username to user_login table with default password
                 // login new user
-                    // session_regenerate_id(true);
                     // $is_user=true;
         $is_user=false;
     }
@@ -65,7 +62,6 @@ function do_logout() {
 
 
 function is_logged_in() {
-    //session_start(); 
     if(isset($_SESSION['USERID'])) {
         return true;
     } else {
@@ -121,12 +117,13 @@ function search($record_type, $search_text) {
  */
 function show_home() {
     
-    $home = '';
-    $home .= 'You are logged in';
+    $home = '<body id="home-page">';
+    $home .= 'Welcome ' . get_logged_in_user($_SESSION['USERID']);
     $home .= '<form name="logout" action="index.php" method="post">';
     $home .= '<input type="hidden" name="action" value="logout">';
     $home .= '<input type="submit" value="Log out">';
     $home .= '</form>';
+    $home .= '</body>';
     
     return $home;    
 }
@@ -155,3 +152,39 @@ function show_footer() {
     
     return $footer;
 }
+
+
+//
+// helper functions
+//
+
+function get_logged_in_user($userid) {
+    // connect to db
+    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $logged_in_user = '';
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    // check if user can log in
+    if ($result = $mysqli->query("SELECT firstname, lastname FROM users record_id=$userid")) {
+        if($result->num_rows==0) {
+            return $logged_in_user;
+        } else {
+            
+            while ($row = $result->fetch_object()) {
+                $logged_in_user = $row->firstname . ' '. $row->lastname;
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    return $logged_in_user;
+}
+
+
