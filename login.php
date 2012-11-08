@@ -1,5 +1,5 @@
 <?php
-    session_set_cookie_params(0, '/', 'w01.ual01test.wf.ulcc.ac.uk');
+    session_name("ualadmintool");
     session_start();
 
     if(!empty($_POST['username']) && !empty($_POST['password'])) {
