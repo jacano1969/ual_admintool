@@ -21,9 +21,11 @@ function do_login($username, $password)
         
         session_regenerate_id(true);
         
-        $ADMINUSER->id=$result->record_id;
-        $ADMINUSER->username=$result->username;
-
+        while ($row = mysql_fetch_assoc($result)) {
+            $ADMINUSER->id=$row->record_id;
+            $ADMINUSER->username=$row->username;
+        }
+        
         /* free result set */
         $result->close();
         $is_user=true;
@@ -38,7 +40,7 @@ function do_login($username, $password)
     }
 
     // check if username password are correct
-    if($is_user) {
+    if($is_user==true) {
         // redirect to index page
         header('Location: index.php');
         exit;

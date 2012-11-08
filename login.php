@@ -8,7 +8,6 @@
         if($username !='' && $password !='') {
             require_once('lib.php');
             do_login($username,$password);
-            exit;
         } else {
             $error=0;
         }
