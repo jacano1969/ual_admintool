@@ -170,7 +170,7 @@ function get_logged_in_user($userid) {
     }
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT firstname, lastname FROM users record_id=$userid")) {
+    if ($result = $mysqli->query("SELECT firstname, lastname FROM users WHERE record_id=$userid")) {
         if($result->num_rows==0) {
             return $logged_in_user;
         } else {
