@@ -110,6 +110,16 @@ function search($record_type, $search_text) {
 }
 
 
+function do_course_request() {
+    
+}
+
+
+//
+// Navigation functions
+//
+
+
 /**
  * Description: function to show default page, when no action has been chosen
  *
@@ -155,6 +165,7 @@ function show_navigation() {
     $navigation .= '<input type="submit" class="submit" value="Update" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'update\';">';
     $navigation .= '<input type="submit" class="submit" value="Delete" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'delete\';">';
     $navigation .= '<input type="submit" class="submit" value="Search" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'search\';">';
+    $navigation .= '<input type="submit" class="submit" value="Course Request" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'courserequest\';">';
     $navigation .= '<input type="submit" class="submit" value="Log out" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'logout\';">';
     $navigation .= '</div>';
     $navigation .= '</form>';
@@ -176,6 +187,7 @@ function show_footer() {
 //
 // helper functions
 //
+
 
 function get_logged_in_user($userid) {
     global $CFG;

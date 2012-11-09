@@ -45,6 +45,9 @@ if(is_logged_in()){
         case 'search' : search($record_type, $search_text);
                         break;
                     
+        case 'courserequest' : do_course_request();
+                        break;
+                    
         case 'logout' : do_logout();
                         break;
                     
