@@ -144,7 +144,7 @@ function show_home() {
     $home .= '</fieldset>';
     
     // get home filters
-    $home .= '<div id="filters">';
+    $home .= '<div id="mainfilters">';
     
     $home .= get_filter_data(false, false);
     

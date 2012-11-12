@@ -17,7 +17,7 @@ var ual_admintool = ual_admintool || (function(){
             
                 $.get('filter.php?type=P&data='+selected_programme, function(data){
                     // replace filters with new data
-                    $('#filters').html(data); 
+                    $('#mainfilters').html(data); 
                 });
             });
         }
