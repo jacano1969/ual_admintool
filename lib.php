@@ -21,13 +21,13 @@ function do_login($username, $password) {
     }
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT record_id, username FROM staff_login where username='$username' AND password='$password'")) {
+    if ($result = $mysqli->query("SELECT id, username FROM staff_login where username='$username' AND password='$password'")) {
         if($result->num_rows==0) {
             $is_user=false;
         } else {
             
             while ($row = $result->fetch_object()) {
-                $_SESSION['USERID']=$row->record_id;
+                $_SESSION['USERID']=$row->id;
                 $_SESSION['USERNAME']=$row->username;
             }
             
