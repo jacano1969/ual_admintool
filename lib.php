@@ -284,8 +284,7 @@ function get_filter_data() {
             
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filter->programmes_list['id'][] = $row->id;
-                $filter->programmes_list['name'][] = $row->name;
+                $filter->programmes_list[$row->id] = $row->name;
             }
         }
         
@@ -301,8 +300,7 @@ function get_filter_data() {
             
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filter->course_years_list['id'][] = $row->name;
-                $filter->course_years_list['name'][] = $row->name;
+                $filter->course_years_list[$row->name] = $row->name;
             }
         }
         
@@ -318,8 +316,7 @@ function get_filter_data() {
             
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filter->courses_list['id'][] = $row->id;
-                $filter->courses_list['name'][] = $row->name;
+                $filter->courses_list[$row->id] = $row->name;
             }
         }
         
@@ -335,8 +332,7 @@ function get_filter_data() {
             
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filter->units_list['id'][] = $row->name;
-                $filter->units_list['name'][] = $row->name;
+                $filter->units_list[$row->name] = $row->name;
             }
         }
         
