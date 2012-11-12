@@ -295,7 +295,7 @@ function get_filter_data($type=false, $data=false) {
     } else {
         // filter by programme 
         if($type=='P') {
-            $courses_sql = "select distinct c.aos_code as id, c.aos_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code like('$data%') and c.courseid=e.courseid order by name";
+            $courses_sql = "select distinct c.aos_code as id, c.aos_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.aos_code='$data' and c.courseid=e.courseid order by name";
         }
     }
     
@@ -310,6 +310,9 @@ function get_filter_data($type=false, $data=false) {
     $filters .= '</legend>';
     $filters .= '<form id="filters" name="filters">';
         
+    // selected items
+    $selected_programme = ''
+    
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
         if($result->num_rows==0) {
@@ -321,8 +324,9 @@ function get_filter_data($type=false, $data=false) {
             // construct data
             while ($row = $result->fetch_object()) {
                 if($type=='P') {
-                    if($data==$row->name) {
+                    if($data==$row->id) {
                         $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
+                        $selected_programme=$row->name;
                     } else {
                         $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
                     }
@@ -348,7 +352,18 @@ function get_filter_data($type=false, $data=false) {
             
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
+                if($type=='P') {
+                    // get course year from progeamme name
+                    $course_year = substr($selected_programme,(len($selected_programme)-5));
+                    if($course_year==$row->name) {
+                        $filters .='<option id="'.$row->name.'" selected="selected">'.$row->name.'</option>';
+                    } else 
+                        $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
+                    }
+                } else {
+                    $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';    
+                }
+                
             }
             
             $filters .= '</select>';
