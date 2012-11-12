@@ -155,8 +155,8 @@ function show_home() {
             $home .='<option>Select Programme ...</option>';
         }
         
-        foreach($filters->programmes_list as $programme) {
-            $home .='<option id="'.$programme['id'].'">'.$programme['name'].'</option>';
+        foreach($filters->programmes_list as $id->$name) {
+            $home .='<option id="'.$id.'">'.$name.'</option>';
         }
         
         if($filters->programmes_list) {
