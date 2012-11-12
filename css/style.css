@@ -18,7 +18,7 @@
 #home-page {background: #E0E0E0; font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 1.0em;}
 #home-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px;}
 #home-page label {font-size: 0.8em;}
-#home-page form {margin-top: 10px;}
+#home-page form {margin-top: 10px; float:left;}
 #home-page input {display: inline; margin-bottom: 5px; margin-right: 2px;}
 #home-page input[type=text] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page input[type=password] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
