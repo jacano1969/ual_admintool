@@ -55,8 +55,6 @@ function do_login($username, $password) {
         header('Location: login.php?error=1');
         exit;
     }
-    
-    $mysqli->close();
 }
 
 
@@ -230,8 +228,6 @@ function get_logged_in_user($userid) {
         $result->close();
     }
     
-    $mysqli->close();
-    
     return $logged_in_user;
 }
 
@@ -348,8 +344,6 @@ function get_filter_data() {
         /* free result set */
         $result->close();
     }
-    
-    $mysqli->close();
     
     return $filter;
 }
