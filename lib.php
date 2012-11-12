@@ -213,7 +213,9 @@ function show_home() {
         $home .= '</fieldset>';
     }
     
-        
+    
+    $home .= '</div>';
+    
     return $home;    
 }
 
@@ -244,7 +246,6 @@ function show_navigation() {
     $navigation .= '<input type="submit" class="submit" value="Search" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'search\';">';
     $navigation .= '<input type="submit" class="submit" value="Course Request" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'courserequest\';">';
     $navigation .= '<input type="submit" class="submit" value="Log out" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'logout\';">';
-    $navigation .= '</div>';
     $navigation .= '</form>';
     
     return $navigation;
