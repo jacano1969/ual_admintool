@@ -28,5 +28,5 @@
 #home-page .submit.down {display: inline-block; background-color: #ffffff; border:2px groove #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page .error {color: #ff0000; font-weight: bold; font-size: 0.8em;}
 #home-page select {display:block; margin: 0 auto; width: 350px;  background: none repeat scroll 0 0 #E0E0E0; border: 2px groove #CCCCCC; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px; margin-bottom: 4px;}
-#home-page img {float:right;}
+#home-page img {float: right; margin-left: 200px; margin-top: 10px;  position: absolute;}
 
