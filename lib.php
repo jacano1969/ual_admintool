@@ -144,77 +144,9 @@ function show_home() {
     $home .= '</fieldset>';
     
     // get home filters
-    $filters = get_filter_data();
+    //$filters = get_filter_data(false, false);
+    $home .= get_filter_data(false, false);
 
-    if($filters){
-        
-        $home .= '<fieldset>';
-        $home .= '<legend>';
-        $home .= 'Filters';
-        $home .= '</legend>';
-        $home .= '<form id="filters" name="filters">';
-        
-        // programmes
-        if($filters->programmes_list) {
-            $home .= '<label for="programmes">Programme:</label><select id="programmes" name="programmes">';
-            $home .='<option id="0">Select Programme ...</option>';
-        }
-        
-        foreach($filters->programmes_list as $id => $name) {
-            $home .='<option id="'.$id.'">'.$name.'</option>';
-        }
-        
-        if($filters->programmes_list) {
-            $home .= '</select>';
-        }
-        
-        // course years
-        if($filters->course_years_list) {
-            $home .= '<label for="courseyears">Course Year:</label><select id="courseyears" name="courseyears">';
-            $home .='<option id="0">Select Course Year ...</option>';
-        }
-        
-        foreach($filters->course_years_list as $id => $name) {
-            $home .='<option id="'.$id.'">'.$name.'</option>';
-        }
-        
-        if($filters->course_years_list) {
-            $home .= '</select>';
-        }
-        
-        // courses
-        if($filters->courses_list) {
-            $home .= '<label for="courses">Course:</label><select id="courses" name="courses">';
-            $home .='<option id="0">Select Course ...</option>';
-        }
-        
-        foreach($filters->courses_list as $id => $name) {
-            $home .='<option id="'.$id.'">'.$name.'</option>';
-        }
-        
-        if($filters->courses_list) {
-            $home .= '</select>';
-        }
-        
-        // units
-        if($filters->units_list) {
-            $home .= '<label for="units">Unit:</label><select id="units" name="units">';
-            $home .='<option id="0">Select Unit ...</option>';
-        }
-        
-        foreach($filters->units_list as $id => $name) {
-            $home .='<option id="'.$id.'">'.$name.'</option>';
-        }
-        
-        if($filters->units_list) {
-            $home .= '</select>';
-        }
-        
-        $home .= '</form>';
-        $home .= '</fieldset>';
-    }
-    
-    
     $home .= '</div>';
     
     return $home;    
@@ -309,7 +241,7 @@ function get_logged_in_user($userid) {
  *
  * To be used with an ajax get/data/json request
  */
-function get_filter_data() {
+function get_filter_data($type=false, $data=false) {
     
     global $CFG;
     
@@ -317,7 +249,8 @@ function get_filter_data() {
     // get all programmes, course years, courses, units for the currently logged in user
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
-    $filter = new stdClass();
+    //$filter = new stdClass();
+    $filters ='';
     
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
@@ -327,10 +260,10 @@ function get_filter_data() {
     // multidimensional arrays for data
     //$filter->colleges_list = array();       // courses.college => college name
     //$filter->schools_list = array();        // courses.school => school name
-    $filter->programmes_list = array();     // courses.aos_code (where 1st character = p) => programme name
-    $filter->course_years_list = array();   // courses.aos_period (4th character) => course year number
-    $filter->courses_list = array();        // courses.courseid => course name
-    $filter->units_list = array();          // courses.aos_code (where 1st character is a-z) => unit name
+    //$filter->programmes_list = array();     // courses.aos_code (where 1st character = p) => programme name
+    //$filter->course_years_list = array();   // courses.aos_period (4th character) => course year number
+    //$filter->courses_list = array();        // courses.courseid => course name
+    //$filter->units_list = array();          // courses.aos_code (where 1st character is a-z) => unit name
     //$filter->users_list = array();          // enrolments.recordid + staff_enrolments_ulcc.recordid => firstname . ' ' . lastname
     
     
@@ -339,27 +272,45 @@ function get_filter_data() {
     
     // programmes
     //$programmes_sql = "select distinct aos_code as id, concat(aos_code, aos_period, acad_period) as name from course_structure where aos_code like('L%') order by name";
-    $programmes_sql = "select distinct cs.aos_code as id, concat(cs.aos_code, cs.aos_period, cs.acad_period) as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and cs.aos_code like('L%') order by name";
+    if($type==false) {
+        $programmes_sql = "select distinct cs.aos_code as id, concat(cs.aos_code, cs.aos_period, cs.acad_period) as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and cs.aos_code like('L%') order by name";
+    }
     
     // course years
-    $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+    if($type==false) {
+        $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+    }
     
     // courses
-    $courses_sql = "select distinct c.aos_code as id, c.aos_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid order by name";
+    if($type==false) {
+        $courses_sql = "select distinct c.aos_code as id, c.aos_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid order by name";
+    }
     
     // units
-    $units_sql = "SELECT DISTINCT CONCAT(cs.AOSCD_LINK, cs.LNK_AOS_PERIOD, cs.LNK_PERIOD) AS name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+    if($type==false) {
+        $units_sql = "SELECT DISTINCT CONCAT(cs.AOSCD_LINK, cs.LNK_AOS_PERIOD, cs.LNK_PERIOD) AS name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+    }
     
+    $filters .= '<fieldset>';
+    $filters .= '<legend>';
+    $filters .= 'Filters';
+    $filters .= '</legend>';
+    $filters .= '<form id="filters" name="filters">';
+        
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
         if($result->num_rows==0) {
             return $filter;
-        } else {
+        } else {  
+            $filters .= '<label for="programmes">Programme:</label><select id="programmes" name="programmes">';
+            $filters .='<option id="0">Select Programme ...</option>';
             
-            // construct json data
+            // construct data
             while ($row = $result->fetch_object()) {
-                $filter->programmes_list[$row->id] = $row->name;
+                $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
             }
+            
+            $filters .= '</select>';
         }
         
         /* free result set */
@@ -371,11 +322,15 @@ function get_filter_data() {
         if($result->num_rows==0) {
             return $filter;
         } else {
+            $filters .= '<label for="courseyears">Course Year:</label><select id="courseyears" name="courseyears">';
+            $filters .='<option id="0">Select Course Year ...</option>';
             
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filter->course_years_list[$row->name] = $row->name;
+                $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
             }
+            
+            $filters .= '</select>';
         }
         
         /* free result set */
@@ -388,10 +343,15 @@ function get_filter_data() {
             return $filter;
         } else {
             
+            $filters .= '<label for="courses">Course:</label><select id="courses" name="courses">';
+            $filters .='<option id="0">Select Course ...</option>';
+            
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filter->courses_list[$row->id] = $row->name;
+                $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
             }
+            
+            $filters .= '</select>';
         }
         
         /* free result set */
@@ -404,16 +364,24 @@ function get_filter_data() {
             return $filter;
         } else {
             
+            $filters .= '<label for="units">Unit:</label><select id="units" name="units">';
+            $filters .='<option id="0">Select Unit ...</option>';
+            
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filter->units_list[$row->name] = $row->name;
+                $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
             }
+            
+            $filters .= '</select>';
         }
         
         /* free result set */
         $result->close();
     }
     
-    return $filter;
+    $filters .= '</form>';
+    $filters .= '</fieldset>';
+        
+    return $filters;
 }
 

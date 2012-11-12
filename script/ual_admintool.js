@@ -8,9 +8,13 @@ var ual_admintool = ual_admintool || (function(){
     
         // home page scripts
         if($('#home-page').length>0) {
+            
+            // programme filter change
             $('#programmes').change(function(){
-                var selected_programme = $(this).val();
                 
+                // get selected filter
+                var selected_programme= $(this).val();
+            
                 alert(selected_programme);
             });
         }
