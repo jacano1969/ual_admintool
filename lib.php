@@ -148,11 +148,15 @@ function show_home() {
 
     if($filters){
         
+        $home .= '<fieldset>';
+        $home .= 'Filters';
+        $home .= '</legend>';
         $home .= '<form id="filters" name="filters">';
         
+        // programmes
         if($filters->programmes_list) {
             $home .= '<select id="programmes" name="programmes">';
-            $home .='<option>Select Programme ...</option>';
+            $home .='<option id="0">Select Programme ...</option>';
         }
         
         foreach($filters->programmes_list as $id => $name) {
@@ -163,7 +167,50 @@ function show_home() {
             $home .= '</select>';
         }
         
+        // course years
+        if($filters->course_years_list) {
+            $home .= '<select id="courseyears" name="courseyears">';
+            $home .='<option id="0">Select Course Year ...</option>';
+        }
+        
+        foreach($filters->course_years_list as $id => $name) {
+            $home .='<option id="'.$id.'">'.$name.'</option>';
+        }
+        
+        if($filters->course_years_list) {
+            $home .= '</select>';
+        }
+        
+        // courses
+        if($filters->courses_list) {
+            $home .= '<select id="courses" name="courses">';
+            $home .='<option id="0">Select Course ...</option>';
+        }
+        
+        foreach($filters->courses_list as $id => $name) {
+            $home .='<option id="'.$id.'">'.$name.'</option>';
+        }
+        
+        if($filters->courses_list) {
+            $home .= '</select>';
+        }
+        
+        // units
+        if($filters->units_list) {
+            $home .= '<select id="units" name="units">';
+            $home .='<option id="0">Select Unit ...</option>';
+        }
+        
+        foreach($filters->units_list as $id => $name) {
+            $home .='<option id="'.$id.'">'.$name.'</option>';
+        }
+        
+        if($filters->units_list) {
+            $home .= '</select>';
+        }
+        
         $home .= '</form>';
+        $home .= '</fieldset>';
     }
     
         
