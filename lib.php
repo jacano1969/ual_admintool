@@ -275,24 +275,24 @@ function get_filter_data($type=false, $data=false) {
     
     // programmes
     //$programmes_sql = "select distinct aos_code as id, concat(aos_code, aos_period, acad_period) as name from course_structure where aos_code like('L%') order by name";
-    if($type==false) {
+    //if($type==false) {
         $programmes_sql = "select distinct cs.aos_code as id, concat(cs.aos_code, cs.aos_period, cs.acad_period) as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and cs.aos_code like('L%') order by name";
-    }
+    //}
     
     // course years
-    if($type==false) {
+    //if($type==false) {
         $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
-    }
+    //}
     
     // courses
-    if($type==false) {
+    //if($type==false) {
         $courses_sql = "select distinct c.aos_code as id, c.aos_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid order by name";
-    }
+    //}
     
     // units
-    if($type==false) {
+    //if($type==false) {
         $units_sql = "SELECT DISTINCT CONCAT(cs.AOSCD_LINK, cs.LNK_AOS_PERIOD, cs.LNK_PERIOD) AS name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
-    }
+    //}
     
     $filters .= '<fieldset>';
     $filters .= '<legend>';
