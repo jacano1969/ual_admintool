@@ -2,6 +2,11 @@
 
 require_once('dbconfig.php');
 
+//
+// Login functions
+//
+
+
 function do_login($username, $password) {
     global $CFG;
     
@@ -50,6 +55,8 @@ function do_login($username, $password) {
         header('Location: login.php?error=1');
         exit;
     }
+    
+    $mysqli->close();
 }
 
 
@@ -68,6 +75,11 @@ function is_logged_in() {
         return false;
     }
 }
+
+
+//
+// Navigation functions
+//
 
 
 /**
@@ -115,11 +127,6 @@ function do_course_request() {
 }
 
 
-//
-// Navigation functions
-//
-
-
 /**
  * Description: function to show default page, when no action has been chosen
  *
@@ -156,6 +163,7 @@ function show_header() {
     return $header;
 }
 
+
 function show_navigation() {
     
     $navigation = '';
@@ -169,6 +177,11 @@ function show_navigation() {
     $navigation .= '<input type="submit" class="submit" value="Log out" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'logout\';">';
     $navigation .= '</div>';
     $navigation .= '</form>';
+    
+    
+    $filters = get_filter_data();
+    
+    printObject($filters);
     
     return $navigation;
 }
@@ -217,7 +230,127 @@ function get_logged_in_user($userid) {
         $result->close();
     }
     
+    $mysqli->close();
+    
     return $logged_in_user;
 }
 
+
+/**
+ * Description function to return data for dropdown filters
+ *
+ *
+ * To be used with an ajax get/data/json request
+ */
+function get_filter_data() {
+    
+    // TODO:
+    // get all programmes, course years, courses, units for the currently logged in user
+    $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $filter = new stdClass();
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    // multidimensional arrays for data
+    //$filter->colleges_list = array();       // courses.college => college name
+    //$filter->schools_list = array();        // courses.school => school name
+    $filter->programmes_list = array();     // courses.aos_code (where 1st character = p) => programme name
+    $filter->course_years_list = array();   // courses.aos_period (4th character) => course year number
+    $filter->courses_list = array();        // courses.courseid => course name
+    $filter->units_list = array();          // courses.aos_code (where 1st character is a-z) => unit name
+    //$filter->users_list = array();          // enrolments.recordid + staff_enrolments_ulcc.recordid => firstname . ' ' . lastname
+    
+    
+    //
+    // todo: check that logged in user has access
+    //
+    // programmes
+    $programmes_sql = "select distinct aos_code as id, concat(aos_code, aos_period, acad_period) as name from course_structure where aos_code like('L%') order by name";
+    
+    // course years
+    $course_years_sql = "select distinct acad_period as name from course_structure order by name";
+    
+    // courses
+    $courses_sql = "select distinct aos_code as id, aos_description as name from courses order by name";
+    
+    // units
+    $units_sql = "SELECT DISTINCT CONCAT(AOSCD_LINK,LNK_AOS_PERIOD,LNK_PERIOD) AS name from course_structure order by name";
+    
+    
+    // get programmes list
+    if ($result = $mysqli->query($programmes_sql)) {
+        if($result->num_rows==0) {
+            return $filter;
+        } else {
+            
+            // construct json data
+            while ($row = $result->fetch_object()) {
+                $filter->programmes_list['id'] = $row->id;
+                $filter->programmes_list['name'] = $row->name;
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    // get course years list
+    if ($result = $mysqli->query($course_years_sql)) {
+        if($result->num_rows==0) {
+            return $filter;
+        } else {
+            
+            // construct json data
+            while ($row = $result->fetch_object()) {
+                $filter->course_years_list['id'] = $row->name;
+                $filter->course_years_list['name'] = $row->name;
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    // get courses list
+    if ($result = $mysqli->query($courses_sql)) {
+        if($result->num_rows==0) {
+            return $filter;
+        } else {
+            
+            // construct json data
+            while ($row = $result->fetch_object()) {
+                $filter->courses_list['id'] = $row->id;
+                $filter->courses_list['name'] = $row->name;
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    // get units list
+    if ($result = $mysqli->query($units_sql)) {
+        if($result->num_rows==0) {
+            return $filter;
+        } else {
+            
+            // construct json data
+            while ($row = $result->fetch_object()) {
+                $filter->units_list['id'] = $row->name;
+                $filter->units_list['name'] = $row->name;
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    $mysqli->close();
+    
+    return $filter;
+}
 
