@@ -9,7 +9,7 @@ var ual_admintool = ual_admintool || (function(){
         // home page scripts
         if($('#home-page').length>0) {
             $('#programmes').change(function(){
-                var selected_programme = $(this).id;
+                var selected_programme = $(this).val();
                 
                 alert(selected_programme);
             });
