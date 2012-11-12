@@ -354,7 +354,7 @@ function get_filter_data($type=false, $data=false) {
             while ($row = $result->fetch_object()) {
                 if($type=='P') {
                     // get course year from progeamme name
-                    $course_year = substr($selected_programme,(len($selected_programme)-5));
+                    $course_year = substr($selected_programme,(strlen($selected_programme)-5));
                     if($course_year==$row->name) {
                         $filters .='<option id="'.$row->name.'" selected="selected">'.$row->name.'</option>';
                     } else 
