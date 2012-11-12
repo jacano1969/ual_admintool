@@ -15,7 +15,7 @@ var ual_admintool = ual_admintool || (function(){
                 // get selected filter
                 var selected_programme= $(this).val();
             
-                $.get('filter.php&type=P&data='+selected_programme, function(data){
+                $.get('filter.php?type=P&data='+selected_programme, function(data){
                     // replace filters with new data
                     $('#filters').html(data); 
                 });
