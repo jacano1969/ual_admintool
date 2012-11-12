@@ -182,7 +182,7 @@ function show_navigation() {
     
     $filters = get_filter_data();
     
-    print $filters;
+    //print $filters;
     
     return $navigation;
 }
