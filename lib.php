@@ -179,8 +179,6 @@ function show_navigation() {
     
     $filters = get_filter_data();
     
-    print $filters;
-    
     return $navigation;
 }
 
@@ -246,6 +244,8 @@ function get_filter_data() {
     // get all programmes, course years, courses, units for the currently logged in user
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
+    echo 'connect';
+    
     $filter = new stdClass();
     
     if (mysqli_connect_error()) {
@@ -263,6 +263,7 @@ function get_filter_data() {
     //$filter->users_list = array();          // enrolments.recordid + staff_enrolments_ulcc.recordid => firstname . ' ' . lastname
     
     
+    echo ' - stclass';
     //
     // todo: check that logged in user has access
     //
@@ -287,7 +288,9 @@ function get_filter_data() {
             
             // construct json data
             while ($row = $result->fetch_object()) {
+                echo ' - prog data';
                 $filter->programmes_list['id'] = $row->id;
+                echo ' - set prog id ';
                 $filter->programmes_list['name'] = $row->name;
             }
         }
