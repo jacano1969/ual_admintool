@@ -143,6 +143,30 @@ function show_home() {
     $home .= show_navigation();
     $home .= '</fieldset>';
     
+    // get home filters
+    $filters = get_filter_data();
+
+    if($filters){
+        
+        $home .= '<form id="filters" name="filters">';
+        
+        if($filters->programmes_list) {
+            $home .= '<select id="programmes" name="programmes">';
+            $home .='<option>Select Programme ...</option>';
+        }
+        
+        foreach($filters->programmes_list as $programme) {
+            $home .='<option id="'.$programme['id'].'">'.$programme['name'].'</option>';
+        }
+        
+        if($filters->programmes_list) {
+            $home .= '</select>';
+        }
+        
+        $home .= '</form>';
+    }
+    
+        
     return $home;    
 }
 
@@ -175,10 +199,6 @@ function show_navigation() {
     $navigation .= '<input type="submit" class="submit" value="Log out" onmousedown="this.className=\'submit down\';" onmouseout="this.className=\'submit\';" onmouseup="this.className=\'submit\';" onclick="this.form.action.value=\'logout\';">';
     $navigation .= '</div>';
     $navigation .= '</form>';
-    
-    $filters = get_filter_data();
-    
-    print_r($filters);
     
     return $navigation;
 }
