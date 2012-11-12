@@ -13,14 +13,16 @@ var ual_admintool = ual_admintool || (function(){
             $('#programmes').live("change", function(){
                 
                 // get selected filter
-                var selected_programme= $(this).val();
-            
-                $.get('filter.php?type=P&data='+selected_programme, function(data){
-                    $('#mainfilters').hide();
-                    // replace filters with new data
-                    $('#mainfilters').html(data);
-                    $('#mainfilters').show();
-                });
+                var selected_programme = $(this).children(":selected").attr("id");
+                
+                if(selected_programme!=0) {
+                    $.get('filter.php?type=P&data='+selected_programme, function(data){
+                        $('#mainfilters').hide();
+                        // replace filters with new data
+                        $('#mainfilters').html(data);
+                        $('#mainfilters').show();
+                    });
+                }
             });
         }
     
