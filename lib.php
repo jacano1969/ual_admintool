@@ -23,7 +23,6 @@ function do_login($username, $password) {
     // check if user can log in
     if ($result = $mysqli->query("SELECT record_id, username FROM staff_login where username='$username' AND password='$password'")) {
         if($result->num_rows==0) {
-            $mysqli->close();
             $is_user=false;
         } else {
             
@@ -48,12 +47,10 @@ function do_login($username, $password) {
 
     // check if username password are correct
     if($is_user==true) {
-        $mysqli->close();
         // redirect to index page
         header('Location: index.php');
         exit;
     } else {
-        $mysqli->close();
         // incorrect username or password
         header('Location: login.php?error=1');
         exit;
@@ -219,7 +216,6 @@ function get_logged_in_user($userid) {
     // check if user can log in
     if ($result = $mysqli->query("SELECT firstname, lastname FROM users WHERE record_id=$userid")) {
         if($result->num_rows==0) {
-            $mysqli->close();
             return $logged_in_user;
         } else {
             
@@ -231,8 +227,6 @@ function get_logged_in_user($userid) {
         /* free result set */
         $result->close();
     }
-    
-    $mysqli->close();
     
     return $logged_in_user;
 }
@@ -288,7 +282,6 @@ function get_filter_data() {
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
         if($result->num_rows==0) {
-            $mysqli->close();
             return $filter;
         } else {
             
@@ -306,7 +299,6 @@ function get_filter_data() {
     // get course years list
     if ($result = $mysqli->query($course_years_sql)) {
         if($result->num_rows==0) {
-            $mysqli->close()
             return $filter;
         } else {
             
@@ -324,7 +316,6 @@ function get_filter_data() {
     // get courses list
     if ($result = $mysqli->query($courses_sql)) {
         if($result->num_rows==0) {
-            $mysqli->close();
             return $filter;
         } else {
             
@@ -342,7 +333,6 @@ function get_filter_data() {
     // get units list
     if ($result = $mysqli->query($units_sql)) {
         if($result->num_rows==0) {
-            $mysqli->close();
             return $filter;
         } else {
             
@@ -356,8 +346,6 @@ function get_filter_data() {
         /* free result set */
         $result->close();
     }
-    
-    $mysqli->close();
     
     return $filter;
 }
