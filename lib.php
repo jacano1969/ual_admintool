@@ -384,7 +384,15 @@ function get_filter_data($type=false, $data=false) {
             
             // construct json data
             while ($row = $result->fetch_object()) {
-                $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                if($type=='P') {
+                    if($data==$row->id) {
+                        $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
+                    } else {
+                        $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                    }
+                } else {
+                    $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                }
             }
             
             $filters .= '</select>';
