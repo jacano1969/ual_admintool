@@ -246,8 +246,6 @@ function get_filter_data() {
     // get all programmes, course years, courses, units for the currently logged in user
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
-    echo 'connect';
-    
     $filter = new stdClass();
     
     if (mysqli_connect_error()) {
@@ -297,6 +295,8 @@ function get_filter_data() {
         $result->close();
     }
     
+    echo 'progs';
+    
     // get course years list
     if ($result = $mysqli->query($course_years_sql)) {
         if($result->num_rows==0) {
@@ -313,6 +313,8 @@ function get_filter_data() {
         /* free result set */
         $result->close();
     }
+    
+    echo ' - course years'; 
     
     // get courses list
     if ($result = $mysqli->query($courses_sql)) {
@@ -331,6 +333,8 @@ function get_filter_data() {
         $result->close();
     }
     
+    echo ' - courses';
+    
     // get units list
     if ($result = $mysqli->query($units_sql)) {
         if($result->num_rows==0) {
@@ -347,6 +351,8 @@ function get_filter_data() {
         /* free result set */
         $result->close();
     }
+    
+    echo ' - units';
     
     return $filter;
 }
