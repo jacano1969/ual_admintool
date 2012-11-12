@@ -179,6 +179,8 @@ function show_navigation() {
     
     $filters = get_filter_data();
     
+    print($filters);
+    
     return $navigation;
 }
 
@@ -262,8 +264,6 @@ function get_filter_data() {
     $filter->units_list = array();          // courses.aos_code (where 1st character is a-z) => unit name
     //$filter->users_list = array();          // enrolments.recordid + staff_enrolments_ulcc.recordid => firstname . ' ' . lastname
     
-    
-    echo ' - stclass';
     //
     // todo: check that logged in user has access
     //
@@ -288,9 +288,7 @@ function get_filter_data() {
             
             // construct json data
             while ($row = $result->fetch_object()) {
-                echo ' - prog data';
                 $filter->programmes_list['id'] = $row->id;
-                echo ' - set prog id ';
                 $filter->programmes_list['name'] = $row->name;
             }
         }
