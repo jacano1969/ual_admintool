@@ -280,14 +280,24 @@ function get_filter_data($type=false, $data=false) {
     //}
     
     // course years
-    //if($type==false) {
+    if($type==false) {
         $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
-    //}
+    } else {
+        // filter by programme 
+        if($type=='P') {
+            $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code like('$data%') and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+        }
+    }
     
     // courses
-    //if($type==false) {
+    if($type==false) {
         $courses_sql = "select distinct c.aos_code as id, c.aos_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid order by name";
-    //}
+    } else {
+        // filter by programme 
+        if($type=='P') {
+            $courses_sql = "select distinct c.aos_code as id, c.aos_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code like('$data%') and c.courseid=e.courseid order by name";
+        }
+    }
     
     // units
     //if($type==false) {
