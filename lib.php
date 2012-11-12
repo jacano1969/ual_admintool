@@ -177,9 +177,9 @@ function show_navigation() {
     $navigation .= '</form>';
     
     
-    $filters = get_filter_data();
+    //$filters = get_filter_data();
     
-    printObject($filters);
+    //printObject($filters);
     
     return $navigation;
 }
