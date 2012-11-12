@@ -311,7 +311,7 @@ function get_filter_data($type=false, $data=false) {
     $filters .= '<form id="filters" name="filters">';
         
     // selected items
-    $selected_programme = ''
+    $selected_programme = '';
     
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
