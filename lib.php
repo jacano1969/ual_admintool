@@ -149,6 +149,7 @@ function show_home() {
     if($filters){
         
         $home .= '<fieldset>';
+        $home .= '<legend>';
         $home .= 'Filters';
         $home .= '</legend>';
         $home .= '<form id="filters" name="filters">';
