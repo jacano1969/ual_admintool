@@ -16,8 +16,10 @@ var ual_admintool = ual_admintool || (function(){
                 var selected_programme= $(this).val();
             
                 $.get('filter.php?type=P&data='+selected_programme, function(data){
+                    $('#mainfilters').hide();
                     // replace filters with new data
-                    $('#mainfilters').html(data); 
+                    $('#mainfilters').html(data);
+                    $('#mainfilters').show();
                 });
             });
         }
