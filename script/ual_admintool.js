@@ -10,7 +10,7 @@ var ual_admintool = ual_admintool || (function(){
         if($('#home-page').length>0) {
             
             // programme filter change
-            $('#programmes').change(function(){
+            $('#programmes').live("change", function(){
                 
                 // get selected filter
                 var selected_programme= $(this).val();
