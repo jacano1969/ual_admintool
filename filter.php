@@ -13,7 +13,7 @@ if(is_logged_in()){
         
         if(!empty($_GET['data'])){
             $type = $_GET['type'];
-            $type = $_GET['data'];
+            $data = $_GET['data'];
         }       
         
         echo get_filter_data($type, $data);
