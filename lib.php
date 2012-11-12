@@ -144,8 +144,11 @@ function show_home() {
     $home .= '</fieldset>';
     
     // get home filters
-    //$filters = get_filter_data(false, false);
+    $home .= '<div id="filters">';
+    
     $home .= get_filter_data(false, false);
+    
+    $home .= '</div>';
 
     $home .= '</div>';
     
@@ -307,7 +310,15 @@ function get_filter_data($type=false, $data=false) {
             
             // construct data
             while ($row = $result->fetch_object()) {
-                $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                if($type=='P') {
+                    if($data==$row->name) {
+                        $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
+                    } else {
+                        $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                    }
+                } else {
+                    $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                }
             }
             
             $filters .= '</select>';

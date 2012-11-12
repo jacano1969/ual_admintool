@@ -8,7 +8,13 @@ if(is_logged_in()){
     // get params
     if(!empty($_GET['type'])){
     
-        $type = $_GET['type'];
+        $type = false;
+        $data = false;
+        
+        if(!empty($_GET['data'])){
+            $type = $_GET['type'];
+            $type = $_GET['data'];
+        }       
         
         echo get_filter_data($type, $data);
     }
