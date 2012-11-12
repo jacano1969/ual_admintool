@@ -179,7 +179,7 @@ function show_navigation() {
     
     $filters = get_filter_data();
     
-    print($filters);
+    print_r($filters);
     
     return $navigation;
 }
@@ -277,7 +277,6 @@ function get_filter_data() {
     // units
     $units_sql = "SELECT DISTINCT CONCAT(AOSCD_LINK,LNK_AOS_PERIOD,LNK_PERIOD) AS name from course_structure order by name";
     
-    
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
         if($result->num_rows==0) {
@@ -294,8 +293,6 @@ function get_filter_data() {
         /* free result set */
         $result->close();
     }
-    
-    echo 'progs';
     
     // get course years list
     if ($result = $mysqli->query($course_years_sql)) {
@@ -314,8 +311,6 @@ function get_filter_data() {
         $result->close();
     }
     
-    echo ' - course years'; 
-    
     // get courses list
     if ($result = $mysqli->query($courses_sql)) {
         if($result->num_rows==0) {
@@ -333,8 +328,6 @@ function get_filter_data() {
         $result->close();
     }
     
-    echo ' - courses';
-    
     // get units list
     if ($result = $mysqli->query($units_sql)) {
         if($result->num_rows==0) {
@@ -351,8 +344,6 @@ function get_filter_data() {
         /* free result set */
         $result->close();
     }
-    
-    echo ' - units';
     
     return $filter;
 }
