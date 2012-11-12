@@ -330,20 +330,22 @@ function get_filter_data() {
     $filter->units_list = array();          // courses.aos_code (where 1st character is a-z) => unit name
     //$filter->users_list = array();          // enrolments.recordid + staff_enrolments_ulcc.recordid => firstname . ' ' . lastname
     
-    //
-    // todo: check that logged in user has access
-    //
+    
+    // check that logged in user has access
+    $loggedin_username = $_SESSION['USERNAME'];
+    
     // programmes
-    $programmes_sql = "select distinct aos_code as id, concat(aos_code, aos_period, acad_period) as name from course_structure where aos_code like('L%') order by name";
+    //$programmes_sql = "select distinct aos_code as id, concat(aos_code, aos_period, acad_period) as name from course_structure where aos_code like('L%') order by name";
+    $programmes_sql = "select distinct cs.aos_code as id, concat(cs.aos_code, cs.aos_period, cs.acad_period) as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and cs.aos_code like('L%') order by name";
     
     // course years
-    $course_years_sql = "select distinct acad_period as name from course_structure order by name";
+    $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
     
     // courses
-    $courses_sql = "select distinct aos_code as id, aos_description as name from courses order by name";
+    $courses_sql = "select distinct c.aos_code as id, c.aos_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid order by name";
     
     // units
-    $units_sql = "SELECT DISTINCT CONCAT(AOSCD_LINK,LNK_AOS_PERIOD,LNK_PERIOD) AS name from course_structure order by name";
+    $units_sql = "SELECT DISTINCT CONCAT(cs.AOSCD_LINK, cs.LNK_AOS_PERIOD, cs.LNK_PERIOD) AS name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
     
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
