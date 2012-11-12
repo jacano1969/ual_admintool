@@ -230,8 +230,8 @@ function show_header() {
     $header .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">';
     $header .= '<title>UAL Admn Tool</title>';
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
-    $header .= '<script href="script/jquery-1.8.1.min.js" type="text/javascript">';
-    $header .= '<script href="script/ual_admintool.js" type="text/javascript">';
+    $header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
+    $header .= '<script src="script/ual_admintool.js" type="text/javascript"></script>';
     $header .= '</head>';
     
     return $header;
