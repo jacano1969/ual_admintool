@@ -156,7 +156,7 @@ function show_home() {
         
         // programmes
         if($filters->programmes_list) {
-            $home .= '<select id="programmes" name="programmes">';
+            $home .= '<label for="programmes">Programme:</label><select id="programmes" name="programmes">';
             $home .='<option id="0">Select Programme ...</option>';
         }
         
@@ -170,7 +170,7 @@ function show_home() {
         
         // course years
         if($filters->course_years_list) {
-            $home .= '<select id="courseyears" name="courseyears">';
+            $home .= '<label for="courseyears">Course Year:</label><select id="courseyears" name="courseyears">';
             $home .='<option id="0">Select Course Year ...</option>';
         }
         
@@ -184,7 +184,7 @@ function show_home() {
         
         // courses
         if($filters->courses_list) {
-            $home .= '<select id="courses" name="courses">';
+            $home .= '<label for="courses">Course:</label><select id="courses" name="courses">';
             $home .='<option id="0">Select Course ...</option>';
         }
         
@@ -198,7 +198,7 @@ function show_home() {
         
         // units
         if($filters->units_list) {
-            $home .= '<select id="units" name="units">';
+            $home .= '<label for="units">Unit:</label><select id="units" name="units">';
             $home .='<option id="0">Select Unit ...</option>';
         }
         
