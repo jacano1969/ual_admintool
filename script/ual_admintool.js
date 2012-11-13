@@ -23,7 +23,7 @@ var ual_admintool = ual_admintool || (function(){
                         $('#mainfilters').html(data);
                         $('#mainfilters').show();
                     });
-                } else {
+                }/* else {
                     // show all
                     $.get('filter.php', function(data){
                         $('#mainfilters').hide();
@@ -31,7 +31,7 @@ var ual_admintool = ual_admintool || (function(){
                         $('#mainfilters').html(data);
                         $('#mainfilters').show();
                     });
-                }
+                }*/
             });
         }
     
