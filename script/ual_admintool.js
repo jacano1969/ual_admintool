@@ -25,7 +25,7 @@ var ual_admintool = ual_admintool || (function(){
                     });
                 } else {
                     // show all
-                    $.get('filter.php', function(data){
+                    $.get('filter.php?type=false&data=false', function(data){
                         $('#mainfilters').hide();
                         // replace filters with new data
                         $('#mainfilters').html(data);
