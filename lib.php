@@ -414,7 +414,7 @@ function get_filter_data($type=false, $data=false) {
         if($type=='P') {
             if(!empty($selected_courses)) {
                 // get units onlt for the selected courses
-                $selected_courses = implode('','',$selected_courses);
+                $selected_courses = implode('\',\'',$selected_courses);
                 echo $selected_courses; exit;
                 $units_sql = "select distinct cs.aos_code as id, c.full_description from course_structure cs inner join courses c on cs.aos_code=cs.aos_code and cs.aos_code REGEXP '^[A-Z]' and cs.aos_code not like('L%') inner join courses c1 on c1.courseid=c.courseid and c1.aos_code in('$selected_courses')";
             } else {
