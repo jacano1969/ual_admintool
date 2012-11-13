@@ -362,6 +362,8 @@ function get_filter_data($type=false, $data=false) {
         $result->close();
     }
     
+    $selected_courses = array();
+    
     // courses
     if($type==false) {
         $courses_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join course_structure cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid order by name";
@@ -389,6 +391,8 @@ function get_filter_data($type=false, $data=false) {
                     } else {
                         $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
                     }
+                    // record selected courses (used to get units)
+                    $selected_courses[]=$row->id;  
                 } else {
                     $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
                 }
@@ -408,8 +412,14 @@ function get_filter_data($type=false, $data=false) {
     } else {
         // filter by programme 
         if($type=='P') {
-            // temp
-            $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) order by name";
+            
+            if(!empty($selected_courses)) {
+                // get units onlt for the selected courses
+                $selected_courses = implode(',',$selected_courses);
+                $units_sql = "select distinct cs.aos_code as id, c.full_description from course_structure cs inner join courses c on cs.aos_code=cs.aos_code and cs.aos_code REGEXP '^[A-Z]' and cs.aos_code not like('L%') inner join courses c1 on c1.courseid=c.courseid and c1.aos_code in('$selected_courses')";
+            } else {
+                $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) order by name";
+            }
         }
     }
     
