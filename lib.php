@@ -435,12 +435,12 @@ function get_filter_data($type=false, $data=false) {
             while ($row = $result->fetch_object()) {
                 if($type=='P') {
                     if($data==$row->id) {
-                        $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
+                        $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.' ('.$row->id.')</option>';
                     } else {
-                        $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                        $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';
                     }
                 } else {
-                    $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                    $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';
                 }
             }
             
