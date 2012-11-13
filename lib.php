@@ -288,9 +288,7 @@ function get_filter_data($type=false, $data=false) {
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') order by name";
     } else if($type=='C'){
         // get programmes for selected course
-        // TODO:
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
-        //$programmes_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') order by name";
     }
     
     // selected items
@@ -380,6 +378,13 @@ function get_filter_data($type=false, $data=false) {
         // filter by programme 
         if($type=='P') {
             $courses_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join course_structure cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid inner join course_structure cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name;";
+        }
+        
+        // filter by programme 
+        if($type=='P') {
+            // TODO:
+            //$courses_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join course_structure cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid inner join course_structure cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name;";
+            $courses_sql = "select c.aos_code as id, c.full_description as name from courses where c.aos_code='$data'";
         }
     }
     
