@@ -415,7 +415,7 @@ function get_filter_data($type=false, $data=false) {
             if(!empty($selected_courses)) {
                 // get units onlt for the selected courses
                 $all_selected_courses = implode('\',\'',$selected_courses);
-                $units_sql = "select distinct cs.aos_code as id, c.full_description from course_structure cs inner join courses c on cs.aos_code=cs.aos_code and cs.aos_code REGEXP '^[A-Z]' and cs.aos_code not like('L%') inner join courses c1 on c1.courseid=c.courseid and c1.aos_code in('$all_selected_courses')";
+                $units_sql = "select distinct cs.aos_code as id, c.full_description as name from course_structure cs inner join courses c on cs.aos_code=cs.aos_code and cs.aos_code REGEXP '^[A-Z]' and cs.aos_code not like('L%') inner join courses c1 on c1.courseid=c.courseid and c1.aos_code in('$all_selected_courses')";
             } else {
                 $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) order by name";
             }
