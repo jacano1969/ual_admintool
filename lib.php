@@ -36,6 +36,7 @@ function do_login($username, $password) {
         
         /* free result set */
         $result->close();
+        $mysqli->close();
     } else {
         // TODO:
         // check staff tale for username
@@ -43,6 +44,7 @@ function do_login($username, $password) {
                 // login new user
                     // $is_user=true;
         $is_user=false;
+        $mysqli->close();
     }
 
     // check if username password are correct
@@ -232,6 +234,7 @@ function get_logged_in_user($userid) {
         
         /* free result set */
         $result->close();
+        $mysqli->close();
     }
     
     return $logged_in_user;
@@ -442,6 +445,8 @@ function get_filter_data($type=false, $data=false) {
     $filters .= '</form>';
     $filters .= '</fieldset>';
         
+    $mysqli->close();
+    
     return $filters;
 }
 
