@@ -333,6 +333,11 @@ function get_filter_data($type=false, $data=false) {
         if($type=='P') {
             $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
         }
+        
+        // filter by course 
+        if($type=='C') {
+            $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+        }
     }
     
     // get course years list
