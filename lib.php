@@ -285,14 +285,15 @@ function get_filter_data($type=false, $data=false) {
     // programmes
     if($type==false || $type=='P') {
         // get all programmes
-        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') order by name";
+        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.aos_period as year from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') order by name";
     } else if($type=='C'){
         // get programmes for selected course
-        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
+        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.aos_period as year from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
     }
     
     // selected items
     $selected_programme = '';
+    $selected_programme_year = '';
     
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
@@ -308,6 +309,7 @@ function get_filter_data($type=false, $data=false) {
                     if($data==$row->id) {
                         $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
                         $selected_programme=$row->name;
+                        $selected_programme_year=$row->year;
                     } else {
                         $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
                     }
@@ -354,16 +356,22 @@ function get_filter_data($type=false, $data=false) {
             while ($row = $result->fetch_object()) {
                 if($type=='P') {
                     // get course year from progeamme name
-                    $course_year = substr($selected_programme,(strlen($selected_programme)-5));
+                    $course_year = $selected_programme_year;
                     if($course_year==$row->name) {
                         $filters .='<option id="'.$row->name.'" selected="selected">'.$row->name.'</option>';
                     } else {
                         $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
                     }
                 } else {
-                    $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';    
+                    if($type=='C') {
+                    // get course year from progeamme name
+                    $course_year = $selected_programme_year;
+                    if($course_year==$row->name) {
+                        $filters .='<option id="'.$row->name.'" selected="selected">'.$row->name.'</option>';
+                    } else {
+                        $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
+                    }
                 }
-                
             }
             
             $filters .= '</select>';
