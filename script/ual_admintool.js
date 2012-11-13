@@ -15,7 +15,7 @@ var ual_admintool = ual_admintool || (function(){
                 // get selected filter
                 var selected_programme = $(this).children(":selected").attr("id");
                 
-                if(selected_programme!=0) {
+                if(selected_programme!="0") {
                     // filter based on selected programme
                     $.get('filter.php?type=P&data='+selected_programme, function(data){
                         $('#mainfilters').hide();
@@ -23,7 +23,7 @@ var ual_admintool = ual_admintool || (function(){
                         $('#mainfilters').html(data);
                         $('#mainfilters').show();
                     });
-                }/* else {
+                } else {
                     // show all
                     $.get('filter.php', function(data){
                         $('#mainfilters').hide();
@@ -31,7 +31,7 @@ var ual_admintool = ual_admintool || (function(){
                         $('#mainfilters').html(data);
                         $('#mainfilters').show();
                     });
-                }*/
+                }
             });
         }
     
