@@ -364,10 +364,13 @@ function get_filter_data($type=false, $data=false) {
                     }
                 } else {
                     if($type=='C') {
-                    // get course year from progeamme name
-                    $course_year = $selected_programme_year;
-                    if($course_year==$row->name) {
-                        $filters .='<option id="'.$row->name.'" selected="selected">'.$row->name.'</option>';
+                        // get course year from progeamme name
+                        $course_year = $selected_programme_year;
+                        if($course_year==$row->name) {
+                            $filters .='<option id="'.$row->name.'" selected="selected">'.$row->name.'</option>';
+                        } else {
+                            $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
+                        }
                     } else {
                         $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
                     }
