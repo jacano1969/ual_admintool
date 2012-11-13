@@ -307,8 +307,8 @@ function get_filter_data($type=false, $data=false) {
     } else {
         // filter by programme 
         if($type=='P') {
-            $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.aos_code='$data' and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) order by name";
-            //$units_sql = "SELECT DISTINCT cs.aos_code as id, full_description AS name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+            // temp
+            $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from courses c inner join enrolments e on e.studentid='$loggedin_username' and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) order by name";
         }
     }
     
