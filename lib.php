@@ -408,7 +408,11 @@ function get_filter_data($type=false, $data=false) {
                     // record selected courses (used to get units)
                     $selected_courses[]=$row->id;  
                 } else {
-                    $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                    if($type=='C') {
+                        $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
+                    } else {
+                        $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
+                    }
                 }
             }
             
