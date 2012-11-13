@@ -15,6 +15,7 @@ var ual_admintool = ual_admintool || (function(){
                 // get selected filter
                 var selected_programme = $(this).children(":selected").attr("id");
                 
+                alert(selected_programme);
                 if(selected_programme!="0") {
                     // filter based on selected programme
                     $.get('filter.php?type=P&data='+selected_programme, function(data){
