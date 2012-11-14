@@ -10,6 +10,10 @@ var ual_admintool = ual_admintool || (function(){
         if($('#home-page').length>0) {
             
             
+            //
+            // Workflow
+            //
+            
             // show workflow
             $('#hiddenlightbox').lightbox_me({
                 centered: true,
@@ -22,6 +26,33 @@ var ual_admintool = ual_admintool || (function(){
                     $('#hiddenlightbox').css('width','400px');
                 }
             });
+            
+            
+            $('#workflows').change(function() {
+                var selected_workflow_step = $(this).children(":selected").attr("id");
+                
+                if(selected_workflow_step!="0") {
+                    // get workflow sub steps
+                    $.get('workflow.php?step='+selected_workflow_step, function(data){
+                        $('#workflow').hide();
+                        // replace workflow with new data
+                        $('#workflow').html(data);
+                        $('#workflow').show();
+                    });
+                } else {
+                    // show all workflows
+                    $.get('workflow.php.php', function(data){
+                        $('#workflow').hide();
+                        // replace filters with new data
+                        $('#workflow').html(data);
+                        $('#workflow').show();
+                    });
+                }
+            });
+            
+            //
+            // Filters
+            //
             
             // programme filter change
             $('#programmes').live("change", function(){

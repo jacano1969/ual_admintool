@@ -547,11 +547,11 @@ function get_workflows($step_id=false) {
             
             // construct data
             while ($workflow_row = $workflow_result->fetch_object()) {
-                $workflow .= '<optgroup label="'.$workflow_row->name .'">';
+                $workflow .= '<optgroup label="'.$workflow_row->name.'">';
                 $workflow_id = $workflow_row->id;
                 
                 // get all active workflow steps for each workflow
-                $workflow_step_sql="select workflow_action_id as id, name as name, description as description from workflow_step where status=1 and workflow_id=$workflow_id";
+                $workflow_step_sql="select workflow_step_id as id, name as name, description as description from workflow_step where status=1 and workflow_id=$workflow_id";
                
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
                     if($workflow_step_result->num_rows==0) {
@@ -559,11 +559,11 @@ function get_workflows($step_id=false) {
                     } else {
                         
                         // construct data
-                        while($workflow_step_result->fetch_object()) {
-                            if($current_workflow_step_id!=$workflow_step_result->id) {
-                                $workflow .='<option id="'.$workflow_step_result->id.'" selected="selected">'.$workflow_step_result->name.'</option>';
+                        while($workflow_step_row = $workflow_step_result->fetch_object()) {
+                            if($current_workflow_step_id!=$workflow_step_row->id) {
+                                $workflow .='<option id="'.$workflow_step_row->id.'" selected="selected">'.$workflow_step_row->name.'</option>';
                             } else {
-                                $workflow .='<option id="'.$workflow_step_result->id.'">'.$workflow_step_result->name.'</option>';
+                                $workflow .='<option id="'.$workflow_step_row->id.'">'.$workflow_step_row->name.'</option>';
                             }
                         }
                     }
@@ -586,14 +586,13 @@ function get_workflows($step_id=false) {
         if ($workflow_sub_step_result = $mysqli->query($workflow_sub_step_sql)) {
             if($workflow_sub_step_result->num_rows==0) {
                 return $workflow;
-            } else {  
+            } else {
+                
                 $workflow .= '<select id="workflow_sub_steps" name="workflow_sub_steps">';
                 $workflow .='<option id="0">Select Action ...</option>';
-                
-                if($workflow_sub_step_result->num_rows==0) {
-                    return $workflow;
-                } else {
-                    $workflow .='<option id="'.$workflow_sub_step_result->id.'">'.$workflow_sub_step_result->name.'</option>';
+                    
+                while($workflow_sub_step_row = $workflow_sub_step_result->fetch_object()) {
+                    $workflow .='<option id="'.$workflow_sub_step_row->id.'">'.$workflow_sub_step_row->name.'</option>';
                 }
                 
                 $workflow .= '</select>';
