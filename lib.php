@@ -586,7 +586,7 @@ function get_workflows($step_id=false) {
     
     // get all active workflow sub steps for the currently selected workflow step
     if($step_id!='0') {
-        $workflow_sub_step_sql="select workflow_action_id as id, name as name, description as description from workflow_sub_step where status=1 and workflow_step_id=$step_id";
+        $workflow_sub_step_sql="select workflow_sub_step_id as id, name as name, work_flow_action_id as action, description as description from workflow_sub_step where status=1 and workflow_step_id=$step_id";
 
         if ($workflow_sub_step_result = $mysqli->query($workflow_sub_step_sql)) {
             if($workflow_sub_step_result->num_rows==0) {
@@ -597,7 +597,7 @@ function get_workflows($step_id=false) {
                 $workflow .='<option id="0">Select Action ...</option>';
                     
                 while($workflow_sub_step_row = $workflow_sub_step_result->fetch_object()) {
-                    $workflow .='<option id="'.$workflow_sub_step_row->id.'">'.$workflow_sub_step_row->name.'</option>';
+                    $workflow .='<option data="'.$workflow_sub_step_row->action.'" id="'.$workflow_sub_step_row->id.'">'.$workflow_sub_step_row->name.'</option>';
                 }
                 
                 $workflow .= '</select>';

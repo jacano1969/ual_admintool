@@ -53,11 +53,13 @@ var ual_admintool = ual_admintool || (function(){
             
             // workflow sub step selected
             $('#workflow_sub_steps').live("change", function() {
-                var sub_step_action = $(this).children(":selected").attr("id");
+                var sub_step_id = $(this).children(":selected").attr("id");
+                var sub_step_action = $(this).children(":selected").attr("data");
                 
                 // set sub step action and enable ok button (submit)
                 if(sub_step_action!="0"){
                     $('#sub_step_action').val(sub_step_action);
+                    $('#sub_step_id').val(sub_step_id);
                     $('#ok').removeAttr('disabled');
                 } else {
                     $('#sub_step_action').val(0);
