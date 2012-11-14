@@ -547,7 +547,7 @@ function get_workflows($step_id=false) {
             
             // construct data
             while ($workflow_row = $workflow_result->fetch_object()) {
-                $workflow = '<optgroup label="'.$workflow_row->name .'">';
+                $workflow .= '<optgroup label="'.$workflow_row->name .'">';
                 $workflow_id = $workflow_row->id;
                 
                 // get all active workflow steps for each workflow
@@ -572,8 +572,8 @@ function get_workflows($step_id=false) {
                 }
             }
             
-            $workflow = '</optgroup>';
-            $workflow = '</select>';
+            $workflow .= '</optgroup>';
+            $workflow .= '</select>';
         }
         
         $workflow_result->close();
@@ -596,7 +596,7 @@ function get_workflows($step_id=false) {
                     $workflow .='<option id="'.$workflow_sub_step_result->id.'">'.$workflow_sub_step_result->name.'</option>';
                 }
                 
-                $workflow = '</select>';
+                $workflow .= '</select>';
             }
             
             $workflow_sub_step_result->close();
