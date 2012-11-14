@@ -82,9 +82,9 @@ var ual_admintool = ual_admintool || (function(){
                     
                     // get workflow action
                     $.get("action.php?step_id="+step_id+"&action_id="+step_action, function(data) {
-                        $('div.container fieldset form').hide();
-                        $('div.container fieldset form').html(data);
-                        $('div.container fieldset form').show();
+                        $('div.container fieldset').hide();
+                        $('div.container fieldset').html(data);
+                        $('div.container fieldset').show();
                     });
                     
                     return false;
@@ -98,9 +98,9 @@ var ual_admintool = ual_admintool || (function(){
                     
                     // get workflow action
                     $.get("action.php?sub_step_id="+sub_step_id+"&action_id="+sub_step_action, function(data) {
-                        $('div.container fieldset form').hide();
-                        $('div.container fieldset form').html(data);
-                        $('div.container fieldset form').show();
+                        $('div.container fieldset').hide();
+                        $('div.container fieldset').html(data);
+                        $('div.container fieldset').show();
                     });
                     
                     return false;
