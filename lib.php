@@ -512,6 +512,9 @@ function get_filter_data($type=false, $data=false) {
 function get_workflows($step_id=false) {
     global $CFG;
     
+    
+    echo 'test'; exit;
+    
     // get wokflows, steps and sub steps
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
