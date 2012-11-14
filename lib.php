@@ -590,7 +590,7 @@ function get_workflows($step_id=false) {
                 $workflow .= '<select id="workflow_sub_steps" name="workflow_sub_steps">';
                 $workflow .='<option id="0">Select Action ...</option>';
                 
-                if($workflow_sub_step_result->num_rows==0)) {
+                if($workflow_sub_step_result->num_rows==0) {
                     return $workflow;
                 } else {
                     $workflow .='<option id="'.$workflow_sub_step_result->id.'">'.$workflow_sub_step_result->name.'</option>';
