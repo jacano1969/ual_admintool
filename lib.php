@@ -552,7 +552,7 @@ function get_workflows($step_id=false) {
                 $workflow_id = $workflow_row->id;
                 
                 // get all active workflow steps for each workflow
-                $workflow_step_sql="select workflow_step_id as id, name as name, description as description workflow_action_id as action from workflow_step where status=1 and workflow_id=$workflow_id";
+                $workflow_step_sql="select workflow_step_id as id, name as name, description as description, workflow_action_id as action from workflow_step where status=1 and workflow_id=$workflow_id";
                
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
                     if($workflow_step_result->num_rows==0) {
