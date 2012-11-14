@@ -556,7 +556,6 @@ function get_workflows($step_id=false) {
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
                     if($workflow_step_result->num_rows==0) {
                         //continue;
-                        $workflow_step_result->close();
                     } else {
                         
                         // construct data
@@ -567,17 +566,17 @@ function get_workflows($step_id=false) {
                                 $workflow .='<option id="'.$workflow_step_result->id.'">'.$workflow_step_result->name.'</option>';
                             }
                         }
-                        
-                        $workflow_step_result->close();
                     }
+                    
+                    $workflow_step_result->close();
                 }
             }
             
             $workflow = '</optgroup>';
             $workflow = '</select>';
-            
-            $workflow_result->close();
         }
+        
+        $workflow_result->close();
     }
     
     // get all active workflow sub steps for the currently selected workflow step
@@ -599,6 +598,9 @@ function get_workflows($step_id=false) {
                 
                 $workflow = '</select>';
             }
+            
+            $workflow_sub_step_result->close();
+            
         }
         
         // show disabled ok button
