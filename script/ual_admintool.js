@@ -28,7 +28,7 @@ var ual_admintool = ual_admintool || (function(){
             });
             
             
-            $('#workflows').change(function() {
+            $('#workflows').live("change", function() {
                 var selected_workflow_step = $(this).children(":selected").attr("id");
                 
                 alert(selected_workflow_step);
