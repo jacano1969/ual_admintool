@@ -516,6 +516,7 @@ function get_workflows($step_id=false) {
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
     $workflows ='';
+    $workflow_action = 0;
     
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
@@ -551,12 +552,14 @@ function get_workflows($step_id=false) {
                 $workflow_id = $workflow_row->id;
                 
                 // get all active workflow steps for each workflow
-                $workflow_step_sql="select workflow_step_id as id, name as name, description as description from workflow_step where status=1 and workflow_id=$workflow_id";
+                $workflow_step_sql="select workflow_step_id as id, name as name, description as description workflow_action_id as action from workflow_step where status=1 and workflow_id=$workflow_id";
                
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
                     if($workflow_step_result->num_rows==0) {
                         //continue;
                     } else {
+                        
+                        $workflow_action = $workflow_step_result->action;
                         
                         // construct data
                         while($workflow_step_row = $workflow_step_result->fetch_object()) {
@@ -605,7 +608,15 @@ function get_workflows($step_id=false) {
     
     // show disabled ok button
     $workflow .='<input type="button" value="Reset" name="reset" id="reset">';
-    $workflow .='<input type="submit" value="Ok" name="ok" class=".close" id="ok" disabled="disabled">';
+    
+    // get action for workflow step
+    if($workflow_action!=0) {
+        $workflow .='<input type="hidden" id="step_action" name="step_action" value="'.$workflow_action.'">';
+        $workflow .='<input type="submit" value="Ok" name="ok" class=".close" id="ok">';
+    } else {
+        $workflow .='<input type="hidden" id="sub_step_action" name="sub_step_action" value="0">';
+        $workflow .='<input type="submit" value="Ok" name="ok" class=".close" id="ok" disabled="disabled">';
+    }
         
     $workflow .= '</form>';
     $workflow .= '</fieldset>';

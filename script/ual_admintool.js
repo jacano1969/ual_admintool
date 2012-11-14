@@ -51,6 +51,18 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
             
+            // workflow sub step selected
+            $('#workflow_sub_steps').live("change", function() {
+                var sub_step_action = $(this).children(":selected").attr("id");
+                
+                // set sub step action and enable ok button (submit)
+                if(sub_step_action!="0"){
+                    $('#sub_step_action').value=sub_step_action;
+                    $('#ok#').disabled=false;
+                }                
+            });
+            
+            // workflow reset
             $('#reset').live("click", function() {
                 // show all workflows
                 $.get('workflow.php?step=false', function(data){
