@@ -1,6 +1,4 @@
 <?php
-
-phpinfo(); exit;
     session_start();
 
     if(!empty($_POST['username']) && !empty($_POST['password'])) {

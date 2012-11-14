@@ -512,9 +512,6 @@ function get_filter_data($type=false, $data=false) {
 function get_workflows($step_id=false) {
     global $CFG;
     
-    
-    echo 'test'; exit;
-    
     // get wokflows, steps and sub steps
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
@@ -557,7 +554,7 @@ function get_workflows($step_id=false) {
                 $workflow_step_sql="select workflow_action_id as id, name, description from workflow_step where status=1 and workflow_id=$workflow_id";
                
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
-                    if($workflow_step_result->num_rows==0)) {
+                    if($workflow_step_result->num_rows==0) {
                         //continue;
                     } else {
                         
