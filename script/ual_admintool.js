@@ -28,11 +28,10 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
             
-            
+            // workflow selected
             $('#workflows').live("change", function() {
                 var selected_workflow_step = $("option:selected", this).attr("id");
                 
-                alert(selected_workflow_step);
                 if(selected_workflow_step!="0") {
                     // get workflow sub steps
                     $.get('workflow.php?step='+selected_workflow_step, function(data){
