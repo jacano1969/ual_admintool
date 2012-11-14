@@ -537,10 +537,11 @@ function get_workflows($step_id=false) {
         $current_workflow_step_id=$step_id;
     }
     
+    return 'test';
      // get workflows
     if ($workflow_result = $mysqli->query($workflow_sql)) {
         if($workflow_result->num_rows==0) {
-            return $workflow;
+            return 'No workflows found.';
         } else {  
             $workflow .= '<select id="workflows" name="workflows">';
             $workflow .='<option id="0">Select Action ...</option>';
