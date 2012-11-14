@@ -51,6 +51,16 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
             
+            $('#reset').live("click", function() {
+                // show all workflows
+                $.get('workflow.php?step=false', function(data){
+                    $('#hiddenlightbox').hide();
+                    // replace filters with new data
+                    $('#hiddenlightbox').html(data);
+                    $('#hiddenlightbox').show();
+                });
+            }
+            
             //
             // Filters
             //
