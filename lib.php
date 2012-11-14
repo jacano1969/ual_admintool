@@ -560,7 +560,7 @@ function get_workflows($step_id=false) {
                         
                         // construct data
                         while($workflow_step_row = $workflow_step_result->fetch_object()) {
-                            if($current_workflow_step_id!=$workflow_step_row->id) {
+                            if($current_workflow_step_id==$workflow_step_row->id) {
                                 $workflow .='<option id="'.$workflow_step_row->id.'" selected="selected">'.$workflow_step_row->name.'</option>';
                             } else {
                                 $workflow .='<option id="'.$workflow_step_row->id.'">'.$workflow_step_row->name.'</option>';
