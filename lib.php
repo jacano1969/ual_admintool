@@ -142,17 +142,17 @@ function show_home() {
     $home .= 'Welcome ' . get_logged_in_user($_SESSION['USERID']);
     $home .= '</legend>';
     
-    $home .= show_navigation();
+    //$home .= show_navigation();
     $home .= '</fieldset>';
     
     // get home filters
-    $home .= '<div id="mainfilters">';
+    /*$home .= '<div id="mainfilters">';
     
     $home .= get_filter_data(false, false);
     
     $home .= '</div>';
 
-    $home .= '</div>';
+    $home .= '</div>';*/
     
     // workflow popup
     $home .= '<div id="hiddenlightbox">';
