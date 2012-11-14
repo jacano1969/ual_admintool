@@ -24,7 +24,6 @@ var ual_admintool = ual_admintool || (function(){
                 closeEsc: false, 
                 onLoad: function() { 
                     // do anything after lightbox is loaded?
-                    $('#hiddenlightbox').css('height','300px');
                     $('#hiddenlightbox').css('width','400px');
                 }
             });

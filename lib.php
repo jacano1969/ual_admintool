@@ -585,7 +585,7 @@ function get_workflows($step_id=false) {
 
         if ($workflow_sub_step_result = $mysqli->query($workflow_sub_step_sql)) {
             if($workflow_sub_step_result->num_rows==0) {
-                return $workflow;
+                //continue;
             } else {
                 
                 $workflow .= '<select id="workflow_sub_steps" name="workflow_sub_steps">';
@@ -604,7 +604,7 @@ function get_workflows($step_id=false) {
     }
     
     // show disabled ok button
-    $workflow .='<input type="submit" value="Cancel" name="cancel" id="cancel">';
+    $workflow .='<input type="submit" value="Reset" name="reset" id="reset">';
     $workflow .='<input type="submit" value="Ok" name="ok" class=".close" id="ok" disabled="disabled">';
         
     $workflow .= '</form>';
