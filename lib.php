@@ -556,6 +556,7 @@ function get_workflows($step_id=false) {
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
                     if($workflow_step_result->num_rows==0) {
                         //continue;
+                        $workflow_step_result->close();
                     } else {
                         
                         // construct data
@@ -580,8 +581,8 @@ function get_workflows($step_id=false) {
     }
     
     // get all active workflow sub steps for the currently selected workflow step
-    if($current_workflow_step_id!='0') {
-        $workflow_sub_step_sql="select workflow_action_id as id, name, description from workflow_sub_step where status=1 and workflow_step_id=$current_workflow_step_id";
+    if($step_id!='0') {
+        $workflow_sub_step_sql="select workflow_action_id as id, name, description from workflow_sub_step where status=1 and workflow_step_id=$step_id";
 
         if ($workflow_sub_step_result = $mysqli->query($workflow_sub_step_sql)) {
             if($workflow_sub_step_result->num_rows==0) {

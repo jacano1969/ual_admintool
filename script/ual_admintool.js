@@ -12,14 +12,14 @@ var ual_admintool = ual_admintool || (function(){
             
             // show workflow
             $('#hiddenlightbox').lightbox_me({
-                centered: false,
+                centered: true,
                 appearEffect: 'show',
                 lightboxSpeed: 'fast',
                 overlaySpeed: 'fast',
                 onLoad: function() { 
                     // do anything after lightbox is loaded?
-                    $('#hiddenlightbox').css('height','260px');
-                    $('#hiddenlightbox').css('width','300px');
+                    $('#hiddenlightbox').css('height','300px');
+                    $('#hiddenlightbox').css('width','400px');
                 }
             });
             
