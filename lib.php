@@ -601,12 +601,12 @@ function get_workflows($step_id=false) {
             $workflow_sub_step_result->close();
             
         }
-        
-        // show disabled ok button
-        $workflow .='<input type="submit" value="Cancel" name="cancel" id="cancel">';
-        $workflow .='<input type="submit" value="Ok" name="ok" id="ok" disabled="disabled">';
     }
     
+    // show disabled ok button
+    $workflow .='<input type="submit" value="Cancel" name="cancel" id="cancel">';
+    $workflow .='<input type="submit" value="Ok" name="ok" class=".close" id="ok" disabled="disabled">';
+        
     $workflow .= '</form>';
     $workflow .= '</fieldset>';
         

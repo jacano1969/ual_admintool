@@ -20,6 +20,8 @@ var ual_admintool = ual_admintool || (function(){
                 appearEffect: 'show',
                 lightboxSpeed: 'fast',
                 overlaySpeed: 'fast',
+                closeClick: false,
+                closeEsc: false, 
                 onLoad: function() { 
                     // do anything after lightbox is loaded?
                     $('#hiddenlightbox').css('height','300px');
