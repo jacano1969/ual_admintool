@@ -564,7 +564,7 @@ function get_workflows($step_id=false) {
                             if($current_workflow_step_id==$workflow_step_row->id) {
                                 
                                 // set the currently selected action
-                                $workflow_action = $workflow_step_result->action;
+                                $workflow_action = $workflow_step_row->action;
                                 
                                 $workflow .='<option id="'.$workflow_step_row->id.'" selected="selected">'.$workflow_step_row->name.'</option>';
                             } else {
