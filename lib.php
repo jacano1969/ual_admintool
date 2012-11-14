@@ -156,7 +156,7 @@ function show_home() {
     
     // workflow popup
     $home .= '<div id="hiddenlightbox">';
-    //$home .= get_workflows(false);
+    $home .= get_workflows(false);
     $home .= '</div>';
     
     return $home;    
@@ -173,6 +173,7 @@ function show_header() {
     $header .= '<title>UAL Admn Tool</title>';
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
     $header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
+    $header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
     $header .= '<script src="script/ual_admintool.js" type="text/javascript"></script>';
     $header .= '</head>';
     
@@ -544,12 +545,10 @@ function get_workflows($step_id=false) {
             $workflow .= '<select id="workflows" name="workflows">';
             $workflow .='<option id="0">Select Action ...</option>';
             
-            $workflow = '<optgroup label="'.$workflow_row->name .'">';
-            
-            $workflow_id = .$workflow_row->id;
-            
             // construct data
             while ($workflow_row = $workflow_result->fetch_object()) {
+                $workflow = '<optgroup label="'.$workflow_row->name .'">';
+                $workflow_id = $workflow_row->id;
                 
                 // get all active workflow steps for each workflow
                 $workflow_step_sql="select workflow_action_id as id, name, description from workflow_step where status=1 and workflow_id=$workflow_id";
@@ -583,9 +582,6 @@ function get_workflows($step_id=false) {
     // get all active workflow sub steps for the currently selected workflow step
     if($current_workflow_step_id!='0') {
         $workflow_sub_step_sql="select workflow_action_id as id, name, description from workflow_sub_step where status=1 and workflow_step_id=$current_workflow_step_id";
-    /*} else {
-        $workflow_sub_step_sql="select workflow_action_id as id, name, description from workflow_sub_step where status=1";
-    }*/
 
         if ($workflow_sub_step_result = $mysqli->query($workflow_sub_step_sql)) {
             if($workflow_sub_step_result->num_rows==0) {
