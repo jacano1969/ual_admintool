@@ -58,7 +58,7 @@ var ual_admintool = ual_admintool || (function(){
                 // set sub step action and enable ok button (submit)
                 if(sub_step_action!="0"){
                     $('#sub_step_action').value=sub_step_action;
-                    $('#ok#').disabled=false;
+                    $('#ok').disabled=false;
                 }                
             });
             
@@ -72,6 +72,7 @@ var ual_admintool = ual_admintool || (function(){
                     $('#hiddenlightbox').show();
                 });
             });
+            
             
             //
             // Filters
