@@ -95,7 +95,7 @@ var ual_admintool = ual_admintool || (function(){
                     var step_id = $('#sub_step_id').val();
                     
                     // get workflow action
-                    $.get("action.php?sub_step_id="+sub_astep_id+"&action_id="+sub_step_action, function(data) {
+                    $.get("action.php?sub_step_id="+sub_step_id+"&action_id="+sub_step_action, function(data) {
                         $('div.container').hide();
                         $('div.container').html(data);
                         $('div.container').show();
