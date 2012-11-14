@@ -155,7 +155,9 @@ function show_home() {
     $home .= '</div>';
     
     // workflow popup
-    $home .= '<div id="hiddenlightbox">'.get_workflows(false).'</div>';
+    $home .= '<div id="hiddenlightbox">';
+    //$home .= get_workflows(false);
+    $home .= '</div>';
     
     return $home;    
 }
@@ -545,7 +547,7 @@ function get_workflows($step_id=false) {
             $workflow = '<optgroup label="'.$workflow_row->name .'">';
             
             $workflow_id = .$workflow_row->id;
-            return $workflow; exit;
+            
             // construct data
             while ($workflow_row = $workflow_result->fetch_object()) {
                 
