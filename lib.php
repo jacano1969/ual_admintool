@@ -559,11 +559,13 @@ function get_workflows($step_id=false) {
                         //continue;
                     } else {
                         
-                        $workflow_action = $workflow_step_result->action;
-                        
                         // construct data
                         while($workflow_step_row = $workflow_step_result->fetch_object()) {
                             if($current_workflow_step_id==$workflow_step_row->id) {
+                                
+                                // set the currently selected action
+                                $workflow_action = $workflow_step_result->action;
+                                
                                 $workflow .='<option id="'.$workflow_step_row->id.'" selected="selected">'.$workflow_step_row->name.'</option>';
                             } else {
                                 $workflow .='<option id="'.$workflow_step_row->id.'">'.$workflow_step_row->name.'</option>';
@@ -610,7 +612,7 @@ function get_workflows($step_id=false) {
     $workflow .='<input type="button" value="Reset" name="reset" id="reset">';
     
     // get action for workflow step
-    if($workflow_action!=0) {
+    if($workflow_action!='0') {
         $workflow .='<input type="hidden" id="step_action" name="step_action" value="'.$workflow_action.'">';
         $workflow .='<input type="submit" value="Ok" name="ok" class=".close" id="ok">';
     } else {
