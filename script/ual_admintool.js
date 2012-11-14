@@ -59,7 +59,10 @@ var ual_admintool = ual_admintool || (function(){
                 if(sub_step_action!="0"){
                     $('#sub_step_action').val(sub_step_action);
                     $('#ok').removeAttr('disabled');
-                }                
+                } else {
+                    $('#sub_step_action').val(0);
+                    $('#ok').attr('disabled','disabled');
+                }
             });
             
             // workflow reset
