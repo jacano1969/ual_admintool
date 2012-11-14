@@ -315,6 +315,8 @@ function get_filter_data($type=false, $data=false) {
                     }
                 } else {
                     if($type=='C') {
+                        $selected_programme=$row->name;
+                        $selected_programme_year=$row->year;
                         $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
                     } else {
                         $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
