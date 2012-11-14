@@ -44,7 +44,7 @@ var ual_admintool = ual_admintool || (function(){
                     });
                 } else {
                     // show all workflows
-                    $.get('workflow.php', function(data){
+                    $.get('workflow.php?step=false', function(data){
                         $('#hiddenlightbox').hide();
                         // replace filters with new data
                         $('#hiddenlightbox').html(data);
@@ -97,7 +97,7 @@ var ual_admintool = ual_admintool || (function(){
                         $('#mainfilters').show();
                     });
                 } else {
-                    // course filter has benn cleared ...
+                    // course filter has been cleared ...
                     // get the currently selected programme
                     var selected_programme = $('#programmes').children(":selected").attr("id");
                     
