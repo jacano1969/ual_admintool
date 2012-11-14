@@ -34,18 +34,18 @@ var ual_admintool = ual_admintool || (function(){
                 if(selected_workflow_step!="0") {
                     // get workflow sub steps
                     $.get('workflow.php?step='+selected_workflow_step, function(data){
-                        $('#workflow_container').hide();
+                        $('#hiddenlightbox').hide();
                         // replace workflow with new data
-                        $('#workflow_container').html(data);
-                        $('#workflow_container').show();
+                        $('#hiddenlightbox').html(data);
+                        $('#hiddenlightbox').show();
                     });
                 } else {
                     // show all workflows
-                    $.get('workflow.php.php', function(data){
-                        $('#workflow_container').hide();
+                    $.get('workflow.php', function(data){
+                        $('#hiddenlightbox').hide();
                         // replace filters with new data
-                        $('#workflow_container').html(data);
-                        $('#workflow_container').show();
+                        $('#hiddenlightbox').html(data);
+                        $('#hiddenlightbox').show();
                     });
                 }
             });

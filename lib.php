@@ -522,7 +522,7 @@ function get_workflows($step_id=false) {
         exit;
     }
     
-    $workflow .= '<fieldset id="workflow_container">';
+    $workflow .= '<fieldset>';
     $workflow .= '<legend>';
     $workflow .= 'Select Action';
     $workflow .= '</legend>';
