@@ -57,7 +57,7 @@ var ual_admintool = ual_admintool || (function(){
                 
                 // set sub step action and enable ok button (submit)
                 if(sub_step_action!="0"){
-                    $('#sub_step_action').value=sub_step_action;
+                    $('#sub_step_action').val(sub_step_action);
                     $('#ok').disabled=false;
                 }                
             });
