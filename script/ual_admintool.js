@@ -73,13 +73,13 @@ var ual_admintool = ual_admintool || (function(){
                 var sub_step_action = $('#sub_step_action').val();
                 
                 // check if this is a step action
-                if(step_action!==false){
+                if(typeof(step_action)!='undefined'){
                     alert("step: "+step_action);
                     return false;
                 }
                 
                 // check if its a sub step action
-                if(sub_step_action!==false){
+                if(typeof(sub_step_action)!='undefined'){
                     alert("sub step: "+sub_step_action);
                     return false;
                 }
