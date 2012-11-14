@@ -68,15 +68,34 @@ var ual_admintool = ual_admintool || (function(){
             // commence workflow action
             $('#ok').live("click", function() {
                 
-                // check if this is a step or sub step
-                var step = $('#step_action').val();
-                var sub_step = $('#sub_step_action').val();
+                // get work flow action
+                var step_action = $('#step_action').val();
+                var sub_step_action = $('#sub_step_action').val();
                 
-                alert('step:'+step);
-                alert('sub step:'+sub_step);
+                // check if this is a step action
+                if(step_action!==false){
+                    alert("step: "+step_action);
+                    return false;
+                }
                 
-                // prevent continue for now
-                return false;                
+                // check if its a sub step action
+                if(sub_step_action!==false){
+                    alert("sub step: "+sub_step_action);
+                    return false;
+                }
+                
+                // something has happened we did not intend
+                alert("An error has occured, please re-try.");
+                
+                // show all workflows
+                $.get('workflow.php?step=false', function(data){
+                    $('#hiddenlightbox').hide();
+                    // replace filters with new data
+                    $('#hiddenlightbox').html(data);
+                    $('#hiddenlightbox').show();
+                });
+                
+                return false;
             });
             
             // workflow reset
