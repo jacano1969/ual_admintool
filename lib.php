@@ -529,7 +529,7 @@ function get_workflows($step_id=false) {
     $workflow .= '<form id="workflow" name="workflow">';
     
     // get all active workflows
-    $workflow_sql="select workflow_id as id, name, description from workflow where status=1";
+    $workflow_sql="select workflow_id as id, name as name, description as description from workflow where status=1";
 
     if($step_id==false) {
         $current_workflow_step_id='0';
@@ -537,7 +537,6 @@ function get_workflows($step_id=false) {
         $current_workflow_step_id=$step_id;
     }
     
-    return 'test';
      // get workflows
     if ($workflow_result = $mysqli->query($workflow_sql)) {
         if($workflow_result->num_rows==0) {
@@ -552,7 +551,7 @@ function get_workflows($step_id=false) {
                 $workflow_id = $workflow_row->id;
                 
                 // get all active workflow steps for each workflow
-                $workflow_step_sql="select workflow_action_id as id, name, description from workflow_step where status=1 and workflow_id=$workflow_id";
+                $workflow_step_sql="select workflow_action_id as id, name as name, description as description from workflow_step where status=1 and workflow_id=$workflow_id";
                
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
                     if($workflow_step_result->num_rows==0) {
@@ -582,7 +581,7 @@ function get_workflows($step_id=false) {
     
     // get all active workflow sub steps for the currently selected workflow step
     if($step_id!='0') {
-        $workflow_sub_step_sql="select workflow_action_id as id, name, description from workflow_sub_step where status=1 and workflow_step_id=$step_id";
+        $workflow_sub_step_sql="select workflow_action_id as id, name as name, description as description from workflow_sub_step where status=1 and workflow_step_id=$step_id";
 
         if ($workflow_sub_step_result = $mysqli->query($workflow_sub_step_sql)) {
             if($workflow_sub_step_result->num_rows==0) {
