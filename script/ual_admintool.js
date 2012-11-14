@@ -65,6 +65,20 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
             
+            // commence workflow action
+            $('#ok').live("click", function() {
+                
+                // check if this is a step or sub step
+                var step = $('#step_action').val();
+                var sub_step = $('#sub_step_action').val();
+                
+                alert('step:'+step);
+                alert('sub step:'+sub_step);
+                
+                // prevent continue for now
+                return false;                
+            });
+            
             // workflow reset
             $('#reset').live("click", function() {
                 // show all workflows
