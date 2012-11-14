@@ -74,13 +74,33 @@ var ual_admintool = ual_admintool || (function(){
                 
                 // check if this is a step action
                 if(typeof(step_action)!='undefined'){
-                    alert("step: "+step_action);
+                    
+                    // get the step id
+                    var step_id = $('#step_id').val();
+                    
+                    // get workflow action
+                    $.get("action.php?step_id="+step_id+"&action_id="+step_action, function(data) {
+                        $('div.container').hide();
+                        $('div.container').html(data);
+                        $('div.container').show();
+                    });
+                    
                     return false;
                 }
                 
                 // check if its a sub step action
                 if(typeof(sub_step_action)!='undefined'){
-                    alert("sub step: "+sub_step_action);
+                    
+                    // get the sub step id
+                    var step_id = $('#sub_step_id').val();
+                    
+                    // get workflow action
+                    $.get("action.php?sub_step_id="+sub_astep_id+"&action_id="+sub_step_action, function(data) {
+                        $('div.container').hide();
+                        $('div.container').html(data);
+                        $('div.container').show();
+                    });
+                    
                     return false;
                 }
                 

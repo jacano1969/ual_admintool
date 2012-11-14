@@ -541,7 +541,7 @@ function get_workflows($step_id=false) {
      // get workflows
     if ($workflow_result = $mysqli->query($workflow_sql)) {
         if($workflow_result->num_rows==0) {
-            return 'No workflows found.';
+            return 'An error has occured.';
         } else {  
             $workflow .= '<select id="workflows" name="workflows">';
             $workflow .='<option id="0">Select Action ...</option>';
@@ -614,10 +614,12 @@ function get_workflows($step_id=false) {
     // get action for workflow step
     if($workflow_action!='0') {
         $workflow .='<input type="hidden" id="step_action" name="step_action" value="'.$workflow_action.'">';
-        $workflow .='<input type="submit" value="Ok" name="ok" class=".close" id="ok">';
+        $workflow .='<input type="hidden" id="step_id" name="step_id" value="'.$step_id.'">';
+        $workflow .='<input type="submit" value="Ok" name="ok" class="close" id="ok">';
     } else {
         $workflow .='<input type="hidden" id="sub_step_action" name="sub_step_action" value="0">';
-        $workflow .='<input type="submit" value="Ok" name="ok" class=".close" id="ok" disabled="disabled">';
+        $workflow .='<input type="hidden" id="sub_step_id" name="sub_step_id" value="0">';
+        $workflow .='<input type="submit" value="Ok" name="ok" class="close" id="ok" disabled="disabled">';
     }
         
     $workflow .= '</form>';
@@ -627,3 +629,71 @@ function get_workflows($step_id=false) {
     
     return $workflow;
 }
+
+
+/**
+ * Description: Get data for workflow action
+ *
+ */
+function get_workflow_action($step_id, $sub_step_id, $action_id) {
+    global $CFG;
+    
+    // get wokflow action
+    $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $workflow_action = '';
+    $action_name='';
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    // get workflow step or sub step details
+    if($step_id!=false){
+        
+        $step_sql = "select name as name, description as description from workflow_step where status=1 and workflow_step_id=$step_id";
+        
+        if ($result = $mysqli->query($step_sql)) {
+            while($row = $result->fetch_object()) {
+                $action_name = $row->name;    
+            }
+            
+            $result->close();
+        } else{
+            $mysqli->close();
+            return 'An error has occured.';
+        }
+    } else if($sub_step_id!=false) {
+        
+        $sub_step_sql = "select name as name, description as description from workflow_sub_step where status=1 and workflow_sub_step_id=$sub_step_id";
+        
+        if ($result = $mysqli->query($sub_step_sql)) {
+            while($row = $result->fetch_object()) {
+                $action_name = $row->name;    
+            }
+            
+            $result->close();
+        } else{
+            $mysqli->close();
+            return 'An error has occured.';
+        }
+    } else {
+        $mysqli->close();
+        return 'An error has occured.';
+    }
+    
+    // get workflow action details
+    $workflow_action_sql ="select ";
+    
+    // TODO: 
+    
+    
+    $workflow_action = $action_name;
+    
+    $mysqli->close();
+    
+    return $workflow_action;
+}
+
+
