@@ -9,6 +9,20 @@ var ual_admintool = ual_admintool || (function(){
         // home page scripts
         if($('#home-page').length>0) {
             
+            
+            // show workflow
+            $('#hiddenlightbox').lightbox_me({
+                centered: false,
+                appearEffect: 'show',
+                lightboxSpeed: 'fast',
+                overlaySpeed: 'fast',
+                onLoad: function() { 
+                    // do anything after lightbox is loaded?
+                    $('#hiddenlightbox').css('height','260px');
+                    $('#hiddenlightbox').css('width','300px');
+                }
+            });
+            
             // programme filter change
             $('#programmes').live("change", function(){
                 

@@ -154,6 +154,9 @@ function show_home() {
 
     $home .= '</div>';
     
+    // workflow popup
+    $home .= '<div id="hiddenlightbox">'.get_workflows(false).'</div>';
+    
     return $home;    
 }
 
@@ -251,7 +254,6 @@ function get_filter_data($type=false, $data=false) {
     
     global $CFG;
     
-    // TODO:
     // get all programmes, course years, courses, units for the currently logged in user
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
@@ -261,17 +263,7 @@ function get_filter_data($type=false, $data=false) {
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
         exit;
-    }
-    
-    // multidimensional arrays for data
-    //$filter->colleges_list = array();       // courses.college => college name
-    //$filter->schools_list = array();        // courses.school => school name
-    //$filter->programmes_list = array();     // courses.aos_code (where 1st character = p) => programme name
-    //$filter->course_years_list = array();   // courses.aos_period (4th character) => course year number
-    //$filter->courses_list = array();        // courses.courseid => course name
-    //$filter->units_list = array();          // courses.aos_code (where 1st character is a-z) => unit name
-    //$filter->users_list = array();          // enrolments.recordid + staff_enrolments_ulcc.recordid => firstname . ' ' . lastname
-    
+    }    
     
     // check that logged in user has access
     $loggedin_username = $_SESSION['USERNAME'];
@@ -345,15 +337,7 @@ function get_filter_data($type=false, $data=false) {
             $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
         }
     }
-    
-    
-    //
-    // TODO:
-    
-    // SORT OUT COURSE YEAR SELECTED IF PROGRAMME OR COURSE IS SELECTED !!!!
-    //
-    
-    
+        
     // get course years list
     if ($result = $mysqli->query($course_years_sql)) {
         if($result->num_rows==0) {
@@ -510,3 +494,113 @@ function get_filter_data($type=false, $data=false) {
     return $filters;
 }
 
+
+
+//
+// Workflow
+//
+
+
+/**
+ * Description: function to retreive all workflows
+ *
+ *
+ */
+function get_workflows($step_id=false) {
+    global $CFG;
+    
+    // get wokflows, steps and sub steps
+    $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $workflows ='';
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    $workflow .= '<fieldset>';
+    $workflow .= '<legend>';
+    $workflow .= 'Select Action';
+    $workflow .= '</legend>';
+    $workflow .= '<form id="workflow" name="workflow">';
+    
+    // get all active workflows
+    $workflow_sql="select workflow_id as id, name, description from workflow where status=1";
+
+    if($step_id==false) {
+        $current_workflow_step_id='0';
+    } else {
+        $current_workflow_step_id=$step_id;
+    }
+    
+     // get workflows
+    if ($workflow_result = $mysqli->query($workflow_sql)) {
+        if($workflow_result->num_rows==0) {
+            return $workflow;
+        } else {  
+            $workflow .= '<select id="workflows" name="workflows">';
+            $workflow .='<option id="0">Select Action ...</option>';
+            
+            $workflow = '<optgroup label="'.$workflow_row->name .'">';
+            
+            // construct data
+            while ($workflow_row = $workflow_result->fetch_object()) {
+                
+                // get all active workflow steps for each workflow
+                $workflow_step_sql="select workflow_action_id as id, name, description from workflow_step where status=1 and workflow_id=$current_workflow_id";
+               
+                if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
+                    if($workflow_step_result->num_rows==0)) {
+                        return $workflow;
+                    } else {
+                        if($current_workflow_step_id!=$workflow_step_result->id) {
+                            $workflow .='<option id="'.$workflow_step_result->id.'" selected="selected">'.$workflow_step_result->name.'</option>';
+                        } else {
+                            $workflow .='<option id="'.$workflow_step_result->id.'">'.$workflow_step_result->name.'</option>';
+                        }
+                    }
+                }
+            }
+            
+            $workflow = '</optgroup>';
+            $workflow = '</select>';
+        }
+    }
+    
+    // get all active workflow sub steps for the currently selected workflow step
+    if($current_workflow_step_id!='0') {
+        $workflow_sub_step_sql="select workflow_action_id as id, name, description from workflow_sub_step where status=1 and workflow_step_id=$current_workflow_step_id";
+    /*} else {
+        $workflow_sub_step_sql="select workflow_action_id as id, name, description from workflow_sub_step where status=1";
+    }*/
+
+        if ($workflow_sub_step_result = $mysqli->query($workflow_sub_step_sql)) {
+            if($workflow_sub_step_result->num_rows==0) {
+                return $workflow;
+            } else {  
+                $workflow .= '<select id="workflow_sub_steps" name="workflow_sub_steps">';
+                $workflow .='<option id="0">Select Action ...</option>';
+                
+                if($workflow_sub_step_result->num_rows==0)) {
+                    return $workflow;
+                } else {
+                    $workflow .='<option id="'.$workflow_sub_step_result->id.'">'.$workflow_sub_step_result->name.'</option>';
+                }
+                
+                $workflow = '</select>';
+            }
+        }
+        
+        // show disabled ok button
+        $workflow .='<input type="submit" value="Cancel" name="cancel" id="cancel">';
+        $workflow .='<input type="submit" value="Ok" name="ok" id="ok" disabled="disabled">';
+    }
+    
+    $workflow .= '</form>';
+    $workflow .= '</fieldset>';
+        
+    $mysqli->close();
+    
+    return $workflow;
+}
