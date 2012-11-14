@@ -544,27 +544,37 @@ function get_workflows($step_id=false) {
             
             $workflow = '<optgroup label="'.$workflow_row->name .'">';
             
+            $workflow_id = .$workflow_row->id;
+            
             // construct data
             while ($workflow_row = $workflow_result->fetch_object()) {
                 
                 // get all active workflow steps for each workflow
-                $workflow_step_sql="select workflow_action_id as id, name, description from workflow_step where status=1 and workflow_id=$workflow_row->id";
+                $workflow_step_sql="select workflow_action_id as id, name, description from workflow_step where status=1 and workflow_id=$workflow_id";
                
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
                     if($workflow_step_result->num_rows==0)) {
                         //continue;
                     } else {
-                        if($current_workflow_step_id!=$workflow_step_result->id) {
-                            $workflow .='<option id="'.$workflow_step_result->id.'" selected="selected">'.$workflow_step_result->name.'</option>';
-                        } else {
-                            $workflow .='<option id="'.$workflow_step_result->id.'">'.$workflow_step_result->name.'</option>';
+                        
+                        // construct data
+                        while($workflow_step_result->fetch_object()) {
+                            if($current_workflow_step_id!=$workflow_step_result->id) {
+                                $workflow .='<option id="'.$workflow_step_result->id.'" selected="selected">'.$workflow_step_result->name.'</option>';
+                            } else {
+                                $workflow .='<option id="'.$workflow_step_result->id.'">'.$workflow_step_result->name.'</option>';
+                            }
                         }
+                        
+                        $workflow_step_result->close();
                     }
                 }
             }
             
             $workflow = '</optgroup>';
             $workflow = '</select>';
+            
+            $workflow_result->close();
         }
     }
     
