@@ -59,7 +59,7 @@ var ual_admintool = ual_admintool || (function(){
                     $('#hiddenlightbox').html(data);
                     $('#hiddenlightbox').show();
                 });
-            }
+            });
             
             //
             // Filters
