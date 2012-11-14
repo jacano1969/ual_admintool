@@ -687,9 +687,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     $workflow_action_sql ="select ";
     
     // TODO: 
-    
-    
-    $workflow_action = $action_name;
+    $workflow_action = '<legend>'.$action_name.'</legend>';
     
     $mysqli->close();
     
