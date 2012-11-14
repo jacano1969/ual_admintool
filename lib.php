@@ -285,10 +285,10 @@ function get_filter_data($type=false, $data=false) {
     // programmes
     if($type==false || $type=='P') {
         // get all programmes
-        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.aos_period as year from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') order by name";
+        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') order by name";
     } else if($type=='C'){
         // get programmes for selected course
-        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.aos_period as year from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
+        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
     }
     
     // selected items
@@ -343,6 +343,14 @@ function get_filter_data($type=false, $data=false) {
             $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
         }
     }
+    
+    
+    //
+    // TODO:
+    
+    // SORT OUT COURSE YEAR SELECTED IF PROGRAMME OR COURSE IS SELECTED !!!!
+    //
+    
     
     // get course years list
     if ($result = $mysqli->query($course_years_sql)) {
