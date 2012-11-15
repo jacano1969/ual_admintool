@@ -609,7 +609,7 @@ function get_workflows($step_id=false) {
     }
     
     // show disabled ok button
-    $workflow .='<input type="button" value="Reset" name="reset" id="reset">';
+    $workflow .='<input type="button" class="submit" value="Reset" name="reset" id="reset">';
     
     // get action for workflow step
     if($workflow_action!='0') {
@@ -619,7 +619,7 @@ function get_workflows($step_id=false) {
     } else {
         $workflow .='<input type="hidden" id="sub_step_action" name="sub_step_action" value="0">';
         $workflow .='<input type="hidden" id="sub_step_id" name="sub_step_id" value="0">';
-        $workflow .='<input type="submit" class="submit" value="Ok" name="ok" class="close" id="ok" disabled="disabled">';
+        $workflow .='<input type="submit" value="Ok" name="ok" class="close" id="ok" disabled="disabled">';
     }
         
     $workflow .= '</form>';
