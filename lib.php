@@ -615,11 +615,11 @@ function get_workflows($step_id=false) {
     if($workflow_action!='0') {
         $workflow .='<input type="hidden" id="step_action" name="step_action" value="'.$workflow_action.'">';
         $workflow .='<input type="hidden" id="step_id" name="step_id" value="'.$step_id.'">';
-        $workflow .='<input type="submit" value="Ok" name="ok" class="close" id="ok">';
+        $workflow .='<input type="submit" class="submit" value="Ok" name="ok" class="close" id="ok">';
     } else {
         $workflow .='<input type="hidden" id="sub_step_action" name="sub_step_action" value="0">';
         $workflow .='<input type="hidden" id="sub_step_id" name="sub_step_id" value="0">';
-        $workflow .='<input type="submit" value="Ok" name="ok" class="close" id="ok" disabled="disabled">';
+        $workflow .='<input type="submit" class="submit" value="Ok" name="ok" class="close" id="ok" disabled="disabled">';
     }
         
     $workflow .= '</form>';
@@ -710,19 +710,19 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     $buttons ='';
     
     if($add_button==1) {
-        $buttons .= '<input type="submit" name="add" id="add" value="Add">';
+        $buttons .= '<input type="submit" class="submit" name="add" id="add" value="Add">';
     }
 
     if($update_button==1) {
-        $buttons .= '<input type="submit" name="update" id="update" value="Update">';
+        $buttons .= '<input type="submit" class="submit" name="update" id="update" value="Update">';
     }
     
     if($delete_button==1) {
-        $buttons .= '<input type="submit" name="delete" id="delete" value="Delete">';
+        $buttons .= '<input type="submit" class="submit" name="delete" id="delete" value="Delete">';
     }
     
     if($cancel_button==1) {
-        $buttons .= '<input type="submit" name="cancel" id="cancel" value="Cancel">';
+        $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Cancel">';
     }
     
     
