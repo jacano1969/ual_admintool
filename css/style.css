@@ -19,9 +19,9 @@
 #home-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px;}
 #home-page label {font-size: 0.8em; font-weight: bold;}
 #home-page form {margin-top: 10px; float:left;}
-#home-page input {display: inline; margin-bottom: 5px; margin-right: 2px;}
-#home-page input[type=text] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
-#home-page input[type=password] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page input {display: block; margin-bottom: 5px; margin-right: 2px;}
+#home-page input[type=text] {border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page input[type=password] {border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page fieldset {background: #ffffff; border: 3px solid #CCCCCC; border-radius: 6px 6px 6px 6px;}
 #home-page legend {font-weight: bold; font-size: 0.9em;}
 #home-page .submit {display: inline-block; background-color: #cccccc; border:2px ridge #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}

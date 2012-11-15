@@ -747,7 +747,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             // draw dropdown select box
             if($row->type=='dropdown') {
                 
-                $workflow_form .= '<select id="'.$row->name.'" name="'.$row->name.'">';
+                $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><select id="'.$row->name.'" name="'.$row->name.'">';
                 
                 // check where we get the data from
                 if($row->data_type=='list') {
