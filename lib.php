@@ -684,10 +684,58 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     }
     
     // get workflow action details
-    $workflow_action_sql ="select ";
+    $workflow_action_sql ="select `add` as add_button,`update` as update_button,`delete` as delete_button,cancel as cancel_button, workflow_data_id as workflow_data_id from workflow_action where status=1 and workflow_action_id=$action_id";
     
-    // TODO: 
+    $add_button = '';
+    $update_button = '';
+    $delete_button = '';
+    $cancel_button = '';
+    $workflow_data_id = '';
+    
+    if ($result = $mysqli->query($workflow_action_sql)) {
+        while($row = $result->fetch_object()) {
+            $add_button = $row->add_button;
+            $update_button = $row->update_button;
+            $delete_button = $row->delete_button;
+            $cancel_button = $row->cancel_button;
+            $workflow_data_id = $row->workflow_data_id;
+        }
+        
+        $result->close();
+    } else{
+        $mysqli->close();
+        return 'An error has occured.';
+    }
+
+    $buttons ='';
+    
+    if($add_button==1) {
+        $buttons .= '<input type="submit" name="add" id="add" value="Add">';
+    }
+
+    if($update_button==1) {
+        $buttons .= '<input type="submit" name="update" id="update" value="Update">';
+    }
+    
+    if($delete_button==1) {
+        $buttons .= '<input type="submit" name="delete" id="delete" value="Delete">';
+    }
+    
+    if($cancel_button==1) {
+        $buttons .= '<input type="submit" name="cancel" id="cancel" value="Cancel">';
+    }
+    
+    
+    // get workflow data and data types
+    
+    
+    
+    // prepare form
     $workflow_action = '<legend>'.$action_name.'</legend>';
+    $workflow_action .= '<form name="action" id="action">';
+    $workflow_action .= '<input type="hidden" id="action_id" name="action_id" value="'.$action_id.'">';
+    $workflow_action .= $buttons;
+    $workflow_action .= '</form>';
     
     $mysqli->close();
     
