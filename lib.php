@@ -174,6 +174,7 @@ function show_header() {
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
     $header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
     $header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
+    $header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
     $header .= '<script src="script/ual_admintool.js" type="text/javascript"></script>';
     $header .= '</head>';
     
@@ -708,7 +709,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     }
     
     // get workflow data and data types and mappings
-    $workflow_data_details = "select wfd.label as label, wfd.data as data, wfd.name as name, wfdt.name as type,". 
+    $workflow_data_details = "select wfd.label as label, wfd.data as data, wfd.name as name, wfd.mandatory as mandatory, wfdt.name as type,". 
                              "wfdm.data_type as data_type,wfdm.data_origin as value from workflow_data wfd ".
                              "inner join workflow_data_type wfdt on wfd.workflow_data_type_id=wfdt.workflow_data_type_id ".
                              "left join workflow_data_mapping wfdm on wfdm.workflow_data_item_id = wfd.workflow_data_item_id ".
@@ -722,11 +723,16 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             
             // draw text box
             if($row->type=='text') {
+                
+                // TODO: check if mandatory==1
+                
                 $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input type="text" id="'.$row->name.'" name="'.$row->name.'">';
             }
             
             // draw dropdown select box
             if($row->type=='dropdown') {
+                
+                // TODO: check if mandatory==1
                 
                 $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><select id="'.$row->name.'" name="'.$row->name.'">';
                 
@@ -757,14 +763,10 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     $buttons ='<hr>';
     
     if($add_button==1) {
-        
-        // TODO: check for mandatory fields before adding
         $buttons .= '<input type="submit" class="submit" name="add" id="add" value="Add">';
     }
 
     if($update_button==1) {
-        
-        // TODO: check for mandatory fields before updating
         $buttons .= '<input type="submit" class="submit" name="update" id="update" value="Update">';
     }
     
