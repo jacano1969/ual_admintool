@@ -706,25 +706,6 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
         $mysqli->close();
         return 'An error has occured.';
     }
-
-    $buttons ='';
-    
-    if($add_button==1) {
-        $buttons .= '<input type="submit" class="submit" name="add" id="add" value="Add">';
-    }
-
-    if($update_button==1) {
-        $buttons .= '<input type="submit" class="submit" name="update" id="update" value="Update">';
-    }
-    
-    if($delete_button==1) {
-        $buttons .= '<input type="submit" class="submit" name="delete" id="delete" value="Delete">';
-    }
-    
-    if($cancel_button==1) {
-        $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Cancel">';
-    }
-    
     
     // get workflow data and data types and mappings
     $workflow_data_details = "select wfd.label as label, wfd.data as data, wfd.name as name, wfdt.name as type,". 
@@ -771,6 +752,30 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
         $mysqli->close();
         return 'An error has occured.';
     }
+    
+    
+    $buttons ='<hr>';
+    
+    if($add_button==1) {
+        
+        // TODO: check for mandatory fields before adding
+        $buttons .= '<input type="submit" class="submit" name="add" id="add" value="Add">';
+    }
+
+    if($update_button==1) {
+        
+        // TODO: check for mandatory fields before updating
+        $buttons .= '<input type="submit" class="submit" name="update" id="update" value="Update">';
+    }
+    
+    if($delete_button==1) {
+        $buttons .= '<input type="submit" class="submit" name="delete" id="delete" value="Delete">';
+    }
+    
+    if($cancel_button==1) {
+        $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Cancel">';
+    }
+    
     
     // prepare form
     $workflow_action = '<legend>'.$action_name.'</legend>';
