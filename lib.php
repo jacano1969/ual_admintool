@@ -726,14 +726,57 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     }
     
     
-    // get workflow data and data types
+    // get workflow data and data types and mappings
+    $workflow_data_details = "select wfd.label as label, wfd.data as data, wfd.name as name, wfdt.name as type,". 
+                             "wfdm.data_type as data_type,wfdm.data_origin as value from workflow_data wfd ".
+                             "inner join workflow_data_type wfdt on wfd.workflow_data_type_id=wfdt.workflow_data_type_id ".
+                             "left join workflow_data_mapping wfdm on wfdm.workflow_data_item_id = wfd.workflow_data_item_id ".
+                             "and wfd.status=1 and wfdt.status=1 order by display_order";
     
+    $workflow_form = '';
     
+    // parse workflow details
+    if ($result = $mysqli->query($workflow_data_details)) {
+        while($row = $result->fetch_object()) {
+            
+            // draw text box
+            if($row->type=='textbox') {
+                $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input type="text" id="'.$row->name.'" name="'.$row->name.'">';
+            }
+            
+            // draw dropdown select box
+            if($row->type=='dropdown') {
+                
+                $workflow_form .= '<select id="'.$row->name.'" name="'.$row->name.'">';
+                
+                // check where we get the data from
+                if($row->data_type=='list') {
+                    
+                    // get list items
+                    $list_items = array();
+                    
+                    $list_items = explode(',',$row->value);
+                    
+                    foreach($list_items as $item) {
+                        $workflow_form .='<option id="'.$item.'" name="'.$item.'">'.$item.'</option>';
+                    }
+                }
+                
+                $workflow_form .= '</select>';
+            }
+        }
+        
+        $result->close();
+    } else{
+        $mysqli->close();
+        return 'An error has occured.';
+    }
     
     // prepare form
     $workflow_action = '<legend>'.$action_name.'</legend>';
     $workflow_action .= '<form name="action" id="action">';
     $workflow_action .= '<input type="hidden" id="action_id" name="action_id" value="'.$action_id.'">';
+    $workflow_action .= $workflow_form;
     $workflow_action .= $buttons;
     $workflow_action .= '</form>';
     
