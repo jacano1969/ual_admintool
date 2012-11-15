@@ -740,7 +740,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
         while($row = $result->fetch_object()) {
             
             // draw text box
-            if($row->type=='textbox') {
+            if($row->type=='text') {
                 $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input type="text" id="'.$row->name.'" name="'.$row->name.'">';
             }
             
