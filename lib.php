@@ -656,8 +656,13 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
         $step_sql = "select name as name, description as description from workflow_step where status=1 and workflow_step_id=$step_id";
         
         if ($result = $mysqli->query($step_sql)) {
-            while($row = $result->fetch_object()) {
-                $action_name = $row->name;    
+            if($result->num_rows==0) {
+                $result->close();
+                return 'An error has occured.';
+            } else {
+                while($row = $result->fetch_object()) {
+                    $action_name = $row->name;    
+                }
             }
             
             $result->close();
@@ -785,7 +790,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     if($cancel_button==1) {
         // show reset and cancel buttons
         $buttons .= '<input type="submit" class="submit" name="resetform" id="resetform" value="Reset">';
-        $buttons .= '<input type="button" class="submit" name="cancel" id="cancel" value="Cancel">';
+        $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Cancel">';
     }
     
     // prepare form
