@@ -145,17 +145,14 @@ var ual_admintool = ual_admintool || (function(){
                 });
             });
             
-            
-            
-            
+            // cancel button clicked
             $('#cancel').live("click", function() {
-                
-                // hide all errors
-                $('label.error').each(function(){  $(this).hide(); });
                 
                 // reset form
                 $("#action").each(function(){  this.reset(); });
                 
+                // hide all errors
+                $('label.error').each(function(){  $(this).hide(); });
             });
             
             
