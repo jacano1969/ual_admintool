@@ -149,14 +149,8 @@ var ual_admintool = ual_admintool || (function(){
                 });
             });
             
-            // reset button clicked
+            // reset form button clicked
             $('#resetform').live("click", function() {
-                
-                // reset form
-                $("#action").each(function(){  this.reset(); });
-                
-                // hide all errors
-                $('label.error').each(function(){  $(this).hide(); });
                 
                 // show all workflows
                 $.get('workflow.php?step=false', function(data){
