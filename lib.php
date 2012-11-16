@@ -714,7 +714,12 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     }
     
     // get workflow data and data types and mappings
-    $workflow_data_details = "select wfd.label as label, wfd.data as data, wfd.name as name, wfd.mandatory as mandatory, wfd.validate_for as validate,".
+    /*$workflow_data_details = "select wfd.label as label, wfd.data as data, wfd.name as name, wfd.mandatory as mandatory, wfd.validate_for as validate,".
+                             "wfdt.name as type,wfdm.data_type as data_type,wfdm.data_origin as value from workflow_data wfd ".
+                             "inner join workflow_data_type wfdt on wfd.workflow_data_type_id=wfdt.workflow_data_type_id ".
+                             "left join workflow_data_mapping wfdm on wfdm.workflow_data_item_id = wfd.workflow_data_item_id ".
+                             "and wfd.status=1 and wfdt.status=1 order by display_order";*/
+    $workflow_data_details = "select wfd.workflow_data_item_id as item_id, wfd.label as label, wfd.name as name, wfd.mandatory as mandatory, wfd.validate_for as validate,".
                              "wfdt.name as type,wfdm.data_type as data_type,wfdm.data_origin as value from workflow_data wfd ".
                              "inner join workflow_data_type wfdt on wfd.workflow_data_type_id=wfdt.workflow_data_type_id ".
                              "left join workflow_data_mapping wfdm on wfdm.workflow_data_item_id = wfd.workflow_data_item_id ".
@@ -733,9 +738,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->mandatory==1){
                     // get any special validation
                     $validate = ($row->validate!='') ? ' '.$row->validate : '';
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><input class="required'.$validate.'" type="text" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><input data="'.$row->item_id.'" class="required'.$validate.'" type="text" id="'.$row->name.'" name="'.$row->name.'">';
                 } else {
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input type="text" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input data="'.$row->item_id.'" type="text" id="'.$row->name.'" name="'.$row->name.'">';
                 }
             }
             
@@ -744,9 +749,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 
                 // TODO: check if mandatory==1
                 if($row->mandatory==1){
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><select class="required" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><select data="'.$row->item_id.'" class="required" id="'.$row->name.'" name="'.$row->name.'">';
                 } else {
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><select id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><select data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'">';
                 }
                 
                 // check where we get the data from

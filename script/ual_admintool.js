@@ -144,7 +144,52 @@ var ual_admintool = ual_admintool || (function(){
                 
                 $("#action").validate({
                     submitHandler: function(form) {
-                        form.submit();
+                        
+                        // TODO: 
+                        /*{
+                            "add": [
+                                {
+                                    "id": 1,
+                                    "data": "1"
+                                },
+                                {
+                                    "id": 2,
+                                    "data": "2"
+                                },
+                                {
+                                    "id": 3,
+                                    "data": "3"
+                                }
+                            ]
+                        }*/
+                        
+                        // construct json
+                        jsonString = '{ "add" : [';
+                            
+                        // get all data and item_ids to be added
+                        $("#action").each(function(){
+                            
+                            // for text box data
+                            if($(this).is('input[type="text"]')) {
+                                
+                                jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+                                
+                            }
+                            
+                            // TODO:
+                            // for dropdown selects
+                            
+                        });
+                        
+                        // chop off last comma
+                        jsonString = replace(/,$/, "");
+                        
+                        jsonString += ']';
+                        
+                        alert(jsonString);
+                        
+                        //form.submit();
+                        return false;
                     }
                 });
             });
