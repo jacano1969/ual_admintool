@@ -35,3 +35,4 @@
 #home-page * { font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 1.0em; }
 #home-page label.error {float: right; color: red; padding-left: .5em; vertical-align: top;}
 #home-page em { font-weight: bold; padding-right: 1em; vertical-align: top; }
+#home-page hr {margin-top:5px;}
