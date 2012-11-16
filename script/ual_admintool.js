@@ -149,11 +149,13 @@ var ual_admintool = ual_admintool || (function(){
             
             
             $('#cancel').live("click", function() {
-                $("#action").validate({
-                    submitHandler: function(form) {
-                        form.submit();
-                    }
-                });
+                
+                // hide all errors
+                $('label.error').each(function(){  $(this).hide(); });
+                
+                // reset form
+                $("#action").each(function(){  $(this).reset(); });
+                
             });
             
             
