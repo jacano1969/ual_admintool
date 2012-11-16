@@ -164,20 +164,8 @@ var ual_admintool = ual_admintool || (function(){
             // cancel button clicked
             $('#cancel').live("click", function() {
                 
-                // reset form
-                $("#action").each(function(){  this.reset(); });
-                
-                // hide all errors
-                $('label.error').each(function(){  $(this).hide(); });
-                
                 // show the workflow screen
-                setTimeout($.get('workflow.php?step=false', function(data){
-                    $('#hiddenlightbox').hide();
-                    // replace filters with new data
-                    $('#hiddenlightbox').html(data);
-                    $('#hiddenlightbox').show();
-                }),1000);
-                
+                $.load('index.php');
                 
             });
             
