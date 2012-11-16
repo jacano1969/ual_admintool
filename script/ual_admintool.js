@@ -165,7 +165,7 @@ var ual_admintool = ual_admintool || (function(){
             $('#cancel').live("click", function() {
                 
                 // show the workflow screen
-                $.load('index.php');
+                window.href.location='index.php';
                 
             });
             
