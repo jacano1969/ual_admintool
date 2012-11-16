@@ -783,6 +783,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     }
     
     if($cancel_button==1) {
+        // show reset and cancel buttons
+        $buttons .= '<input type="submit" class="submit" name="reset" id="reset" value="Reset">';
         $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Cancel">';
     }
     

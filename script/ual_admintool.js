@@ -30,6 +30,7 @@ var ual_admintool = ual_admintool || (function(){
             
             // workflow selected
             $('#workflows').live("change", function() {
+                
                 var selected_workflow_step = $("option:selected", this).attr("id");
                 
                 if(selected_workflow_step!="0") {
@@ -53,6 +54,7 @@ var ual_admintool = ual_admintool || (function(){
             
             // workflow sub step selected
             $('#workflow_sub_steps').live("change", function() {
+                
                 var sub_step_id = $(this).children(":selected").attr("id");
                 var sub_step_action = $(this).children(":selected").attr("data");
                 
@@ -122,6 +124,7 @@ var ual_admintool = ual_admintool || (function(){
             
             // workflow reset
             $('#reset').live("click", function() {
+                
                 // show all workflows
                 $.get('workflow.php?step=false', function(data){
                     $('#hiddenlightbox').hide();
@@ -138,6 +141,7 @@ var ual_admintool = ual_admintool || (function(){
                 
             // add button clicked
             $('#add').live("click", function() {
+                
                 $("#action").validate({
                     submitHandler: function(form) {
                         form.submit();
@@ -145,14 +149,26 @@ var ual_admintool = ual_admintool || (function(){
                 });
             });
             
-            // cancel button clicked
-            $('#cancel').live("click", function() {
+            // reset button clicked
+            $('#reset').live("click", function() {
                 
                 // reset form
                 $("#action").each(function(){  this.reset(); });
                 
                 // hide all errors
                 $('label.error').each(function(){  $(this).hide(); });
+            });
+            
+            // cancel button clicked
+            $('#cancel').live("click", function() {
+                
+                // show the workflow screen
+                $.get('workflow.php?step=false', function(data){
+                    $('#hiddenlightbox').hide();
+                    // replace filters with new data
+                    $('#hiddenlightbox').html(data);
+                    $('#hiddenlightbox').show();
+                });
             });
             
             
