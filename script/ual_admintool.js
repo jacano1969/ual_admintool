@@ -133,15 +133,13 @@ var ual_admintool = ual_admintool || (function(){
             
             
             //
-            // Validation
+            // Workflow Validation and links
             //
-            //if($('#action').length>0) {
                 
-                // add button clicked
-                $('#add').live("click", function() {
-                    $("#action").validate();
-                });
-            //}
+            // add button clicked
+            $('#add').live("click", function() {
+                $("#action").validate();
+            });
             
             
             //
