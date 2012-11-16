@@ -725,16 +725,22 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             if($row->type=='text') {
                 
                 // TODO: check if mandatory==1
-                
-                $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input type="text" id="'.$row->name.'" name="'.$row->name.'">';
+                if($row->mandatory==1){
+                    $workflow_form .= '<em>*</em><label for="'.$row->name.'">'.$row->label.'</label><input type="text" id="'.$row->name.'" name="'.$row->name.'">';
+                } else {
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input type="text" id="'.$row->name.'" name="'.$row->name.'">';
+                }
             }
             
             // draw dropdown select box
             if($row->type=='dropdown') {
                 
                 // TODO: check if mandatory==1
-                
-                $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><select id="'.$row->name.'" name="'.$row->name.'">';
+                if($row->mandatory==1){
+                    $workflow_form .= '<em>*</em><label for="'.$row->name.'">'.$row->label.'</label><select id="'.$row->name.'" name="'.$row->name.'">';
+                } else {
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><select id="'.$row->name.'" name="'.$row->name.'">';
+                }
                 
                 // check where we get the data from
                 if($row->data_type=='list') {
@@ -777,7 +783,6 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     if($cancel_button==1) {
         $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Cancel">';
     }
-    
     
     // prepare form
     $workflow_action = '<legend>'.$action_name.'</legend>';

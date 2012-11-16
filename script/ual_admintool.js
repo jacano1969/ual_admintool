@@ -133,6 +133,12 @@ var ual_admintool = ual_admintool || (function(){
             
             
             //
+            // Validation
+            //
+            $("#action").validate();
+            
+            
+            //
             // Filters
             //
             
