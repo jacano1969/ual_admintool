@@ -164,7 +164,8 @@ var ual_admintool = ual_admintool || (function(){
             // cancel button clicked
             $('#cancel').live("click", function() {
                 
-                $("#action").submit();
+                $("#action").validate = function(){ return false; }
+                
                 // reset form
                 //$("#action").each(function(){  this.reset(); });
                 
@@ -172,12 +173,12 @@ var ual_admintool = ual_admintool || (function(){
                 //$('label.error').each(function(){  $(this).hide(); });
                 
                 // show the workflow screen
-                /*$.get('workflow.php?step=false', function(data){
+                $.get('workflow.php?step=false', function(data){
                     $('#hiddenlightbox').hide();
                     // replace filters with new data
                     $('#hiddenlightbox').html(data);
                     $('#hiddenlightbox').show();
-                });*/
+                });
                 
                 
             });
