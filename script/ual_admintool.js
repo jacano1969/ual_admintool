@@ -142,8 +142,8 @@ var ual_admintool = ual_admintool || (function(){
             // add button clicked
             $('#add').live("click", function() {
                 
-                $("#action").validate({
-                    submitHandler: function(form) {
+                //$("#action").validate({
+                //    submitHandler: function(form) {
                         
                         // TODO: 
                         /*{
@@ -190,8 +190,9 @@ var ual_admintool = ual_admintool || (function(){
                         
                         //form.submit();
                         return false;
-                    }
-                });
+                    
+                    //}
+                //});
             });
             
             // reset button clicked
