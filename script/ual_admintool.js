@@ -135,13 +135,13 @@ var ual_admintool = ual_admintool || (function(){
             //
             // Validation
             //
-            if($('#action').length>0) {
+            //if($('#action').length>0) {
                 
                 // add button clicked
                 $('#add').live("click", function() {
                     $("#action").validate();
                 });
-            }
+            //}
             
             
             //
