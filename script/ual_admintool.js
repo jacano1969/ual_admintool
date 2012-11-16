@@ -135,7 +135,9 @@ var ual_admintool = ual_admintool || (function(){
             //
             // Validation
             //
-            $("#action").validate();
+            if($('#action').length>0) {
+                $("#action").validate();
+            }
             
             
             //
