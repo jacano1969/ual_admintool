@@ -154,7 +154,7 @@ var ual_admintool = ual_admintool || (function(){
                 $('label.error').each(function(){  $(this).hide(); });
                 
                 // reset form
-                $("#action").each(function(){  $(this).reset(); });
+                $("#action").each(function(){  this.reset(); });
                 
             });
             
