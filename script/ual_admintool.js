@@ -138,7 +138,22 @@ var ual_admintool = ual_admintool || (function(){
                 
             // add button clicked
             $('#add').live("click", function() {
-                $("#action").validate();
+                $("#action").validate({
+                    submitHandler: function(form) {
+                        form.submit();
+                    }
+                });
+            });
+            
+            
+            
+            
+            $('#cancel').live("click", function() {
+                $("#action").validate({
+                    submitHandler: function(form) {
+                        form.submit();
+                    }
+                });
             });
             
             
