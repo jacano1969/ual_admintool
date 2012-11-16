@@ -726,7 +726,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 
                 // TODO: check if mandatory==1
                 if($row->mandatory==1){
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input class="required" type="text" id="'.$row->name.'" name="'.$row->name.'"><em>*</em>';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><input class="required" type="text" id="'.$row->name.'" name="'.$row->name.'">';
                 } else {
                     $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input type="text" id="'.$row->name.'" name="'.$row->name.'">';
                 }
@@ -737,7 +737,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 
                 // TODO: check if mandatory==1
                 if($row->mandatory==1){
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><select class="required" id="'.$row->name.'" name="'.$row->name.'"><em>*</em>';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><select class="required" id="'.$row->name.'" name="'.$row->name.'">';
                 } else {
                     $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><select id="'.$row->name.'" name="'.$row->name.'">';
                 }
