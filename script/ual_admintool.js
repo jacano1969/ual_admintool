@@ -149,28 +149,18 @@ var ual_admintool = ual_admintool || (function(){
                 });
             });
             
-            // reset form button clicked
+            // reset button clicked
             $('#resetform').live("click", function() {
-                
-                // show all workflows
-                /*$.get('workflow.php?step=false', function(data){
-                    $('#hiddenlightbox').hide();
-                    // replace filters with new data
-                    $('#hiddenlightbox').html(data);
-                    $('#hiddenlightbox').show();
-                });*/
-                
-                // allow the form to submit
-            });
-            
-            // cancel button clicked
-            $('#cancel').live("click", function() {
                 
                 // reset form
                 $("#action").each(function(){  this.reset(); });
                 
                 // hide all errors
                 $('label.error').each(function(){  $(this).hide(); });
+            });
+            
+            // cancel button clicked
+            $('#cancel').live("click", function() {
                 
                 // show the workflow screen
                 $.get('workflow.php?step=false', function(data){
