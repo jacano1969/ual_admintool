@@ -158,7 +158,16 @@ var ual_admintool = ual_admintool || (function(){
                 // hide all errors
                 $('label.error').each(function(){  $(this).hide(); });
                 
-                return false; 
+                
+                // let form submit (reset workflow)
+                
+                // show all workflows
+                /*$.get('workflow.php?step=false', function(data){
+                    $('#hiddenlightbox').hide();
+                    // replace filters with new data
+                    $('#hiddenlightbox').html(data);
+                    $('#hiddenlightbox').show();
+                });*/
             });
             
             // cancel button clicked
