@@ -33,5 +33,5 @@
 #home-page #hiddenlightbox {display:none; background: none repeat scroll 0 0 #FFFFFF; border: 2px ridge #CCCCCC; border-radius: 7px 7px 7px 7px; padding: 6px;}
 
 #home-page * { font-family: Verdana,Arial,Helvetica,sans-serif; font-size: 1.0em; }
-#home-page * label.error {float: none; color: red; padding-left: .5em; vertical-align: top;}
+#home-page label.error {float: right; color: red; padding-left: .5em; vertical-align: top;}
 #home-page em { font-weight: bold; padding-right: 1em; vertical-align: top; }
