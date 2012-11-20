@@ -129,17 +129,16 @@ function process_record($record_data) {
                         // create data values
                         $create_data->sqlb[$table_name] = $create_data->sqlb[$table_name] . "('$new_data'";
                     }
-                    $create_data->data[]=$new_data
                 } else {
                     // add to sql field list
                     $create_data->sqla[$table_name]= $create_data->sqla[$table_name].", $row_name";
                     
                     // add to sql data values
                     $create_data->sqlb[$table_name]= $create_data->sqlb[$table_name].", '$new_data'";
-                    //$create_data->rows[]=$row_name;
-                    //$create_data->data[]=$new_data
                 }
             }
+            
+            $sql_full ='';
             
             // add end to each sql piece
             foreach($create_data->sqla as $new_table_insert) {
