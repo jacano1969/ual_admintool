@@ -167,9 +167,26 @@ var ual_admintool = ual_admintool || (function(){
                         
                         jsonString += '}';
                         
-                        console.log(jsonString);
+                        //console.log(jsonString);
                         
-                        //form.submit();
+                        // submit data 
+                        $.get('index.php?action=add&record_data='+jsonString, function(data){
+                            
+                            var action = $('.container fieldset legend').text();
+                            
+                            if(data) {    
+                                alert(action+":\n\nNew record created successfully.");
+                                alert(data);
+                                return false;
+                            } else {
+                                alert(action+":\n\nAn error occurred, please try again.");
+                                alert(data);
+                                return false;
+                            }
+                            
+                            return false;
+                        });
+                        
                         return false;
                     
                     }

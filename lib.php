@@ -83,12 +83,24 @@ function is_logged_in() {
 
 
 /**
- * Description: function to add a new record of type $record_type
+ * Description: function to add a new record 
  *
  * 
  */
-function add($record_type) {
+function add($record_data) {
     
+    if(is_logged_in()){
+        if(!empty($record_data)){
+            // extract json data
+            $add_data = json_decode($record_data,true);
+            
+            return $add_data;            
+        }       
+    } else {
+        header('Location: login.php');
+        exit;
+    }
+
 }
 
 

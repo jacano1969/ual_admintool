@@ -5,21 +5,21 @@ session_start();
 require_once('lib.php');
 
 $action = '';
-$record_type = '';
-$record_id = '';
+$record_data = '';
+//$record_id = '';
 $search_text='';
 
-if(!empty($_POST['action'])) {
-    $action = $_POST['action'];
+if(!empty($_GET['action'])) {
+    $action = $_GET['action'];
 }
 
-if(!empty($_POST['record_type'])) {
-    $action = $_POST['record_type'];
+if(!empty($_GET['record_data'])) {
+    $action = $_GET['record_data'];
 }
 
-if(!empty($_POST['record_id'])) {
+/*if(!empty($_POST['record_id'])) {
     $action = $_POST['record_id'];
-}
+}*/
 
 if(!empty($_POST['search_text'])) {
     $action = $_POST['search_text'];
@@ -28,21 +28,20 @@ if(!empty($_POST['search_text'])) {
 
 if(is_logged_in()){
 
-    // TODO:
     // show logged in header
     echo show_header();
 
     switch($action) {
-        case 'add' :    add($record_type);
+        case 'add' :    add($record_data);
                         break;
                     
-        case 'update' : update($record_type, $record_id);
+        case 'update' : update($record_data);
                         break;
                     
-        case 'delete' : delete($record_type, $record_id);
+        case 'delete' : delete($record_data);
                         break;
                     
-        case 'search' : search($record_type, $search_text);
+        case 'search' : search($record_data, $search_text);
                         break;
                     
         case 'courserequest' : do_course_request();
