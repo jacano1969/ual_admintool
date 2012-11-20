@@ -99,8 +99,8 @@ function process_record($record_data) {
         $delete_data = $process_data['delete'];
         
         $create_data = new stdClass();
-        $create_data->sqla = array();
-        $create_data->sqlb = array();
+        $create_data->sqla = "";
+        $create_data->sqlb = "";
         
         // add new record
         if(!empty($add_data)) {
@@ -120,34 +120,28 @@ function process_record($record_data) {
                 // collect table names                
                 if(in_array($table_name,$create_data->tables)) {
                     // just add new row to table
-                    $create_data->sqla[$table_name]="INSERT INTO $table_name (";
+                    $create_data->sqla="INSERT INTO $table_name (";
                     
                     if($new_data_type=="string") {
                         // create field list
-                        $create_data->sqla[$table_name] = $create_data->sql[$table_name] . "( $row_name";
+                        $create_data->sqla = $create_data->sqla . " $row_name";
                         
                         // create data values
-                        $create_data->sqlb[$table_name] = $create_data->sqlb[$table_name] . "('$new_data'";
+                        $create_data->sqlb = $create_data->sqlb . "('$new_data'";
                     }
                 } else {
                     // add to sql field list
-                    $create_data->sqla[$table_name]= $create_data->sqla[$table_name].", $row_name";
+                    $create_data->sqla .=", $row_name";
                     
                     // add to sql data values
-                    $create_data->sqlb[$table_name]= $create_data->sqlb[$table_name].", '$new_data'";
+                    if($new_data_type=="string") {
+                        $create_data->sqlb .= ", '$new_data'";
+                    }
                 }
             }
             
-            $sql_full ='';
-            
-            // add end to each sql piece
-            foreach($create_data->sqla as $new_table_insert) {
-                $sql_full .= $create_data->sqla[$new_table_insert].") VALUES ";
-                
-            }
-            foreach($create_data->sqlb as $new_table_insert) {
-                $sql_full .= $create_data->sqlb[$new_table_insert].")";
-            }
+            // add sqla to sqlb
+            $sql_full = $create_data->sqla .") VALUES " . $create_data->sqlb .")";
             
             // TODO: add records
             print_r($sql_full);
