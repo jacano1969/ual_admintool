@@ -99,9 +99,8 @@ function process_record($record_data) {
         $delete_data = $process_data['delete'];
         
         $create_data = new stdClass();
-        $create_data->tables = array();
-        $create_data->rows = array();
-        $create_data->data = array();
+        $create_data->sqla = array();
+        $create_data->sqlb = array();
         
         // add new record
         if(!empty($add_data)) {
@@ -109,6 +108,7 @@ function process_record($record_data) {
                 
                 $workflow_data_id = $data['id'];
                 $new_data = $data['data'];
+                $new_data_type = $data['data_type'];
                 
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
@@ -118,20 +118,37 @@ function process_record($record_data) {
                 $row_name = $table_and_row[1];
                 
                 // collect table names                
-                /*if(!in_array($table_name,$create_data->tables)) {
-                    // create new table and add row
-                    $create_data->tables[]=$table_name;
-                    $create_data->rows[]=$row_name;
+                if(in_array($table_name,$create_data->tables)) {
+                    // just add new row to table
+                    $create_data->sqla[$table_name]="INSERT INTO $table_name (";
+                    
+                    if($new_data_type=="string") {
+                        // create field list
+                        $create_data->sqla[$table_name] = $create_data->sql[$table_name] . "( $row_name";
+                        
+                        // create data values
+                        $create_data->sqlb[$table_name] = $create_data->sqlb[$table_name] . "('$new_data'";
+                    }
                     $create_data->data[]=$new_data
                 } else {
-                    // add row to table
-                    $create_data->rows[]=$row_name;
-                    $create_data->data[]=$new_data
-                }*/
+                    // add to sql field list
+                    $create_data->sqla[$table_name]= $create_data->sqla[$table_name].", $row_name";
+                    
+                    // add to sql data values
+                    $create_data->sqlb[$table_name]= $create_data->sqlb[$table_name].", '$new_data'";
+                    //$create_data->rows[]=$row_name;
+                    //$create_data->data[]=$new_data
+                }
+            }
+            
+            // add end to each sql piece
+            foreach($create_data->sqla as $new_table_insert) {
+                $sql_full = $create_data->sqla[$new_table_insert].") VALUES ";
+                $sql_full .= $create_data->sqla[$new_table_insert].")";
             }
             
             // TODO: add records
-            print_r($create_data);
+            print_r($sql_full);
                 
         } else {
             echo $process_data;
@@ -564,7 +581,9 @@ function get_workflow_data($workflow_data_item_id) {
             return false;
         }
         
-        $workflow_data_sql="select data as data from workflow_data where workflow_data_item_id=$workflow_data_item_id";
+        $workflow_data_sql="select wfd.data as data, wfdt.data_type as data_type from workflow_data wfd " .
+                           "inner join workflow_data_type wfdt on wfd.workflow_data_type_id=wfdt.workflow_data_type_id " .
+                           "and workflow_data_item_id=$workflow_data_item_id";
         
         if ($result = $mysqli->query($workflow_data_sql)) {
             if($result->num_rows==0) {
