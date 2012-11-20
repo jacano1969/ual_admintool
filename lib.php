@@ -98,6 +98,9 @@ function process_record($record_data) {
         $update_data = $process_data['update'];
         $delete_data = $process_data['delete'];
         
+        $create_data = new stdClass();
+        $create_data->tables = array();
+        
         // add new record
         if(!empty($add_data)) {
             foreach($add_data as $data) {
@@ -106,8 +109,28 @@ function process_record($record_data) {
                 $new_data = $data['data'];
                 
                 // get the table and column for this new data
-                echo "<br><br>workflow_data_id: " . $workflow_data_id;
-                echo "<br>new_data: " . $new_data;
+                $workflow_data = get_workflow_data($workflow_data_id);
+                
+                $table_name = substr($workflow_data,0,strpos($workflow_data,'.'));
+                $row_name = substr($workflow_data,strpos($workflow_data,'.'));
+                
+                // collect table names                
+                if(!in_array($table_name,$create_data->tables)) {
+                    // create new table and add row
+                    $create_data->tables[$table_name];
+                    $create_data->tables[$table_name]->$row_name;
+                } else {
+                    // add row to table
+                    $create_data->tables[$table_name]->$row_name;
+                }
+                
+                // add record
+                print_r($create_data->tables);
+                
+                
+                
+                
+                
             }
         } else {
             echo $process_data;
@@ -127,26 +150,6 @@ function process_record($record_data) {
         return false;
     }
 
-}
-
-
-/**
- * Description: function to update a record of type $record_type
- *
- * 
- */
-function update($record_type, $record_id) {
-    
-}
-
-
-/**
- * Description: function to delete a record of type $record_type with id $record_id
- *
- * 
- */
-function delete($record_type, $record_id) {
-    
 }
 
 
@@ -541,6 +544,44 @@ function get_filter_data($type=false, $data=false) {
 //
 // Workflow
 //
+
+
+/**
+ * Description: function to retreive workflow data
+ *
+ */
+function get_workflow_data($workflow_data_item_id) {
+    global $CFG;
+    
+    $data = '';
+    
+    if(!empty($workflow_data_id) && $workflow_data_id!='') {
+        // get wokflow data
+        $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+        
+        if (mysqli_connect_error()) {
+            return false;
+        }
+        
+        $workflow_data_sql="select data as data from workflow_data where workflow_data_item_id=$workflow_data_item_id";
+        
+        if ($result = $mysqli->query($workflow_data_sql)) {
+            if($result->num_rows==0) {
+                return false;
+            } else {  
+
+                // construct data
+                while ($row = $result->fetch_object()) {
+                    $data = $row->data;
+                }
+            }
+        }        
+    } else {
+        return false;
+    }
+    
+    return $data;
+}
 
 
 /**
