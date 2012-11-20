@@ -142,54 +142,38 @@ var ual_admintool = ual_admintool || (function(){
             // add button clicked
             $('#add').live("click", function() {
                 
-                //$("#action").validate({
-                //    submitHandler: function(form) {
-                        
-                        // TODO: 
-                        /*{
-                            "add": [
-                                {
-                                    "id": 1,
-                                    "data": "1"
-                                },
-                                {
-                                    "id": 2,
-                                    "data": "2"
-                                },
-                                {
-                                    "id": 3,
-                                    "data": "3"
-                                }
-                            ]
-                        }*/
+                $("#action").validate({
+                    submitHandler: function(form) {
                         
                         // construct json
                         var jsonString = '{ "add" : [';
                             
-                        // get all data and item_ids to be added for text box data
+                        // get all data and item_ids to be added ...
+                        
+                        // for text box data
                         $("#action input[type='text']").each(function(){
                             jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
                         });
                         
-                        // TODO:
                         // for dropdown selects
                         $("#action select").each(function(){
                             jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
                         });
-                        
                         
                         // chop off last comma
                         jsonString = jsonString.slice(0,-1);
                         
                         jsonString += ']';
                         
-                        alert(jsonString);
+                        jsonString += '}';
+                        
+                        console.log(jsonString);
                         
                         //form.submit();
                         return false;
                     
-                    //}
-                //});
+                    }
+                });
             });
             
             // reset button clicked
