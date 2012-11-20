@@ -14,7 +14,7 @@ if(!empty($_GET['action'])) {
 }
 
 if(!empty($_GET['record_data'])) {
-    $action = $_GET['record_data'];
+    $record_data = $_GET['record_data'];
 }
 
 /*if(!empty($_POST['record_id'])) {

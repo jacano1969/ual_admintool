@@ -89,13 +89,12 @@ function is_logged_in() {
  */
 function add($record_data) {
     
-    if(is_logged_in()){
-        if(!empty($record_data)){
-            // extract json data
-            $add_data = json_decode($record_data,true);
+    if(!empty($record_data)) {
             
-            print_r($add_data);            
-        }       
+        // extract json data
+        $add_data = json_decode($record_data,true);
+            
+        print_r($add_data);            
     } else {
         header('Location: login.php');
         exit;
