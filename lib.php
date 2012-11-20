@@ -111,7 +111,6 @@ function process_record($record_data) {
                 $workflow_data_id = $data['id'];
                 $new_data = $data['data'];
                 
-                
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
                 
@@ -148,7 +147,7 @@ function process_record($record_data) {
             $sql_full = $create_data->sqla .") VALUES " . $create_data->sqlb .")";
             
             // TODO: add records
-            print_r($sql_full);
+            echo $sql_full;
                 
         } else {
             echo $process_data;
