@@ -109,6 +109,8 @@ function process_record($record_data) {
                 echo "<br><br>workflow_data_id: " . $workflow_data_id;
                 echo "<br>new_data: " . $new_data;
             }
+        } else {
+            echo $process_data;
         }
         
         // update existing record
@@ -122,8 +124,7 @@ function process_record($record_data) {
         }
         
     } else {
-        header('Location: login.php');
-        exit;
+        return false;
     }
 
 }
