@@ -99,9 +99,9 @@ function process_record($record_data) {
         $delete_data = $process_data['delete'];
         
         $create_data = new stdClass();
-        $create_data->tables = array();
-        $create_data->sqla = "";
-        $create_data->sqlb = "";
+        //$create_data->tables = array();
+        $create_data->sqla = array();
+        $create_data->sqlb = array();
         
         
         // add new record
@@ -120,31 +120,31 @@ function process_record($record_data) {
                 $new_data_type = $table_and_row[2];
                 
                 // collect table names                
-                if(in_array($table_name,$create_data->tables)) {
+                if(array_key_exists($table_name, $create_data->sqla)) {
                     // add to sql field list
-                    $create_data->sqla .=", $row_name";
+                    $create_data->sqla[$table_name] .=", $row_name";
                     
                     // add to sql data values
                     if($new_data_type=="string") {
-                        $create_data->sqlb .= ", '$new_data'";
+                        $create_data->sqlb[$table_name] .= ", '$new_data'";
                     }
                 } else {
                     // just add new row to table
-                    $create_data->tables[]=$table_name;
-                    $create_data->sqla="INSERT INTO $table_name (";
+                    //$create_data->tables[]=$table_name;
+                    $create_data->sqla[$table_name]="INSERT INTO $table_name (";
                     
                     if($new_data_type=="string") {
                         // create field list
-                        $create_data->sqla .= $create_data->sqla . " $row_name";
+                        $create_data->sqla[$table_name] .= $create_data->sqla[$table_name] . " $row_name";
                         
                         // create data values
-                        $create_data->sqlb .= $create_data->sqlb . "('$new_data'";
+                        $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
                     }
                 }
             }
             
             // add sqla to sqlb
-            $sql_full = $create_data->sqla .") VALUES " . $create_data->sqlb .")";
+            $sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
             
             // TODO: add records
             echo $sql_full;
