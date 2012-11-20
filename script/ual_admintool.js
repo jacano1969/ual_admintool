@@ -170,7 +170,7 @@ var ual_admintool = ual_admintool || (function(){
                         $("#action").each(function(){
                             
                             // for text box data
-                            if($(this).is('input[type="text"]')) {
+                            if($(this).find('input[type="text"]')) {
                                 
                                 jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
                                 
