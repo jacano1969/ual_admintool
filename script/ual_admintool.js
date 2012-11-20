@@ -166,20 +166,15 @@ var ual_admintool = ual_admintool || (function(){
                         // construct json
                         var jsonString = '{ "add" : [';
                             
-                        // get all data and item_ids to be added
-                        $("#action").each(function(){
-                            
-                            // for text box data
-                            if($(this).find('input[type="text"]')) {
-                                
-                                jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
-                                
-                            }
-                            
-                            // TODO:
-                            // for dropdown selects
-                            
+                        // get all data and item_ids to be added for text box data
+                        $("#action input[type='text']").each(function(){
+                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
                         });
+                        
+                        // TODO:
+                        // for dropdown selects
+                        
+                        
                         
                         // chop off last comma
                         jsonString = jsonString.slice(0,-1);
