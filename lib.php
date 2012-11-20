@@ -142,8 +142,11 @@ function process_record($record_data) {
             
             // add end to each sql piece
             foreach($create_data->sqla as $new_table_insert) {
-                $sql_full = $create_data->sqla[$new_table_insert].") VALUES ";
-                $sql_full .= $create_data->sqla[$new_table_insert].")";
+                $sql_full .= $create_data->sqla[$new_table_insert].") VALUES ";
+                
+            }
+            foreach($create_data->sqlb as $new_table_insert) {
+                $sql_full .= $create_data->sqlb[$new_table_insert].")";
             }
             
             // TODO: add records
