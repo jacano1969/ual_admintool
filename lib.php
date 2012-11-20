@@ -110,14 +110,15 @@ function process_record($record_data) {
                 
                 $workflow_data_id = $data['id'];
                 $new_data = $data['data'];
-                $new_data_type = $data['data_type'];
+                
                 
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
                 
-                $table_and_row = explode(".", $workflow_data[data], 2);
+                $table_and_row = explode(".", $workflow_data[data], 3);
                 $table_name = $table_and_row[0];
                 $row_name = $table_and_row[1];
+                $new_data_type = $table_and_row[2];
                 
                 // collect table names                
                 if(!in_array($table_name,$create_data->tables)) {
@@ -125,7 +126,7 @@ function process_record($record_data) {
                     $create_data->tables[]=$table_name;
                     $create_data->sqla="INSERT INTO $table_name (";
                     
-                    if($workflow_data->data_type=="string") {
+                    if($new_data_type=="string") {
                         // create field list
                         $create_data->sqla .= $create_data->sqla . " $row_name";
                         
@@ -137,7 +138,7 @@ function process_record($record_data) {
                     $create_data->sqla .=", $row_name";
                     
                     // add to sql data values
-                    if($workflow_data->data_type=="string") {
+                    if($new_data_type=="string") {
                         $create_data->sqlb .= ", '$new_data'";
                     }
                 }
@@ -571,6 +572,7 @@ function get_workflow_data($workflow_data_item_id) {
     global $CFG;
     
     $data = '';
+    $data_type = '';
     
     if(!empty($workflow_data_id) && $workflow_data_id!='') {
         // get wokflow data
@@ -592,6 +594,7 @@ function get_workflow_data($workflow_data_item_id) {
                 // construct data
                 while ($row = $result->fetch_object()) {
                     $data = $row->data;
+                    $data_type = $row->data_type;
                 }
             }
         }
@@ -603,7 +606,7 @@ function get_workflow_data($workflow_data_item_id) {
         return false;
     }
     
-    return $data;
+    return $data .'.'. $data_type;
 }
 
 
