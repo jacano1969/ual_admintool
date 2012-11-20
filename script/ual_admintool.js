@@ -182,7 +182,7 @@ var ual_admintool = ual_admintool || (function(){
                         });
                         
                         // chop off last comma
-                        jsonString = jsonString.replace(/,$/, "");
+                        jsonString = jsonString.slice(0,-1);
                         
                         jsonString += ']';
                         
