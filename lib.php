@@ -100,6 +100,8 @@ function process_record($record_data) {
         
         $create_data = new stdClass();
         $create_data->tables = array();
+        $create_data->rows = array();
+        $create_data->data = array();
         
         // add new record
         if(!empty($add_data)) {
@@ -111,27 +113,26 @@ function process_record($record_data) {
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
                 
-                $table_name = substr($workflow_data,0,strpos($workflow_data,'.'));
-                $row_name = substr($workflow_data,strpos($workflow_data,'.'));
+                $table_and_row = explode(".", $workflow_data, 2);
+                $table_name = $table_and_row[0];
+                $row_name = $table_and_row[1];
                 
                 // collect table names                
                 if(!in_array($table_name,$create_data->tables)) {
                     // create new table and add row
-                    $create_data->tables[$table_name];
-                    $create_data->tables[$table_name]->$row_name;
+                    $create_data->tables[]=$table_name;
+                    $create_data->rows[]=$row_name;
+                    $create_data->data[]=$new_data
                 } else {
                     // add row to table
-                    $create_data->tables[$table_name]->$row_name;
+                    $create_data->rows[]=$row_name;
+                    $create_data->data[]=$new_data
                 }
-                
-                // add record
-                print_r($create_data->tables);
-                
-                
-                
-                
-                
             }
+            
+            // TODO: add records
+            print_r($create_data);
+                
         } else {
             echo $process_data;
         }
@@ -575,10 +576,14 @@ function get_workflow_data($workflow_data_item_id) {
                     $data = $row->data;
                 }
             }
-        }        
+        }
+        
+        $result->close();
     } else {
         return false;
     }
+    
+    $mysqli->close();
     
     return $data;
 }
