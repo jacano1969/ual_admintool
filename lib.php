@@ -115,9 +115,7 @@ function process_record($record_data) {
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
                 
-                echo $workflow_data; exit;
-                
-                $table_and_row = explode(".", $workflow_data[data], 3);
+                $table_and_row = explode(".", $workflow_data, 3);
                 $table_name = $table_and_row[0];
                 $row_name = $table_and_row[1];
                 $new_data_type = $table_and_row[2];
