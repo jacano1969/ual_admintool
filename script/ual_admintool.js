@@ -164,7 +164,7 @@ var ual_admintool = ual_admintool || (function(){
                         }*/
                         
                         // construct json
-                        jsonString = '{ "add" : [';
+                        var jsonString = '{ "add" : [';
                             
                         // get all data and item_ids to be added
                         $("#action").each(function(){
