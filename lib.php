@@ -118,7 +118,7 @@ function process_record($record_data) {
                 $row_name = $table_and_row[1];
                 
                 // collect table names                
-                if(!in_array($table_name,$create_data->tables)) {
+                /*if(!in_array($table_name,$create_data->tables)) {
                     // create new table and add row
                     $create_data->tables[]=$table_name;
                     $create_data->rows[]=$row_name;
@@ -127,7 +127,7 @@ function process_record($record_data) {
                     // add row to table
                     $create_data->rows[]=$row_name;
                     $create_data->data[]=$new_data
-                }
+                }*/
             }
             
             // TODO: add records
