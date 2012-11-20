@@ -115,8 +115,6 @@ function process_record($record_data) {
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
                 
-                echo $workflow_data; exit;
-                
                 $table_and_row = explode(".", $workflow_data[data], 3);
                 $table_name = $table_and_row[0];
                 $row_name = $table_and_row[1];
@@ -576,7 +574,7 @@ function get_workflow_data($workflow_data_item_id) {
     $data = '';
     $data_type = '';
     
-    if(!empty($workflow_data_id) && $workflow_data_id!='') {
+    if(!empty($workflow_data_item_id) && $workflow_data_item_id!='') {
         // get wokflow data
         $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
         
