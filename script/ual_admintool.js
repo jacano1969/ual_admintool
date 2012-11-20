@@ -174,7 +174,7 @@ var ual_admintool = ual_admintool || (function(){
                             
                             var action = $('.container fieldset legend').text();
                             
-                            if(data) {    
+                            if(data  && data!=false) {    
                                 alert(action+":\n\nNew record created successfully.");
                                 alert(data);
                                 return false;
