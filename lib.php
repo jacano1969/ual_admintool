@@ -579,11 +579,11 @@ function get_workflow_data($workflow_data_item_id) {
         }
         
         $result->close();
+        
+        $mysqli->close();
     } else {
         return false;
     }
-    
-    $mysqli->close();
     
     return $data;
 }
