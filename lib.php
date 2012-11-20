@@ -83,18 +83,44 @@ function is_logged_in() {
 
 
 /**
- * Description: function to add a new record 
+ * Description: function to process a database record
  *
  * 
  */
-function add($record_data) {
+function process_record($record_data) {
     
     if(!empty($record_data)) {
             
         // extract json data
-        $add_data = json_decode($record_data,true);
+        $process_data = json_decode($record_data,true);
+           
+        $add_data = $process_data['add'];
+        $update_data = $process_data['update'];
+        $delete_data = $process_data['delete'];
+        
+        // add new record
+        if(!empty($add_data)) {
+            foreach($add_data as $data) {
+                
+                $workflow_data_id = $data['id'];
+                $new_data = $data['data'];
+                
+                // get the table and column for this new data
+                echo "<br><br>workflow_data_id: " . $workflow_data_id;
+                echo "<br>new_data: " . $new_data;
+            }
+        }
+        
+        // update existing record
+        if(!empty($update_data)) {
             
-        print_r($add_data);            
+        }
+        
+        // delete existing record
+        if(!empty($delete_data)) {
+            
+        }
+        
     } else {
         header('Location: login.php');
         exit;

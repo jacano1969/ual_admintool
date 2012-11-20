@@ -29,13 +29,13 @@ if(!empty($_POST['search_text'])) {
 if(is_logged_in()){
 
     switch($action) {
-        case 'add' :    add($record_data);
+        case 'add' :    process_record($record_data);
                         break;
                     
-        case 'update' : update($record_data);
+        case 'update' : process_record($record_data);
                         break;
                     
-        case 'delete' : delete($record_data);
+        case 'delete' : process_record($record_data);
                         break;
                     
         case 'search' : search($record_data, $search_text);
