@@ -120,7 +120,15 @@ function process_record($record_data) {
                 $new_data_type = $table_and_row[2];
                 
                 // collect table names                
-                if(!in_array($table_name,$create_data->tables)) {
+                if(in_array($table_name,$create_data->tables)) {
+                    // add to sql field list
+                    $create_data->sqla .=", $row_name";
+                    
+                    // add to sql data values
+                    if($new_data_type=="string") {
+                        $create_data->sqlb .= ", '$new_data'";
+                    }
+                } else {
                     // just add new row to table
                     $create_data->tables[]=$table_name;
                     $create_data->sqla="INSERT INTO $table_name (";
@@ -132,14 +140,6 @@ function process_record($record_data) {
                         // create data values
                         $create_data->sqlb .= $create_data->sqlb . "('$new_data'";
                     }
-                } else {
-                    // add to sql field list
-                    $create_data->sqla .=", $row_name";
-                    
-                    // add to sql data values
-                    if($new_data_type=="string") {
-                        $create_data->sqlb .= ", '$new_data'";
-                    }
                 }
             }
             
@@ -150,6 +150,7 @@ function process_record($record_data) {
             echo $sql_full;
                 
         } else {
+            // TODO: handle error
             echo $process_data;
         }
         
