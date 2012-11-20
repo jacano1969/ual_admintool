@@ -173,7 +173,9 @@ var ual_admintool = ual_admintool || (function(){
                         
                         // TODO:
                         // for dropdown selects
-                        
+                        $("#action select").each(function(){
+                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+                        });
                         
                         
                         // chop off last comma
