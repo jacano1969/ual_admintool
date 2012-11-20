@@ -99,8 +99,10 @@ function process_record($record_data) {
         $delete_data = $process_data['delete'];
         
         $create_data = new stdClass();
+        $create_data->tables = array();
         $create_data->sqla = "";
         $create_data->sqlb = "";
+        
         
         // add new record
         if(!empty($add_data)) {
@@ -113,28 +115,29 @@ function process_record($record_data) {
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
                 
-                $table_and_row = explode(".", $workflow_data, 2);
+                $table_and_row = explode(".", $new_data, 2);
                 $table_name = $table_and_row[0];
                 $row_name = $table_and_row[1];
                 
                 // collect table names                
-                if(in_array($table_name,$create_data->tables)) {
+                if(!in_array($table_name,$create_data->tables)) {
                     // just add new row to table
+                    $create_data->tables[]=$table_name;
                     $create_data->sqla="INSERT INTO $table_name (";
                     
-                    if($new_data_type=="string") {
+                    if($workflow_data->data_type=="string") {
                         // create field list
-                        $create_data->sqla = $create_data->sqla . " $row_name";
+                        $create_data->sqla .= $create_data->sqla . " $row_name";
                         
                         // create data values
-                        $create_data->sqlb = $create_data->sqlb . "('$new_data'";
+                        $create_data->sqlb .= $create_data->sqlb . "('$new_data'";
                     }
                 } else {
                     // add to sql field list
                     $create_data->sqla .=", $row_name";
                     
                     // add to sql data values
-                    if($new_data_type=="string") {
+                    if($workflow_data->data_type=="string") {
                         $create_data->sqlb .= ", '$new_data'";
                     }
                 }
