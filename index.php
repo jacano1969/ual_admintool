@@ -28,9 +28,6 @@ if(!empty($_POST['search_text'])) {
 
 if(is_logged_in()){
 
-    // show logged in header
-    echo show_header();
-
     switch($action) {
         case 'add' :    add($record_data);
                         break;
@@ -50,12 +47,11 @@ if(is_logged_in()){
         case 'logout' : do_logout();
                         break;
                     
-        default :       echo show_home();
+        default :       echo show_header();
+                        echo show_home();
+                        echo show_footer();
                         break;
-    }
-    
-    // show footer
-    echo show_footer();
+    }    
 } else {
     header('Location: login.php');
     exit;

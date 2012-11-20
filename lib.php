@@ -94,7 +94,7 @@ function add($record_data) {
             // extract json data
             $add_data = json_decode($record_data,true);
             
-            return $add_data;            
+            print_r($add_data);            
         }       
     } else {
         header('Location: login.php');
