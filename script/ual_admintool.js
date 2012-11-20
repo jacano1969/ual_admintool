@@ -170,7 +170,7 @@ var ual_admintool = ual_admintool || (function(){
                         //console.log(jsonString);
                         
                         // submit data 
-                        $.get('index.php?record_data='+jsonString, function(data){
+                        $.get('index.php?action=add&record_data='+jsonString, function(data){
                             
                             var action = $('.container fieldset legend').text();
                             
