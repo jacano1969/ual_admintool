@@ -111,13 +111,8 @@ var ual_admintool = ual_admintool || (function(){
                 // something has happened we did not intend
                 alert("An error has occured, please re-try.");
                 
-                // show all workflows
-                $.get('workflow.php?step=false', function(data){
-                    $('#hiddenlightbox').hide();
-                    // replace filters with new data
-                    $('#hiddenlightbox').html(data);
-                    $('#hiddenlightbox').show();
-                });
+                // show the home screen (and all workflows)
+                window.location.href='index.php';
                 
                 return false;
             });
