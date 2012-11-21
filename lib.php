@@ -149,8 +149,10 @@ function process_record($record_data) {
             // add sqla to sqlb
             $sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
             
-            // TODO: add records
-            echo $sql_full;
+            if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
+                // TODO: add records
+                echo $sql_full;
+            }
                 
         } else {
             // TODO: handle error
@@ -275,6 +277,31 @@ function show_footer() {
 //
 // helper functions
 //
+
+/**
+ * Description: function to log user activity
+ * 
+ */
+function log_user_action($username, $userid, $action, $description, $data) {
+    global $CFG;
+    
+    // connect to db
+    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    if (mysqli_connect_error()) {
+        return false;
+    }
+
+    $log_sql= "INSERT INTO workflow_log (username, record_id, time, action, description, data) " .
+              "VALUES ('$username',$userid,UNIX_TIMESTAMP(),'$action','$description','$data')";
+    
+    if($result = $mysqli->query($log_sql)){
+        $mysqli->close();
+        return true;
+    }
+    
+    return false;    
+}
 
 
 function get_logged_in_user($userid) {
