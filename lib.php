@@ -152,8 +152,9 @@ function process_record($record_data) {
             if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
                 // TODO: add records
                 echo $sql_full;
+            } else {
+                return false;                
             }
-                
         } else {
             // TODO: handle error
             echo $process_data;
@@ -296,8 +297,6 @@ function log_user_action($username, $userid, $action, $description, $data) {
     
     $log_sql= "INSERT INTO workflow_log (username, record_id, time, action, description, data) " .
               "VALUES ('$username',$userid,UNIX_TIMESTAMP(),'$action','$description','$data')";
-    
-    echo $log_sql; exit;
     
     if($result = $mysqli->query($log_sql)){
         $mysqli->close();
