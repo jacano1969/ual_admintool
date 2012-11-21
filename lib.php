@@ -151,11 +151,9 @@ function process_record($record_data) {
                 $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
                         
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
-                    // TODO: add records
-                    echo $sql_full;
+                    // add records
+                    echo sql_insert($sql_full);
                     
-                    print_r($create_data->sqla);
-                    print_r($create_data->sqlb);
                 } else {
                     return false;                
                 }
@@ -283,6 +281,32 @@ function show_footer() {
 //
 // helper functions
 //
+
+
+/**
+ * Description: function to do an sql insert
+ * 
+ */
+function sql_insert($sql) {
+    global $CFG;
+    
+    // connect to db
+    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    if (mysqli_connect_error()) {
+        return false;
+    }
+
+    $sql_insert = str_replace("'","''",$sql);
+    
+    if($result = $mysqli->query($sql_insert)){
+        $mysqli->close();
+        return true;
+    }
+    
+    return false;    
+}
+
 
 /**
  * Description: function to log user activity

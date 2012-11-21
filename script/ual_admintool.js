@@ -167,8 +167,6 @@ var ual_admintool = ual_admintool || (function(){
                         
                         jsonString += '}';
                         
-                        //console.log(jsonString);
-                        
                         // submit data 
                         $.get('index.php?action=add&record_data='+jsonString, function(data){
                             
@@ -176,11 +174,21 @@ var ual_admintool = ual_admintool || (function(){
                             
                             if(data  && data!=false) {    
                                 alert(action+":\n\nNew record created successfully.");
-                                alert(data);
+                                
+                                // TODO: 
+                                // check for workflow links
+                                
+                                // show all workflows
+                                $.get('workflow.php?step=false', function(data){
+                                    $('#hiddenlightbox').hide();
+                                    // replace filters with new data
+                                    $('#hiddenlightbox').html(data);
+                                    $('#hiddenlightbox').show();
+                                });
+                                
                                 return false;
                             } else {
                                 alert(action+":\n\nAn error occurred, please try again.");
-                                alert(data);
                                 return false;
                             }
                             
