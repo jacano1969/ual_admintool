@@ -153,9 +153,8 @@ function process_record($record_data) {
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
                     // add records
                     if(sql_insert($sql_full)) {
-                        return true;
+                        echo "ok";  // send back some data to show everyting went as planned
                     }
-                    
                 } else {
                     return false;                
                 }
@@ -306,9 +305,9 @@ function sql_insert($sql) {
     if($result = $mysqli->query($sql_insert)){
         $mysqli->close();
         return true;
+    } else {
+        return false;
     }
-    
-    return false;    
 }
 
 
