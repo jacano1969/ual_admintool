@@ -121,9 +121,8 @@ function process_record($record_data) {
                 
                 // collect table names                
                 if(array_key_exists($table_name, $create_data->sqla)) {
-                    // new table insert
-                    $create_data->sqla[$table_name]="";
-                    
+        
+                    // insert statement exists for this table            
                     // add to sql field list
                     $create_data->sqla[$table_name] .=", $row_name";
                     
@@ -132,8 +131,8 @@ function process_record($record_data) {
                         $create_data->sqlb[$table_name] .= ", '$new_data'";
                     }
                 } else {
-                    // just add new row to table
-                    //$create_data->tables[]=$table_name;
+                    
+                    // just add new statement for table
                     $create_data->sqla[$table_name]="INSERT INTO $table_name (";
                     
                     if($new_data_type=="string") {
