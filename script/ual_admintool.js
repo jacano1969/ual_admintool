@@ -177,15 +177,13 @@ var ual_admintool = ual_admintool || (function(){
                                 
                                 // TODO: 
                                 // check for workflow links
-                                
-                                // show all workflows
-                                $.get('workflow.php?step=false', function(data){
-                                    $('div.container fieldset').hide();  
-                                    $('#hiddenlightbox').hide();
-                                    // replace filters with new data
-                                    $('#hiddenlightbox').html(data);
-                                    $('#hiddenlightbox').show();
-                                });
+                                // if(there are workflow links){
+                                    // get workflow links
+                                //}
+                                //else {
+                                    // show the home screen (and all workflows)
+                                    window.location.href='index.php';
+                                //}
                                 
                                 return false;
                             } else {
