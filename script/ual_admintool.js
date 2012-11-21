@@ -180,6 +180,7 @@ var ual_admintool = ual_admintool || (function(){
                                 
                                 // show all workflows
                                 $.get('workflow.php?step=false', function(data){
+                                    $('div.container fieldset').hide();  
                                     $('#hiddenlightbox').hide();
                                     // replace filters with new data
                                     $('#hiddenlightbox').html(data);
