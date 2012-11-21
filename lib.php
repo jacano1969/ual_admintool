@@ -119,11 +119,11 @@ function process_record($record_data) {
                 $row_name = $table_and_row[1];
                 $new_data_type = $table_and_row[2];
                 
-                // new table insert
-                $create_data->sqla[$table_name]="";
-                
                 // collect table names                
                 if(array_key_exists($table_name, $create_data->sqla)) {
+                    // new table insert
+                    $create_data->sqla[$table_name]="";
+                    
                     // add to sql field list
                     $create_data->sqla[$table_name] .=", $row_name";
                     
