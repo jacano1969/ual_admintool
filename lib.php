@@ -109,7 +109,7 @@ function process_record($record_data) {
             foreach($add_data as $data) {
                 
                 $workflow_data_id = $data['id'];
-                $new_data = $data['data'];
+                $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
@@ -299,7 +299,9 @@ function sql_insert($sql) {
         return false;
     }
 
-    $sql_insert = str_replace("'","''",$sql);
+    // TODO:
+    // do we ned ot check this syntax
+    $sql_insert = $sql;
     
     if($result = $mysqli->query($sql_insert)){
         $mysqli->close();
