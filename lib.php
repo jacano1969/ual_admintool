@@ -120,8 +120,7 @@ function process_record($record_data) {
                 $new_data_type = $table_and_row[2];
                 
                 // collect table names                
-                //if(array_key_exists($table_name, $create_data->sqla)) {
-                if(!empty($create_data->sqla[$table_name])) {
+                if(array_key_exists($table_name, $create_data->sqla)) {
         
                     // insert statement exists for this table            
                     // add to sql field list
@@ -138,7 +137,7 @@ function process_record($record_data) {
                     
                     if($new_data_type=="string") {
                         // create field list
-                        $create_data->sqla[$table_name] .= $create_data->sqla[$table_name] . " $row_name";
+                        $create_data->sqla[$table_name] .= " $row_name";
                         
                         // create data values
                         $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
