@@ -120,7 +120,8 @@ function process_record($record_data) {
                 $new_data_type = $table_and_row[2];
                 
                 // collect table names                
-                if(array_key_exists($table_name, $create_data->sqla)) {
+                //if(array_key_exists($table_name, $create_data->sqla)) {
+                if(!empty($create_data->sqla[$table_name])) {
         
                     // insert statement exists for this table            
                     // add to sql field list
