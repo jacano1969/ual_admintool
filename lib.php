@@ -292,7 +292,7 @@ function log_user_action($username, $userid, $action, $description, $data) {
         return false;
     }
 
-    $data = json_encode($data);
+    $data = str_replace("'","''",$data);
     
     $log_sql= "INSERT INTO workflow_log (username, record_id, time, action, description, data) " .
               "VALUES ('$username',$userid,UNIX_TIMESTAMP(),'$action','$description','$data')";
