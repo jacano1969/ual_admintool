@@ -146,13 +146,16 @@ function process_record($record_data) {
             }
             
             // add sqla to sqlb
-            $sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
-            
-            if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
-                // TODO: add records
-                echo $sql_full;
-            } else {
-                return false;                
+            foreach($create_data->sqla as $key => $value) {
+                //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
+                $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
+                        
+                if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
+                    // TODO: add records
+                    echo $sql_full;
+                } else {
+                    return false;                
+                }
             }
         } else {
             // TODO: handle error
