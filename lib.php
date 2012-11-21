@@ -152,7 +152,9 @@ function process_record($record_data) {
                         
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
                     // add records
-                    echo sql_insert($sql_full);
+                    if(sql_insert($sql_full)) {
+                        return true;
+                    }
                     
                 } else {
                     return false;                
