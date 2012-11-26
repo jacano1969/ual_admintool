@@ -966,11 +966,6 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     }
     
     // get workflow data and data types and mappings
-    /*$workflow_data_details = "select wfd.label as label, wfd.data as data, wfd.name as name, wfd.mandatory as mandatory, wfd.validate_for as validate,".
-                             "wfdt.name as type,wfdm.data_type as data_type,wfdm.data_origin as value from workflow_data wfd ".
-                             "inner join workflow_data_type wfdt on wfd.workflow_data_type_id=wfdt.workflow_data_type_id ".
-                             "left join workflow_data_mapping wfdm on wfdm.workflow_data_item_id = wfd.workflow_data_item_id ".
-                             "and wfd.status=1 and wfdt.status=1 order by display_order";*/
     $workflow_data_details = "select wfd.workflow_data_item_id as item_id, wfd.label as label, wfd.name as name,".
                              "wfd.mandatory as mandatory, wfd.validate_for as validate, wfdt.name as type,".
                              "wfdm.data_type as data_type,wfdm.data_origin as value from workflow_data wfd ".
@@ -1022,6 +1017,25 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     foreach($list_items as $item) {
                         $workflow_form .='<option id="'.$item.'" name="'.$item.'">'.$item.'</option>';
                     }
+                }
+                else if($row->data_type=='data') {
+                    
+                    // extract database details for data
+                    $data_details = explode(',',$row->value);  // split into db.table.col array
+                    
+                    $data_detail = explode('.',$data_details);  // split into db, table, col array
+                    
+                    // create sql
+                    $sql = "SELECT $data_detail[2] as id, $data_detail[5] as name FROM $data_detail[0].$data_detail[1]";
+                    
+                    // TESTING!!!!!!
+                    
+                    $workflow_form .= "<option>$sql</option>";
+                    
+                    // get data from where specified
+                    
+                    
+                    
                 }
                 
                 $workflow_form .= '</select>';
