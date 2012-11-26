@@ -911,13 +911,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
         $step_sql = "select name as name, description as description from workflow_step where status=1 and workflow_step_id=$step_id";
         
         if ($result = $mysqli->query($step_sql)) {
-            if($result->num_rows==0) {
-                $result->close();
-                return 'An error has occured.';
-            } else {
-                while($row = $result->fetch_object()) {
-                    $action_name = $row->name;    
-                }
+            while($row = $result->fetch_object()) {
+                $action_name = $row->name;    
             }
             
             $result->close();
