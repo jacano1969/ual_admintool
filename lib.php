@@ -945,12 +945,13 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     }
     
     // get workflow action details
-    $workflow_action_sql ="select `add` as add_button,`update` as update_button,`delete` as delete_button,cancel as cancel_button, workflow_data_id as workflow_data_id from workflow_action where status=1 and workflow_action_id=$action_id";
+    $workflow_action_sql ="select `add` as add_button,`update` as update_button,`delete` as delete_button, cancel as cancel_button, send_email as send_email, workflow_data_id as workflow_data_id from workflow_action where status=1 and workflow_action_id=$action_id";
     
     $add_button = '';
     $update_button = '';
     $delete_button = '';
     $cancel_button = '';
+    $send_email = '';
     $workflow_data_id = '';
     
     if ($result = $mysqli->query($workflow_action_sql)) {
@@ -959,6 +960,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             $update_button = $row->update_button;
             $delete_button = $row->delete_button;
             $cancel_button = $row->cancel_button;
+            $send_email = $row->send_email;
             $workflow_data_id = $row->workflow_data_id;
         }
         
