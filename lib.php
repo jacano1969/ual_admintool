@@ -122,7 +122,6 @@ function process_record($record_data) {
                 // collect table names                
                 if(array_key_exists($table_name, $create_data->sqla)) {
         
-                    // insert statement exists for this table            
                     // add to sql field list
                     $create_data->sqla[$table_name] .=", $row_name";
                     
@@ -132,7 +131,7 @@ function process_record($record_data) {
                     }
                 } else {
                     
-                    // just add new statement for table
+                    // just add new insert statement for table
                     $create_data->sqla[$table_name]="INSERT INTO $table_name (";
                     
                     if($new_data_type=="string") {
@@ -164,10 +163,69 @@ function process_record($record_data) {
             echo $process_data;
         }
         
+        
+        
+// TODO: find UQ ID to update record
         // update existing record
         if(!empty($update_data)) {
+            foreach($update_data as $data) {
+                
+                $workflow_data_id = $data['id'];
+                $new_data = str_replace("'","''",$data['data']);  // escape quotes
+                
+                // get the table and column for this new data
+                $workflow_data = get_workflow_data($workflow_data_id);
+                
+                $table_and_row = explode(".", $workflow_data, 3);
+                $table_name = $table_and_row[0];
+                $row_name = $table_and_row[1];
+                $new_data_type = $table_and_row[2];
+                
+                // collect table names                
+                if(array_key_exists($table_name, $create_data->sqla)) {
+        
+                    // add to sql field list
+                    $create_data->sqla[$table_name] .=", $row_name";
+                    
+                    // add to sql data values
+                    if($new_data_type=="string") {
+                        $create_data->sqla[$table_name] .= ", '$new_data'";
+                    }
+                } else {
+                    
+                    // just add new update statement for table
+                    $create_data->sqla[$table_name]="UPDATE $table_name SET ";
+                    
+                    if($new_data_type=="string") {
+                        // create field list
+                        $create_data->sqla[$table_name] .= " $row_name=";
+                        
+                        // create data values
+                        $create_data->sqla[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                    }
+                }
+            }
             
+            // add sqla to sqlb
+            foreach($create_data->sqla as $key => $value) {
+                //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
+                $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
+                        
+                if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record","Update Existing User",$sql_full)) {            
+                    // add records
+                    if(sql_update($sql_full)) {
+                        echo "ok";  // send back some data to show everyting went as planned
+                    }
+                } else {
+                    return false;                
+                }
+            }
+        } else {
+            // TODO: handle error
+            echo $process_data;
         }
+        
+        
         
         // delete existing record
         if(!empty($delete_data)) {
@@ -303,6 +361,33 @@ function sql_insert($sql) {
     $sql_insert = $sql;
     
     if($result = $mysqli->query($sql_insert)){
+        $mysqli->close();
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+/**
+ * Description: function to do an sql update
+ * 
+ */
+function sql_update($sql) {
+    global $CFG;
+    
+    // connect to db
+    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    if (mysqli_connect_error()) {
+        return false;
+    }
+
+    // TODO:
+    // do we need to check this syntax
+    $sql_update = $sql;
+    
+    if($result = $mysqli->query($sql_update)){
         $mysqli->close();
         return true;
     } else {
@@ -891,9 +976,10 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                              "and wfd.status=1 and wfdt.status=1 order by display_order";*/
     $workflow_data_details = "select wfd.workflow_data_item_id as item_id, wfd.label as label, wfd.name as name, wfd.mandatory as mandatory, wfd.validate_for as validate,".
                              "wfdt.name as type,wfdm.data_type as data_type,wfdm.data_origin as value from workflow_data wfd ".
+                             "inner join workflow_action wfa on wfa.workflow_data_id=wfd.workflow_data_id ".
                              "inner join workflow_data_type wfdt on wfd.workflow_data_type_id=wfdt.workflow_data_type_id ".
                              "left join workflow_data_mapping wfdm on wfdm.workflow_data_item_id = wfd.workflow_data_item_id ".
-                             "and wfd.status=1 and wfdt.status=1 order by display_order";
+                             "and wfa.workflow_action_id=$action_id and wfd.status=1 and wfdt.status=1 order by display_order";
     
     $workflow_form = '';
     
