@@ -357,7 +357,7 @@ function sql_insert($sql) {
     }
 
     // TODO:
-    // do we ned ot check this syntax
+    // do we need to check this syntax
     $sql_insert = $sql;
     
     if($result = $mysqli->query($sql_insert)){
@@ -871,7 +871,7 @@ function get_workflows($step_id=false) {
     if($workflow_action!='0') {
         $workflow .='<input type="hidden" id="step_action" name="step_action" value="'.$workflow_action.'">';
         $workflow .='<input type="hidden" id="step_id" name="step_id" value="'.$step_id.'">';
-        $workflow .='<input type="submit" class="submit" value="Ok" name="ok" class="close" id="ok">';
+        $workflow .='<input type="submit" value="Ok" name="ok" class="close" id="ok">';
     } else {
         $workflow .='<input type="hidden" id="sub_step_action" name="sub_step_action" value="0">';
         $workflow .='<input type="hidden" id="sub_step_id" name="sub_step_id" value="0">';
@@ -1093,8 +1093,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     }
     
     if($send_email==1) {
-        // get ther to email address from workflow data
-        
+        // TODO: is this needed ? (can we just use the hidden email as a mailto)
+        // tell the engine that theere is a hidden maito on the form
     }
     
     // prepare form
