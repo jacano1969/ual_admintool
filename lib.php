@@ -1029,7 +1029,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     
                     $temp = array();
                     foreach($data_details as $detail) {
-                       $temp[] = explode(".",$detail);
+                       $temp = explode(".",$detail);
                     }
                     
                     print_r($temp);
