@@ -1029,10 +1029,6 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 }
                 else if($row->data_type=='data') {
                     
-                    
-                    // check if this is a set value or a database value
-                    if()
-                    
                     // extract database details for data
                     $databases = array();
                     $tables = array();
