@@ -1023,11 +1023,11 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     // extract database details for data
                     $data_details = explode(",",$row->value);  // split into db.table.col array
                     
-                    $workflow_form .= "<option>$data_details</option>";
+                    print_r($data_details);
                     
                     $data_detail = explode(".",$data_details);  // split into db, table, col array
                     
-                    $workflow_form .= "<option>$data_detail</option>";
+                    print_r($data_detail);
                     
                     // create sql
                     $sql = "SELECT ".$data_detail[2]." as id, ".$data_detail[5]." as name FROM ".$data_detail[0].".".$data_detail[1];
