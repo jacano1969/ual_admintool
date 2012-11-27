@@ -1012,7 +1012,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     // get list items
                     $list_items = array();
                     
-                    $list_items = explode(',',$row->value);
+                    $list_items = explode(",",$row->value);
                     
                     foreach($list_items as $item) {
                         $workflow_form .='<option id="'.$item.'" name="'.$item.'">'.$item.'</option>';
@@ -1021,12 +1021,16 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 else if($row->data_type=='data') {
                     
                     // extract database details for data
-                    $data_details = explode(',',$row->value);  // split into db.table.col array
+                    $data_details = explode(",",$row->value);  // split into db.table.col array
                     
-                    $data_detail = explode('.',$data_details);  // split into db, table, col array
+                    $workflow_form .= "<option>$data_details</option>";
+                    
+                    $data_detail = explode(".",$data_details);  // split into db, table, col array
+                    
+                    $workflow_form .= "<option>$data_detail</option>";
                     
                     // create sql
-                    $sql = "SELECT $data_detail[2] as id, $data_detail[5] as name FROM $data_detail[0].$data_detail[1]";
+                    $sql = "SELECT ".$data_detail[2]." as id, ".$data_detail[5]." as name FROM ".$data_detail[0].".".$data_detail[1];
                     
                     // TESTING!!!!!!
                     
