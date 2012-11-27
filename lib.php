@@ -1030,19 +1030,17 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $temp = array();
                     foreach($data_details as $detail) {
                        $temp = explode(".",$detail);
+                       $database = $temp[0];
+                       $tables = $temp[1];
+                       $columns = $temp[2];
                     }
                     
-                    print_r($temp);
-                    
-                    //$data_detail = explode(".",$data_details);  // split into db, table, col array
-                
-                    
                     // create sql
-                    //$sql = "SELECT ".$data_detail[2]." as id, ".$data_detail[5]." as name FROM ".$data_detail[0].".".$data_detail[1];
+                    $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
                     
                     // TESTING!!!!!!
                     
-                    //$workflow_form .= "<option>$sql</option>";
+                    $workflow_form .= "<option>$sql</option>";
                     
                     // get data from where specified
                     
