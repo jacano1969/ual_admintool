@@ -1030,9 +1030,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $temp = array();
                     foreach($data_details as $detail) {
                        $temp = explode(".",$detail);
-                       $database = $temp[0];
-                       $tables = $temp[1];
-                       $columns = $temp[2];
+                       $database[] = $temp[0];
+                       $tables[] = $temp[1];
+                       $columns[] = $temp[2];
                     }
                     
                     // create sql
