@@ -968,7 +968,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     // get workflow data and data types and mappings
     $workflow_data_details = "select wfd.workflow_data_item_id as item_id, wfd.label as label, wfd.name as name,".
                              "wfd.mandatory as mandatory, wfd.validate_for as validate, wfdt.name as type,".
-                             "wfdm.data_type as data_type,wfdm.data_origin as value from workflow_data wfd ".
+                             "wfdm.data_type as data_type,wfdm.data_origin as value,wfdm.data_origin_criteria as criteria from workflow_data wfd ".
                              "inner join workflow_action wfa on wfa.workflow_action_id=$action_id and wfa.status=1 ".
                              "and wfa.workflow_data_id=wfd.workflow_data_id ".
                              "inner join workflow_data_type wfdt on ".
@@ -1037,6 +1037,10 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     
                     // create sql
                     $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                    
+                    if(!empty($row->criteria)) {
+                        $sql .=" WHERE $row->criteria";    
+                    }
                     
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
