@@ -1038,14 +1038,14 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     // create sql
                     $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
                     
-                    // TESTING!!!!!!
-                    
-                    $workflow_form .= "<option>$sql</option>";
-                    
-                    // get data from where specified
-                    
-                    
-                    
+                    // get records
+                    if ($data_result = $mysqli->query($sql)) {
+                        while($data_row = $data_result->fetch_object()) {
+                            $workflow_form .= '<option id="'.$data_result->id.'" name="'.$data_result->id.'">'.$data_result->name.'</option>';
+                        }
+                        
+                        $data_result->close();
+                    }                    
                 }
                 
                 $workflow_form .= '</select>';
