@@ -996,6 +996,15 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 }
             }
             
+            // draw hidden field
+            if($row->type=='hidden') {
+                
+                // construct hidden value
+                if($row->data_type=='mailto') {
+                    $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$row->value.'">';
+                }
+            }
+            
             // draw dropdown select box
             if($row->type=='dropdown') {
                 
@@ -1019,6 +1028,10 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     }
                 }
                 else if($row->data_type=='data') {
+                    
+                    
+                    // check if this is a set value or a database value
+                    if()
                     
                     // extract database details for data
                     $databases = array();
@@ -1081,6 +1094,11 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
         // show reset and cancel buttons
         $buttons .= '<input type="submit" class="submit" name="resetform" id="resetform" value="Reset">';
         $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Cancel">';
+    }
+    
+    if($send_email==1) {
+        // get ther to email address from workflow data
+        
     }
     
     // prepare form
