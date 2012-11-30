@@ -112,7 +112,9 @@ function process_record($record_data, $action_desc) {
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
                 // check if we have a mailto
-                $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
+                if($data['mailto']) {
+                    $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
+                }
                 
                 if($mailto=='') {
                     // get the table and column for this new data
