@@ -163,7 +163,9 @@ var ual_admintool = ual_admintool || (function(){
                                 jsonString += '{ "id": ' + $(this).attr("data") + ',"mailto": "' + $(this).val() +'"},';
 							} else {					
 							    // any other values need processing ?
-								jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+								if(typeof($(this).attr("data"))!='undefined') {
+								    jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+								}
 							}
 							
                         });
