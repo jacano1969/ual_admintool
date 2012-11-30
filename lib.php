@@ -161,6 +161,8 @@ function process_record($record_data, $action_desc) {
                 }
             }
             
+            $testing='';
+            
             // add sqla to sqlb
             foreach($create_data->sqla as $key => $value) {
                 $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
@@ -179,14 +181,14 @@ function process_record($record_data, $action_desc) {
                             $headers .= 'To: ' . $mailto . "\r\n";
                             $headers .= 'From: UAL AdminTool' . "\r\n";
                             
-                            echo "sending email";
+                            $testing .="sending email";
                             
                             if(mail($mailto, $subject, $message, $headers)) {
-                                echo " - email sent -";
+                                $testing .=" - email sent -";
                             }
                         }
                         
-                        echo "ok";  // if we get to here, send back some data to show everyting went as planned
+                        echo $testing . "ok";  // if we get to here, send back some data to show everyting went as planned
                     }
                 } else {
                     return false;                
