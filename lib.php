@@ -133,6 +133,10 @@ function process_record($record_data) {
                         if($new_data_type=="string") {
                             $create_data->sqlb[$table_name] .= ", '$new_data'";
                         }
+                        
+                        if($new_data_type=="integer") {
+                            $create_data->sqlb[$table_name] .= ", $new_data";
+                        }
                     } else {
                         
                         // just add new insert statement for table
@@ -144,6 +148,14 @@ function process_record($record_data) {
                             
                             // create data values
                             $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                        }
+                        
+                        if($new_data_type=="integer") {
+                            // create field list
+                            $create_data->sqla[$table_name] .= " $row_name";
+                            
+                            // create data values
+                            $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "($new_data";
                         }
                     }
                 }
