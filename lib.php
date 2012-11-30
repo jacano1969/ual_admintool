@@ -154,31 +154,32 @@ function process_record($record_data) {
             // add sqla to sqlb
             foreach($create_data->sqla as $key => $value) {
                 $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
-                
-                //TODO: 
-                // check if email is to be sent        
-                if($mailto!='') {
-                    
-                    $subject ='Test email';
-                    $message = 'This is a test email.';
-                    
-                    $headers  = 'MIME-Version: 1.0' . "\r\n";
-                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                    $headers .= 'To: ' . $to . "\r\n";
-                    $headers .= 'From: UAL AdminTool' . "\r\n";
-                    
-                    mail($mailto, $subject, $message, $headers);   
-                }
-                
+
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
                     // add records
                     if(sql_insert($sql_full)) {
-                        echo "ok";  // send back some data to show everyting went as planned
+                        // continue
                     }
                 } else {
                     return false;                
                 }
             }
+            
+            // check if email is to be sent        
+            if($mailto!='') {
+                
+                $subject ='Test email';
+                $message = 'This is a test email.';
+                
+                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                $headers .= 'To: ' . $to . "\r\n";
+                $headers .= 'From: UAL AdminTool' . "\r\n";
+                
+                mail($mailto, $subject, $message, $headers);   
+            }
+            
+            echo "ok";  // if we get to here, send back some data to show everyting went as planned
         } else {
             // TODO: handle error
             echo $process_data;
@@ -1020,9 +1021,14 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             // draw hidden field
             if($row->type=='hidden') {
                 
-                // construct hidden value
+                // construct hidden value for mailto
                 if($row->data_type=='mailto') {
                     $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$row->value.'">';
+                }
+                
+                // hidden value for session vars
+                if($row->data_type=='session') {
+                    $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$_SESSION[$row->value].'">';
                 }
             }
             
