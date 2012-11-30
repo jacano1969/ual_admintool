@@ -155,13 +155,16 @@ var ual_admintool = ual_admintool || (function(){
                             jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
                         });
                         
-						
-						
-						// TEST !!!
-						
 						// for hidden values
 						$("#action input[type='hidden']").each(function(){
-                            jsonString += '{ "id": ' + $(this).attr("data") + ',"mailto": "' + $(this).val() +'"},';
+							
+							// send email action
+							if($(this).attr('id')=='email') {
+                                jsonString += '{ "id": ' + $(this).attr("data") + ',"mailto": "' + $(this).val() +'"},';
+							}
+							
+							// any other values need processing ?
+							
                         });
 						
 						
