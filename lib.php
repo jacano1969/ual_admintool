@@ -1028,7 +1028,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 
                 // hidden value for session vars
                 if($row->data_type=='session') {
-                    $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$_SESSION[$row->value].'">';
+                    $session_var = $row->value;
+                    $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$_SESSION[$session_var].'">';
                 }
             }
             
