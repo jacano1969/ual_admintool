@@ -8,9 +8,14 @@ $action = '';
 $record_data = '';
 //$record_id = '';
 $search_text='';
+$action_desc='';
 
 if(!empty($_GET['action'])) {
     $action = $_GET['action'];
+}
+
+if(!empty($_GET['action_desc'])) {
+    $action = $_GET['action_desc'];
 }
 
 if(!empty($_GET['record_data'])) {
@@ -29,13 +34,13 @@ if(!empty($_POST['search_text'])) {
 if(is_logged_in()){
 
     switch($action) {
-        case 'add' :    process_record($record_data);
+        case 'add' :    process_record($record_data, $action_desc);
                         break;
                     
-        case 'update' : process_record($record_data);
+        case 'update' : process_record($record_data, $action_desc);
                         break;
                     
-        case 'delete' : process_record($record_data);
+        case 'delete' : process_record($record_data, $action_desc);
                         break;
                     
         case 'search' : search($record_data, $search_text);

@@ -87,7 +87,7 @@ function is_logged_in() {
  *
  * 
  */
-function process_record($record_data) {
+function process_record($record_data, $action_desc) {
     
     if(!empty($record_data)) {
             
@@ -165,7 +165,7 @@ function process_record($record_data) {
             foreach($create_data->sqla as $key => $value) {
                 $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
 
-                if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
+                if(log_user_action($_SESSION['USERNAME'], $_SESSION['USERID'], "Insert Record", $action_desc, $sql_full)) {            
                     // add records
                     if(sql_insert($sql_full)) {
                         // check if email is to be sent        

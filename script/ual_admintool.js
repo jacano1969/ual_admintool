@@ -178,13 +178,15 @@ var ual_admintool = ual_admintool || (function(){
                         
                         jsonString += '}';
 						
+						var action_desc = $('.container fieldset legend').text();
+						
                         // submit data 
-                        $.get('index.php?action=add&record_data='+jsonString, function(data){
+                        $.get('index.php?action=add&action_desc='+action_desc+'&record_data='+jsonString, function(data){
                             
-                            var action = $('.container fieldset legend').text();
+                            
                             
                             if(data  && data!=false) {    
-                                alert(action+":\n\nNew record created successfully.");
+                                alert(action_desc+":\n\nNew record created successfully.");
                                 
                                 // TODO: 
                                 // check for workflow links
