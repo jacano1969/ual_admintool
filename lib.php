@@ -102,7 +102,7 @@ function process_record($record_data) {
         //$create_data->tables = array();
         $create_data->sqla = array();
         $create_data->sqlb = array();
-        
+        $mailto = '';
         
         // add new record
         if(!empty($add_data)) {
@@ -110,6 +110,11 @@ function process_record($record_data) {
                 
                 $workflow_data_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
+                
+                // TODO:
+                // check if we have a mailto
+                $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
+                
                 
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_id);
@@ -146,9 +151,23 @@ function process_record($record_data) {
             
             // add sqla to sqlb
             foreach($create_data->sqla as $key => $value) {
-                //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
                 $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
-                        
+                
+                //TODO: 
+                // check if email is to be sent        
+                if($mailto!='') {
+                    
+                    $subject ='Test email';
+                    $message = 'This is a test email.';
+                    
+                    $headers  = 'MIME-Version: 1.0' . "\r\n";
+                    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                    $headers .= 'To: ' . $to . "\r\n";
+                    $headers .= 'From: UAL AdminTool' . "\r\n";
+                    
+                    mail($mailto, $subject, $message, $headers);   
+                }
+                
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
                     // add records
                     if(sql_insert($sql_full)) {

@@ -155,6 +155,20 @@ var ual_admintool = ual_admintool || (function(){
                             jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
                         });
                         
+						
+						
+						// TEST !!!
+						
+						// for hidden values
+						$("#action input[type='hidden']").each(function(){
+                            jsonString += '{ "id": ' + $(this).attr("data") + ',"mailto": "' + $(this).val() +'"},';
+                        });
+						
+						
+						
+						
+						
+						
                         // chop off last comma
                         jsonString = jsonString.slice(0,-1);
                         
