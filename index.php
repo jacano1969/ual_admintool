@@ -15,7 +15,7 @@ if(!empty($_GET['action'])) {
 }
 
 if(!empty($_GET['action_desc'])) {
-    $action = $_GET['action_desc'];
+    $action_desc = $_GET['action_desc'];
 }
 
 if(!empty($_GET['record_data'])) {
