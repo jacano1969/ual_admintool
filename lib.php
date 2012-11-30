@@ -170,25 +170,27 @@ function process_record($record_data, $action_desc) {
                 if(log_user_action($_SESSION['USERNAME'], $_SESSION['USERID'], "Insert Record", $action_desc, $sql_full)) {            
                     // add records
                     sql_insert($sql_full);
-                    
-                    // check if email is to be sent        
-                    if($mailto!='') {
-                        
-                        $subject ='Test email';
-                        $message = 'This is a test email.';
-                        
-                        $headers  = 'MIME-Version: 1.0' . "\r\n";
-                        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                        $headers .= 'To: ' . $mailto . "\r\n";
-                        $headers .= 'From: UAL AdminTool' . "\r\n";
-                        
-                        mail($mailto, $subject, $message, $headers);
-                    }
-                    echo "ok";  // if we get to here, send back some data to show everyting went as planned
                 } else {
                     return false;                
                 }
-            }            
+            }
+            
+            // check if an email is to be sent        
+            if($mailto!='') {
+                
+                $subject ='Test email';
+                $message = 'This is a test email.';
+                
+                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                $headers .= 'To: ' . $mailto . "\r\n";
+                $headers .= 'From: UAL AdminTool' . "\r\n";
+                
+                mail($mailto, $subject, $message, $headers);
+            }
+            
+            echo "ok";  // if we get to here, send back some data to show everyting went as planned
+            
         } else {
             // TODO: handle error
             echo $process_data;
