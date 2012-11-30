@@ -111,42 +111,38 @@ function process_record($record_data) {
                 $workflow_data_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
-                // TODO:
                 // check if we have a mailto
-                $mailto='';
                 $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
                 
-                if($mailto=='') {
-                    // get the table and column for this new data
-                    $workflow_data = get_workflow_data($workflow_data_id);
+                // get the table and column for this new data
+                $workflow_data = get_workflow_data($workflow_data_id);
+                
+                $table_and_row = explode(".", $workflow_data, 3);
+                $table_name = $table_and_row[0];
+                $row_name = $table_and_row[1];
+                $new_data_type = $table_and_row[2];
+                
+                // collect table names                
+                if(array_key_exists($table_name, $create_data->sqla)) {
+        
+                    // add to sql field list
+                    $create_data->sqla[$table_name] .=", $row_name";
                     
-                    $table_and_row = explode(".", $workflow_data, 3);
-                    $table_name = $table_and_row[0];
-                    $row_name = $table_and_row[1];
-                    $new_data_type = $table_and_row[2];
+                    // add to sql data values
+                    if($new_data_type=="string") {
+                        $create_data->sqlb[$table_name] .= ", '$new_data'";
+                    }
+                } else {
                     
-                    // collect table names                
-                    if(array_key_exists($table_name, $create_data->sqla)) {
-            
-                        // add to sql field list
-                        $create_data->sqla[$table_name] .=", $row_name";
+                    // just add new insert statement for table
+                    $create_data->sqla[$table_name]="INSERT INTO $table_name (";
+                    
+                    if($new_data_type=="string") {
+                        // create field list
+                        $create_data->sqla[$table_name] .= " $row_name";
                         
-                        // add to sql data values
-                        if($new_data_type=="string") {
-                            $create_data->sqlb[$table_name] .= ", '$new_data'";
-                        }
-                    } else {
-                        
-                        // just add new insert statement for table
-                        $create_data->sqla[$table_name]="INSERT INTO $table_name (";
-                        
-                        if($new_data_type=="string") {
-                            // create field list
-                            $create_data->sqla[$table_name] .= " $row_name";
-                            
-                            // create data values
-                            $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
-                        }
+                        // create data values
+                        $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
                     }
                 }
             }
@@ -168,6 +164,7 @@ function process_record($record_data) {
             // check if email is to be sent        
             if($mailto!='') {
                 
+                // TODO: check what type of email is being sent and get content, subject, etc.
                 $subject ='Test email';
                 $message = 'This is a test email.';
                 
