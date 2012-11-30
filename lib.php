@@ -179,7 +179,11 @@ function process_record($record_data, $action_desc) {
                             $headers .= 'To: ' . $mailto . "\r\n";
                             $headers .= 'From: UAL AdminTool' . "\r\n";
                             
-                            mail($mailto, $subject, $message, $headers);   
+                            echo "sending email";
+                            
+                            if(mail($mailto, $subject, $message, $headers)) {
+                                echo " - email sent -";
+                            }
                         }
                         
                         echo "ok";  // if we get to here, send back some data to show everyting went as planned
