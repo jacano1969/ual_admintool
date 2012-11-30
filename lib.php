@@ -114,35 +114,37 @@ function process_record($record_data) {
                 // check if we have a mailto
                 $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
                 
-                // get the table and column for this new data
-                $workflow_data = get_workflow_data($workflow_data_id);
-                
-                $table_and_row = explode(".", $workflow_data, 3);
-                $table_name = $table_and_row[0];
-                $row_name = $table_and_row[1];
-                $new_data_type = $table_and_row[2];
-                
-                // collect table names                
-                if(array_key_exists($table_name, $create_data->sqla)) {
-        
-                    // add to sql field list
-                    $create_data->sqla[$table_name] .=", $row_name";
+                if($mailto=='') {
+                    // get the table and column for this new data
+                    $workflow_data = get_workflow_data($workflow_data_id);
                     
-                    // add to sql data values
-                    if($new_data_type=="string") {
-                        $create_data->sqlb[$table_name] .= ", '$new_data'";
-                    }
-                } else {
+                    $table_and_row = explode(".", $workflow_data, 3);
+                    $table_name = $table_and_row[0];
+                    $row_name = $table_and_row[1];
+                    $new_data_type = $table_and_row[2];
                     
-                    // just add new insert statement for table
-                    $create_data->sqla[$table_name]="INSERT INTO $table_name (";
-                    
-                    if($new_data_type=="string") {
-                        // create field list
-                        $create_data->sqla[$table_name] .= " $row_name";
+                    // collect table names                
+                    if(array_key_exists($table_name, $create_data->sqla)) {
+            
+                        // add to sql field list
+                        $create_data->sqla[$table_name] .=", $row_name";
                         
-                        // create data values
-                        $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                        // add to sql data values
+                        if($new_data_type=="string") {
+                            $create_data->sqlb[$table_name] .= ", '$new_data'";
+                        }
+                    } else {
+                        
+                        // just add new insert statement for table
+                        $create_data->sqla[$table_name]="INSERT INTO $table_name (";
+                        
+                        if($new_data_type=="string") {
+                            // create field list
+                            $create_data->sqla[$table_name] .= " $row_name";
+                            
+                            // create data values
+                            $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                        }
                     }
                 }
             }
@@ -154,29 +156,26 @@ function process_record($record_data) {
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Insert Record","Add New User",$sql_full)) {            
                     // add records
                     if(sql_insert($sql_full)) {
-                        // continue
+                        // check if email is to be sent        
+                        if($mailto!='') {
+                            
+                            $subject ='Test email';
+                            $message = 'This is a test email.';
+                            
+                            $headers  = 'MIME-Version: 1.0' . "\r\n";
+                            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                            $headers .= 'To: ' . $to . "\r\n";
+                            $headers .= 'From: UAL AdminTool' . "\r\n";
+                            
+                            mail($mailto, $subject, $message, $headers);   
+                        }
+                        
+                        echo "ok";  // if we get to here, send back some data to show everyting went as planned
                     }
                 } else {
                     return false;                
                 }
-            }
-            
-            // check if email is to be sent        
-            if($mailto!='') {
-                
-                // TODO: check what type of email is being sent and get content, subject, etc.
-                $subject ='Test email';
-                $message = 'This is a test email.';
-                
-                $headers  = 'MIME-Version: 1.0' . "\r\n";
-                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                $headers .= 'To: ' . $to . "\r\n";
-                $headers .= 'From: UAL AdminTool' . "\r\n";
-                
-                mail($mailto, $subject, $message, $headers);   
-            }
-            
-            echo "ok";  // if we get to here, send back some data to show everyting went as planned
+            }            
         } else {
             // TODO: handle error
             echo $process_data;
