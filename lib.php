@@ -161,35 +161,28 @@ function process_record($record_data, $action_desc) {
                 }
             }
             
-            $testing='';
-            
             // add sqla to sqlb
             foreach($create_data->sqla as $key => $value) {
                 $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
 
                 if(log_user_action($_SESSION['USERNAME'], $_SESSION['USERID'], "Insert Record", $action_desc, $sql_full)) {            
                     // add records
-                    if(sql_insert($sql_full)) {
-                        // check if email is to be sent        
-                        if($mailto!='') {
-                            
-                            $subject ='Test email';
-                            $message = 'This is a test email.';
-                            
-                            $headers  = 'MIME-Version: 1.0' . "\r\n";
-                            $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                            $headers .= 'To: ' . $mailto . "\r\n";
-                            $headers .= 'From: UAL AdminTool' . "\r\n";
-                            
-                            $testing .="sending email";
-                            
-                            if(mail($mailto, $subject, $message, $headers)) {
-                                $testing .=" - email sent -";
-                            }
-                        }
+                    sql_insert($sql_full);
+                    
+                    // check if email is to be sent        
+                    if($mailto!='') {
                         
-                        echo $testing . $mailto ."ok";  // if we get to here, send back some data to show everyting went as planned
+                        $subject ='Test email';
+                        $message = 'This is a test email.';
+                        
+                        $headers  = 'MIME-Version: 1.0' . "\r\n";
+                        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                        $headers .= 'To: ' . $mailto . "\r\n";
+                        $headers .= 'From: UAL AdminTool' . "\r\n";
+                        
+                        mail($mailto, $subject, $message, $headers);
                     }
+                    echo "ok";  // if we get to here, send back some data to show everyting went as planned
                 } else {
                     return false;                
                 }
