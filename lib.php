@@ -113,38 +113,40 @@ function process_record($record_data) {
                 
                 // TODO:
                 // check if we have a mailto
+                $mailto='';
                 $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
                 
-                
-                // get the table and column for this new data
-                $workflow_data = get_workflow_data($workflow_data_id);
-                
-                $table_and_row = explode(".", $workflow_data, 3);
-                $table_name = $table_and_row[0];
-                $row_name = $table_and_row[1];
-                $new_data_type = $table_and_row[2];
-                
-                // collect table names                
-                if(array_key_exists($table_name, $create_data->sqla)) {
-        
-                    // add to sql field list
-                    $create_data->sqla[$table_name] .=", $row_name";
+                if($mailto=='') {
+                    // get the table and column for this new data
+                    $workflow_data = get_workflow_data($workflow_data_id);
                     
-                    // add to sql data values
-                    if($new_data_type=="string") {
-                        $create_data->sqlb[$table_name] .= ", '$new_data'";
-                    }
-                } else {
+                    $table_and_row = explode(".", $workflow_data, 3);
+                    $table_name = $table_and_row[0];
+                    $row_name = $table_and_row[1];
+                    $new_data_type = $table_and_row[2];
                     
-                    // just add new insert statement for table
-                    $create_data->sqla[$table_name]="INSERT INTO $table_name (";
-                    
-                    if($new_data_type=="string") {
-                        // create field list
-                        $create_data->sqla[$table_name] .= " $row_name";
+                    // collect table names                
+                    if(array_key_exists($table_name, $create_data->sqla)) {
+            
+                        // add to sql field list
+                        $create_data->sqla[$table_name] .=", $row_name";
                         
-                        // create data values
-                        $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                        // add to sql data values
+                        if($new_data_type=="string") {
+                            $create_data->sqlb[$table_name] .= ", '$new_data'";
+                        }
+                    } else {
+                        
+                        // just add new insert statement for table
+                        $create_data->sqla[$table_name]="INSERT INTO $table_name (";
+                        
+                        if($new_data_type=="string") {
+                            // create field list
+                            $create_data->sqla[$table_name] .= " $row_name";
+                            
+                            // create data values
+                            $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                        }
                     }
                 }
             }
