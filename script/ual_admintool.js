@@ -161,16 +161,12 @@ var ual_admintool = ual_admintool || (function(){
 							// send email action
 							if($(this).attr('id')=='email') {
                                 jsonString += '{ "id": ' + $(this).attr("data") + ',"mailto": "' + $(this).val() +'"},';
+							} else {					
+							    // any other values need processing 
+								jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
 							}
 							
-							// any other values need processing ?
-							
                         });
-						
-						
-						
-						
-						
 						
                         // chop off last comma
                         jsonString = jsonString.slice(0,-1);
