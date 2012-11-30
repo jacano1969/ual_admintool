@@ -164,7 +164,7 @@ function process_record($record_data) {
                             
                             $headers  = 'MIME-Version: 1.0' . "\r\n";
                             $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-                            $headers .= 'To: ' . $to . "\r\n";
+                            $headers .= 'To: ' . $mailto . "\r\n";
                             $headers .= 'From: UAL AdminTool' . "\r\n";
                             
                             mail($mailto, $subject, $message, $headers);   
