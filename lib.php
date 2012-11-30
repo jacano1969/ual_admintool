@@ -188,7 +188,7 @@ function process_record($record_data, $action_desc) {
                             }
                         }
                         
-                        echo $testing . "ok";  // if we get to here, send back some data to show everyting went as planned
+                        echo $testing . $mailto ."ok";  // if we get to here, send back some data to show everyting went as planned
                     }
                 } else {
                     return false;                
