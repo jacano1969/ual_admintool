@@ -152,8 +152,8 @@ var ual_admintool = ual_admintool || (function(){
                         
                         // for dropdown selects
                         $("#action select").each(function(){
-							// get the value from the option id
-                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).attr("id") +'"},';
+							// get the value from the selected option id
+                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $("option:selected", this).attr("id") +'"},';
                         });
                         
 						// for hidden values
