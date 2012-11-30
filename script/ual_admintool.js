@@ -174,8 +174,6 @@ var ual_admintool = ual_admintool || (function(){
                         jsonString += ']';
                         
                         jsonString += '}';
-                        
-						alert(jsonString);
 						
                         // submit data 
                         $.get('index.php?action=add&record_data='+jsonString, function(data){
