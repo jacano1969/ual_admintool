@@ -105,7 +105,7 @@ function process_record($record_data, $action_desc) {
         
         $mailto = '';
         $message='';
-        $subject=''
+        $subject='';
         
         // add new record
         if(!empty($add_data)) {
