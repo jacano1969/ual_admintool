@@ -102,23 +102,47 @@ function process_record($record_data, $action_desc) {
         //$create_data->tables = array();
         $create_data->sqla = array();
         $create_data->sqlb = array();
+        
         $mailto = '';
+        $message='';
+        $subject=''
         
         // add new record
         if(!empty($add_data)) {
             foreach($add_data as $data) {
                 
-                $workflow_data_id = $data['id'];
+                $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
                 // check if we have a mailto
                 if($data['mailto']) {
+                    
                     $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    // TODO:
+                    // get email template
+                    //$message = get workflow_data_mapping data_destination for workflow_data_tem_id
+                    //$subject = get workflow_data_mapping data_destination_criteria for workflow_data_tem_id
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 }
                 
                 if($mailto=='') {
                     // get the table and column for this new data
-                    $workflow_data = get_workflow_data($workflow_data_id);
+                    $workflow_data = get_workflow_data($workflow_data_item_id);
                     
                     $table_and_row = explode(".", $workflow_data, 3);
                     $table_name = $table_and_row[0];
@@ -179,7 +203,7 @@ function process_record($record_data, $action_desc) {
             if($mailto!='') {
                 
                 $subject ='Test email';
-                $message = 'This is a test email.';
+                //$message = 'This is a test email.';
                 
                 $headers  = 'MIME-Version: 1.0' . "\r\n";
                 $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
@@ -203,11 +227,11 @@ function process_record($record_data, $action_desc) {
         if(!empty($update_data)) {
             foreach($update_data as $data) {
                 
-                $workflow_data_id = $data['id'];
+                $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
                 // get the table and column for this new data
-                $workflow_data = get_workflow_data($workflow_data_id);
+                $workflow_data = get_workflow_data($workflow_data_item_id);
                 
                 $table_and_row = explode(".", $workflow_data, 3);
                 $table_name = $table_and_row[0];
