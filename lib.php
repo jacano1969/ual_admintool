@@ -225,7 +225,7 @@ function process_record($record_data, $action_desc) {
 // TODO: find UQ ID to update record
         // update existing record
         if(!empty($update_data)) {
-            foreach($update_data as $data) {
+            /*foreach($update_data as $data) {
                 
                 $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
@@ -261,7 +261,7 @@ function process_record($record_data, $action_desc) {
                         // create field list
                         $create_data->sqla[$table_name] .= "'$new_data'";
                     }
-                } 
+                } */
             }
             
             // add sqla to sqlb
