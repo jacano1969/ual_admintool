@@ -213,6 +213,13 @@ var ual_admintool = ual_admintool || (function(){
                 });
             });
             
+			// update button clicked
+            $('#update').live("click", function() {
+			    alert('update clicked');
+			});
+			
+			
+			
             // reset button clicked
             $('#resetform').live("click", function() {
                 
