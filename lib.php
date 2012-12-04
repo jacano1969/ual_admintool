@@ -264,10 +264,10 @@ function process_record($record_data, $action_desc) {
                 } 
             }
             
-            // add sqla to sqlb
-            /*foreach($create_data->sqla as $key => $value) {
+            // add sqla to sql_full
+            foreach($create_data->sqla as $key => $value) {
                 //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
-                $sql_full = $create_data->sqla[$key]; // ." ". $create_data->sqlb[$key] .")";
+                $sql_full = $create_data->sqla[$key];
                         
                 $sql_full . = " WHERE ";
                 
@@ -279,7 +279,7 @@ function process_record($record_data, $action_desc) {
                 } else {
                     return false;                
                 }
-            }*/
+            }
         } else {
             // TODO: handle error
             echo $process_data;
