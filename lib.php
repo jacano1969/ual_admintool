@@ -224,7 +224,7 @@ function process_record($record_data, $action_desc) {
         
 // TODO: find UQ ID to update record
         // update existing record
-        /*if(!empty($update_data)) {
+        if(!empty($update_data)) {
             foreach($update_data as $data) {
                 
                 $workflow_data_item_id = $data['id'];
@@ -267,7 +267,7 @@ function process_record($record_data, $action_desc) {
             // add sqla to sqlb
             foreach($create_data->sqla as $key => $value) {
                 //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
-                $sql_full = $create_data->sqla[$key] .' '. $create_data->sqlb[$key] .")";
+                $sql_full = $create_data->sqla[$key] ." ". $create_data->sqlb[$key] .")";
                         
                 $sql_full . = ' WHERE ';
                 
@@ -283,7 +283,7 @@ function process_record($record_data, $action_desc) {
         } else {
             // TODO: handle error
             echo $process_data;
-        }*/
+        }
         
         
         
