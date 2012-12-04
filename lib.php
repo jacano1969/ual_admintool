@@ -1061,9 +1061,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->mandatory==1){
                     // get any special validation
                     $validate = ($row->validate!='') ? ' '.$row->validate : '';
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><input data="'.$row->item_id.'" class="required'.$validate.'" type="textarea" mulitline id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><textarea data="'.$row->item_id.'" class="required'.$validate.'" id="'.$row->name.'" name="'.$row->name.'"></textarea>';
                 } else {
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input data="'.$row->item_id.'" type="textarea" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><textarea data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'"></textarea>';
                 }
             }
             
