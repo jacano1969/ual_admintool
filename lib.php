@@ -1067,7 +1067,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }
                         
                         // create sql
-                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
                         
                         if(!empty($row->criteria)) {
                             $sql .=" WHERE $row->criteria";    
@@ -1104,7 +1104,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }
                         
                         // create sql
-                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
                         
                         if(!empty($row->criteria)) {
                             $sql .=" WHERE $row->criteria";    
@@ -1151,7 +1151,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }
                         
                         // create sql
-                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
                         
                         if(!empty($row->criteria)) {
                             $sql .=" WHERE $row->criteria";    
@@ -1188,7 +1188,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }
                         
                         // create sql
-                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                         $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
                         
                         if(!empty($row->criteria)) {
                             $sql .=" WHERE $row->criteria";    
