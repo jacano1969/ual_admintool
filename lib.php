@@ -1047,9 +1047,21 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->mandatory==1){
                     // get any special validation
                     $validate = ($row->validate!='') ? ' '.$row->validate : '';
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><input data="'.$row->item_id.'" class="required'.$validate.'" type="text" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><input data="'.$row->item_id.'" ';
+                    
+                    if($row->data_type=='data') {
+                        $workflow_form .= 'value="'.$row->value.'" ';
+                    }
+                    
+                    $workflow_form .= 'class="required'.$validate.'" type="text" id="'.$row->name.'" name="'.$row->name.'">';
                 } else {
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input data="'.$row->item_id.'" type="text" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input data="'.$row->item_id.'" type="text" id="'.$row->name.'" ';
+                    
+                    if($row->data_type=='data') {
+                        $workflow_form .= 'value="'.$row->value.'" ';
+                    }
+                    
+                    $workflow_form .= 'name="'.$row->name.'">';
                 }
             }
             
@@ -1061,9 +1073,21 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->mandatory==1){
                     // get any special validation
                     $validate = ($row->validate!='') ? ' '.$row->validate : '';
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><textarea data="'.$row->item_id.'" class="required'.$validate.'" id="'.$row->name.'" name="'.$row->name.'"></textarea>';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><textarea data="'.$row->item_id.'" class="required'.$validate.'" id="'.$row->name.'" ';
+                    
+                    if($row->data_type=='data') {
+                        $workflow_form .= 'value="'.$row->value.'" ';
+                    }
+                    
+                    $workflow_form .= 'name="'.$row->name.'"></textarea>';
                 } else {
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><textarea data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'"></textarea>';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><textarea data="'.$row->item_id.'" id="'.$row->name.'" ';
+                    
+                    if($row->data_type=='data') {
+                        $workflow_form .= 'value="'.$row->value.'" ';
+                    }
+                    
+                    $workflow_form .= 'name="'.$row->name.'"></textarea>';
                 }
             }
             
