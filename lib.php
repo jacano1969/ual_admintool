@@ -224,7 +224,7 @@ function process_record($record_data, $action_desc) {
         
 // TODO: find UQ ID to update record
         // update existing record
-        /*if(!empty($update_data)) {
+        if(!empty($update_data)) {
             foreach($update_data as $data) {
                 
                 $workflow_data_item_id = $data['id'];
@@ -242,11 +242,11 @@ function process_record($record_data, $action_desc) {
                 if(array_key_exists($table_name, $create_data->sqla)) {
         
                     // add to sql field list
-                    $create_data->sqla[$table_name] .=", $row_name";
+                    $create_data->sqla[$table_name] .=", $row_name=";
                     
                     // add to sql data values
                     if($new_data_type=="string" || $new_data_type=="data") {
-                        $create_data->sqla[$table_name] .= ", '$new_data'";
+                        $create_data->sqla[$table_name] .= "'$new_data',";
                     }
                     
                 } else {
@@ -255,11 +255,11 @@ function process_record($record_data, $action_desc) {
                     $create_data->sqla[$table_name]="UPDATE $table_name SET ";
                     
                     if($new_data_type=="string" || $new_data_type=="data") {
-                        // create field list
-                        $create_data->sqla[$table_name] .= " $row_name=";
-                        
                         // create data values
-                        $create_data->sqla[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                        $create_data->sqla[$table_name] .= $create_data->sqlb[$table_name] . "($row_name=";
+                        
+                        // create field list
+                        $create_data->sqla[$table_name] .= "'$new_data'";
                     }
                 } 
             }
@@ -267,9 +267,9 @@ function process_record($record_data, $action_desc) {
             // add sqla to sqlb
             foreach($create_data->sqla as $key => $value) {
                 //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
-                $sql_full = $create_data->sqla[$key] ." ". $create_data->sqlb[$key] .")";
+                $sql_full = $create_data->sqla[$key]; // ." ". $create_data->sqlb[$key] .")";
                         
-                $sql_full . = ' WHERE ';
+                $sql_full . = " WHERE ";
                 
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record",$action_desc,$sql_full)) {            
                     // add records
@@ -283,7 +283,7 @@ function process_record($record_data, $action_desc) {
         } else {
             // TODO: handle error
             echo $process_data;
-        }*/
+        }
         
         
         
