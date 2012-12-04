@@ -266,10 +266,10 @@ function process_record($record_data, $action_desc) {
             
             // add sqla to sql_full
             foreach($create_data->sqla as $key => $value) {
-                //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
+
                 $sql_full = $create_data->sqla[$key];
                         
-                $sql_full . = " WHERE ";
+                $sql_full .= " WHERE ";
                 
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record",$action_desc,$sql_full)) {            
                     // add records
