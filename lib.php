@@ -225,7 +225,7 @@ function process_record($record_data, $action_desc) {
 // TODO: find UQ ID to update record
         // update existing record
         if(!empty($update_data)) {
-            /*foreach($update_data as $data) {
+            foreach($update_data as $data) {
                 
                 $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
@@ -233,7 +233,7 @@ function process_record($record_data, $action_desc) {
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_item_id);
                 
-                $table_and_row = explode(".", $workflow_data, 3);
+                /*$table_and_row = explode(".", $workflow_data, 3);
                 $table_name = $table_and_row[0];
                 $row_name = $table_and_row[1];
                 $new_data_type = $table_and_row[2];
@@ -265,7 +265,7 @@ function process_record($record_data, $action_desc) {
             }
             
             // add sqla to sqlb
-            foreach($create_data->sqla as $key => $value) {
+            /*foreach($create_data->sqla as $key => $value) {
                 //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
                 $sql_full = $create_data->sqla[$key]; // ." ". $create_data->sqlb[$key] .")";
                         
@@ -279,7 +279,7 @@ function process_record($record_data, $action_desc) {
                 } else {
                     return false;                
                 }
-            }
+            }*/
         } else {
             // TODO: handle error
             echo $process_data;
