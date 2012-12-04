@@ -245,15 +245,16 @@ function process_record($record_data, $action_desc) {
                     $create_data->sqla[$table_name] .=", $row_name";
                     
                     // add to sql data values
-                    if($new_data_type=="string") {
+                    if($new_data_type=="string" || $new_data_type=="data") {
                         $create_data->sqla[$table_name] .= ", '$new_data'";
                     }
+                    
                 } else {
                     
                     // just add new update statement for table
                     $create_data->sqla[$table_name]="UPDATE $table_name SET ";
                     
-                    if($new_data_type=="string") {
+                    if($new_data_type=="string" || $new_data_type=="data") {
                         // create field list
                         $create_data->sqla[$table_name] .= " $row_name=";
                         
@@ -266,9 +267,11 @@ function process_record($record_data, $action_desc) {
             // add sqla to sqlb
             foreach($create_data->sqla as $key => $value) {
                 //$sql_full = $create_data->sqla[$table_name] .") VALUES " . $create_data->sqlb[$table_name] .")";
-                $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
+                $sql_full = $create_data->sqla[$key] .' '. $create_data->sqlb[$key] .")";
                         
-                if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record","Update Existing User",$sql_full)) {            
+                $sql_full . = ' WHERE ';
+                
+                if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record",$action_desc,$sql_full)) {            
                     // add records
                     if(sql_update($sql_full)) {
                         echo "ok";  // send back some data to show everyting went as planned
@@ -1220,6 +1223,39 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->data_type=='session') {
                     $session_var = $row->value;
                     $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$_SESSION[$session_var].'">';
+                }
+                
+                if($row->data_type=='data') {
+                    // extract database details for data
+                    $databases = array();
+                    $tables = array();
+                    $columns = array();
+                                        
+                    $data_details = explode(",",$row->value);  // split into db.table.col array
+                    
+                    $temp = array();
+                    foreach($data_details as $detail) {
+                       $temp = explode(".",$detail);
+                       $database[] = $temp[0];
+                       $tables[] = $temp[1];
+                       $columns[] = $temp[2];
+                    }
+                    
+                    // create sql
+                     $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                    
+                    if(!empty($row->criteria)) {
+                        $sql .=" WHERE $row->criteria";    
+                    }
+                    
+                    // get records
+                    if ($data_result = $mysqli->query($sql)) {
+                        while($data_row = $data_result->fetch_object()) {
+                            $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$row->name.'">';
+                        }
+                        
+                        $data_result->close();
+                    }                  
                 }
             }
             

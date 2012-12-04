@@ -215,7 +215,85 @@ var ual_admintool = ual_admintool || (function(){
             
 			// update button clicked
             $('#update').live("click", function() {
-			    alert('update clicked');
+			    $("#action").validate({
+                    submitHandler: function(form) {
+                        
+                        // construct json
+                        var jsonString = '{ "update" : [';
+                            
+                        // get all data and item_ids to be added ...
+                        
+                        // for text box data
+                        $("#action input[type='text']").each(function(){
+                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+                        });
+						
+						// for text area data
+                        $("#action textarea").each(function(){
+                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+                        });
+                        
+                        // for dropdown selects
+                        $("#action select").each(function(){
+							// get the value from the selected option id
+                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $("option:selected", this).attr("id") +'"},';
+                        });
+                        
+						// for hidden values
+						$("#action input[type='hidden']").each(function(){
+							
+							// send email action
+							if($(this).attr('id')=='email') {
+                                jsonString += '{ "id": ' + $(this).attr("data") + ',"mailto": "' + $(this).val() +'"},';
+							} else {					
+							    // any other values need processing ?
+								if(typeof($(this).attr("data"))!='undefined') {
+								    jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+								}
+							}
+							
+                        });
+						
+                        // chop off last comma
+                        jsonString = jsonString.slice(0,-1);
+                        
+                        jsonString += ']';
+                        
+                        jsonString += '}';
+						
+						var action_desc = $('.container fieldset legend').text();
+						
+                        // submit data 
+                        $.get('index.php?action=update&action_desc='+action_desc+'&record_data='+jsonString, function(data){
+                            
+                            
+                            
+                            if(data  && data!=false) {    
+                                alert(action_desc+":\n\nRecord updated successfully.");
+                                
+                                // TODO: 
+                                // check for workflow links
+                                // if(there are workflow links){
+                                    // get workflow links
+                                //}
+                                //else {
+                                    // show the home screen (and all workflows)
+                                    window.location.href='index.php';
+                                //}
+                                
+                                return false;
+                            } else {
+                                alert(action+":\n\nAn error occurred, please try again.");
+                                return false;
+                            }
+                            
+                            return false;
+                        });
+                        
+                        return false;
+                    
+                    }
+                });
 			});
 			
 			
