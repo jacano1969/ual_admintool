@@ -1225,7 +1225,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$_SESSION[$session_var].'">';
                 }
                 
-                if($row->data_type=='data') {
+                /*if($row->data_type=='data') {
                     // extract database details for data
                     $databases = array();
                     $tables = array();
@@ -1256,7 +1256,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         
                         $data_result->close();
                     }                  
-                }
+                }*/
             }
             
             // draw dropdown select box
