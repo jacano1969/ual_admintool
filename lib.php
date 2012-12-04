@@ -1050,7 +1050,37 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><input data="'.$row->item_id.'" ';
                     
                     if($row->data_type=='data') {
-                        $workflow_form .= 'value="'.$row->value.'" ';
+                        
+                        // extract database details for data
+                        $databases = array();
+                        $tables = array();
+                        $columns = array();
+                                            
+                        $data_details = explode(",",$row->value);  // split into db.table.col array
+                        
+                        $temp = array();
+                        foreach($data_details as $detail) {
+                           $temp = explode(".",$detail);
+                           $database[] = $temp[0];
+                           $tables[] = $temp[1];
+                           $columns[] = $temp[2];
+                        }
+                        
+                        // create sql
+                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        
+                        if(!empty($row->criteria)) {
+                            $sql .=" WHERE $row->criteria";    
+                        }
+                        
+                        // get records
+                        if ($data_result = $mysqli->query($sql)) {
+                            while($data_row = $data_result->fetch_object()) {
+                                $workflow_form .= 'value="'.$data_row->name.'" ';
+                            }
+                            
+                            $data_result->close();
+                        }                  
                     }
                     
                     $workflow_form .= 'class="required'.$validate.'" type="text" id="'.$row->name.'" name="'.$row->name.'">';
@@ -1058,7 +1088,36 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input data="'.$row->item_id.'" type="text" id="'.$row->name.'" ';
                     
                     if($row->data_type=='data') {
-                        $workflow_form .= 'value="'.$row->value.'" ';
+                        // extract database details for data
+                        $databases = array();
+                        $tables = array();
+                        $columns = array();
+                                            
+                        $data_details = explode(",",$row->value);  // split into db.table.col array
+                        
+                        $temp = array();
+                        foreach($data_details as $detail) {
+                           $temp = explode(".",$detail);
+                           $database[] = $temp[0];
+                           $tables[] = $temp[1];
+                           $columns[] = $temp[2];
+                        }
+                        
+                        // create sql
+                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        
+                        if(!empty($row->criteria)) {
+                            $sql .=" WHERE $row->criteria";    
+                        }
+                        
+                        // get records
+                        if ($data_result = $mysqli->query($sql)) {
+                            while($data_row = $data_result->fetch_object()) {
+                                $workflow_form .= 'value="'.$data_row->name.'" ';
+                            }
+                            
+                            $data_result->close();
+                        }                  
                     }
                     
                     $workflow_form .= 'name="'.$row->name.'">';
@@ -1076,7 +1135,36 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><textarea data="'.$row->item_id.'" class="required'.$validate.'" id="'.$row->name.'" ';
                     
                     if($row->data_type=='data') {
-                        $workflow_form .= 'value="'.$row->value.'" ';
+                        // extract database details for data
+                        $databases = array();
+                        $tables = array();
+                        $columns = array();
+                                            
+                        $data_details = explode(",",$row->value);  // split into db.table.col array
+                        
+                        $temp = array();
+                        foreach($data_details as $detail) {
+                           $temp = explode(".",$detail);
+                           $database[] = $temp[0];
+                           $tables[] = $temp[1];
+                           $columns[] = $temp[2];
+                        }
+                        
+                        // create sql
+                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        
+                        if(!empty($row->criteria)) {
+                            $sql .=" WHERE $row->criteria";    
+                        }
+                        
+                        // get records
+                        if ($data_result = $mysqli->query($sql)) {
+                            while($data_row = $data_result->fetch_object()) {
+                                $workflow_form .= 'value="'.$data_row->name.'" ';
+                            }
+                            
+                            $data_result->close();
+                        }                  
                     }
                     
                     $workflow_form .= 'name="'.$row->name.'"></textarea>';
@@ -1084,7 +1172,36 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><textarea data="'.$row->item_id.'" id="'.$row->name.'" ';
                     
                     if($row->data_type=='data') {
-                        $workflow_form .= 'value="'.$row->value.'" ';
+                        // extract database details for data
+                        $databases = array();
+                        $tables = array();
+                        $columns = array();
+                                            
+                        $data_details = explode(",",$row->value);  // split into db.table.col array
+                        
+                        $temp = array();
+                        foreach($data_details as $detail) {
+                           $temp = explode(".",$detail);
+                           $database[] = $temp[0];
+                           $tables[] = $temp[1];
+                           $columns[] = $temp[2];
+                        }
+                        
+                        // create sql
+                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        
+                        if(!empty($row->criteria)) {
+                            $sql .=" WHERE $row->criteria";    
+                        }
+                        
+                        // get records
+                        if ($data_result = $mysqli->query($sql)) {
+                            while($data_row = $data_result->fetch_object()) {
+                                $workflow_form .= 'value="'.$data_row->name.'" ';
+                            }
+                            
+                            $data_result->close();
+                        }                  
                     }
                     
                     $workflow_form .= 'name="'.$row->name.'"></textarea>';
