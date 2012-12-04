@@ -1132,7 +1132,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->mandatory==1){
                     // get any special validation
                     $validate = ($row->validate!='') ? ' '.$row->validate : '';
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><textarea data="'.$row->item_id.'" class="required'.$validate.'" id="'.$row->name.'" ';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><textarea data="'.$row->item_id.'" class="required'.$validate.'" id="'.$row->name.'" name="'.$row->name.'">';
                     
                     if($row->data_type=='data') {
                         // extract database details for data
@@ -1160,16 +1160,16 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         // get records
                         if ($data_result = $mysqli->query($sql)) {
                             while($data_row = $data_result->fetch_object()) {
-                                $workflow_form .= 'value="'.$data_row->name.'" ';
+                                $workflow_form .= $data_row->name;
                             }
                             
                             $data_result->close();
                         }                  
                     }
                     
-                    $workflow_form .= 'name="'.$row->name.'"></textarea>';
+                    $workflow_form .= '</textarea>';
                 } else {
-                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><textarea data="'.$row->item_id.'" id="'.$row->name.'" ';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><textarea data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'">';
                     
                     if($row->data_type=='data') {
                         // extract database details for data
@@ -1197,14 +1197,14 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         // get records
                         if ($data_result = $mysqli->query($sql)) {
                             while($data_row = $data_result->fetch_object()) {
-                                $workflow_form .= 'value="'.$data_row->name.'" ';
+                                $workflow_form .= $data_row->name;
                             }
                             
                             $data_result->close();
                         }                  
                     }
                     
-                    $workflow_form .= 'name="'.$row->name.'"></textarea>';
+                    $workflow_form .= '</textarea>';
                 }
             }
             
