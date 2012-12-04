@@ -21,6 +21,7 @@
 #home-page form {margin-top: 10px; float:left;}
 #home-page input {display: block; margin-bottom: 5px; margin-right: 2px;}
 #home-page input[type=text] {width:95%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page textarea {width:95%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page input[type=password] {width: 95%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page fieldset {background: #ffffff; border: 3px solid #CCCCCC; border-radius: 6px 6px 6px 6px;}
 #home-page legend {font-weight: bold; font-size: 0.9em;}
