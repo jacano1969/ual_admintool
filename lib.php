@@ -230,6 +230,8 @@ function process_record($record_data, $action_desc) {
                 $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
+                if()
+                
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_item_id);
                 
@@ -1251,7 +1253,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
                         while($data_row = $data_result->fetch_object()) {
-                            $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$data_row->name.'" name="'.$row->name.'" value="'.$row->name.'">';
+                            $workflow_form .= '<input data="'.$row->name.'" type="hidden" id="'.$columns[0].'" name="'.$row->name.'" value="'.$row->name.'">';
                         }
                         
                         $data_result->close();
