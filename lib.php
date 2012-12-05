@@ -230,38 +230,44 @@ function process_record($record_data, $action_desc) {
                 $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
-                // get the table and column for this new data
-                $workflow_data = get_workflow_data($workflow_data_item_id);
-                
-                $table_and_row = explode(".", $workflow_data, 3);
-                $table_name = $table_and_row[0];
-                $row_name = $table_and_row[1];
-                $new_data_type = $table_and_row[2];
-                
-                // collect table names                
-                if(array_key_exists($table_name, $create_data->sqla)) {
-        
-                    // add to sql field list
-                    $create_data->sqla[$table_name] .=", $row_name=";
-                    
-                    // add to sql data values
-                    if($new_data_type=="string" || $new_data_type=="data") {
-                        $create_data->sqla[$table_name] .= "'$new_data',";
-                    }
-                    
+                $unique_id = 0;
+                if($data['id']=='id') {
+                    $unique_id = str_replace("'","''",$data['data']);
                 } else {
+                
+                    // get the table and column for this new data
+                    $workflow_data = get_workflow_data($workflow_data_item_id);
                     
-                    // just add new update statement for table
-                    $create_data->sqla[$table_name]="UPDATE $table_name SET ";
+                    $table_and_row = explode(".", $workflow_data, 3);
+                    $table_name = $table_and_row[0];
+                    $row_name = $table_and_row[1];
+                    $new_data_type = $table_and_row[2];
                     
-                    if($new_data_type=="string" || $new_data_type=="data") {
-                        // create data values
-                        $create_data->sqla[$table_name] .= "($row_name=";
+                    // collect table names                
+                    if(array_key_exists($table_name, $create_data->sqla)) {
+            
+                        // add to sql field list
+                        $create_data->sqla[$table_name] .=", $row_name=";
                         
-                        // create field list
-                        $create_data->sqla[$table_name] .= "'$new_data'";
-                    }
-                } 
+                        // add to sql data values
+                        if($new_data_type=="string" || $new_data_type=="data") {
+                            $create_data->sqla[$table_name] .= "'$new_data',";
+                        }
+                        
+                    } else {
+                        
+                        // just add new update statement for table
+                        $create_data->sqla[$table_name]="UPDATE $table_name SET ";
+                        
+                        if($new_data_type=="string" || $new_data_type=="data") {
+                            // create data values
+                            $create_data->sqla[$table_name] .= "($row_name=";
+                            
+                            // create field list
+                            $create_data->sqla[$table_name] .= "'$new_data'";
+                        }
+                    } 
+                }
             }
             
             // add sqla to sql_full
@@ -269,7 +275,7 @@ function process_record($record_data, $action_desc) {
 
                 $sql_full = $create_data->sqla[$key];
                         
-                $sql_full .= " WHERE ";
+                $sql_full .= " WHERE id=" . $unique_id;
                 
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record",$action_desc,$sql_full)) {            
                     // add records
@@ -1251,7 +1257,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
                         while($data_row = $data_result->fetch_object()) {
-                            $workflow_form .= '<input data="'.$columns[0].'" type="hidden" id="'.$data_row->name.'" name="'.$row->name.'" value="'.$row->name.'">';
+                            $workflow_form .= '<input data="'.$data_row->name.'" type="hidden" id="'.$columns[0].'" name="'.$row->name.'" value="'.$row->name.'">';
                         }
                         
                         $data_result->close();

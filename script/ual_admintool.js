@@ -251,11 +251,7 @@ var ual_admintool = ual_admintool || (function(){
 							} else {					
 							    // any other values need processing ?
 								if(typeof($(this).attr("data"))!='undefined') {
-									if(isNumber($(this).attr("data"))) {
-								        jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
-									} else {
-										jsonString += '{ "id": "' + $(this).attr("data") + '" ,"data": "' + $(this).val() +'"},';
-									}
+							        jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
 								}
 							}
 							
