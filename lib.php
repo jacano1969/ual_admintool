@@ -123,15 +123,20 @@ function process_record($record_data, $action_desc) {
             
                     // get message text
                     $sql = "SELECT message FROM course_request_email where status=1";
-
+echo "ok3";
                     // get records
                     if ($message_result = $mysqli->query($sql)) {
+                        echo "okA";
                         if($message_result->num_rows==0) {
+                            echo "okB";
                             while($message_row = $message_result->fetch_object()) {
+                                echo "okC";
                                 $message = $message_row->message;
                             }
                         }
+                        echo "okd";
                         $message_result->close();
+                        echo "oke";
                     }                  
                         
                     // create sql
