@@ -119,24 +119,25 @@ function process_record($record_data, $action_desc) {
                 if($data['mailto']) {
                     
                     $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
-                    echo "ok2";
             
                     // get message text
                     $sql = "SELECT message FROM course_request_email where status=1";
-echo "ok3";
+
                     // get records
+                    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+                    if (mysqli_connect_error()) {
+                        header('Location: login.php?error=4');
+                        exit;
+                    }
+                    
                     if ($message_result = $mysqli->query($sql)) {
-                        echo "okA";
                         if($message_result->num_rows==0) {
-                            echo "okB";
                             while($message_row = $message_result->fetch_object()) {
-                                echo "okC";
                                 $message = $message_row->message;
                             }
                         }
-                        echo "okd";
                         $message_result->close();
-                        echo "oke";
                     }                  
                         
                     // create sql
@@ -152,7 +153,8 @@ echo "ok3";
                         
                         $subject_result->close();
                     }
-                    echo "ok3";
+                    
+                    $mysqli->close();
                 }
 
                 if($mailto=='') {
