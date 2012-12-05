@@ -280,7 +280,7 @@ function process_record($record_data, $action_desc) {
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record",$action_desc,$sql_full)) {            
                     // add records
                     if(sql_update($sql_full)) {
-                        echo "ok";  // send back some data to show everyting went as planned
+                        echo $sql_full ; //"ok";  // send back some data to show everyting went as planned
                     }
                 } else {
                     return false;                
