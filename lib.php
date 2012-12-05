@@ -230,8 +230,6 @@ function process_record($record_data, $action_desc) {
                 $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
-                if()
-                
                 // get the table and column for this new data
                 $workflow_data = get_workflow_data($workflow_data_item_id);
                 
