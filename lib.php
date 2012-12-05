@@ -119,25 +119,76 @@ function process_record($record_data, $action_desc) {
                     
                     $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
                     
+                    // get message
+                    $sql="select data_destination as data from workflow_data_mapping where workflow_data_tem_id=$workflow_data_item_id";
+                    
+                    if ($result = $mysqli->query($sql)) {
+                        while($row = $result->fetch_object()) {
+            
+                            // extract database details for data
+                            $databases = array();
+                            $tables = array();
+                            $columns = array();
+                                                
+                            $data_details = explode(",",$row->value);  // split into db.table.col array
+                        
+                            $temp = array();
+                            foreach($data_details as $detail) {
+                               $temp = explode(".",$detail);
+                               $database = $temp[0];
+                               $table = $temp[1];
+                               $column = $temp[2];
+                            }
+                        
+                            // create sql
+                            $sql = "SELECT ".$column." as name FROM ".$database.".".$table . " where status=1";
+
+                            // get records
+                            if ($data_result = $mysqli->query($sql)) {
+                                while($data_row = $data_result->fetch_object()) {
+                                    $message = $data_row->name;
+                                }
+                                
+                                $data_result->close();
+                            }                  
+                        }
+                    }
                     
                     
+                    // get subject
+                    $sql="select data_destination_criteria as data from workflow_data_mapping where workflow_data_tem_id=$workflow_data_item_id";
                     
-                    
-                    
-                    
-                    // TODO:
-                    // get email template
-                    //$message = get workflow_data_mapping data_destination for workflow_data_tem_id
-                    //$subject = get workflow_data_mapping data_destination_criteria for workflow_data_tem_id
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+                    if ($result = $mysqli->query($sql)) {
+                        while($row = $result->fetch_object()) {
+            
+                            // extract database details for data
+                            $databases = array();
+                            $tables = array();
+                            $columns = array();
+                                                
+                            $data_details = explode(",",$row->value);  // split into db.table.col array
+                        
+                            $temp = array();
+                            foreach($data_details as $detail) {
+                               $temp = explode(".",$detail);
+                               $database = $temp[0];
+                               $table = $temp[1];
+                               $column = $temp[2];
+                            }
+                        
+                            // create sql
+                            $sql = "SELECT ".$column." as name FROM ".$database.".".$table . " where status=1";
+
+                            // get records
+                            if ($data_result = $mysqli->query($sql)) {
+                                while($data_row = $data_result->fetch_object()) {
+                                    $subject = $data_row->name;
+                                }
+                                
+                                $data_result->close();
+                            }                  
+                        }
+                    }
                 }
                 
                 if($mailto=='') {
@@ -202,7 +253,7 @@ function process_record($record_data, $action_desc) {
             // check if an email is to be sent        
             if($mailto!='') {
                 
-                $subject ='Test email';
+                //$subject ='Test email';
                 //$message = 'This is a test email.';
                 
                 $headers  = 'MIME-Version: 1.0' . "\r\n";
