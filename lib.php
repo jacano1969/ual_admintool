@@ -122,27 +122,30 @@ function process_record($record_data, $action_desc) {
                     echo "ok2";
             
                     // get message text
-                    $sql = "SELECT message as msg FROM course_request_email where status=1";
+                    $sql = "SELECT message FROM course_request_email where status=1";
 
                     // get records
-                    if ($data_result = $mysqli->query($sql)) {
-                        while($data_row = $data_result->fetch_object()) {
-                            $message = $data_row->msg;
+                    if ($message_result = $mysqli->query($sql)) {
+                        if($message_result->num_rows==0) {
+                            while($message_row = $message_result->fetch_object()) {
+                                $message = $message_row->message;
+                            }
                         }
-                        
-                        $data_result->close();
+                        $message_result->close();
                     }                  
                         
                     // create sql
-                    $sql = "SELECT subject as subject FROM course_request_email where status=1";
+                    $sql = "SELECT subject FROM course_request_email where status=1";
 
                     // get records
-                    if ($data_result = $mysqli->query($sql)) {
-                        while($data_row = $data_result->fetch_object()) {
-                            $subject = $data_row->subject;
+                    if ($subject_result = $mysqli->query($sql)) {
+                        if($subject_result->num_rows==0) {
+                            while($subject_row = $subject_result->fetch_object()) {
+                                $subject = $subject_row->subject;
+                            }
                         }
                         
-                        $data_result->close();
+                        $subject_result->close();
                     }
                     echo "ok3";
                 }
@@ -217,7 +220,9 @@ function process_record($record_data, $action_desc) {
                 $headers .= 'To: ' . $mailto . "\r\n";
                 $headers .= 'From: UAL AdminTool' . "\r\n";
                 
-                mail($mailto, $subject, $message, $headers);
+                if($message!='') {
+                    mail($mailto, $subject, $message, $headers);
+                }
             }
             
             echo "ok";  // if we get to here, send back some data to show everyting went as planned
