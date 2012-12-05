@@ -231,8 +231,8 @@ function process_record($record_data, $action_desc) {
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
                 $unique_id = 0;
-                if($data['id']=='id') {
-                    $unique_id = str_replace("'","''",$data['data']);
+                if($data['data']=='id') {
+                    $unique_id = $data['id'];
                 } else {
                 
                     // get the table and column for this new data
