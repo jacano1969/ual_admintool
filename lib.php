@@ -89,6 +89,8 @@ function is_logged_in() {
  */
 function process_record($record_data, $action_desc) {
     
+    global $CFG;
+    
     if(!empty($record_data)) {
             
         // extract json data
