@@ -1251,7 +1251,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
                         while($data_row = $data_result->fetch_object()) {
-                            $workflow_form .= '<input data="'.$data_row->name.'" type="hidden" id="'.$columns[0].'" name="'.$row->name.'" value="'.$row->name.'">';
+                            $workflow_form .= '<input data="'.$columns[0].'" type="hidden" id="'.$data_row->name.'" name="'.$row->name.'" value="'.$row->name.'">';
                         }
                         
                         $data_result->close();
