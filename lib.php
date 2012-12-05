@@ -96,7 +96,6 @@ function process_record($record_data, $action_desc) {
         // extract json data
         $process_data = json_decode($record_data,true);
            
-        echo "ok1";
         $add_data = $process_data['add'];
         $update_data = $process_data['update'];
         $delete_data = $process_data['delete'];
