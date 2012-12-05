@@ -264,7 +264,7 @@ function process_record($record_data, $action_desc) {
                             $create_data->sqla[$table_name] .= "($row_name=";
                             
                             // create field list
-                            $create_data->sqla[$table_name] .= "'$new_data'";
+                            $create_data->sqla[$table_name] .= "'$new_data',";
                         }
                     } 
                 }
@@ -275,6 +275,8 @@ function process_record($record_data, $action_desc) {
 
                 $sql_full = $create_data->sqla[$key];
                         
+                $sql_full = substr($sql_full,0,-1);
+                
                 $sql_full .= " WHERE id=" . $unique_id;
                 
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record",$action_desc,$sql_full)) {            
