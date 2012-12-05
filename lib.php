@@ -94,6 +94,7 @@ function process_record($record_data, $action_desc) {
         // extract json data
         $process_data = json_decode($record_data,true);
            
+        echo "ok1";
         $add_data = $process_data['add'];
         $update_data = $process_data['update'];
         $delete_data = $process_data['delete'];
@@ -118,31 +119,32 @@ function process_record($record_data, $action_desc) {
                 if($data['mailto']) {
                     
                     $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
-                    
+                    echo "ok2";
             
                     // get message text
-                    $sql = "SELECT message as name FROM course_request_email where status=1";
+                    $sql = "SELECT message as msg FROM course_request_email where status=1";
 
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
                         while($data_row = $data_result->fetch_object()) {
-                            $message = $data_row->name;
+                            $message = $data_row->msg;
                         }
                         
                         $data_result->close();
                     }                  
                         
                     // create sql
-                    $sql = "SELECT subject as name FROM course_request_email where status=1";
+                    $sql = "SELECT subject as subject FROM course_request_email where status=1";
 
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
                         while($data_row = $data_result->fetch_object()) {
-                            $subject = $data_row->name;
+                            $subject = $data_row->subject;
                         }
                         
                         $data_result->close();
-                    }                  
+                    }
+                    echo "ok3";
                 }
 
                 if($mailto=='') {
