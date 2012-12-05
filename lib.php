@@ -247,7 +247,7 @@ function process_record($record_data, $action_desc) {
                     if(array_key_exists($table_name, $create_data->sqla)) {
             
                         // add to sql field list
-                        $create_data->sqla[$table_name] .=", $row_name=";
+                        $create_data->sqla[$table_name] .=" $row_name=";
                         
                         // add to sql data values
                         if($new_data_type=="string" || $new_data_type=="data") {
