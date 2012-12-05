@@ -261,7 +261,7 @@ function process_record($record_data, $action_desc) {
                         
                         if($new_data_type=="string" || $new_data_type=="data") {
                             // create data values
-                            $create_data->sqla[$table_name] .= "($row_name=";
+                            $create_data->sqla[$table_name] .= " $row_name=";
                             
                             // create field list
                             $create_data->sqla[$table_name] .= "'$new_data',";
