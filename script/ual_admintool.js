@@ -6,9 +6,12 @@ var ual_admintool = ual_admintool || (function(){
 
     $(document).ready(function(){
     
+	    function isNumber(n) {
+            return !isNaN(parseFloat(n)) && isFinite(n);
+        }
+			
         // home page scripts
         if($('#home-page').length>0) {
-            
             
             //
             // Workflow
@@ -248,7 +251,11 @@ var ual_admintool = ual_admintool || (function(){
 							} else {					
 							    // any other values need processing ?
 								if(typeof($(this).attr("data"))!='undefined') {
-								    jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+									if(isNumber($(this).attr("data"))) {
+								        jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+									} else {
+										jsonString += '{ "id": "' + $(this).attr("data") + '" ,"data": "' + $(this).val() +'"},';
+									}
 								}
 							}
 							
