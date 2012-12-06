@@ -1346,6 +1346,56 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 
                 $workflow_form .= '</select>';
             }
+            
+            // draw a data grid
+            if($row->type=='grid') {
+                
+                // TODO: check if mandatory==1
+                if($row->mandatory==1){
+                    $workflow_form .= '<h3>'.$row->name.'</h3>';
+                    $workflow_form .= '<table id="data_grid" name="data-grid">';
+                } else {
+                    $workflow_form .= '<h3>'.$row->name.'</h3>';
+                    $workflow_form .= '<table id="data_grid" name="data-grid">';
+                }
+                
+                //
+                // TODO: get grid data
+                //
+                if($row->data_type=='data') {
+                    
+                    // extract database details for data
+                    $databases = array();
+                    $tables = array();
+                    $columns = array();
+                                        
+                    $data_details = explode(",",$row->value);  // split into db.table.col array
+                    
+                    $temp = array();
+                    foreach($data_details as $detail) {
+                       $temp = explode(".",$detail);
+                       $database[] = $temp[0];
+                       $tables[] = $temp[1];
+                       $columns[] = $temp[2];
+                    }
+                    
+                    // create sql
+                    /*$sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                    
+                    if(!empty($row->criteria)) {
+                        $sql .=" WHERE $row->criteria";    
+                    }
+                    
+                    // get records
+                    if ($data_result = $mysqli->query($sql)) {
+                        while($data_row = $data_result->fetch_object()) {
+                            $workflow_form .= '<option id="'.$data_row->id.'" name="'.$data_row->id.'">'.$data_row->name.'</option>';
+                        }
+                        
+                        $data_result->close();
+                    } */                   
+                }
+            }
         }
         
         $result->close();
