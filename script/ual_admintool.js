@@ -13,6 +13,15 @@ var ual_admintool = ual_admintool || (function(){
         // home page scripts
         if($('#home-page').length>0) {
             
+			
+			//
+			// data grid
+			//
+			
+			if($("data-grid").length>0) {
+			    $("data-grid").tablesorter();
+		    }
+			
             //
             // Workflow
             //
