@@ -1120,7 +1120,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }                  
                     }
                     
-                    $workflow_form .= 'class="required'.$validate.'" type="text" id="'.$row->name.'" name="'.$row->name.'"><div id="helplabel">'.$row->description.'<div>';
+                    $workflow_form .= 'class="required'.$validate.'" type="text" id="'.$row->name.'" name="'.$row->name.'"><div id="helplabel">'.$row->description.'</div>';
                 } else {
                     $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><input data="'.$row->item_id.'" type="text" id="'.$row->name.'" ';
                     
@@ -1157,7 +1157,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }                  
                     }
                     
-                    $workflow_form .= 'name="'.$row->name.'"><div id="helplabel">'.$row->description.'<div>';
+                    $workflow_form .= 'name="'.$row->name.'"><div id="helplabel">'.$row->description.'</div>';
                 }
             }
             
@@ -1204,7 +1204,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }                  
                     }
                     
-                    $workflow_form .= '</textarea><div id="helplabel">'.$row->description.'<div>';
+                    $workflow_form .= '</textarea><div id="helplabel">'.$row->description.'</div>';
                 } else {
                     $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><textarea data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'">';
                     
@@ -1241,7 +1241,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }                  
                     }
                     
-                    $workflow_form .= '</textarea><div id="helplabel">'.$row->description.'<div>';
+                    $workflow_form .= '</textarea><div id="helplabel">'.$row->description.'</div>';
                 }
             }
             
@@ -1349,7 +1349,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     }                    
                 }
                 
-                $workflow_form .= '</select><div id="helplabel">'.$row->description.'<div>';
+                $workflow_form .= '</select><div id="helplabel">'.$row->description.'</div>';
             }
             
             // draw a data grid
