@@ -918,7 +918,7 @@ function get_workflows($step_id=false) {
                                 
                                 $workflow .='<option id="'.$workflow_step_row->id.'" selected="selected">'.$workflow_step_row->name.'</option>';
                             } else {
-                                $workflow .='<option id="'.$workflow_step_row->id.'">'.$workflow_step_row->name.'</option>';
+                                $workflow .='<option help="'.$workflow_step_row->description.'" id="'.$workflow_step_row->id.'">'.$workflow_step_row->name.'</option>';
                             }
                         }
                     }
@@ -947,7 +947,7 @@ function get_workflows($step_id=false) {
                 $workflow .='<option id="0">Select Action ...</option>';
                     
                 while($workflow_sub_step_row = $workflow_sub_step_result->fetch_object()) {
-                    $workflow .='<option data="'.$workflow_sub_step_row->action.'" id="'.$workflow_sub_step_row->id.'">'.$workflow_sub_step_row->name.'</option>';
+                    $workflow .='<option help="'.$workflow_sub_step_row->description.'" data="'.$workflow_sub_step_row->action.'" id="'.$workflow_sub_step_row->id.'">'.$workflow_sub_step_row->name.'</option>';
                 }
                 
                 $workflow .= '</select>';
