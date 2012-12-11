@@ -46,9 +46,10 @@ var ual_admintool = ual_admintool || (function(){
                 var selected_workflow_step = $("option:selected", this).attr("id");
                 
 				// set the help text
-				$('#helpbox').fadeIn('slow');
+				$('#helpbox').hide();
 				var selected_workflow_help = $("option:selected", this).attr("help");
 				$('#helptext').html(selected_workflow_help);
+				$('#helpbox').fadeIn('slow');
 				
                 if(selected_workflow_step!="0") {
                     // get workflow sub steps
