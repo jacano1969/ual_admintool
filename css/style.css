@@ -76,6 +76,7 @@
     border: 2px ridge #CCCCCC;
     border-radius: 7px 7px 7px 7px;
     padding: 6px;
+    top: 10%;
 }
 
 #helpbox h2 {
