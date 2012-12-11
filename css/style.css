@@ -84,9 +84,10 @@
 }
 
 #helplabel {
-    left: 550px;
+    color: #333333;
+    font-size: 0.8em;
+    left: 520px;
     margin-top: 5px;
     position: fixed;
-    font-size: 0.6em;
 }
 
