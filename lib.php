@@ -374,6 +374,10 @@ function show_home() {
     $home .= get_workflows(false);
     $home .= '</div>';
     
+    $home .= '<div id="helpbox">';
+    $home .= '<h2>Help</h2>'
+    $home .= '</div>';
+    
     return $home;    
 }
 
