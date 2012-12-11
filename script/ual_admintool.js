@@ -46,6 +46,7 @@ var ual_admintool = ual_admintool || (function(){
                 var selected_workflow_step = $("option:selected", this).attr("id");
                 
 				// set the help text
+				$('#helpbox').show();
 				var selected_workflow_help = $("option:selected", this).attr("help");
 				$('#helptext').html(selected_workflow_help);
 				

@@ -67,7 +67,7 @@
 
 #helpbox {
     background: #FFFFFF;
-    display: block;
+    display: none; 
     left: 80%;
     margin-left: 0;
     width: 200px;
