@@ -898,7 +898,7 @@ function get_workflows($step_id=false) {
             
             // construct data
             while ($workflow_row = $workflow_result->fetch_object()) {
-                $workflow .= '<optgroup label="'.$workflow_row->name.'">';
+                $workflow .= '<optgroup help="'.$workflow_row->description.'" label="'.$workflow_row->name.'">';
                 $workflow_id = $workflow_row->id;
                 
                 // get all active workflow steps for each workflow
