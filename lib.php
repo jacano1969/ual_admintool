@@ -376,6 +376,7 @@ function show_home() {
     
     $home .= '<div id="helpbox">';
     $home .= '<h2>Help</h2>';
+    $home .= '<div id="helptext"></div>';
     $home .= '</div>';
     
     return $home;    
