@@ -65,7 +65,7 @@
 
 
 
-div .helpbox {
+#helpbox {
     display: block;
     left: 50%;
     margin-left: -198px;
