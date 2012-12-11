@@ -1084,7 +1084,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->mandatory==1){
                     // get any special validation
                     $validate = ($row->validate!='') ? ' '.$row->validate : '';
-                    $workflow_form .= '<div id="helplabel">'.$row->description.'</div><label for="'.$row->name.'">'.$row->label.'</label><em>*</em><input data="'.$row->item_id.'" ';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><div id="helplabel">'.$row->description.'</div><input data="'.$row->item_id.'" ';
                     
                     if($row->data_type=='data') {
                         
@@ -1122,7 +1122,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     
                     $workflow_form .= 'class="required'.$validate.'" type="text" id="'.$row->name.'" name="'.$row->name.'">';
                 } else {
-                    $workflow_form .= '<div id="helplabel">'.$row->description.'</div><label for="'.$row->name.'">'.$row->label.'</label><input data="'.$row->item_id.'" type="text" id="'.$row->name.'" ';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><div id="helplabel">'.$row->description.'</div><input data="'.$row->item_id.'" type="text" id="'.$row->name.'" ';
                     
                     if($row->data_type=='data') {
                         // extract database details for data
@@ -1169,7 +1169,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->mandatory==1){
                     // get any special validation
                     $validate = ($row->validate!='') ? ' '.$row->validate : '';
-                    $workflow_form .= '<div id="helplabel">'.$row->description.'</div><label for="'.$row->name.'">'.$row->label.'</label><em>*</em><textarea data="'.$row->item_id.'" class="required'.$validate.'" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><div id="helplabel">'.$row->description.'</div><textarea data="'.$row->item_id.'" class="required'.$validate.'" id="'.$row->name.'" name="'.$row->name.'">';
                     
                     if($row->data_type=='data') {
                         // extract database details for data
@@ -1206,7 +1206,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     
                     $workflow_form .= '</textarea>';
                 } else {
-                    $workflow_form .= '<div id="helplabel">'.$row->description.'</div><label for="'.$row->name.'">'.$row->label.'</label><textarea data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><div id="helplabel">'.$row->description.'</div><textarea data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'">';
                     
                     if($row->data_type=='data') {
                         // extract database details for data
@@ -1298,9 +1298,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 
                 // TODO: check if mandatory==1
                 if($row->mandatory==1){
-                    $workflow_form .= '<div id="helplabel">'.$row->description.'</div><label for="'.$row->name.'">'.$row->label.'</label><em>*</em><select data="'.$row->item_id.'" class="required" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><em>*</em><div id="helplabel">'.$row->description.'</div><select data="'.$row->item_id.'" class="required" id="'.$row->name.'" name="'.$row->name.'">';
                 } else {
-                    $workflow_form .= '<div id="helplabel">'.$row->description.'</div><label for="'.$row->name.'">'.$row->label.'</label><select data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'">';
+                    $workflow_form .= '<label for="'.$row->name.'">'.$row->label.'</label><div id="helplabel">'.$row->description.'</div><select data="'.$row->item_id.'" id="'.$row->name.'" name="'.$row->name.'">';
                 }
                 
                 // check where we get the data from

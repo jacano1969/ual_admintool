@@ -82,3 +82,10 @@
 #helpbox h2 {
     text-align: center;
 }
+
+#helplabel {
+    left: 550px;
+    margin-top: 5px;
+    position: fixed;
+}
+
