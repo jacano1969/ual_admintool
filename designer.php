@@ -133,7 +133,7 @@ if(is_logged_in()){
     
     
 	// display designer
-    $content = $header . $footer;
+    $content = $header . $main . $footer;
     
     echo $content;
     
