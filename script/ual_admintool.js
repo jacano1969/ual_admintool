@@ -51,7 +51,7 @@ var ual_admintool = ual_admintool || (function(){
 				$('#helptext').html(selected_workflow_help);
 				$('#helpbox').fadeIn('slow');
 				
-				if(selected_workflow_step=="designer") {
+				if(selected_workflow_step=="10000") {
 				    location.href="designer.php";	
 				} else {
 					if(selected_workflow_step!="0") {
