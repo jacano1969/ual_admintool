@@ -82,7 +82,7 @@
 #designer-page label.error {float: right; color: red; padding-left: .5em; vertical-align: top;}
 #designer-page em {font-weight: bold; padding-right: 1em; vertical-align: top;}
 #designer-page hr {margin-top:25px; border: 3px double #CCCCCC;}
-
+#designer-page h2 {text-align: center; color:red; font-style: italic;}
 
 
 #helpbox {
