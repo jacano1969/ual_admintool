@@ -407,12 +407,15 @@ var ual_admintool = ual_admintool || (function(){
 			
 			// workflow selector
 			if($('#designer_workflow').length>0) {
-				if($('option:selected','#designer_workflow').attr('id')==0) {
-					$('#new_worflow').prop('disabled', false);
-				}
-				else {
-					$('#new_worflow').prop('disabled', true);
-				}
+				
+				$('#designer_workflow').live("change", function() {
+					if($('option:selected',this).attr('id')==0) {
+						$('#new_worflow').prop('disabled', false);
+					}
+					else {
+						$('#new_worflow').prop('disabled', true);
+					}
+				});
 			}
 		}
     
