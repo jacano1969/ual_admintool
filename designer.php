@@ -7,8 +7,8 @@ require_once('lib.php');
 
 $stage = '';
 
-if(!empty($_GET['stage'])) {
-    $stage = $_GET['stage'];
+if(!empty($_POST['stage'])) {
+    $stage = $_POST['stage'];
 }
 
 
@@ -48,7 +48,13 @@ if(is_logged_in()){
 		$main .= get_designer_workflows();
 	}
 	
-	
+	if($stage=='1') {
+		$workflow_id=0;
+		// check if create or new
+		if(!empty($_POST['stage'])) {
+            $stage = $_POST['stage'];
+        }
+	}
 	
     
     // get designer wizard

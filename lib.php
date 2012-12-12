@@ -1509,6 +1509,8 @@ function get_designer_workflows() {
     
     $workflow .= '<input type="submit" class="submit" name="continue" id="continue" value="continue">';
     
+    $workflow .= '<input type="hidden" name="workflow_id" id="workflow_id">';
+    
     $workflow .= '</form>';
     $workflow .= '</fieldset>';
         

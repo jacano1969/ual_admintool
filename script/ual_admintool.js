@@ -406,11 +406,14 @@ var ual_admintool = ual_admintool || (function(){
         if($('#designer-page').length>0) {
 			
     		$('#workflows').live("change", function() {
-				if($('option:selected',this).attr('id')==0) {
+				var workflow_id = $('option:selected',this).attr('id');
+				if(workflow_id==0) {
 					$('#new_workflow').prop('disabled', false);
+					$('#workflow_id').val('0');
 				}
 				else {
 					$('#new_workflow').prop('disabled', true);
+					$('#workflow_id').val(workflow_id);
 				}
 			});
 			
@@ -422,7 +425,7 @@ var ual_admintool = ual_admintool || (function(){
 				new_workflow = new_workflow.replace(/^\s+|\s+$/g,"");
 				
 				if(new_workflow=="" && workflow_id==0) {
-					alert("your messin");
+					alert("Please select an existing workflow or create a new workflow.");
 					return false;
 				}
 				
