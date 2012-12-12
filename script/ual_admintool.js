@@ -419,7 +419,7 @@ var ual_admintool = ual_admintool || (function(){
 				var workflow_id = $('option:selected','#workflows').attr('id');
 				var new_workflow = $('#new_workflow').val();
 				
-				new_workflow = new_workflow.replace("/^\s+|\s+$/g","");
+				new_workflow = new_workflow.replace(/^\s+|\s+$/g,"");
 				
 				if(new_workflow=="" && workflow_id==0) {
 					alert("your messin");
