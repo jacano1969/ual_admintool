@@ -45,7 +45,7 @@ if(is_logged_in()){
 	if($stage=='') {
 	    // get workflow
 	    // select workflow_id as id, name as name, description as description from workflow where status=1;
-		echo get_designer_workflows();
+		$main .= get_designer_workflows();
 	}
 	
 	
