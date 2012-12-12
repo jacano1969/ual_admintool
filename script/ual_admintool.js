@@ -413,6 +413,21 @@ var ual_admintool = ual_admintool || (function(){
 					$('#new_workflow').prop('disabled', true);
 				}
 			});
+			
+			$('#continue').live("click", function() {
+				// check if either a workflow is selected or a new one is being created
+				var workflow_id = $('option:selected','#workflows').attr('id');
+				var new_workflow = $('#new_workflow').val();
+				
+				new_workflow = new_workflow.replace("/^\s+|\s+$/g","");
+				
+				if(new_workflow=="" && workflow_id==0) {
+					alert("your messin");
+					return false;
+				}
+				
+				return false;
+			});
 		}
 
     }); // end of document ready
