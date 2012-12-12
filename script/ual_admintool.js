@@ -403,7 +403,7 @@ var ual_admintool = ual_admintool || (function(){
 		
 		
 		// workflow designer scripts
-        if($('#workflow-designer').length>0) {
+        if($('#designer-page').length>0) {
 			
     		$('#workflows').live("change", function() {
 				if($('option:selected',this).attr('id')==0) {
