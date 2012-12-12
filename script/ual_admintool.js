@@ -405,20 +405,16 @@ var ual_admintool = ual_admintool || (function(){
 		// workflow designer scripts
         if($('#workflow-designer').length>0) {
 			
-			// workflow selector
-			if($('#workflows').length>0) {
-				
-				$('#workflows').live("change", function() {
-					if($('option:selected',this).attr('id')==0) {
-						$('#new_workflow').prop('disabled', false);
-					}
-					else {
-						$('#new_workflow').prop('disabled', true);
-					}
-				});
-			}
+    		$('#workflows').live("change", function() {
+				if($('option:selected',this).attr('id')==0) {
+					$('#new_workflow').prop('disabled', false);
+				}
+				else {
+					$('#new_workflow').prop('disabled', true);
+				}
+			});
 		}
-    
+
     }); // end of document ready
 
 
