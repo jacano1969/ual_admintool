@@ -399,6 +399,22 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
         }
+		
+		
+		
+		// workflow designer scripts
+        if($('#workflow-designer').length>0) {
+			
+			// workflow selector
+			if($('#designer_workflow').length>0) {
+				if($('option:selected','#designer_workflow').attr('id')==0) {
+					$('#new_worflow').prop('disabled', false);
+				}
+				else {
+					$('#new_worflow').prop('disabled', true);
+				}
+			}
+		}
     
     }); // end of document ready
 
