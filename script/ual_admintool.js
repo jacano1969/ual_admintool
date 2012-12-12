@@ -51,23 +51,27 @@ var ual_admintool = ual_admintool || (function(){
 				$('#helptext').html(selected_workflow_help);
 				$('#helpbox').fadeIn('slow');
 				
-                if(selected_workflow_step!="0") {
-                    // get workflow sub steps
-                    $.get('workflow.php?step='+selected_workflow_step, function(data){
-                        $('#hiddenlightbox').hide();
-                        // replace workflow with new data
-                        $('#hiddenlightbox').html(data);
-                        $('#hiddenlightbox').show();
-                    });
-                } else {
-                    // show all workflows
-                    $.get('workflow.php?step=false', function(data){
-                        $('#hiddenlightbox').hide();
-                        // replace filters with new data
-                        $('#hiddenlightbox').html(data);
-                        $('#hiddenlightbox').show();
-                    });
-                }
+				if(selected_workflow_step=="designer") {
+				    location.href="designer.php";	
+				} else {
+					if(selected_workflow_step!="0") {
+						// get workflow sub steps
+						$.get('workflow.php?step='+selected_workflow_step, function(data){
+							$('#hiddenlightbox').hide();
+							// replace workflow with new data
+							$('#hiddenlightbox').html(data);
+							$('#hiddenlightbox').show();
+						});
+					} else {
+						// show all workflows
+						$.get('workflow.php?step=false', function(data){
+							$('#hiddenlightbox').hide();
+							// replace filters with new data
+							$('#hiddenlightbox').html(data);
+							$('#hiddenlightbox').show();
+						});
+					}
+					}
             });
             
             // workflow sub step selected
