@@ -1507,7 +1507,7 @@ function get_designer_workflows() {
     
     $workflow .= '<label for="create_workflow">Create a new workflow</label><input type="text" id="new_workflow" name="new_workflow">';
     
-    $workflow .= '<input type="submit" name="continue" id="continue" value="continue">';
+    $workflow .= '<input type="submit" class="submit" name="continue" id="continue" value="continue">';
     
     $workflow .= '</form>';
     $workflow .= '</fieldset>';
