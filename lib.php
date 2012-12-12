@@ -930,6 +930,7 @@ function get_workflows($step_id=false) {
             $workflow .= '</optgroup>';
             $workflow .= '<optgroup help="Create or edit workflows" label="Workflows">';
             $workflow .= '<option id="10000" help="Open the workflow designer" selected="selected">Workflow Designer</option>';
+            $workflow .= '</optgroup>';
             $workflow .= '</select>';
         }
         
