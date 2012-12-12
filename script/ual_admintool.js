@@ -406,14 +406,14 @@ var ual_admintool = ual_admintool || (function(){
         if($('#workflow-designer').length>0) {
 			
 			// workflow selector
-			if($('#designer_workflow').length>0) {
+			if($('#workflows').length>0) {
 				
-				$('#designer_workflow').live("change", function() {
+				$('#workflows').live("change", function() {
 					if($('option:selected',this).attr('id')==0) {
-						$('#new_worflow').prop('disabled', false);
+						$('#new_workflow').prop('disabled', false);
 					}
 					else {
-						$('#new_worflow').prop('disabled', true);
+						$('#new_workflow').prop('disabled', true);
 					}
 				});
 			}

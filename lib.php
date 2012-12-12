@@ -1505,7 +1505,7 @@ function get_designer_workflows() {
     
     $workflow .= '<h2>Or</h2>';
     
-    $workflow .= '<label for="create_workflow">Create a new workflow</label><input type="text" id="new_worflow" name="new_workflow">';
+    $workflow .= '<label for="create_workflow">Create a new workflow</label><input type="text" id="new_workflow" name="new_workflow">';
     
     $workflow .= '</form>';
     $workflow .= '</fieldset>';
