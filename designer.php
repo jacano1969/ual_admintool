@@ -36,11 +36,10 @@ if(is_logged_in()){
     $main .= '<body id="designer-page">';
     $main .= '<div class="container">';
     
-	$home .= '<fieldset>';
-    $home .= '<legend>';
-    $home .= 'Workflow Designer';
-    $home .= '</legend>';
-    $home .= '</fieldset>';
+	$main .= '<fieldset>';
+    $main .= '<legend>';
+    $main .= 'Workflow Designer';
+    $main .= '</legend>';
 	
 	// begin
 	if($stage=='') {
@@ -122,6 +121,7 @@ if(is_logged_in()){
     }); 
     </script>*/
 	
+	$main .= '</fieldset>';
     $main .= '</div>';    
     
     
