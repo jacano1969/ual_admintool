@@ -36,11 +36,17 @@ if(is_logged_in()){
     $main .= '<body id="designer-page">';
     $main .= '<div class="container">';
     
+	$home .= '<fieldset>';
+    $home .= '<legend>';
+    $home .= 'Workflow Designer';
+    $home .= '</legend>';
+    $home .= '</fieldset>';
+	
 	// begin
 	if($stage=='') {
 	    // get workflow
 	    // select workflow_id as id, name as name, description as description from workflow where status=1;
-		
+		echo get_designer_workflows();
 	}
 	
 	

@@ -1452,3 +1452,65 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
 }
 
 
+
+
+/*
+ * Workflow Designer
+ *
+ */
+
+function get_designer_workflows() {
+    global $CFG;
+    
+    // get wokflows, steps and sub steps
+    $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $workflows ='';
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    $workflow .= '<form id="designer_workflow" name="designer_workflow">';
+    
+    // get all active workflows
+    $workflow_sql="select workflow_id as id, name as name, description as description, status as status from workflow";
+
+    if($step_id==false) {
+        $current_workflow_step_id='0';
+    } else {
+        $current_workflow_step_id=$step_id;
+    }
+    
+    // get workflows
+    if ($workflow_result = $mysqli->query($workflow_sql)) {
+        if($workflow_result->num_rows==0) {
+            return 'An error has occured.';
+        } else {  
+            $workflow .= '<select id="workflows" name="workflows">';
+            $workflow .= '<option id="0">Select an existing workflow</option>';
+            
+            // construct data
+            while ($workflow_row = $workflow_result->fetch_object()) {
+                $workflow_id = $workflow_row->id;
+                $workflow .= '<option id="'.$workflow_row->id.'">'.$workflow_row->name.'</option>';
+            }
+                
+            $workflow .= '</select>';
+        }
+        
+        $workflow_result->close();
+    }
+    
+    $workflow .= '<h2>Or</h2>';
+    
+    $workflow .= '<label for="create_workflow">Create a new workflow</label><input type="text" id="new_worflow" name="new_workflow">';
+    
+    $workflow .= '</form>';
+    $workflow .= '</fieldset>';
+        
+    $mysqli->close();
+    
+    return $workflow;
+}
