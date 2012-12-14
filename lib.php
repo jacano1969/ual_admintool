@@ -1506,7 +1506,7 @@ function get_designer_workflows() {
     $workflow .= '<h2>Or</h2>';
     
     $workflow .= 'Create a new workflow<br><label for="workflow_name">Name</label><input type="text" id="workflow_name" name="workflow_name">';
-    $workflow .= '<br><label for="workflow_description">Name</label><textarea id="workflow_description" name="workflow_description"></textarea>';
+    $workflow .= '<br><label for="workflow_description">Description</label><textarea id="workflow_description" name="workflow_description"></textarea>';
     $workflow .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
     
     $workflow .= '<input type="hidden" name="workflow_id" id="workflow_id">';

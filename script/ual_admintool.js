@@ -438,7 +438,7 @@ var ual_admintool = ual_admintool || (function(){
 					}
 				}
 				
-				return false;
+				return 'ok';   // allow from submit
 			});
 		}
 
