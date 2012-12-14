@@ -1509,6 +1509,7 @@ function get_designer_workflows() {
     $workflow .= '<br><label for="workflow_description">Description</label><textarea id="workflow_description" name="workflow_description"></textarea>';
     $workflow .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
     
+    $workflow .= '<input type="submit" class="submit" name="abort" id="abort" value="abort">';
     $workflow .= '<input type="hidden" name="workflow_id" id="workflow_id">';
     $workflow .= '<input type="hidden" name="stage" id="stage" value="1">';
     
@@ -1532,9 +1533,10 @@ function create_designer_workflow_step($workflow_name, $workflow_description) {
     $workflow_step .= '<br><label for="workflow_step_description">Description</label><textarea id="workflow_step_description" name="workflow_step_description"></textarea>';
     $workflow_step .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
         
+    $workflow_step .= '<input type="submit" class="submit" name="abort" id="abort" value="abort">';
     $workflow_step .= '<input type="hidden" name="workflow_name" id="workflow_name" value="'.$workflow_name.'">';
     $workflow_step .= '<input type="hidden" name="workflow_description" id="workflow_description" value="'.$workflow_description.'">';
-    $workflow_step .= '<input type="hidden" name="stage" id="stage" value="1">';
+    $workflow_step .= '<input type="hidden" name="stage" id="stage" value="2">';
     
     $workflow_step .= '</form>';
     $workflow_step .= '</fieldset>';

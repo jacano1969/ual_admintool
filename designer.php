@@ -58,7 +58,8 @@ if(is_logged_in()){
 		if(!empty($_POST['workflow_id'])) {
             $workflow_id = $_POST['workflow_id'];
 			
-			// create new workflow step  
+			// TODO:
+			// select or create new workflow step belonging to this workflow
 			//$main .= get_designer_workflow_step($workflow_id);
         } else {
 			
@@ -69,10 +70,19 @@ if(is_logged_in()){
 		        $workflow_description=$_POST['workflow_description'];
 				
 				$main .= create_designer_workflow_step($workflow_name, $workflow_description);
+			} else {
+				// TODO:
+				// go back to first stage
+				$main .= "An Error has occured";
 			}
-		}
-		
-		
+		}		
+	}
+	
+	if($stage=='2') {
+		$workflow_name='';
+		$workflow_description='';
+		$workflow_step_name='';
+		$workflow_step_description='';
 	}
 	
 	

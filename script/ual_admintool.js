@@ -419,26 +419,69 @@ var ual_admintool = ual_admintool || (function(){
 				}
 			});
 			
+			$('#abort').live("click", function() {
+				
+				if(prompt("Are you sure you want to abort\nAll Progress will be lost")==true) {
+				    location.href="index.php"
+			    }
+				
+				return false;
+			});
+			
 			$('#continue').live("click", function() {
-				// check if either a workflow is selected or a new one is being created
-				var workflow_id = $('option:selected','#workflows').attr('id');
-				var new_workflow = $('#workflow_name').val();
-				var new_workflow_desc = $('#workflow_description').val();
 				
-				new_workflow = new_workflow.replace(/^\s+|\s+$/g,"");
-				new_workflow_desc = new_workflow_desc.replace(/^\s+|\s+$/g,"");
+				// check the stage
+				var stage = 0;
 				
-				if(new_workflow=="" && workflow_id==0) {
-					alert("Please select an existing workflow or create a new workflow.");
-					return false;
-				} else {
-					if(new_workflow_desc=="" && workflow_id==0) {
-						alert("Please provide a description for your new workflow.");
-					    return false;
+				if($('#stage').length>0) {
+				    stage = $('#stage').val();
+			    }
+				
+				// workflow
+				if(stage==0) {	
+					// check if either a workflow is selected or a new one is being created
+					var workflow_id = $('option:selected','#workflows').attr('id');
+					var new_workflow = $('#workflow_name').val();
+					var new_workflow_desc = $('#workflow_description').val();
+					
+					new_workflow = new_workflow.replace(/^\s+|\s+$/g,"");
+					new_workflow_desc = new_workflow_desc.replace(/^\s+|\s+$/g,"");
+					
+					if(new_workflow=="" && workflow_id==0) {
+						alert("Please select an existing workflow or create a new workflow.");
+						return false;
+					} else {
+						if(new_workflow_desc=="" && workflow_id==0) {
+							alert("Please provide a description for your new workflow.");
+							return false;
+						}
 					}
 				}
 				
-				return 'ok';   // allow from submit
+				// workflow step
+				if(stage==1) {
+					// TODO:
+					// check if we have a workflow
+					//var workflow_id = $('#workflow_id').val();
+							
+					var workflow_step_name = $('#workflow_step_name').val();
+					var workflow_step_desc = $('#workflow_step_description').val();
+					
+					workflow_step_name = workflow_step_name.replace(/^\s+|\s+$/g,"");
+					workflow_step_desc = workflow_step_desc.replace(/^\s+|\s+$/g,"");
+					
+					if(workflow_step_name=="") {
+						alert("Please enter a name for the new workflow step.");
+						return false;
+					} else {
+						if(workflow_step_desc=="") {
+							alert("Please provide a description for your new workflow step.");
+							return false;
+						}
+					}			
+				}
+				
+				return 'ok';   // allow form submit
 			});
 		}
 
