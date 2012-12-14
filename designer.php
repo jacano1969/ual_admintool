@@ -25,7 +25,7 @@ if(is_logged_in()){
     $header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
     #$header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
     $header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
-    $header .= '<script src="script/jquery.stepy.min.js" type="text/javascript"></script>';
+    #$header .= '<script src="script/jquery.stepy.min.js" type="text/javascript"></script>';
     #$header .= '<script type="text/javascript" src="script/jquery.tablesorter.js"></script>';
     $header .= '<script src="script/ual_admintool.js" type="text/javascript"></script>';
     $header .= '</head>';
@@ -48,84 +48,30 @@ if(is_logged_in()){
 		$main .= get_designer_workflows();
 	}
 	
+	// start
 	if($stage=='1') {
 		$workflow_id=0;
+		$workflow_name='';
+		$workflow_description='';
+		
 		// check if create or new
-		if(!empty($_POST['stage'])) {
-            $stage = $_POST['stage'];
-        }
+		if(!empty($_POST['workflow_id'])) {
+            $workflow_id = $_POST['workflow_id'];
+			
+			// create new workflow step  
+			$main .= create_designer_workflow_step($workflow_id);
+        } else {
+			
+			// create new workflow
+			if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description'])) {
+			    
+			
+			}
+		}
+		
+		
 	}
 	
-    
-    // get designer wizard
-    
-	/*<form id="custom">
-		<fieldset title="Thread 1">
-		    <legend>description one</legend>
-
-			<label>User:</label>
-			<!-- Hidden fields are not focused.  -->
-			<input type="hidden" name="hidden" />
-
-			<!-- Disabled fields are not validated.  -->
-			<input type="text" value="wbotelhos" size="40" name="user" disabled="disabled" />
-
-			<label>E-mail:</label>
-			<input type="text" size="40" name="email" />
-			<input type="checkbox" name="checked" /> Checked?
-
-			<label>Newsletter?</label>
-			<input type="radio" name="newsletter" /> Yep
-			<input type="radio" name="newsletter" /> Nope
-
-			<label>Password:</label>
-			<input type="password" name="password" size="40" />
-		</fieldset>
-
-		<fieldset title="Thread 2">
-			<legend>description two</legend>
-
-			<label>Nick Name:</label>
-			<input type="text" size="30" />
-
-			<label>Bio:</label>
-			<textarea name="bio" rows="5" cols="60"></textarea>
-		</fieldset>
-
-		<fieldset title="Thread 3">
-			<legend>description three</legend>
-
-			<label>Birthday:</label>
-			<select name="day">
-				<option></option>
-				<option>23</option>
-			</select>
-
-			<select>
-				<option>10</option>
-			</select>
-
-			<select>
-				<option>1984</option>
-			</select>
-
-			<label>Site:</label>
-			<input type="text" name="site" size="40" />
-		</fieldset>
-
-		<input type="submit" class="finish" value="Finish!" />
-	</form><br/>
-
-	<script>
-	$('#custom').stepy({
-            backLabel:      'Backward',
-            block:          true,
-            errorImage:     true,
-            nextLabel:      'Forward',
-            titleClick:     true,
-            validate:       true
-    }); 
-    </script>*/
 	
 	$main .= '</fieldset>';
     $main .= '</div>';    
