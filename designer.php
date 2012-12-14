@@ -41,14 +41,14 @@ if(is_logged_in()){
     $main .= 'Workflow Designer';
     $main .= '</legend>';
 	
-	// begin
+	// stage 0: select or create new workflow
 	if($stage=='') {
 	    // get workflow
 	    // select workflow_id as id, name as name, description as description from workflow where status=1;
 		$main .= get_designer_workflows();
 	}
 	
-	// start
+	// stage 1: select or create workflow step
 	if($stage=='1') {
 		$workflow_id=0;
 		$workflow_name='';
@@ -59,13 +59,16 @@ if(is_logged_in()){
             $workflow_id = $_POST['workflow_id'];
 			
 			// create new workflow step  
-			$main .= create_designer_workflow_step($workflow_id);
+			$main .= get_designer_workflow_step($workflow_id);
         } else {
 			
 			// create new workflow
 			if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description'])) {
 			    
-			
+				$workflow_name=$_POST['workflow_name'];
+		        $workflow_description=$_POST['workflow_description'];
+				
+				$main . = create_designer_workflow_step($workflow_name, $workflow_description);
 			}
 		}
 		
