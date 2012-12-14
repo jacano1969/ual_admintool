@@ -408,11 +408,11 @@ var ual_admintool = ual_admintool || (function(){
     		$('#workflows').live("change", function() {
 				var workflow_id = $('option:selected',this).attr('id');
 				if(workflow_id==0) {
-					$('#new_workflow').prop('disabled', false);
+					$('#workflow_name').prop('disabled', false);
 					$('#workflow_id').val('0');
 				}
 				else {
-					$('#new_workflow').prop('disabled', true);
+					$('#workflow_name').prop('disabled', true);
 					$('#workflow_id').val(workflow_id);
 				}
 			});
@@ -420,13 +420,20 @@ var ual_admintool = ual_admintool || (function(){
 			$('#continue').live("click", function() {
 				// check if either a workflow is selected or a new one is being created
 				var workflow_id = $('option:selected','#workflows').attr('id');
-				var new_workflow = $('#new_workflow').val();
+				var new_workflow = $('#workflow_name').val();
+				var new_workflow_desc = $('#workflow_description').val();
 				
 				new_workflow = new_workflow.replace(/^\s+|\s+$/g,"");
+				new_workflow_desc = new_workflow_desc.replace(/^\s+|\s+$/g,"");
 				
 				if(new_workflow=="" && workflow_id==0) {
 					alert("Please select an existing workflow or create a new workflow.");
 					return false;
+				} else {
+					if(new_workflow_desc=="" && workflow_id==0) {
+						alert("Please provide a description for your new workflow.");
+					    return false;
+					}
 				}
 				
 				return false;
