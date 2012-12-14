@@ -1465,7 +1465,7 @@ function get_designer_workflows() {
     // get wokflows, steps and sub steps
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
-    $workflows ='';
+    $workflow ='';
     
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
@@ -1524,18 +1524,22 @@ function get_designer_workflows() {
 
 function create_designer_workflow_step($workflow_name, $workflow_description) {
     
-    $workflow .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
+    $workflow_step = '';
     
-    $workflow .= 'Create a new workflow step<br><label for="workflow_step_name">Name</label><input type="text" id="workflow_step_name" name="workflow_step_name">';
-    $workflow .= '<br><label for="workflow_step_description">Description</label><textarea id="workflow_step_description" name="workflow_step_description"></textarea>';
-    $workflow .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
+    $workflow_step .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
+    
+    $workflow_step .= 'Create a new workflow step<br><label for="workflow_step_name">Name</label><input type="text" id="workflow_step_name" name="workflow_step_name">';
+    $workflow_step .= '<br><label for="workflow_step_description">Description</label><textarea id="workflow_step_description" name="workflow_step_description"></textarea>';
+    $workflow_step .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
         
-    $workflow .= '<input type="hidden" name="workflow_name" id="workflow_name" value="'.$workflow_name.'">';
-    $workflow .= '<input type="hidden" name="workflow_description" id="workflow_description" value="'.$workflow_description.'">';
-    $workflow .= '<input type="hidden" name="stage" id="stage" value="1">';
+    $workflow_step .= '<input type="hidden" name="workflow_name" id="workflow_name" value="'.$workflow_name.'">';
+    $workflow_step .= '<input type="hidden" name="workflow_description" id="workflow_description" value="'.$workflow_description.'">';
+    $workflow_step .= '<input type="hidden" name="stage" id="stage" value="1">';
     
-    $workflow .= '</form>';
-    $workflow .= '</fieldset>';
+    $workflow_step .= '</form>';
+    $workflow_step .= '</fieldset>';
+    
+    return $workflow_step;
     
 }
 
