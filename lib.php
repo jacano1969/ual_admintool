@@ -1545,3 +1545,26 @@ function create_designer_workflow_step($workflow_name, $workflow_description) {
     
 }
 
+
+function create_designer_workflow_sub_step($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description) {
+    
+    $workflow_sub_step = '';
+    
+    $workflow_sub_step .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
+    
+    $workflow_sub_step .= 'Opionally create a new workflow sub step (or continue)<br><label for="workflow_sub_step_name">Name</label><input type="text" id="workflow_sub_step_name" name="workflow_sub_step_name">';
+    $workflow_sub_step .= '<br><label for="workflow_sub_step_description">Description</label><textarea id="workflow_sub_step_description" name="workflow_sub_step_description"></textarea>';
+    $workflow_sub_step .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
+        
+    $workflow_sub_step .= '<input type="submit" class="submit" name="abort" id="abort" value="cancel">';
+    $workflow_sub_step .= '<input type="hidden" name="workflow_name" id="workflow_name" value="'.$workflow_name.'">';
+    $workflow_sub_step .= '<input type="hidden" name="workflow_description" id="workflow_description" value="'.$workflow_description.'">';
+    $workflow_sub_step .= '<input type="hidden" name="workflow_step_name" id="workflow_step_name" value="'.$workflow_step_name.'">';
+    $workflow_sub_step .= '<input type="hidden" name="workflow_step_description" id="workflow_step_description" value="'.$workflow_step_description.'">';
+    $workflow_sub_step .= '<input type="hidden" name="stage" id="stage" value="3">';
+    
+    $workflow_sub_step .= '</form>';
+    $workflow_sub_step .= '</fieldset>';
+    
+    return $workflow_sub_step;
+}

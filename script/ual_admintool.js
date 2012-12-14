@@ -438,7 +438,7 @@ var ual_admintool = ual_admintool || (function(){
 			    }
 				
 				// workflow
-				if(stage==0) {	
+				if(stage==0 || stage==1) {	
 					// check if either a workflow is selected or a new one is being created
 					var workflow_id = $('option:selected','#workflows').attr('id');
 					var new_workflow = $('#workflow_name').val();
@@ -459,7 +459,7 @@ var ual_admintool = ual_admintool || (function(){
 				}
 				
 				// workflow step
-				if(stage==1) {
+				if(stage==2) {
 					// TODO:
 					// check if we have a workflow
 					//var workflow_id = $('#workflow_id').val();
@@ -479,6 +479,13 @@ var ual_admintool = ual_admintool || (function(){
 							return false;
 						}
 					}			
+				}
+				
+				// workflow sub step (optional)
+				if(stage==3) {
+					
+					// this is optional so we are not checking this stage
+					
 				}
 				
 				return 'ok';   // allow form submit
