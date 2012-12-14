@@ -59,7 +59,7 @@ if(is_logged_in()){
             $workflow_id = $_POST['workflow_id'];
 			
 			// create new workflow step  
-			$main .= get_designer_workflow_step($workflow_id);
+			//$main .= get_designer_workflow_step($workflow_id);
         } else {
 			
 			// create new workflow
@@ -68,7 +68,7 @@ if(is_logged_in()){
 				$workflow_name=$_POST['workflow_name'];
 		        $workflow_description=$_POST['workflow_description'];
 				
-				$main . = create_designer_workflow_step($workflow_name, $workflow_description);
+				$main .= create_designer_workflow_step($workflow_name, $workflow_description);
 			}
 		}
 		
