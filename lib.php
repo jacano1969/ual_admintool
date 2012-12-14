@@ -1472,7 +1472,7 @@ function get_designer_workflows() {
         exit;
     }
     
-    $workflow .= '<form id="designer_workflow" name="designer_workflow">';
+    $workflow .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
     
     // get all active workflows
     $workflow_sql="select workflow_id as id, name as name, description as description, status as status from workflow";
@@ -1507,7 +1507,7 @@ function get_designer_workflows() {
     
     $workflow .= 'Create a new workflow<br><label for="workflow_name">Name</label><input type="text" id="workflow_name" name="workflow_name">';
     $workflow .= '<br><label for="workflow_description">Name</label><textarea id="workflow_description" name="workflow_description"></textarea>';
-    $workflow .= '<input type="submit" class="submit" name="continue" id="continue" value="continue">';
+    $workflow .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
     
     $workflow .= '<input type="hidden" name="workflow_id" id="workflow_id">';
     $workflow .= '<input type="hidden" name="stage" id="stage" value="1">';

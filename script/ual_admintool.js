@@ -409,10 +409,12 @@ var ual_admintool = ual_admintool || (function(){
 				var workflow_id = $('option:selected',this).attr('id');
 				if(workflow_id==0) {
 					$('#workflow_name').prop('disabled', false);
+					$('#workflow_description').prop('disabled', false);
 					$('#workflow_id').val('0');
 				}
 				else {
 					$('#workflow_name').prop('disabled', true);
+					$('#workflow_description').prop('disabled', true);
 					$('#workflow_id').val(workflow_id);
 				}
 			});
