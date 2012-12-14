@@ -84,8 +84,8 @@ if(is_logged_in()){
 		$workflow_step_name='';
 		$workflow_step_description='';
 		
-		if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description'] &&
-			!empty($_POST['workflow_step_name']) && !empty($_POST['workflow_step_description']))) {
+		if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description']) &&
+			!empty($_POST['workflow_step_name']) && !empty($_POST['workflow_step_description'])) {
 		
 			$workflow_name=$_POST['workflow_name'];
 			$workflow_description=$_POST['workflow_description'];
