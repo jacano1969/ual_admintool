@@ -421,7 +421,7 @@ var ual_admintool = ual_admintool || (function(){
 			
 			$('#abort').live("click", function() {
 				
-				if(confirm("Are you sure you want to abort\nAll Progress will be lost")==true) {
+				if(confirm("Are you sure you want to cancel?\nAll Progress will be lost!")==true) {
 				    location.href="index.php"
 			    }
 				
