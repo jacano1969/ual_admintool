@@ -1587,6 +1587,24 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form .= get_workflow_data_types();
     $workflow_form .= '</select>';
     
+    $workflow_form .= '<label for="field_label">Field Label</label>';
+    $workflow_form .= '<input type="text" id="field_label" name="field_label">';
+    
+    $workflow_form .= '<label for="field_name">Field name</label>';
+    $workflow_form .= '<input type="text" id="field_name" name="field_name">';
+    
+    $workflow_form .= '<label for="field_description">Field description</label>';
+    $workflow_form .= '<textarea id="field_description" name="field_description"></textarea>';
+    
+    $workflow_form .= '<label for="field_mandatory">Is field mandatory?</label>';
+    $workflow_form .= '<select id="field_mandatory" name="field_mandatory">';
+    $workflow_form .= get_list(3);
+    $workflow_form .= '</select>';
+    
+    $workflow_form .= '<label for="field_validation">Validation</label>';
+    $workflow_form .= '<select id="field_validation" name="field_validation">';
+    $workflow_form .= get_list(4);
+    $workflow_form .= '</select>';
     
     $workflow_form .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
         
@@ -1663,7 +1681,7 @@ function get_workflow_data_types() {
         exit;
     }
     
-    $sql = "select workflow_data_type_id as id, name, data_type, concat(name,'(', data_type, ')') as fullname from workflow_data_type where status=1";
+    $sql = "select workflow_data_type_id as id, name, data_type, concat(name,' (', data_type, ')') as fullname from workflow_data_type where status=1";
     
     // get workflow data types data
     if ($result = $mysqli->query($sql)) {
