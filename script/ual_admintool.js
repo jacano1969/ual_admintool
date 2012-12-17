@@ -547,7 +547,7 @@ var ual_admintool = ual_admintool || (function(){
 				//var workflow_form_elements = $('#workflow_form_elements').val();
 				
 			    // update previews
-			    $('*[id^=field_type]').live("change", function() {
+			    $('*[id^=field_type]').bind("change", function(event) {
 					var field_type = $(this).attr('data');
 					
 					var preview ='';
