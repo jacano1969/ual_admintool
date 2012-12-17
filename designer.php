@@ -148,7 +148,6 @@ if(is_logged_in()){
 		
 		if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description']) &&
 			!empty($_POST['workflow_step_name']) && !empty($_POST['workflow_step_description']) && 
-			!empty($_POST['workflow_sub_step_name']) && !empty($_POST['workflow_sub_step_description']) && 
 			!empty($_POST['workflow_action']) && !empty($_POST['workflow_form_elements'])) {
 			
 			$workflow_name=$_POST['workflow_name'];
