@@ -548,7 +548,7 @@ var ual_admintool = ual_admintool || (function(){
 				
 			    // update previews
 				$('select').live("change", function() {
-					var thisId = $(this).attr(id);
+					var thisId = $(this).attr('id');
 					if (thisId.match(/field_type.*/)) {
 					    var field_type = $(this).attr('data');
 					
