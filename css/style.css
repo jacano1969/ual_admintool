@@ -113,7 +113,10 @@
 }
 
 div.preview {
-    background: #333;
-    width: 350px;
+    background: #ccc;
+    width: 400px;
     height: 200px;
+    left: 650px;
+    position: fixed;
+    border: 2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;
 }

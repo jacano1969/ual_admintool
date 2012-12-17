@@ -1616,6 +1616,8 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form .= 'Create your form elements<br>';
     
     for($index=0; $index<$workflow_form_elements; $index++) {
+        $workflow_form  .='<div class="preview" id="preview'.$index.'">';
+        $workflow_form  .='</div>';
         $workflow_form .= '<label for="field_type'.$index.'">Field type</label>';
         $workflow_form .= '<select id="field_type'.$index.'" name="field_type[]">';
         $workflow_form .= get_workflow_data_types();
@@ -1639,9 +1641,6 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
         $workflow_form .= '<select id="field_validation'.$index.'" name="field_validation[]">';
         $workflow_form .= get_list(4,'None');
         $workflow_form .= '</select>';
-        
-        $workflow_form  .='<div class="preview" id="preview'.$index.'">';
-        $workflow_form  .='</div>';
         
         $workflow_form .= '<hr>';
     }
