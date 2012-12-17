@@ -510,7 +510,7 @@ var ual_admintool = ual_admintool || (function(){
 					
 					for(var index=0; index<workflow_form_elements; index++) {
 					    // update previews
-					    $('#field_type'+index).live("change", function() {
+					    $('*[id^=field_type]').live("change", function() {
 							var field_type = $(this).attr('data');
 							
 							var preview ='';
@@ -525,7 +525,7 @@ var ual_admintool = ual_admintool || (function(){
 									      break;
 							}
 							
-							$('#preview'+index).html(preview);
+							$(this).closest('*[id^=preview]').html(preview);
 						});
 					}
 					
