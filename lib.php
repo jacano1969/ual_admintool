@@ -1582,8 +1582,8 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form .= get_list(2);
     $workflow_form .= '</select>';
     
-    $workflow_form .= '<label for="field_type[]">Field type</label>';
-    $workflow_form .= '<select id="field_type[]" name="field_type[]">';
+    $workflow_form .= '<label for="field_type">Field type</label>';
+    $workflow_form .= '<select id="field_type" name="field_type">';
     $workflow_form .= get_workflow_data_types();
     $workflow_form .= '</select>';
     
@@ -1674,10 +1674,9 @@ function get_workflow_data_types() {
             
             // construct data
             while ($row = $result->fetch_object()) {
-                
                 $help1 = get_help(7, $row->name);
                 $help2 = get_help(8, $row->data_type);
-                $workflow_data_types .='<option help="'.$row->name. '<br> ' .$help1 .'<br><br>' .$row->data_type . '<br>'.$help2.'" id="'.$row->id.'">'.$row->name.'</option>';
+                $workflow_data_types .='<option help="'.$row->name. '<br> ' .$help1 .'<br><br>' .$row->data_type . '<br>'.$help2.'" id="'.$row->id.'">'.$row->fullname.'</option>';
             }
         }
         

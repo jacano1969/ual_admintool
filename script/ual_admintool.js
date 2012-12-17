@@ -517,6 +517,21 @@ var ual_admintool = ual_admintool || (function(){
 				    $('#helpbox').fadeIn('slow');
 				}
 			});
+			
+			// field type drop down
+			$('#field_type').live("change", function() {
+				var field_type_id = $('option:selected',this).attr('id');
+				
+				// set the help text
+				$('#helpbox').hide();
+				var selected_field_type_help='';
+				selected_field_type_help = $("option:selected", this).attr("help");
+				
+				if(typeof(selected_field_type_help)!='undefined') {
+				    $('#helptext').html(selected_field_type_help);
+				    $('#helpbox').fadeIn('slow');
+				}
+			});
 		}
 
     }); // end of document ready
