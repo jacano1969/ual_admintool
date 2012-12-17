@@ -564,7 +564,7 @@ var ual_admintool = ual_admintool || (function(){
 									  break;
 						}
 						
-						$(this).prev('.preview').html(preview);
+						$(this).prevAll('.preview').html(preview);
 					}
 			    });					
 			//}
