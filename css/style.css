@@ -112,3 +112,8 @@
     position: fixed;
 }
 
+div.preview {
+    background: #333;
+    width: 350px;
+    height: 200px;
+}
