@@ -1615,7 +1615,7 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
     $workflow_form .= 'Create your form elements<br>';
     
-    for($index=0; $index<=$workflow_form_elements; $index++) {
+    for($index=0; $index<$workflow_form_elements; $index++) {
         $workflow_form .= '<label for="field_type'.$index.'">Field type</label>';
         $workflow_form .= '<select id="field_type'.$index.'" name="field_type[]">';
         $workflow_form .= get_workflow_data_types();
