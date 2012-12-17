@@ -547,22 +547,25 @@ var ual_admintool = ual_admintool || (function(){
 				//var workflow_form_elements = $('#workflow_form_elements').val();
 				
 			    // update previews
-			    $('*[id^=field_type]').bind("change", function(event) {
-					var field_type = $(this).attr('data');
+				$('select').live("change", function() {
+					var thisId = $(this).attr(id);
+					if (thisId.match(/field_type.*/)) {
+					    var field_type = $(this).attr('data');
 					
-					var preview ='';
+					    var preview ='';
 					
-					switch(field_type) {
-						case 'text' : preview = '<input type="'+field_type+'">';
-							          break;
+						switch(field_type) {
+							case 'text' : preview = '<input type="'+field_type+'">';
+										  break;
+							
+							case 'dropdown' : preview = '<select><option></option></select>';
+											  break;
+							default : preview = '';
+									  break;
+						}
 						
-						case 'dropdown' : preview = '<select><option></option></select>';
-							              break;
-						default : preview = '';
-							      break;
+						$(this).closest('*[id^=preview]').html(preview);
 					}
-					
-    				$(this).closest('*[id^=preview]').html(preview);
 			    });					
 			//}
 		}
