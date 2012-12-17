@@ -121,4 +121,4 @@ div.preview {
     border: 2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;
 }
 
-div.preview input { width:50%; }
+#designer-page .preview input { width:50%; }
