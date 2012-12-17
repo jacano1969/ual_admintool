@@ -490,6 +490,7 @@ var ual_admintool = ual_admintool || (function(){
 				
 				// workflow action
 				if(stage==4) {
+					
 					$("#designer_workflow").validate({
 						rules: {
 							workflow_form_elements: {
@@ -499,9 +500,7 @@ var ual_admintool = ual_admintool || (function(){
 								max: 20
 							}
 						}
-					});
-					
-					
+					});					
 				}					
 				
 				// workflow form

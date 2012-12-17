@@ -1608,37 +1608,38 @@ function create_designer_workflow_action($workflow_name,$workflow_description,$w
 }
 
 
-function create_designer_workflow_form() {
+function create_designer_workflow_form($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description,$workflow_sub_step_name,$workflow_sub_step_description, $workflow_action, $workflow_form_elements) {
     
     $workflow_form = '';
     
     $workflow_form .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
     $workflow_form .= 'Create your form elements<br>';
     
-    $workflow_form .= '<label for="field_type">Field type</label>';
-    $workflow_form .= '<select id="field_type" name="field_type">';
-    $workflow_form .= get_workflow_data_types();
-    $workflow_form .= '</select>';
-    
-    $workflow_form .= '<label for="field_label">Field Label</label>';
-    $workflow_form .= '<input type="text" id="field_label" name="field_label">';
-    
-    $workflow_form .= '<label for="field_name">Field name</label>';
-    $workflow_form .= '<input type="text" id="field_name" name="field_name">';
-    
-    $workflow_form .= '<label for="field_description">Field description</label>';
-    $workflow_form .= '<textarea id="field_description" name="field_description"></textarea>';
-    
-    $workflow_form .= '<label for="field_mandatory">Is field mandatory?</label>';
-    $workflow_form .= '<select id="field_mandatory" name="field_mandatory">';
-    $workflow_form .= get_list(3,'');
-    $workflow_form .= '</select>';
-    
-    $workflow_form .= '<label for="field_validation">Validation</label>';
-    $workflow_form .= '<select id="field_validation" name="field_validation">';
-    $workflow_form .= get_list(4,'None');
-    $workflow_form .= '</select>';
-    
+    for($index=0; $index<=$workflow_form_elements; $index++) {
+        $workflow_form .= '<label for="field_type'.$index.'">Field type</label>';
+        $workflow_form .= '<select id="field_type'.$index.'" name="field_type[]">';
+        $workflow_form .= get_workflow_data_types();
+        $workflow_form .= '</select>';
+        
+        $workflow_form .= '<label for="field_label'.$index.'">Field Label</label>';
+        $workflow_form .= '<input type="text" id="field_label'.$index.'" name="field_label[]">';
+        
+        $workflow_form .= '<label for="field_name'.$index.'">Field name</label>';
+        $workflow_form .= '<input type="text" id="field_name'.$index.'" name="field_name[]">';
+        
+        $workflow_form .= '<label for="field_description'.$index.'">Field description</label>';
+        $workflow_form .= '<textarea id="field_description'.$index.'" name="field_description[]"></textarea>';
+        
+        $workflow_form .= '<label for="field_mandatory'.$index.'">Is field mandatory?</label>';
+        $workflow_form .= '<select id="field_mandatory'.$index.'" name="field_mandatory[]">';
+        $workflow_form .= get_list(3,'');
+        $workflow_form .= '</select>';
+        
+        $workflow_form .= '<label for="field_validation'.$index.'">Validation</label>';
+        $workflow_form .= '<select id="field_validation'.$index.'" name="field_validation[]">';
+        $workflow_form .= get_list(4,'None');
+        $workflow_form .= '</select>';
+    }
     
     $workflow_form .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
         
