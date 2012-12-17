@@ -488,13 +488,29 @@ var ual_admintool = ual_admintool || (function(){
 					
 				}
 				
-				// workflow form
+				// workflow action
 				if(stage==4) {
-					
+					$("#designer_workflow").validate({
+						rules: {
+							workflow_form_elements: {
+								required: true,
+								digits: true, 
+								min: 1,
+								max: 20
+							}
+						}
+					});
 					
 					
 				}					
+				
+				// workflow form
+				if(stage==5) {
 					
+					
+					
+				}
+				
 				return 'ok';   // allow form submit
 			});
 			

@@ -1570,41 +1570,20 @@ function create_designer_workflow_sub_step($workflow_name,$workflow_description,
 }
 
 
-function create_designer_workflow_form($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description,$workflow_sub_step_name,$workflow_sub_step_description) {
+function create_designer_workflow_action($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description,$workflow_sub_step_name,$workflow_sub_step_description) {
 
     $workflow_form = '';
     
     $workflow_form .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
-    $workflow_form .= 'Design your form<br>';
+    $workflow_form .= 'Select the action to be performed<br>';
     
     $workflow_form .= '<label for="workflow_action">Action</label>';
-    $workflow_form .= '<select id="workflow_action" name="workflow_action">';
-    $workflow_form .= get_list(2);
+    $workflow_form .= '<select class="required" id="workflow_action" name="workflow_action">';
+    $workflow_form .= get_list(2,'');
     $workflow_form .= '</select>';
     
-    $workflow_form .= '<label for="field_type">Field type</label>';
-    $workflow_form .= '<select id="field_type" name="field_type">';
-    $workflow_form .= get_workflow_data_types();
-    $workflow_form .= '</select>';
-    
-    $workflow_form .= '<label for="field_label">Field Label</label>';
-    $workflow_form .= '<input type="text" id="field_label" name="field_label">';
-    
-    $workflow_form .= '<label for="field_name">Field name</label>';
-    $workflow_form .= '<input type="text" id="field_name" name="field_name">';
-    
-    $workflow_form .= '<label for="field_description">Field description</label>';
-    $workflow_form .= '<textarea id="field_description" name="field_description"></textarea>';
-    
-    $workflow_form .= '<label for="field_mandatory">Is field mandatory?</label>';
-    $workflow_form .= '<select id="field_mandatory" name="field_mandatory">';
-    $workflow_form .= get_list(3);
-    $workflow_form .= '</select>';
-    
-    $workflow_form .= '<label for="field_validation">Validation</label>';
-    $workflow_form .= '<select id="field_validation" name="field_validation">';
-    $workflow_form .= get_list(4);
-    $workflow_form .= '</select>';
+    $workflow_form .= '<label for="workflow_form_elements">Number of form elements</label>';
+    $workflow_form .= '<input type="text" class="required number" id="workflow_form_elements" valiedate="" name="workflow_form_elements">';
     
     $workflow_form .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
         
@@ -1629,7 +1608,62 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
 }
 
 
-function get_list($list_data_id) {
+function create_designer_workflow_form() {
+    
+    $workflow_form = '';
+    
+    $workflow_form .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
+    $workflow_form .= 'Create your form elements<br>';
+    
+    $workflow_form .= '<label for="field_type">Field type</label>';
+    $workflow_form .= '<select id="field_type" name="field_type">';
+    $workflow_form .= get_workflow_data_types();
+    $workflow_form .= '</select>';
+    
+    $workflow_form .= '<label for="field_label">Field Label</label>';
+    $workflow_form .= '<input type="text" id="field_label" name="field_label">';
+    
+    $workflow_form .= '<label for="field_name">Field name</label>';
+    $workflow_form .= '<input type="text" id="field_name" name="field_name">';
+    
+    $workflow_form .= '<label for="field_description">Field description</label>';
+    $workflow_form .= '<textarea id="field_description" name="field_description"></textarea>';
+    
+    $workflow_form .= '<label for="field_mandatory">Is field mandatory?</label>';
+    $workflow_form .= '<select id="field_mandatory" name="field_mandatory">';
+    $workflow_form .= get_list(3,'');
+    $workflow_form .= '</select>';
+    
+    $workflow_form .= '<label for="field_validation">Validation</label>';
+    $workflow_form .= '<select id="field_validation" name="field_validation">';
+    $workflow_form .= get_list(4,'None');
+    $workflow_form .= '</select>';
+    
+    
+    $workflow_form .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
+        
+    $workflow_form .= '<input type="submit" class="submit" name="abort" id="abort" value="cancel">';
+    $workflow_form .= '<input type="hidden" name="workflow_name" id="workflow_name" value="'.$workflow_name.'">';
+    $workflow_form .= '<input type="hidden" name="workflow_description" id="workflow_description" value="'.$workflow_description.'">';
+    $workflow_form .= '<input type="hidden" name="workflow_step_name" id="workflow_step_name" value="'.$workflow_step_name.'">';
+    $workflow_form .= '<input type="hidden" name="workflow_step_description" id="workflow_step_description" value="'.$workflow_step_description.'">';
+    $workflow_form .= '<input type="hidden" name="workflow_sub_step_name" id="workflow_sub_step_name" value="'.$workflow_sub_step_name.'">';
+    $workflow_form .= '<input type="hidden" name="workflow_sub_step_description" id="workflow_sub_step_description" value="'.$workflow_sub_step_description.'">';
+    $workflow_form .= '<input type="hidden" name="stage" id="stage" value="5">';
+    
+    $workflow_form .= '</form>';
+    $workflow_form .= '</fieldset>';
+    
+    $workflow_form .= '<div id="helpbox">';
+    $workflow_form .= '<h2>Help</h2>';
+    $workflow_form .= '<div id="helptext"></div>';
+    $workflow_form .= '</div>';
+    
+    return $workflow_form;
+}
+
+
+function get_list($list_data_id, $default_value) {
     global $CFG;
     
     // get list data
@@ -1649,7 +1683,7 @@ function get_list($list_data_id) {
         if($result->num_rows==0) {
             return $list_data;
         } else {  
-            $list_data .='<option id="0"></option>';
+            $list_data .='<option id="0">'.$default_value.'</option>';
             
             // construct data
             while ($row = $result->fetch_object()) {

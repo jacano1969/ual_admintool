@@ -121,7 +121,7 @@ if(is_logged_in()){
 			$workflow_sub_step_description=$_POST['workflow_sub_step_description'];
 		
 		    // create form with sub step
-		    $main .= create_designer_workflow_form($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description,$workflow_sub_step_name,$workflow_sub_step_description);
+		    $main .= create_designer_workflow_action($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description,$workflow_sub_step_name,$workflow_sub_step_description);
 		}
 		
 		if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description']) &&
@@ -132,7 +132,7 @@ if(is_logged_in()){
 			$workflow_step_description=$_POST['workflow_step_description'];
 		
 		    // create form without sub step
-		    $main .= create_designer_workflow_form($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description, '', '');
+		    $main .= create_designer_workflow_action($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description, '', '');
 		}	
 	}
 	
