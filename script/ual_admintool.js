@@ -491,19 +491,26 @@ var ual_admintool = ual_admintool || (function(){
 				// workflow form
 				if(stage==4) {
 					
-					// workflow action 
-					$('#workflow_action').live("change", function() {
-				        var workflow_action_id = $('option:selected',this).attr('id');
-					    
-						// set the help text
-				        $('#helpbox').hide();
-					    var selected_workflow_action_help = $("option:selected", this).attr("help");
-				        $('#helptext').html(selected_workflow_action_help);
-				        $('#helpbox').fadeIn('slow');
-					});
+					
 					
 				}
 				
+				//
+				// general
+				//
+				
+				// workflow action drop down
+				$('#workflow_action').live("change", function() {
+					var workflow_action_id = $('option:selected',this).attr('id');
+					
+					// set the help text
+					$('#helpbox').hide();
+					var selected_workflow_action_help = $("option:selected", this).attr("help");
+					$('#helptext').html(selected_workflow_action_help);
+					$('#helpbox').fadeIn('slow');
+				});
+					
+					
 				return 'ok';   // allow form submit
 			});
 		}
