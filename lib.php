@@ -1575,12 +1575,18 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form = '';
     
     $workflow_form .= '<form id="designer_workflow" name="designer_workflow" action="designer.php" method="post">';
+    $workflow_form .= 'Design your form<br>';
     
-    $workflow_form .= 'Design your form<br><label for="workflow_action">Action</label>';
-    
+    $workflow_form .= '<label for="workflow_action">Action</label>';
     $workflow_form .= '<select id="workflow_action" name="workflow_action">';
     $workflow_form .= get_list(2);
     $workflow_form .= '</select>';
+    
+    $workflow_form .= '<label for="field_type[]">Field type</label>';
+    $workflow_form .= '<select id="field_type[]" name="field_type[]">';
+    $workflow_form .= get_workflow_data_types();
+    $workflow_form .= '</select>';
+    
     
     $workflow_form .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
         
@@ -1642,3 +1648,80 @@ function get_list($list_data_id) {
     return $list_data;    
 }
 
+
+
+function get_workflow_data_types() {
+    global $CFG;
+    
+    // get workflow data types
+    $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $workflow_data_types ='';
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    $sql = "select workflow_data_type_id as id, name, data_type, concat(name,'(', data_type, ')') as fullname from workflow_data_type where status=1";
+    
+    // get workflow data types data
+    if ($result = $mysqli->query($sql)) {
+        if($result->num_rows==0) {
+            return $workflow_data_types;
+        } else {  
+            $workflow_data_types .='<option id="0"></option>';
+            
+            // construct data
+            while ($row = $result->fetch_object()) {
+                
+                $help1 = get_help(7, $row->name);
+                $help2 = get_help(8, $row->data_type);
+                $workflow_data_types .='<option help="'.$row->name. '<br> ' .$help1 .'<br><br>' .$row->data_type . '<br>'.$help2.'" id="'.$row->id.'">'.$row->name.'</option>';
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    $mysqli->close();
+    
+    return $workflow_data_types;    
+}
+
+
+function get_help($list_data_id, $name) {
+    global $CFG;
+    
+    // get description for list data item
+    $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $list_data_description ='';
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    $sql = "select description from list_data where name='$name' and list_data_id=$list_data_id and item_id!=0";
+    
+    // get workflow data types data
+    if ($result = $mysqli->query($sql)) {
+        if($result->num_rows==0) {
+            return $list_data_description;
+        } else {  
+            // construct data
+            while ($row = $result->fetch_object()) {
+                $list_data_description = $row->description;
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    $mysqli->close();
+    
+    return $list_data_description;    
+}
