@@ -1639,6 +1639,7 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
         $workflow_form .= '<select id="field_validation'.$index.'" name="field_validation[]">';
         $workflow_form .= get_list(4,'None');
         $workflow_form .= '</select>';
+        $workflow_form .= '<hr>';
     }
     
     $workflow_form .= '<br><input type="submit" class="submit" name="continue" id="continue" value="continue">';
