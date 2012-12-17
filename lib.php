@@ -1596,6 +1596,11 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form .= '</form>';
     $workflow_form .= '</fieldset>';
     
+    $workflow_form .= '<div id="helpbox">';
+    $workflow_form .= '<h2>Help</h2>';
+    $workflow_form .= '<div id="helptext"></div>';
+    $workflow_form .= '</div>';
+    
     return $workflow_form;
 }
 
@@ -1613,7 +1618,7 @@ function get_list($list_data_id) {
         exit;
     }
     
-    $sql = "select list_data_id, item_id, name, description from list_data where list_data_id=$list_data_id and status=1";
+    $sql = "select list_data_id, item_id, name, description from list_data where item_id!=0 and list_data_id=$list_data_id and status=1";
     
     // get list data
     if ($result = $mysqli->query($sql)) {
