@@ -512,7 +512,7 @@ var ual_admintool = ual_admintool || (function(){
 				var selected_workflow_action_help='';
 				selected_workflow_action_help = $("option:selected", this).attr("help");
 				
-				if(selected_workflow_action_help!='') {
+				if(typeof(selected_workflow_action_help)!='undefined') {
 				    $('#helptext').html(selected_workflow_action_help);
 				    $('#helpbox').fadeIn('slow');
 				}
