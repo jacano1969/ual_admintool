@@ -136,6 +136,34 @@ if(is_logged_in()){
 		}	
 	}
 	
+	if($stage=='4') {
+		$workflow_name='';
+		$workflow_description='';
+		$workflow_step_name='';
+		$workflow_step_description='';
+		$workflow_sub_step_name='';
+		$workflow_sub_step_description='';
+		$workflow_action='';
+		$workflow_form_elements='';
+		
+		if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description']) &&
+			!empty($_POST['workflow_step_name']) && !empty($_POST['workflow_step_description']) && 
+			!empty($_POST['workflow_sub_step_name']) && !empty($_POST['workflow_sub_step_description']) && 
+			!empty($_POST['workflow_action']) && !empty($_POST['workflow_form_elements'])) {
+			
+			$workflow_name=$_POST['workflow_name'];
+			$workflow_description=$_POST['workflow_description'];
+			$workflow_step_name=$_POST['workflow_step_name'];
+			$workflow_step_description=$_POST['workflow_step_description'];
+			$workflow_sub_step_name=$_POST['workflow_sub_step_name'];
+			$workflow_sub_step_description=$_POST['workflow_sub_step_description'];
+			$workflow_action=$_POST['workflow_action'];
+			$workflow_form_elements=$_POST['workflow_form_elements'];
+			
+			$main .= create_designer_workflow_form($workflow_name,$workflow_description,$workflow_step_name,$workflow_step_description,$workflow_sub_step_name,$workflow_sub_step_description, $workflow_action, $workflow_form_elements);
+		}
+	}
+	
 	$main .= '</fieldset>';
     $main .= '</div>';    
     
