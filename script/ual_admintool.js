@@ -542,9 +542,9 @@ var ual_admintool = ual_admintool || (function(){
 			});
 			
 			// workflow form
-			if(stage==5) {
+			//if(stage==5) {
 				
-				var workflow_form_elements = $('#workflow_form_elements').val();
+				//var workflow_form_elements = $('#workflow_form_elements').val();
 				
 			    // update previews
 			    $('*[id^=field_type]').live("change", function() {
@@ -564,7 +564,7 @@ var ual_admintool = ual_admintool || (function(){
 					
     				$(this).closest('*[id^=preview]').html(preview);
 			    });					
-			}
+			//}
 		}
 
     }); // end of document ready
