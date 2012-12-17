@@ -498,6 +498,7 @@ var ual_admintool = ual_admintool || (function(){
 				return 'ok';   // allow form submit
 			});
 			
+			
 			//
 			// general elements
 			//
@@ -508,9 +509,13 @@ var ual_admintool = ual_admintool || (function(){
 				
 				// set the help text
 				$('#helpbox').hide();
-				var selected_workflow_action_help = $("option:selected", this).attr("help");
-				$('#helptext').html(selected_workflow_action_help);
-				$('#helpbox').fadeIn('slow');
+				var selected_workflow_action_help='';
+				selected_workflow_action_help = $("option:selected", this).attr("help");
+				
+				if(selected_workflow_action_help!='') {
+				    $('#helptext').html(selected_workflow_action_help);
+				    $('#helpbox').fadeIn('slow');
+				}
 			});
 		}
 
