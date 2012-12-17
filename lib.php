@@ -1654,6 +1654,8 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form .= '<input type="hidden" name="workflow_step_description" id="workflow_step_description" value="'.$workflow_step_description.'">';
     $workflow_form .= '<input type="hidden" name="workflow_sub_step_name" id="workflow_sub_step_name" value="'.$workflow_sub_step_name.'">';
     $workflow_form .= '<input type="hidden" name="workflow_sub_step_description" id="workflow_sub_step_description" value="'.$workflow_sub_step_description.'">';
+    $workflow_form .= '<input type="hidden" name="workflow_action" id="workflow_action" value="'.$workflow_action.'">';
+    $workflow_form .= '<input type="hidden" name="workflow_form_elements" id="workflow_form_elements" value="'.$workflow_form_elements.'">';
     $workflow_form .= '<input type="hidden" name="stage" id="stage" value="5">';
     
     $workflow_form .= '</form>';
@@ -1733,7 +1735,7 @@ function get_workflow_data_types() {
             while ($row = $result->fetch_object()) {
                 $help1 = get_help(7, $row->name);
                 $help2 = get_help(8, $row->data_type);
-                $workflow_data_types .='<option help="'.$row->name. '<br> ' .$help1 .'<br><br>' .$row->data_type . '<br>'.$help2.'" id="'.$row->id.'">'.$row->fullname.'</option>';
+                $workflow_data_types .='<option data="'.$row->name.'" help="'.$row->name. '<br> ' .$help1 .'<br><br>' .$row->data_type . '<br>'.$help2.'" id="'.$row->id.'">'.$row->fullname.'</option>';
             }
         }
         

@@ -506,6 +506,28 @@ var ual_admintool = ual_admintool || (function(){
 				// workflow form
 				if(stage==5) {
 					
+					var workflow_form_elements = $('#workflow_form_elements').val();
+					
+					for(var index=0; index<workflow_form_elements; index++) {
+					    // update previews
+					    $('#field_type'+index).live("change", function() {
+							var field_type = $(this).attr('data');
+							
+							var preview ='';
+							
+							switch(field_type) {
+								case 'text' : preview = '<input type="'+field_type+'">';
+									          break;
+								
+								case 'dropdown' : preview = '<select><option></option></select>';
+									              break;
+								default : preview = '';
+									      break;
+							}
+							
+							$('#preview'+index).html(preview);
+						});
+					}
 					
 					
 				}
