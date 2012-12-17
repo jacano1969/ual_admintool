@@ -111,7 +111,7 @@ if(is_logged_in()){
 		
 		if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description']) &&
 			!empty($_POST['workflow_step_name']) && !empty($_POST['workflow_step_description'])
-			!empty($_POST['workflow_sub_step_name']) && !empty($_POST['workflow_sub_step_description']) {
+			!empty($_POST['workflow_sub_step_name']) && !empty($_POST['workflow_sub_step_description'])) {
 		
 			$workflow_name=$_POST['workflow_name'];
 			$workflow_description=$_POST['workflow_description'];
@@ -125,8 +125,7 @@ if(is_logged_in()){
 		}
 		
 		if(!empty($_POST['workflow_name']) && !empty($_POST['workflow_description']) &&
-			!empty($_POST['workflow_step_name']) && !empty($_POST['workflow_step_description'])
-		{
+			!empty($_POST['workflow_step_name']) && !empty($_POST['workflow_step_description'])) {
 			$workflow_name=$_POST['workflow_name'];
 			$workflow_description=$_POST['workflow_description'];
 			$workflow_step_name=$_POST['workflow_step_name'];
