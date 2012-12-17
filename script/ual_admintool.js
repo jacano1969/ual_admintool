@@ -405,6 +405,13 @@ var ual_admintool = ual_admintool || (function(){
 		// workflow designer scripts
         if($('#designer-page').length>0) {
 			
+			// check the stage
+			var stage = 0;
+				
+			if($('#stage').length>0) {
+			    stage = $('#stage').val();
+			}
+				
     		$('#workflows').live("change", function() {
 				var workflow_id = $('option:selected',this).attr('id');
 				if(workflow_id==0) {
@@ -429,13 +436,6 @@ var ual_admintool = ual_admintool || (function(){
 			});
 			
 			$('#continue').live("click", function() {
-				
-				// check the stage
-				var stage = 0;
-				
-				if($('#stage').length>0) {
-				    stage = $('#stage').val();
-			    }
 				
 				// workflow
 				if(stage==0 || stage==1) {	
@@ -503,31 +503,6 @@ var ual_admintool = ual_admintool || (function(){
 					});					
 				}					
 				
-				// workflow form
-				if(stage==5) {
-					
-					var workflow_form_elements = $('#workflow_form_elements').val();
-					
-				    // update previews
-				    $('*[id^=field_type]').live("change", function() {
-						var field_type = $(this).attr('data');
-						
-						var preview ='';
-						
-						switch(field_type) {
-							case 'text' : preview = '<input type="'+field_type+'">';
-								          break;
-							
-							case 'dropdown' : preview = '<select><option></option></select>';
-								              break;
-							default : preview = '';
-								      break;
-						}
-						
-    					$(this).closest('*[id^=preview]').html(preview);
-				    });					
-				}
-				
 				return 'ok';   // allow form submit
 			});
 			
@@ -565,6 +540,31 @@ var ual_admintool = ual_admintool || (function(){
 				    $('#helpbox').fadeIn('slow');
 				}
 			});
+			
+			// workflow form
+			if(stage==5) {
+				
+				var workflow_form_elements = $('#workflow_form_elements').val();
+				
+			    // update previews
+			    $('*[id^=field_type]').live("change", function() {
+					var field_type = $(this).attr('data');
+					
+					var preview ='';
+					
+					switch(field_type) {
+						case 'text' : preview = '<input type="'+field_type+'">';
+							          break;
+						
+						case 'dropdown' : preview = '<select><option></option></select>';
+							              break;
+						default : preview = '';
+							      break;
+					}
+					
+    				$(this).closest('*[id^=preview]').html(preview);
+			    });					
+			}
 		}
 
     }); // end of document ready
