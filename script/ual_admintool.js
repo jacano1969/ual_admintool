@@ -550,7 +550,7 @@ var ual_admintool = ual_admintool || (function(){
 				$('select').live("change", function() {
 					var thisId = $(this).attr('id');
 					if (thisId.match(/field_type.*/)) {
-					    var field_type = $(this).attr('data');
+					    var field_type = $("option:selected", this).attr('data');
 					
 					    var preview ='';
 					
