@@ -1630,7 +1630,7 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form .= 'Create your form elements<br>';
     
     for($index=0; $index<$workflow_form_elements; $index++) {
-        $workflow_form  .='<div class="form_element">[Element: '.$index.']';
+        $workflow_form  .='<div class="form_element">[Element: '.$index+1.']<br>';
         $workflow_form  .='<div class="preview" id="preview'.$index.'">';
         $workflow_form  .='</div>';
         $workflow_form .= '<label for="field_type'.$index.'">Field type</label>';
