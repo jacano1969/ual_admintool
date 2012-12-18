@@ -96,6 +96,7 @@
 #designer-page hr {margin-top:25px; border: 3px double #CCCCCC;}
 #designer-page h2 {text-align: center; color:red; font-style: italic; text-decoration: underline;}
 
+#designer-page .form_element { border:2px solid #ccc; }
 
 #helpbox {
     background: #FFFFFF;

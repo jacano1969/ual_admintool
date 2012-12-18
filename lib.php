@@ -1083,7 +1083,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             // draw text box
             if($row->type=='text') {
                 
-                // TODO: check if mandatory==1
+                // check if mandatory==1
                 if($row->mandatory==1){
                     // get any special validation
                     $validate = ($row->validate!='') ? ' '.$row->validate : '';
@@ -1404,7 +1404,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                     $workflow_form .= '<td><input name="'.$data_row[0].'" type="radio" '.$checked.'></td>';
                                 } else if(in_array($index,$status_cols)) {
                                     $checked = $data_row[$index] == 1 ? 'checked' : '';
-                                    $workflow_form .= '<td><input name="'.$data_row[0].'" type="checkbox" '.$checked.'></td>';
+                                    $workflow_form .= '<td><input type="checkbox" '.$checked.'></td>';
                                 } else {
                                     $workflow_form .= "<td>$data_row[$index]</td>";
                                 }
@@ -1630,6 +1630,7 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
     $workflow_form .= 'Create your form elements<br>';
     
     for($index=0; $index<$workflow_form_elements; $index++) {
+        $workflow_form  .='<div class="form_element">[Element: '.$index.']';
         $workflow_form  .='<div class="preview" id="preview'.$index.'">';
         $workflow_form  .='</div>';
         $workflow_form .= '<label for="field_type'.$index.'">Field type</label>';
@@ -1655,6 +1656,8 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
         $workflow_form .= '<select id="field_validation'.$index.'" name="field_validation[]">';
         $workflow_form .= get_list(4,'None');
         $workflow_form .= '</select>';
+        
+        $workflow_form .= '</div>';
         
         $workflow_form .= '<hr>';
     }
