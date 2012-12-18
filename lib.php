@@ -1373,11 +1373,19 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->data_type=='data') {
                     
                     $sql = $row->value;
-                    
+                    $cols=0;
                     $workflow_form .= $sql;
                     
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
+                        $workflow_form .= '<th>';
+                        $data_table_cols = $data_result->fetch_fields();
+                        foreach ($data_table_cols as $table_col) {
+                            $cols++;
+                            $workflow_form .= "<td>$table_col->name</td>";
+                        }
+                        $workflow_form .= '</th>';
+                        
                         while($data_row = $data_result->fetch_array(MYSQLI_NUM)) {
                             
                             $workflow_form .= '<tr>';
