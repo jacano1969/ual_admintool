@@ -575,7 +575,7 @@ var ual_admintool = ual_admintool || (function(){
 							case 'hidden' : preview_field_type = '<input disabled="disabled" type="text">';
 										    break;
 							
-							case 'textarea' : preview_field_type = '<textarea><textarea>';
+							case 'textarea' : preview_field_type = '<textarea></textarea>';
 										    break;
 							
 							case 'dropdown' : preview_field_type = '<select><option></option></select>';

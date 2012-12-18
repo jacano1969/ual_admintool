@@ -233,7 +233,7 @@ function process_record($record_data, $action_desc) {
                 }
             }
             
-            echo "ok";  // if we get to here, send back some data to show everyting went as planned
+            echo "ok";  // if we get to here, send back some data to show everything went as planned
             
         } else {
             // TODO: handle error
@@ -1388,7 +1388,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     }
                     
                     // create sql
-                    /*$sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                    $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
                     
                     if(!empty($row->criteria)) {
                         $sql .=" WHERE $row->criteria";    
@@ -1401,7 +1401,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }
                         
                         $data_result->close();
-                    } */                   
+                    }                   
                 }
             }
         }
