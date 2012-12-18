@@ -596,6 +596,18 @@ var ual_admintool = ual_admintool || (function(){
 					}
 				});
 				
+				$('textarea').live("focus click", function() {
+				    // set the help text
+					$('#helpbox').hide();
+					var selected_field_help='';
+					selected_field_help = $(this).attr("help");
+						
+					if(typeof(selected_field_help)!='undefined') {
+						$('#helptext').html(selected_field_help);
+						$('#helpbox').fadeIn('slow');
+					}
+				});
+				
 				$('input[type="text"]').live("keyup keydown", function() {
 					var thisId = $(this).attr('id');
 					if (thisId.match(/field_label.*/)) {
