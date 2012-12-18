@@ -1380,28 +1380,49 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $data_details = explode(",",$row->value);  // split into db.table.col array
                     
                     $temp = array();
+                    
                     foreach($data_details as $detail) {
                        $temp = explode(".",$detail);
                        $database[] = $temp[0];
                        $tables[] = $temp[1];
                        $columns[] = $temp[2];
+                       
+                       
                     }
                     
+                    $sql = "SELECT ";
+                    $cols=0;
+                    foreach ($columns as $column) {
+                        $sql .= $column .",";
+                        $cols++;
+                    }
+                    
+                    $sql = rtrim($sql, ",");
+
                     // create sql
-                    $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                    $sql .= " FROM ".$database[0].".".$tables[0];
                     
                     if(!empty($row->criteria)) {
                         $sql .=" WHERE $row->criteria";    
                     }
                     
+                    $workflow_form .= $sql;
+                    
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
-                        while($data_row = $data_result->fetch_object()) {
-                            $workflow_form .= '<option id="'.$data_row->id.'" name="'.$data_row->id.'">'.$data_row->name.'</option>';
+                        while($data_row = $data_result->fetch_array(MYSQLI_NUM)) {
+                            
+                            $workflow_form .= '<tr>';
+                            for($index=0; $index<=$cols; $index++) {
+                                $workflow_form .= "<td>$data_row[$index]</td>";
+                            }
+                            $workflow_form .= '</tr>';
                         }
                         
                         $data_result->close();
-                    }                   
+                    }
+                    
+                    $workflow_form .= '</table>';
                 }
             }
         }
