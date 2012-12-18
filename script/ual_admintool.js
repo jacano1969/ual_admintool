@@ -583,7 +583,7 @@ var ual_admintool = ual_admintool || (function(){
 					
 					preview = preview_field_label + preview_field_type;
 					
-					$('#preview'+field_typeid).html(preview);
+					$('#preview'+field_labelid).html(preview);
 				}
 			});
 			//}
