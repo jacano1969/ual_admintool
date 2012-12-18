@@ -579,7 +579,7 @@ var ual_admintool = ual_admintool || (function(){
 					var field_label = $(this).val();
 					var field_labelid = this.id.match(/[\d]+$/);
 					
-					preview_field_type = '<label>'+field_label+'</label>';
+					preview_field_label = '<label>'+field_label+'</label>';
 					
 					preview = preview_field_label + preview_field_type;
 					
