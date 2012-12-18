@@ -1366,6 +1366,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     
                     $sql = $row->value;
                     $cols=0;
+                    $status_cols = array();
+                    $status_columns = array('status','visible','approved', 'rejected');
                     
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
@@ -1374,15 +1376,28 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         $workflow_form .= '<tr>';
                         foreach ($data_table_cols as $table_col) {
                             $workflow_form .= "<td>$table_col->name</td>";
+                            
+                            // record that column is a status field
+                            if(in_array($table_col->name,$status_columns)) {
+                                $status_cols[] = $cols;
+                            }
+                            
                             $cols++;
                         }
+                        $workflow_form .= '';
                         $workflow_form .= '</tr>';
                         
                         while($data_row = $data_result->fetch_array(MYSQLI_NUM)) {
                             
                             $workflow_form .= '<tr>';
                             for($index=0; $index<$cols; $index++) {
-                                $workflow_form .= "<td>$data_row[$index]</td>";
+                                
+                                // show status column check box
+                                if(in_array($index,$status_cols)) {
+                                    $workflow_form .= '<td><input type="check" value="'.$data_row[$index].'"></td>";
+                                } else {
+                                    $workflow_form .= "<td>$data_row[$index]</td>";
+                                }
                             }
                             $workflow_form .= '</tr>';
                         }
