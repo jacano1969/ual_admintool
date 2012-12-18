@@ -1624,16 +1624,16 @@ function create_designer_workflow_form($workflow_name,$workflow_description,$wor
         $workflow_form .= '</select>';
         
         $workflow_form .= '<label for="field_label'.$index.'">Field Label</label>';
-        $workflow_form .= '<input type="text" id="field_label'.$index.'" name="field_label[]">';
+        $workflow_form .= '<input help="Text label for field type element" type="text" id="field_label'.$index.'" name="field_label[]">';
         
         $workflow_form .= '<label for="field_name'.$index.'">Field name</label>';
-        $workflow_form .= '<input type="text" id="field_name'.$index.'" name="field_name[]">';
+        $workflow_form .= '<input help="Field identifier, must be unique" type="text" id="field_name'.$index.'" name="field_name[]">';
         
         $workflow_form .= '<label for="field_description'.$index.'">Field description</label>';
-        $workflow_form .= '<textarea id="field_description'.$index.'" name="field_description[]"></textarea>';
+        $workflow_form .= '<textarea help="Describe your field element" id="field_description'.$index.'" name="field_description[]"></textarea>';
         
         $workflow_form .= '<label for="field_mandatory'.$index.'">Is field mandatory?</label>';
-        $workflow_form .= '<select id="field_mandatory'.$index.'" name="field_mandatory[]">';
+        $workflow_form .= '<select help="Is this a required field?" id="field_mandatory'.$index.'" name="field_mandatory[]">';
         $workflow_form .= get_list(3,'');
         $workflow_form .= '</select>';
         
