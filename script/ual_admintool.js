@@ -584,11 +584,11 @@ var ual_admintool = ual_admintool || (function(){
 					}
 				});
 				
-				$('input[type="text"]').live("focus", function() {
+				$('input[type="text"]').live("focus click", function() {
 				    // set the help text
 					$('#helpbox').hide();
 					var selected_field_help='';
-					selected_field_help = $("option:selected", this).attr("help");
+					selected_field_help = $(this).attr("help");
 						
 					if(typeof(selected_field_help)!='undefined') {
 						$('#helptext').html(selected_field_help);
