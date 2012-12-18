@@ -1372,39 +1372,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 //
                 if($row->data_type=='data') {
                     
-                    // extract database details for data
-                    $databases = array();
-                    $tables = array();
-                    $columns = array();
-                                        
-                    $data_details = explode(",",$row->value);  // split into db.table.col array
-                    
-                    $temp = array();
-                    
-                    foreach($data_details as $detail) {
-                       $temp = explode(".",$detail);
-                       $database[] = $temp[0];
-                       $tables[] = $temp[1];
-                       $columns[] = $temp[2];
-                       
-                       
-                    }
-                    
-                    $sql = "SELECT ";
-                    $cols=0;
-                    foreach ($columns as $column) {
-                        $sql .= $column .",";
-                        $cols++;
-                    }
-                    
-                    $sql = rtrim($sql, ",");
-
-                    // create sql
-                    $sql .= " FROM ".$database[0].".".$tables[0];
-                    
-                    if(!empty($row->criteria)) {
-                        $sql .=" WHERE $row->criteria";    
-                    }
+                    $sql = $row->value;
                     
                     $workflow_form .= $sql;
                     
