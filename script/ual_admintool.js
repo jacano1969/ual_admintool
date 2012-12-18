@@ -4,6 +4,10 @@ var ual_admintool = ual_admintool || (function(){
 	
 	"use strict";
 
+	var preview ='';
+	var preview_field_type='';
+	var preview_field_label ='';
+			
     $(document).ready(function(){
     
 	    function isNumber(n) {
@@ -540,10 +544,6 @@ var ual_admintool = ual_admintool || (function(){
 				    $('#helpbox').fadeIn('slow');
 				}
 			});
-			
-			var preview ='';
-			var preview_field_type='';
-			var preview_field_label ='';
 			
 			// workflow form
 			//if(stage==5) {
