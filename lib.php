@@ -1358,31 +1358,23 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             // draw a data grid
             if($row->type=='grid') {
                 
-                // TODO: check if mandatory==1
-                if($row->mandatory==1){
-                    $workflow_form .= '<h3>'.$row->name.'</h3>';
-                    $workflow_form .= '<table id="data_grid" name="data-grid">';
-                } else {
-                    $workflow_form .= '<h3>'.$row->name.'</h3>';
-                    $workflow_form .= '<table id="data_grid" name="data-grid">';
-                }
-                
-                //
-                // TODO: get grid data
-                //
+                $workflow_form .= '<h3>'.$row->name.'</h3>';
+                $workflow_form .= '<table id="data_grid" name="data-grid">';
+                               
+                // get grid data
                 if($row->data_type=='data') {
                     
                     $sql = $row->value;
                     $cols=0;
-                    $workflow_form .= $sql;
                     
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
-                        $workflow_form .= '<th>';
+                        
                         $data_table_cols = $data_result->fetch_fields();
+                        $workflow_form .= '<th>';
                         foreach ($data_table_cols as $table_col) {
-                            $cols++;
                             $workflow_form .= "<td>$table_col->name</td>";
+                            $cols++;
                         }
                         $workflow_form .= '</th>';
                         
