@@ -541,6 +541,9 @@ var ual_admintool = ual_admintool || (function(){
 				}
 			});
 			
+			var preview ='';
+			var preview_field_type='';
+			
 			// workflow form
 			//if(stage==5) {
 				
@@ -551,20 +554,25 @@ var ual_admintool = ual_admintool || (function(){
 					var thisId = $(this).attr('id');
 					if (thisId.match(/field_type.*/)) {
 					    var field_type = $("option:selected", this).attr('data');
-					
-					    var preview ='';
+					    var field_typeid = this.id.match(/[\d]+$/);
+					    var preview_field_type ='';
 					
 						switch(field_type) {
-							case 'text' : preview = '<input type="'+field_type+'">';
+							case 'text' : preview_field_type = '<input type="'+field_type+'">';
 										  break;
 							
-							case 'dropdown' : preview = '<select><option></option></select>';
+							case 'dropdown' : preview_field_type = '<select><option></option></select>';
 											  break;
-							default : preview = '';
+							default : preview_field_type = '';
 									  break;
 						}
 						
-						$(this).prevAll('.preview').html(preview);
+						preview = preview_field_type;
+						
+						
+						// CHECK THIS !!!!!!
+						$('#preview'+field_typeid).html(preview);
+						//$(this).prevAll('.preview:first').html(preview);
 					}
 			    });					
 			//}
