@@ -543,38 +543,49 @@ var ual_admintool = ual_admintool || (function(){
 			
 			var preview ='';
 			var preview_field_type='';
+			var preview_field_label ='';
 			
 			// workflow form
 			//if(stage==5) {
 				
-				//var workflow_form_elements = $('#workflow_form_elements').val();
+			//var workflow_form_elements = $('#workflow_form_elements').val();
+			
+			// update previews
+			$('select').live("change", function() {
+				var thisId = $(this).attr('id');
+				if (thisId.match(/field_type.*/)) {
+					var field_type = $("option:selected", this).attr('data');
+					var field_typeid = this.id.match(/[\d]+$/);
 				
-			    // update previews
-				$('select').live("change", function() {
-					var thisId = $(this).attr('id');
-					if (thisId.match(/field_type.*/)) {
-					    var field_type = $("option:selected", this).attr('data');
-					    var field_typeid = this.id.match(/[\d]+$/);
-					    var preview_field_type ='';
-					
-						switch(field_type) {
-							case 'text' : preview_field_type = '<input type="'+field_type+'">';
-										  break;
-							
-							case 'dropdown' : preview_field_type = '<select><option></option></select>';
-											  break;
-							default : preview_field_type = '';
+					switch(field_type) {
+						case 'text' : preview_field_type = '<input type="'+field_type+'">';
 									  break;
-						}
 						
-						preview = preview_field_type;
-						
-						
-						// CHECK THIS !!!!!!
-						$('#preview'+field_typeid).html(preview);
-						//$(this).prevAll('.preview:first').html(preview);
+						case 'dropdown' : preview_field_type = '<select><option></option></select>';
+										  break;
+						default : preview_field_type = '';
+								  break;
 					}
-			    });					
+					
+					preview = preview_field_label + preview_field_type;
+					
+					$('#preview'+field_typeid).html(preview);
+				}
+			});
+			
+			$('input[type="text"]').live("keyup keydown", function() {
+				var thisId = $(this).attr('id');
+				if (thisId.match(/field_label.*/)) {
+					var field_label = $(this).val();
+					var field_labelid = this.id.match(/[\d]+$/);
+					
+					preview_field_type = '<label>'+field_label+'</label>';
+					
+					preview = preview_field_label + preview_field_type;
+					
+					$('#preview'+field_typeid).html(preview);
+				}
+			});
 			//}
 		}
 
