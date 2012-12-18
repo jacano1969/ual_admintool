@@ -1381,7 +1381,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         while($data_row = $data_result->fetch_array(MYSQLI_NUM)) {
                             
                             $workflow_form .= '<tr>';
-                            for($index=0; $index<=$cols; $index++) {
+                            for($index=0; $index<$cols; $index++) {
                                 $workflow_form .= "<td>$data_row[$index]</td>";
                             }
                             $workflow_form .= '</tr>';
