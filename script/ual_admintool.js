@@ -546,57 +546,57 @@ var ual_admintool = ual_admintool || (function(){
 			});
 			
 			// workflow form
-			//if(stage==5) {
+			if(stage==5) {
 				
-			//var workflow_form_elements = $('#workflow_form_elements').val();
-			
-			// update previews
-			$('select').live("change", function() {				
-				var thisId = $(this).attr('id');
-				if (thisId.match(/field_type.*/)) {
-					var field_type = $("option:selected", this).attr('data');
-					var field_typeid = this.id.match(/[\d]+$/);
+				//var workflow_form_elements = $('#workflow_form_elements').val();
 				
-					// set the help text
-					$('#helpbox').hide();
-					var selected_field_type_help='';
-					selected_field_type_help = $("option:selected", this).attr("help");
+				// update previews
+				$('select').live("change", function() {				
+					var thisId = $(this).attr('id');
+					if (thisId.match(/field_type.*/)) {
+						var field_type = $("option:selected", this).attr('data');
+						var field_typeid = this.id.match(/[\d]+$/);
 					
-					if(typeof(selected_field_type_help)!='undefined') {
-						$('#helptext').html(selected_field_type_help);
-						$('#helpbox').fadeIn('slow');
-					}
-				
-					switch(field_type) {
-						case 'text' : preview_field_type = '<input type="'+field_type+'">';
-									  break;
+						// set the help text
+						$('#helpbox').hide();
+						var selected_field_type_help='';
+						selected_field_type_help = $("option:selected", this).attr("help");
 						
-						case 'dropdown' : preview_field_type = '<select><option></option></select>';
+						if(typeof(selected_field_type_help)!='undefined') {
+							$('#helptext').html(selected_field_type_help);
+							$('#helpbox').fadeIn('slow');
+						}
+					
+						switch(field_type) {
+							case 'text' : preview_field_type = '<input type="'+field_type+'">';
 										  break;
-						default : preview_field_type = '';
-								  break;
+							
+							case 'dropdown' : preview_field_type = '<select><option></option></select>';
+											  break;
+							default : preview_field_type = '';
+									  break;
+						}
+						
+						preview = preview_field_label + preview_field_type;
+						
+						$('#preview'+field_typeid).html(preview);
 					}
-					
-					preview = preview_field_label + preview_field_type;
-					
-					$('#preview'+field_typeid).html(preview);
-				}
-			});
-			
-			$('input[type="text"]').live("keyup keydown", function() {
-				var thisId = $(this).attr('id');
-				if (thisId.match(/field_label.*/)) {
-					var field_label = $(this).val();
-					var field_labelid = this.id.match(/[\d]+$/);
-					
-					preview_field_label = '<label>'+field_label+'</label>';
-					
-					preview = preview_field_label + preview_field_type;
-					
-					$('#preview'+field_labelid).html(preview);
-				}
-			});
-			//}
+				});
+				
+				$('input[type="text"]').live("keyup keydown", function() {
+					var thisId = $(this).attr('id');
+					if (thisId.match(/field_label.*/)) {
+						var field_label = $(this).val();
+						var field_labelid = this.id.match(/[\d]+$/);
+						
+						preview_field_label = '<label>'+field_label+'</label>';
+						
+						preview = preview_field_label + preview_field_type;
+						
+						$('#preview'+field_labelid).html(preview);
+					}
+				});
+			}
 		}
 
     }); // end of document ready
