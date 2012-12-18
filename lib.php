@@ -1395,7 +1395,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                 // show status column check box
                                 if(in_array($index,$status_cols)) {
                                     $checked = $data_row[$index] == 1 ? 'checked' : '';
-                                    $workflow_form .= '<td><input type="checkbox" '.$checked.'></td>';
+                                    $workflow_form .= '<td><input name="'.$index.'" type="radio" '.$checked.'></td>';
                                 } else {
                                     $workflow_form .= "<td>$data_row[$index]</td>";
                                 }
