@@ -1367,7 +1367,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $sql = $row->value;
                     $cols=0;
                     $status_cols = array();
-                    $status_columns = array('status','visible','approved', 'rejected');
+                    $switch_status_columns = array('approved', 'rejected');
+                    $status_columns = array('status','visible');
                     
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
@@ -1378,7 +1379,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                             $workflow_form .= "<td>$table_col->name</td>";
                             
                             // record that column is a status field
-                            if(in_array($table_col->name,$status_columns)) {
+                            if(in_array($table_col->name,$switch_status_columns) || in_array($table_col->name, $status_columns)) {
                                 $status_cols[] = $cols;
                             }
                             
@@ -1393,9 +1394,12 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                             for($index=0; $index<$cols; $index++) {
                                 
                                 // show status column check box
-                                if(in_array($index,$status_cols)) {
+                                if(in_array($index,$switch_status_columns)) {
                                     $checked = $data_row[$index] == 1 ? 'checked' : '';
                                     $workflow_form .= '<td><input name="'.$data_row[0].'" type="radio" '.$checked.'></td>';
+                                } else if(in_array($index,$status_columns)) {
+                                    $checked = $data_row[$index] == 1 ? 'checked' : '';
+                                    $workflow_form .= '<td><input name="'.$data_row[0].'" type="checkbox" '.$checked.'></td>';
                                 } else {
                                     $workflow_form .= "<td>$data_row[$index]</td>";
                                 }
