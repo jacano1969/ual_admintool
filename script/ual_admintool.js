@@ -553,19 +553,20 @@ var ual_admintool = ual_admintool || (function(){
 				// update previews
 				$('select').live("change", function() {				
 					var thisId = $(this).attr('id');
+					
+					// set the help text
+					$('#helpbox').hide();
+					var selected_field_type_help='';
+					selected_field_type_help = $("option:selected", this).attr("help");
+					
+					if(typeof(selected_field_type_help)!='undefined') {
+						$('#helptext').html(selected_field_type_help);
+						$('#helpbox').fadeIn('slow');
+					}
+						
 					if (thisId.match(/field_type.*/)) {
 						var field_type = $("option:selected", this).attr('data');
 						var field_typeid = this.id.match(/[\d]+$/);
-					
-						// set the help text
-						$('#helpbox').hide();
-						var selected_field_type_help='';
-						selected_field_type_help = $("option:selected", this).attr("help");
-						
-						if(typeof(selected_field_type_help)!='undefined') {
-							$('#helptext').html(selected_field_type_help);
-							$('#helpbox').fadeIn('slow');
-						}
 					
 						switch(field_type) {
 							case 'text' : preview_field_type = '<input type="'+field_type+'">';
