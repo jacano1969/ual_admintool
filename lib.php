@@ -1370,6 +1370,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $switch_status_cols = array();
                     $switch_status_columns = array('approved', 'rejected');
                     $status_columns = array('status','visible');
+                    $id_col=0;
                     
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
@@ -1393,6 +1394,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         $workflow_form .= '';
                         $workflow_form .= '</tr>';
                         
+                        // reset columns
+                        $cols=0;
+                        
                         while($data_row = $data_result->fetch_array(MYSQLI_NUM)) {
                             
                             $workflow_form .= '<tr>';
@@ -1406,9 +1410,16 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                     $checked = $data_row[$index] == 1 ? 'checked' : '';
                                     $workflow_form .= '<td><input type="checkbox" '.$checked.'></td>';
                                 } else {
-                                    $workflow_form .= "<td>$data_row[$index]</td>";
+                                    if($index==0) {
+                                        // first column is unique id
+                                        $workflow_form .= '<td>'.$data_row[$index].'<input type="hidden" name="id'.$cols.'" id="id'.$cols.'" value="'.$data_row[$index].'"></td>';
+                                    } else {
+                                        $workflow_form .= "<td>$data_row[$index]</td>";
+                                    }
                                 }
                             }
+                            
+                            $cols ++;
                             $workflow_form .= '</tr>';
                         }
                         
