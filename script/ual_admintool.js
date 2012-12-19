@@ -326,7 +326,7 @@ var ual_admintool = ual_admintool || (function(){
 			// check boxes (status and visible fields)
 			
 			// radio buttons (approved and rejected)
-			$('radio').live("click", function() {
+			$('input[type="radio"]').live("click", function() {
 				var thisId = $(this).attr('id');
 				var uniqueId = this.id.match(/[\d]+$/);
 				
