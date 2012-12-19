@@ -287,8 +287,6 @@ var ual_admintool = ual_admintool || (function(){
                         
                         jsonString += '}';
 						
-						alert(jsonString); return false;
-						
 						var action_desc = $('.container fieldset legend').text();
 						
                         // submit data 
@@ -324,6 +322,23 @@ var ual_admintool = ual_admintool || (function(){
                 });
 			});
 			
+			// todo
+			// check boxes (status and visible fields)
+			
+			// radio buttons (approved and rejected)
+			$('radio').live("click", function() {
+				var thisId = $(this).attr('id');
+				var uniqueId = this.id.match(/[\d]+$/);
+				
+				if (thisId.match(/approved.*/)) {
+					
+					alert('Approved id:' + uniqueId);
+				}
+				
+				if (thisId.match(/rejected.*/)) {
+					alert('Rejected id:' + uniqueId);
+				}
+			});
 			
 			
             // reset button clicked
