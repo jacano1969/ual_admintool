@@ -1394,9 +1394,6 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         $workflow_form .= '';
                         $workflow_form .= '</tr>';
                         
-                        // reset columns
-                        $cols=0;
-                        
                         while($data_row = $data_result->fetch_array(MYSQLI_NUM)) {
                             
                             $workflow_form .= '<tr>';
@@ -1412,14 +1409,13 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                 } else {
                                     if($index==0) {
                                         // first column is unique id
-                                        $workflow_form .= '<td>'.$data_row[$index].'<input type="hidden" name="id'.$cols.'" id="id'.$cols.'" value="'.$data_row[$index].'"></td>';
+                                        $workflow_form .= '<td>'.$data_row[$index].'<input type="hidden" name="id'.$data_row[$index].'" id="id'.$data_row[$index].'" value="'.$data_row[$index].'"></td>';
                                     } else {
                                         $workflow_form .= "<td>$data_row[$index]</td>";
                                     }
                                 }
                             }
                             
-                            $cols++;
                             $workflow_form .= '</tr>';
                         }
                         
