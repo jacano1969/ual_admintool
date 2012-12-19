@@ -156,9 +156,8 @@ function process_record($record_data, $action_desc) {
                     }
                     
                     $mysqli->close();
-                }
-
-                if($mailto=='') {
+                } else {
+                //if($mailto=='') {
                     // get the table and column for this new data
                     $workflow_data = get_workflow_data($workflow_data_item_id);
                     
