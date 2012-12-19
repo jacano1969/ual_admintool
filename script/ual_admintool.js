@@ -204,6 +204,9 @@ var ual_admintool = ual_admintool || (function(){
                         
                         jsonString += '}';
 						
+						
+						alert(jsonString); return false;
+						
 						var action_desc = $('.container fieldset legend').text();
 						
                         // submit data 
