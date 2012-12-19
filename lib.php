@@ -1419,7 +1419,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                 }
                             }
                             
-                            $cols ++;
+                            $cols++;
                             $workflow_form .= '</tr>';
                         }
                         
