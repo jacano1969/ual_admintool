@@ -122,7 +122,7 @@ function process_record($record_data, $action_desc) {
                     $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
             
                     // get message text
-                    $sql = "SELECT message FROM course_request_email where status=1";
+                    $sql = "SELECT message FROM course_request_email where email_type=1 and status=1";
 
                     // get records
                     $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
@@ -133,7 +133,7 @@ function process_record($record_data, $action_desc) {
                     }
                     
                     if ($message_result = $mysqli->query($sql)) {
-                        if($message_result->num_rows==0) {
+                        if($message_result->num_rows!=0) {
                             while($message_row = $message_result->fetch_object()) {
                                 $message = $message_row->message;
                             }
@@ -142,11 +142,11 @@ function process_record($record_data, $action_desc) {
                     }                  
                         
                     // create sql
-                    $sql = "SELECT subject FROM course_request_email where status=1";
+                    $sql = "SELECT subject FROM course_request_email where email_type=1 and status=1";
 
                     // get records
                     if ($subject_result = $mysqli->query($sql)) {
-                        if($subject_result->num_rows==0) {
+                        if($subject_result->num_rows!=0) {
                             while($subject_row = $subject_result->fetch_object()) {
                                 $subject = $subject_row->subject;
                             }
