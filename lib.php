@@ -1405,10 +1405,10 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                 // show status column check box
                                 if(in_array($index,$switch_status_cols)) {
                                     $checked = $data_row[$index] == 1 ? 'checked' : '';
-                                    $workflow_form .= '<td><input name="'.$switch_status_col_names[$index].$data_row[0].'" value="'.$data_row[$index].'" type="radio" '.$checked.'></td>';
+                                    $workflow_form .= '<td><input name="'.$data_row[0].'" id="'.$switch_status_col_names[$index].$data_row[0].'" value="'.$data_row[$index].'" type="radio" '.$checked.'></td>';
                                 } else if(in_array($index,$status_cols)) {
                                     $checked = $data_row[$index] == 1 ? 'checked' : '';
-                                    $workflow_form .= '<td><input name="'.$status_col_names[$index].$data_row[0].'" type="checkbox" value="'.$data_row[$index].'" '.$checked.'></td>';
+                                    $workflow_form .= '<td><input name="'.$status_col_names[$index].'" id="'.$status_col_names[$index].$data_row[0].'" type="checkbox" value="'.$data_row[$index].'" '.$checked.'></td>';
                                 } else {
                                     if($index==0) {
                                         // first column is unique id
