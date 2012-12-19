@@ -287,8 +287,6 @@ var ual_admintool = ual_admintool || (function(){
                         
                         jsonString += '}';
 						
-						alert(jsonString); return false;
-						
 						var action_desc = $('.container fieldset legend').text();
 						
                         // submit data 
@@ -334,11 +332,17 @@ var ual_admintool = ual_admintool || (function(){
 				
 				if (thisId.match(/approved.*/)) {
 					if(confirm("Are you sure you want to approve this item?")==true) {
+					} else {
+						// uncheck
+						$(this).prop('checked', false);
 					}
 				}
 				
 				if (thisId.match(/rejected.*/)) {
 					if(confirm("Are you sure you want to reject this item?")==true) {
+					} else {
+						// uncheck
+						$(this).prop('checked', false);
 					}
 				}
 			});
