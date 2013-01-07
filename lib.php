@@ -604,7 +604,7 @@ function get_filter_data($type=false, $data=false) {
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
         if($result->num_rows==0) {
-            return $filter;
+            $filters .= 'No Programmes';
         } else {  
             $filters .= '<label for="programmes">Programme (' .$result->num_rows . '):</label><select id="programmes" name="programmes">';
             $filters .='<option id="0">Select Programme ...</option>';
@@ -668,7 +668,7 @@ function get_filter_data($type=false, $data=false) {
     // get course years list
     if ($result = $mysqli->query($course_years_sql)) {
         if($result->num_rows==0) {
-            return $filter;
+            $filters .= 'No Course Years';
         } else {
             $filters .= '<label for="courseyears">Course Year (' .$result->num_rows . '):</label><select id="courseyears" name="courseyears">';
             $filters .='<option id="0">Select Course Year ...</option>';
@@ -742,7 +742,7 @@ function get_filter_data($type=false, $data=false) {
     // get courses list
     if ($result = $mysqli->query($courses_sql)) {
         if($result->num_rows==0) {
-            return $filter;
+            $filters .= 'No Courses';
         } else {
             
             $filters .= '<label for="courses">Course (' .$result->num_rows . '):</label><select id="courses" name="courses">';
@@ -805,7 +805,7 @@ function get_filter_data($type=false, $data=false) {
     // get units list
     if ($result = $mysqli->query($units_sql)) {
         if($result->num_rows==0) {
-            return $filter;
+            $filters .= 'No Units';
         } else {
             
             $filters .= '<label for="units">Unit (' .$result->num_rows . '):</label><select id="units" name="units">';
