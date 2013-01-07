@@ -566,8 +566,6 @@ function get_filter_data($type=false, $data=false) {
     //$filter = new stdClass();
     $filters ='';
     
-    $filters .= show_header();
-    
     $filters .= '<body id="home-page">';
     
     $filters .= '<div id="mainfilters">';
@@ -632,8 +630,6 @@ function get_filter_data($type=false, $data=false) {
         }
         
         $filters .='</div>';
-        
-        $filters .= show_footer();
         
         /* free result set */
         $result->close();

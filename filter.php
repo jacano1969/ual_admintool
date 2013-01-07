@@ -15,10 +15,13 @@ if(is_logged_in()){
             $type = $_GET['type'];
             $data = $_GET['data'];
         }       
-        
+        echo show_header();
         echo get_filter_data($type, $data);
+        echo show_footer();
     } else {
+        echo show_header();
         echo get_filter_data(false, $data);
+        echo show_footer();
     }
 } else {
     header('Location: login.php');
