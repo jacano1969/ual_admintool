@@ -593,7 +593,7 @@ function get_filter_data($type=false, $data=false) {
         // get programmes for selected course year
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.acad_period='$data' order by name";
     } else if($type=='U') {
-        // get programmes for selected course year
+        // get programmes for selected unit
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.aos_code='$data' order by name";
     }
     
@@ -824,7 +824,7 @@ function get_filter_data($type=false, $data=false) {
                     $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';
                 }else if($type=='U') {
                     $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.' ('.$row->id.')</option>';   
-                } else {
+                }else {
                     $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';   
                 }
             }
