@@ -631,16 +631,16 @@ function get_filter_data($type=false, $data=false) {
 
     // course years
     if($type==false) {
-        $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+        $course_years_sql = "select distinct cs.acad_period as name from COURSE_STRUCTURE cs inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
     } else {
         // filter by programme 
         if($type=='P') {
-            $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+            $course_years_sql = "select distinct cs.acad_period as name from COURSE_STRUCTURE cs inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
         }
         
         // filter by course 
         if($type=='C') {
-            $course_years_sql = "select distinct cs.acad_period as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+            $course_years_sql = "select distinct cs.acad_period as name from COURSE_STRUCTURE cs inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
         }
     }
         
@@ -688,18 +688,18 @@ function get_filter_data($type=false, $data=false) {
     
     // courses
     if($type==false) {
-        $courses_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join course_structure cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid order by name";
+        $courses_sql = "select distinct c.aos_code as id, c.full_description as name from COURSES c inner join COURSE_STRUCTURE cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and c.courseid=e.courseid order by name";
     } else {
         // filter by programme 
         if($type=='P') {
-            $courses_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join course_structure cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid inner join course_structure cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name;";
+            $courses_sql = "select distinct c.aos_code as id, c.full_description as name from COURSES c inner join COURSE_STRUCTURE cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and c.courseid=e.courseid inner join COURSE_STRUCTURE cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name;";
         }
         
         // filter by programme 
         if($type=='C') {
             // TODO:
             //$courses_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join course_structure cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid inner join course_structure cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name;";
-            $courses_sql = "select c.aos_code as id, c.full_description as name from courses c where c.aos_code='$data'";
+            $courses_sql = "select c.aos_code as id, c.full_description as name from COURSES c where c.aos_code='$data'";
         }
     }
     
@@ -741,21 +741,21 @@ function get_filter_data($type=false, $data=false) {
     // units
     if($type==false) {
         //$units_sql = "SELECT DISTINCT cs.aos_code as id, full_description AS name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and order by name";
-        $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') order by name";
+        $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') order by name";
     } else {
         // filter by programme 
         if($type=='P') {
             if(!empty($selected_courses)) {
                 // get units onlt for the selected courses
                 $all_selected_courses = implode('\',\'',$selected_courses);
-                $units_sql = "select distinct cs.aos_code as id, c.full_description as name from course_structure cs inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) inner join courses c on cs.aos_code=cs.aos_code and cs.aos_code REGEXP '^[A-Z]' and cs.aos_code not like('L%') inner join courses c1 on c1.courseid=c.courseid and c1.aos_code in('$all_selected_courses') order by name";
+                $units_sql = "select distinct cs.aos_code as id, c.full_description as name from COURSE_STRUCTURE cs inner join enrolments e on e.staffid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) inner join COURSES c on cs.aos_code=cs.aos_code and cs.aos_code REGEXP '^[A-Z]' and cs.aos_code not like('L%') inner join COURSES c1 on c1.courseid=c.courseid and c1.aos_code in('$all_selected_courses') order by name";
             } else {
-                $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') order by name";   
+                $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' and c.aos_code not like('L%') order by name";   
             }
         }
         
         if($type=='C') {
-            $units_sql = " SELECT DISTINCT c.aos_code as id, c.full_description AS name from courses c inner join enrolments e on e.studentid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' inner join course_structure cs on cs.aos_code='$data' and cs.aoscd_link = c.aos_code order by name";
+            $units_sql = " SELECT DISTINCT c.aos_code as id, c.full_description AS name from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' inner join COURSE_STRUCTURE cs on cs.aos_code='$data' and cs.aoscd_link = c.aos_code order by name";
         }
     }
     
