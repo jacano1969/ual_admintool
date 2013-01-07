@@ -566,6 +566,8 @@ function get_filter_data($type=false, $data=false) {
     //$filter = new stdClass();
     $filters ='';
     
+    $filters .= show_header();
+    
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
         exit;
@@ -624,6 +626,8 @@ function get_filter_data($type=false, $data=false) {
             
             $filters .= '</select>';
         }
+        
+        $filters .= show_footer();
         
         /* free result set */
         $result->close();
@@ -796,6 +800,7 @@ function get_filter_data($type=false, $data=false) {
     $filters .= '</fieldset>';
         
     $mysqli->close();
+    
     
     return $filters;
 }
