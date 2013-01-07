@@ -17,6 +17,8 @@ if(is_logged_in()){
         }       
         
         echo get_filter_data($type, $data);
+    } else {
+        echo get_filter_data(false, $data);
     }
 } else {
     header('Location: login.php');
