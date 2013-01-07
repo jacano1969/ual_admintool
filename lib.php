@@ -799,7 +799,7 @@ function get_filter_data($type=false, $data=false) {
     
     // TODO: actions
     
-    $filters .='<input type="submit" value="reset">';
+    $filters .='<input type="submit" class="submit" value="reset">';
     
     
     $filters .= '</form>';
