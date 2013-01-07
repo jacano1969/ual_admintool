@@ -134,6 +134,17 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
 			
+			$('#showresults').click(function() {
+				var selected_programme = $('#programme').children(":selected").attr("id");
+				var selected_courseyear = $('#courseyears').children(":selected").attr("id");
+				var selected_course = $('#courses').children(":selected").attr("id");
+				var selected_unit = $('#units').children(":selected").attr("id");
+				
+				alert('Programme: ' + selected_programme + '\n' +
+					  'Course Year: ' + selected_courseyear + '\n' +
+					  'Course: ' + selected_course + '\n' +
+					  'Unit:' + selected_unit);
+			});
 			
 			//
 			// end of filters ---------------------------------->
