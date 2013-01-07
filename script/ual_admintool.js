@@ -76,6 +76,35 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
 			
+			// course years filter change
+            $('#courseyears').change(function(){
+                
+                // get selected filter
+                var selected_year = $(this).children(":selected").attr("id");
+                
+                if(selected_year!="0") {
+                    // filter based on selected programme
+                    $.get('filter.php?type=Y&data='+selected_year, function(data){
+                        $('#mainfilters').hide();
+                        // replace filters with new data
+                        $('#mainfilters').html(data);
+                        $('#mainfilters').show();
+                    });
+                } else {
+                    // course years filter has been cleared ...
+                    // get the currently selected programme
+                    var selected_programme = $('#programmes').children(":selected").attr("id");
+                    
+                    // show filters based on the selected programme
+                    $.get('filter.php?type=P$data='+selected_programme, function(data){
+                        $('#mainfilters').hide();
+                        // replace filters with new data
+                        $('#mainfilters').html(data);
+                        $('#mainfilters').show();
+                    });
+                }
+            });
+			
 			//
 			// data grid
 			//
