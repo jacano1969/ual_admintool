@@ -19,12 +19,12 @@ if(is_logged_in()){
         echo '<body id="home-page">';
         echo get_filter_data($type, $data);
         echo show_footer();
-    } else {
+    }/* else {
         echo show_header();
         echo '<body id="home-page">';
-        echo get_filter_data(false, $data);
+        echo get_filter_data(false, false);
         echo show_footer();
-    }
+    }*/
 } else {
     header('Location: login.php');
     exit;
