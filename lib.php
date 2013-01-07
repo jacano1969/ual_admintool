@@ -591,7 +591,10 @@ function get_filter_data($type=false, $data=false) {
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
     } else if ($type=='Y') {
         // get programmes for selected course year
-        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.acad_period ='$data' order by name";
+        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.acad_period='$data' order by name";
+    } else if ($type=='U') {
+        // get programmes for selected course year
+        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.aos_code='$data' order by name";
     }
     
     // selected items
@@ -654,6 +657,11 @@ function get_filter_data($type=false, $data=false) {
         // filter by course year
         if($type=='Y') {
             $course_years_sql = "select distinct cs.acad_period as name from COURSE_STRUCTURE cs inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and cs.acad_period='$data' order by name";
+        }
+        
+        // filter by unit
+        if($type=='U') {
+            $course_years_sql = "select distinct cs.acad_period as name from COURSE_STRUCTURE cs inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and cs.aos_code='$data' order by name";
         }
     }
         
@@ -724,6 +732,11 @@ function get_filter_data($type=false, $data=false) {
             $courses_sql = "select distinct c.aos_code as id, c.full_description as name from COURSES c inner join COURSE_STRUCTURE cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and c.courseid=e.courseid and c.acad_period='$data' inner join COURSE_STRUCTURE cs1 on cs1.aoscd_link=c.aos_code order by name";
             //$courses_sql = "select c.aos_code as id, c.full_description as name from COURSES c where c.acad_period='$data'";
         }
+        
+        // filter by unit
+        if($type=='U') {
+            $courses_sql = "select distinct c.aos_code as id, c.full_description as name from COURSES c inner join COURSE_STRUCTURE cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and c.courseid=e.courseid and c.aos_code='$data' inner join COURSE_STRUCTURE cs1 on cs1.aoscd_link=c.aos_code order by name";
+        }
     }
     
     // get courses list
@@ -745,8 +758,7 @@ function get_filter_data($type=false, $data=false) {
                     }
                     // record selected courses (used to get units)
                     $selected_courses[]=$row->id;  
-                } else {
-                    if($type=='C') {
+                } else if($type=='C') {
                         $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
                     } else {
                         $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
