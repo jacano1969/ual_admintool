@@ -709,7 +709,7 @@ function get_filter_data($type=false, $data=false) {
     } else {
         // filter by programme 
         if($type=='P') {
-            $courses_sql = "select distinct c.aos_code as id, c.full_description as name from COURSES c inner join COURSE_STRUCTURE cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and c.courseid=e.courseid inner join COURSE_STRUCTURE cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name;";
+            $courses_sql = "select distinct c.aos_code as id, c.full_description as name from COURSES c inner join COURSE_STRUCTURE cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and c.courseid=e.courseid inner join COURSE_STRUCTURE cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name";
         }
         
         // filter by course 
@@ -721,7 +721,8 @@ function get_filter_data($type=false, $data=false) {
         
         // filter by course year
         if($type=='Y') {
-            $courses_sql = "select c.aos_code as id, c.full_description as name from COURSES c where c.acad_period='$data'";
+            $courses_sql = "select distinct c.aos_code as id, c.full_description as name from COURSES c inner join COURSE_STRUCTURE cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and c.courseid=e.courseid and c.acad_period='$data' inner join COURSE_STRUCTURE cs1 on cs1.aoscd_link=c.aos_code order by name";
+            //$courses_sql = "select c.aos_code as id, c.full_description as name from COURSES c where c.acad_period='$data'";
         }
     }
     
