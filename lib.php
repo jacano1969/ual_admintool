@@ -638,6 +638,8 @@ function get_filter_data($type=false, $data=false) {
         
         /* free result set */
         $result->close();
+    } else {
+        $filters .= $programmes_sql;
     }
 
     // course years
