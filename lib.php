@@ -589,10 +589,10 @@ function get_filter_data($type=false, $data=false) {
     } else if($type=='C'){
         // get programmes for selected course
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
-    } else if ($type=='Y') {
+    } else if($type=='Y') {
         // get programmes for selected course year
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.acad_period='$data' order by name";
-    } else if ($type=='U') {
+    } else if($type=='U') {
         // get programmes for selected course year
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.aos_code='$data' order by name";
     }
@@ -798,7 +798,7 @@ function get_filter_data($type=false, $data=false) {
             //$units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' inner join COURSE_STRUCTURE cs on c.acad_period='$data' and cs.aoscd_link = c.aos_code order by name";
         }
         
-        if($type='U') {
+        if($type=='U') {
             $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code='$data' order by name";
         }
     }
