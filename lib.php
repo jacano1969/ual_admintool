@@ -800,6 +800,7 @@ function get_filter_data($type=false, $data=false) {
     $filters .= '</fieldset>';
         
     $filters .='</div>';
+    $filters .='</div>';
     
     $mysqli->close();
     
