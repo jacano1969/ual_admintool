@@ -683,12 +683,6 @@ function get_filter_data($type=false, $data=false) {
                     } else {
                         $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
                     }
-                } else if($type='Y') {
-                    if($course_year==$row->name) {
-                        $filters .='<option id="'.$row->name.'" selected="selected">'.$row->name.'</option>';
-                    } else {
-                        $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
-                    }
                 } else {
                     $filters .='<option id="'.$row->name.'">'.$row->name.'</option>';
                 }
