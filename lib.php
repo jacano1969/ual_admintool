@@ -781,7 +781,7 @@ function get_filter_data($type=false, $data=false) {
             $units_sql = " SELECT DISTINCT c.aos_code as id, c.full_description AS name from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' inner join COURSE_STRUCTURE cs on cs.aos_code='$data' and cs.aoscd_link = c.aos_code order by name";
         }
         
-        if($type='Y') {
+        if($type=='Y') {
             $units_sql = " SELECT DISTINCT c.aos_code as id, c.full_description AS name from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code REGEXP '^[A-Z]' inner join COURSE_STRUCTURE cs on c.acad_period='$data' and cs.aoscd_link = c.aos_code order by name";
         }
     }
