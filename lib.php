@@ -628,7 +628,7 @@ function get_filter_data($type=false, $data=false) {
                 
             }
             
-            $filters .= '</select>';
+            $filters .= '</select> (' .$result->num_rows . ')';
         }
         
         //$filters .='</div>';
@@ -694,7 +694,7 @@ function get_filter_data($type=false, $data=false) {
                 }
             }
             
-            $filters .= '</select>';
+            $filters .= '</select> (' .$result->num_rows . ')';
         }
         
         /* free result set */
@@ -754,7 +754,7 @@ function get_filter_data($type=false, $data=false) {
                 }
             }
             
-            $filters .= '</select>';
+            $filters .= '</select> (' .$result->num_rows . ')';
         }
         
         /* free result set */
@@ -813,7 +813,7 @@ function get_filter_data($type=false, $data=false) {
                 }
             }
             
-            $filters .= '</select>';
+            $filters .= '</select> (' .$result->num_rows . ')';
         }
         
         /* free result set */
