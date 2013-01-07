@@ -625,6 +625,7 @@ function get_filter_data($type=false, $data=false) {
                         $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
                     }
                 }
+                
             }
             
             $filters .= '</select>';
@@ -648,6 +649,11 @@ function get_filter_data($type=false, $data=false) {
         // filter by course 
         if($type=='C') {
             $course_years_sql = "select distinct cs.acad_period as name from COURSE_STRUCTURE cs inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and cs.aos_code='$data' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) order by name";
+        }
+        
+        // filter by course year
+        if($type=='Y') {
+            $course_years_sql = "select distinct cs.acad_period as name from COURSE_STRUCTURE cs inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and cs.acad_period='$data' order by name";
         }
     }
         
