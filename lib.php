@@ -760,9 +760,8 @@ function get_filter_data($type=false, $data=false) {
                     $selected_courses[]=$row->id;  
                 } else if($type=='C') {
                         $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.'</option>';
-                    } else {
+                } else {
                         $filters .='<option id="'.$row->id.'">'.$row->name.'</option>';
-                    }
                 }
             }
             
