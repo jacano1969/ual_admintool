@@ -6,7 +6,7 @@ require_once('lib.php');
 
 if(is_logged_in()){
     // get params
-    if(!empty($_GET['type'])){
+    //if(!empty($_GET['type'])){
     
         $type = false;
         $data = false;
@@ -17,7 +17,7 @@ if(is_logged_in()){
         }       
         
         echo get_filter_data($type, $data);
-    }
+    //}
 } else {
     header('Location: login.php');
     exit;
