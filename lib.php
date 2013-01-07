@@ -589,6 +589,8 @@ function get_filter_data($type=false, $data=false) {
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
     }
     
+    echo $programmes_sql; exit;
+    
     // selected items
     $selected_programme = '';
     $selected_programme_year = '';
