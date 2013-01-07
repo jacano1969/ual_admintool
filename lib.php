@@ -591,7 +591,7 @@ function get_filter_data($type=false, $data=false) {
         $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') inner join course_structure cs1 on cs1.aoscd_link='$data' and cs1.aos_code=c.aos_code order by name";
     } else if ($type=='Y') {
         // get programmes for selected course year
-        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.acad_period ='$type' order by name";
+        $programmes_sql = "select distinct c.aos_code as id, c.full_description as name, c.acad_period as year from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code like('L%') and c.acad_period ='$data' order by name";
     }
     
     // selected items
