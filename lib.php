@@ -570,6 +570,8 @@ function get_filter_data($type=false, $data=false) {
     
     $filters .= '<body id="home-page">';
     
+    $filters .= '<div id="mainfilters">';
+    
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
         exit;
@@ -628,6 +630,8 @@ function get_filter_data($type=false, $data=false) {
             
             $filters .= '</select>';
         }
+        
+        $filters .='</div>';
         
         $filters .= show_footer();
         
