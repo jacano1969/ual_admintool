@@ -23,7 +23,7 @@ var ual_admintool = ual_admintool || (function(){
             //
             
             // programme filter change
-            $('#programmes').live("change", function(){
+            $('#programmes').change(function(){
                 
                 // get selected filter
                 var selected_programme = $(this).children(":selected").attr("id");
@@ -48,7 +48,7 @@ var ual_admintool = ual_admintool || (function(){
             });
             
             // course filter change
-            $('#courses').live("change", function(){
+            $('#courses').change(function(){
                 
                 // get selected filter
                 var selected_course = $(this).children(":selected").attr("id");
