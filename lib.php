@@ -568,6 +568,8 @@ function get_filter_data($type=false, $data=false) {
     
     $filters .= show_header();
     
+    $filters .= '<body id="home-page">';
+    
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
         exit;
