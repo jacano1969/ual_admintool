@@ -627,7 +627,7 @@ function get_filter_data($type=false, $data=false) {
             $filters .= '</select>';
         }
         
-        $filters .='</div>';
+        //$filters .='</div>';
         
         /* free result set */
         $result->close();
@@ -799,6 +799,8 @@ function get_filter_data($type=false, $data=false) {
     $filters .= '</form>';
     $filters .= '</fieldset>';
         
+    $filters .='</div>';
+    
     $mysqli->close();
     
     
