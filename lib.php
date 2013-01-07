@@ -566,8 +566,6 @@ function get_filter_data($type=false, $data=false) {
     //$filter = new stdClass();
     $filters ='';
     
-    $filters .= '<body id="home-page">';
-    
     $filters .= '<div id="mainfilters">';
     
     if (mysqli_connect_error()) {

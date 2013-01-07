@@ -16,10 +16,12 @@ if(is_logged_in()){
             $data = $_GET['data'];
         }       
         echo show_header();
+        echo '<body id="home-page">';
         echo get_filter_data($type, $data);
         echo show_footer();
     } else {
         echo show_header();
+        echo '<body id="home-page">';
         echo get_filter_data(false, $data);
         echo show_footer();
     }
