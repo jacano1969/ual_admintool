@@ -706,11 +706,16 @@ function get_filter_data($type=false, $data=false) {
             $courses_sql = "select distinct c.aos_code as id, c.full_description as name from COURSES c inner join COURSE_STRUCTURE cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and c.courseid=e.courseid inner join COURSE_STRUCTURE cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name;";
         }
         
-        // filter by programme 
+        // filter by course 
         if($type=='C') {
             // TODO:
             //$courses_sql = "select distinct c.aos_code as id, c.full_description as name from courses c inner join course_structure cs on cs.aos_code=c.aos_code and cs.aos_code REGEXP '^[0-9]' inner join enrolments e on e.studentid='$loggedin_username' and c.courseid=e.courseid inner join course_structure cs1 on cs1.aoscd_link=c.aos_code and cs1.aos_code='$data' order by name;";
             $courses_sql = "select c.aos_code as id, c.full_description as name from COURSES c where c.aos_code='$data'";
+        }
+        
+        // filter by course year
+        if($type=='Y') {
+            $courses_sql = "select c.aos_code as id, c.full_description as name from COURSES c where c.acad_period='$data'";
         }
     }
     
