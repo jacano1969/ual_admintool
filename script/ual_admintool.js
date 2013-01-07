@@ -105,6 +105,41 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
 			
+			// units filter change
+            $('#units').change(function(){
+                
+                // get selected filter
+                var selected_unit = $(this).children(":selected").attr("id");
+                
+                if(selected_unit!="0") {
+                    // filter based on selected unit
+                    $.get('filter.php?type=U&data='+selected_unit, function(data){
+                        $('#mainfilters').hide();
+                        // replace filters with new data
+                        $('#mainfilters').html(data);
+                        $('#mainfilters').show();
+                    });
+                } else {
+                    // unit filter has been cleared ...
+                    // get the currently selected programme
+                    var selected_programme = $('#programmes').children(":selected").attr("id");
+                    
+                    // show filters based on the selected programme
+                    $.get('filter.php?type=P$data='+selected_programme, function(data){
+                        $('#mainfilters').hide();
+                        // replace filters with new data
+                        $('#mainfilters').html(data);
+                        $('#mainfilters').show();
+                    });
+                }
+            });
+			
+			
+			//
+			// end of filters ---------------------------------->
+			//
+			
+			
 			//
 			// data grid
 			//
