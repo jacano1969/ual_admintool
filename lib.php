@@ -808,12 +808,12 @@ function get_filter_data($type=false, $data=false) {
                     } else {
                         $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';
                     }
+                }else if($type=='C') {
+                    $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';
+                }else if($type=='U') {
+                    $filters .='<option id="'.$row->id.'" selected="selected">'.$row->name.' ('.$row->id.')</option>';   
                 } else {
-                    if($type=='C') {
-                        $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';
-                    } else {
-                        $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';   
-                    }
+                    $filters .='<option id="'.$row->id.'">'.$row->name.' ('.$row->id.')</option>';   
                 }
             }
             
