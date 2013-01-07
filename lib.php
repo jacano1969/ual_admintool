@@ -796,6 +796,12 @@ function get_filter_data($type=false, $data=false) {
         $result->close();
     }
     
+    
+    // TODO: actions
+    
+    $filters .='<input type="submit" value="reset">';
+    
+    
     $filters .= '</form>';
     $filters .= '</fieldset>';
         
