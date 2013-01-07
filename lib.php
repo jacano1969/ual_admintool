@@ -603,7 +603,7 @@ function get_filter_data($type=false, $data=false) {
         if($result->num_rows==0) {
             return $filter;
         } else {  
-            $filters .= '<label for="programmes">Programme:</label><select id="programmes" name="programmes">';
+            $filters .= '<label for="programmes">Programme (' .$result->num_rows . '):</label><select id="programmes" name="programmes">';
             $filters .='<option id="0">Select Programme ...</option>';
             
             // construct data
@@ -628,7 +628,7 @@ function get_filter_data($type=false, $data=false) {
                 
             }
             
-            $filters .= '</select> (' .$result->num_rows . ')';
+            $filters .= '</select>';
         }
         
         //$filters .='</div>';
@@ -662,7 +662,7 @@ function get_filter_data($type=false, $data=false) {
         if($result->num_rows==0) {
             return $filter;
         } else {
-            $filters .= '<label for="courseyears">Course Year:</label><select id="courseyears" name="courseyears">';
+            $filters .= '<label for="courseyears">Course Year (' .$result->num_rows . '):</label><select id="courseyears" name="courseyears">';
             $filters .='<option id="0">Select Course Year ...</option>';
             
             // construct json data
@@ -694,7 +694,7 @@ function get_filter_data($type=false, $data=false) {
                 }
             }
             
-            $filters .= '</select> (' .$result->num_rows . ')';
+            $filters .= '</select>';
         }
         
         /* free result set */
@@ -732,7 +732,7 @@ function get_filter_data($type=false, $data=false) {
             return $filter;
         } else {
             
-            $filters .= '<label for="courses">Course:</label><select id="courses" name="courses">';
+            $filters .= '<label for="courses">Course (' .$result->num_rows . '):</label><select id="courses" name="courses">';
             $filters .='<option id="0">Select Course ...</option>';
             
             // construct json data
@@ -754,7 +754,7 @@ function get_filter_data($type=false, $data=false) {
                 }
             }
             
-            $filters .= '</select> (' .$result->num_rows . ')';
+            $filters .= '</select>';
         }
         
         /* free result set */
@@ -793,7 +793,7 @@ function get_filter_data($type=false, $data=false) {
             return $filter;
         } else {
             
-            $filters .= '<label for="units">Unit:</label><select id="units" name="units">';
+            $filters .= '<label for="units">Unit (' .$result->num_rows . '):</label><select id="units" name="units">';
             $filters .='<option id="0">Select Unit ...</option>';
             
             // construct json data
@@ -813,7 +813,7 @@ function get_filter_data($type=false, $data=false) {
                 }
             }
             
-            $filters .= '</select> (' .$result->num_rows . ')';
+            $filters .= '</select>';
         }
         
         /* free result set */
