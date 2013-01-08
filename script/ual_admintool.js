@@ -146,9 +146,9 @@ var ual_admintool = ual_admintool || (function(){
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
 						
-						$('#hiddenlightbox').html(data);
+						$('#hiddenresultslightbox').html(data);
 						
-						$('#hiddenlightbox').lightbox_me({
+						$('#hiddenresultslightbox').lightbox_me({
 							centered: true,
 							appearEffect: 'show',
 							lightboxSpeed: 'fast',
@@ -157,7 +157,7 @@ var ual_admintool = ual_admintool || (function(){
 							closeEsc: false, 
 							onLoad: function() { 
                                 // do anything after lightbox is loaded?
-                                $('#hiddenlightbox').css('width','400px');
+                                $('#hiddenresultslightbox').css('width','400px');
                             }
                         });
 				        
