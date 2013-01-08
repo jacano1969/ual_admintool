@@ -86,7 +86,7 @@ if(is_logged_in()){
     }*/
     
     
-    $content .='<input type="button" class="close" value="close">';
+    $content .='<input type="button" class="submit" value="Back">';
     
     //$content .= $enrolments_sql;
     
