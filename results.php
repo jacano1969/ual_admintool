@@ -11,18 +11,34 @@ $unit='';
 
 if(!empty($_GET['P'])) {
     $programme = $_GET['P'];
+    
+    if($programme=="undefined") {
+        $programme=0;
+    }
 }
 
 if(!empty($_GET['Y'])) {
     $course_year = $_GET['Y'];
+    
+    if($course_year=="undefined") {
+        $course_year=0;
+    }
 }
 
 if(!empty($_GET['C'])) {
     $course = $_GET['C'];
+    
+    if($course=="undefined") {
+        $course=0;
+    }
 }
 
 if(!empty($_GET['U'])) {
     $unit = $_GET['U'];
+    
+    if($unit=="undefined") {
+        $unit=0;
+    }
 }
 
 if(is_logged_in()){
