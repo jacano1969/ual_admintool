@@ -62,7 +62,7 @@ if(is_logged_in()){
     $loggedin_username = $_SESSION['USERNAME'];
     
     // users enrolments
-    $enrolments_sql = "SELECT " .
+    $enrolments_sql = "SELECT DISTINCT " .
                       "CASE WHEN c.aos_code like('L%') THEN 'Programme' ELSE " . 
                       "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course' ELSE " .
                       "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN 'Unit' " .
@@ -74,15 +74,15 @@ if(is_logged_in()){
                       "inner join COURSES c on c.courseid = e.courseid ";
     
     if($unit!=''){
-        $enrolments_sql .=" and e.aos_code='$unit'";
+        $enrolments_sql .=" and c.aos_code='$unit'";
     }else if($course!=''){
-        $enrolments_sql .=" and e.aos_code='$course' ";
+        $enrolments_sql .=" and c.aos_code='$course' ";
     }else if($programme!=''){
-        $enrolments_sql .=" and e.aos_code='$programme' ";
+        $enrolments_sql .=" and c.aos_code='$programme' ";
     }
     
     if($course_year!='') {
-        $enrolments_sql .=" and e.acad_period='$course_year' ";
+        $enrolments_sql .=" and c.acad_period='$course_year' ";
     }
     
     $enrolments_sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
