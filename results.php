@@ -116,15 +116,16 @@ if(is_logged_in()){
     
     if ($result = $mysqli->query($enrolments_sql)) {
         if($result->num_rows==0) {
-            $content .= '<tr><td>No Data</td></tr>';
+            $content .= '<th><td>No Data</td></th>';
         } else {
-            $content .='<tr>';
+            $content .='<th>';
             
             $content .='<td>Type</td><td>Record Id</td><td>Enrolment Id</td><td>Staff Id</td><td>Stage Id</td>';
             $content .='<td>Course Id</td><td>AOS Code</td><td>AOS Period</td><td>ACAD Period</td>';
             $content .='<td>College</td><td>AOS Description</td><td>Full Description</td><td>School</td><td>AOS Type</td>';
             
-            $content .='</tr>';
+            $content .='</th>';
+            
             while ($row = $result->fetch_object()) {
                 $content .="<tr>";
                 $content .="<td>$row->Type</td>";
