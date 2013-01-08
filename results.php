@@ -122,7 +122,7 @@ if(is_logged_in()){
             
             $content .='<td>Type</td><td>Record Id</td><td>Enrolment Id</td><td>Staff Id</td><td>Stage Id</td>';
             $content .='<td>Course Id</td><td>AOS Code</td><td>AOS Period</td><td>ACAD Period</td>';
-            $content .='<td>College</td><td>ASO Description</td><td>Full Description</td><td>School</td><td>AOS Type</td>';
+            $content .='<td>College</td><td>AOS Description</td><td>Full Description</td><td>School</td><td>AOS Type</td>';
             
             $content .='</tr>';
             while ($row = $result->fetch_object()) {
