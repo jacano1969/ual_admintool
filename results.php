@@ -70,8 +70,9 @@ if(is_logged_in()){
                       "e.record_id, e.enrolmentid, e.staffid, e.stageid, " .
                       "c.courseid, c.aos_code, c.aos_period, c.acad_period, c.college, c.aos_description," .
                       "c.full_description, c.school,c.aos_type " .
-                      "from STAFF_ENROLMENTS e ";
-                      
+                      "from STAFF_ENROLMENTS e " .
+                      "inner join COURSES c on c.courseid = e.courseid ";
+    
     if($unit!=''){
         $enrolments_sql .=" and e.aos_code='$unit'";
     }else if($course!=''){
@@ -84,8 +85,7 @@ if(is_logged_in()){
         $enrolments_sql .=" and e.acad_period='$course_year' ";
     }
     
-    $enrolments_sql .="inner join COURSES c on c.courseid = e.courseid " .
-                      "inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
+    $enrolments_sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
                       "and e.staffid = '$loggedin_username'";
                       
                
