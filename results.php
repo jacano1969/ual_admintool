@@ -72,14 +72,14 @@ if(is_logged_in()){
                       "c.full_description, c.school,c.aos_type " .
                       "from STAFF_ENROLMENTS e " .
                       "inner join COURSES c on c.courseid = e.courseid ";
-    if($programme!=0){
+    if($programme!=''){
         $enrolments_sql .=" and c.aos_code='$programme' ";
     }
     
     $enrolments_sql .= "inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
                       "and e.staffid = '$loggedin_username'";
                       
-                      
+               
     // course user is NOT enrolled on
     $not_enroled_sql ="SELECT * FROM COURSE_STRUCTURE cs " .
                       "INNER JOIN COURSES c " .
@@ -101,7 +101,7 @@ if(is_logged_in()){
     
     $content .='<input type="button" class="submit" value="Back">';
     
-    //$content .= $enrolments_sql;
+    $content .= $enrolments_sql;
     
     $content .='<table>';
     
