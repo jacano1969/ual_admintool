@@ -90,7 +90,7 @@ if(is_logged_in()){
     
     $content .='<table>';
     
-    if ($result = $mysqli->query($programmes_sql)) {
+    if ($result = $mysqli->query($enrolments_sql)) {
         if($result->num_rows==0) {
             $content .= '<tr><td>No Data</td></tr>';
         }
