@@ -118,18 +118,17 @@ if(is_logged_in()){
         if($result->num_rows==0) {
             $content .= '<th><td>No Data</td></th>';
         } else {
-            $content .='<th>';
+            $content .='<tr>';
             
-            $content .='<td>Type</td><td>Record Id</td><td>Enrolment Id</td><td>Staff Id</td><td>Stage Id</td>';
-            $content .='<td>Course Id</td><td>AOS Code</td><td>AOS Period</td><td>ACAD Period</td>';
-            $content .='<td>College</td><td>AOS Description</td><td>Full Description</td><td>School</td><td>AOS Type</td>';
+            $content .='<th>Type</th><th>Record Id</th><th>Enrolment Id</th><th>Staff Id</th><th>Stage Id</th>';
+            $content .='<th>Course Id</th><th>AOS Code</th><th>AOS Period</th><th>ACAD Period</th>';
+            $content .='<th>College</th><th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
             
-            $content .='</th>';
+            $content .='</tr>';
             
             while ($row = $result->fetch_object()) {
                 $content .="<tr>";
-                $type=$row->Type=='' ? ' ' : $row->Type;
-                $content .="<td>$type</td>";
+                $content .="<td>$row->Type</td>";
                 $content .="<td>$row->record_id</td>";
                 $content .="<td>$row->enrolmentid</td>";
                 $content .="<td>$row->staffid</td>";
@@ -142,8 +141,7 @@ if(is_logged_in()){
                 $content .="<td>$row->aos_description</td>";
                 $content .="<td>$row->full_description</td>";
                 $content .="<td>$row->school</td>";
-                $aos_type=$row->aos_type=='' ? ' ' : $row->aos_type;
-                $content .="<td>$aos_type</td>";
+                $content .="<td>$row->aos_type</td>";
                 $content .="</tr>";
             }
             
