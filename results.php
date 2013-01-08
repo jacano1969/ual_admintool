@@ -40,7 +40,7 @@ if(is_logged_in()){
     
     $content .='</table>';
     
-    
+    echo $content;
     
 } else {
     header('Location: login.php');
