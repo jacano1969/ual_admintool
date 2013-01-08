@@ -141,10 +141,27 @@ var ual_admintool = ual_admintool || (function(){
 				var selected_unit = $('#units').children(":selected").attr("id");
 				
 				// testing
-				alert('Programme: ' + selected_programme + '\n' +
-					  'Course Year: ' + selected_courseyear + '\n' +
-					  'Course: ' + selected_course + '\n' +
-					  'Unit:' + selected_unit);
+				$.get('results.php?P=' + selected_programme +
+					  '&Y=' + selected_courseyear +
+					  '&C=' + selected_course +
+					  '&U=' + selected_unit, function(data) {
+						
+						$('#hiddenlightbox').html(data);
+						
+						$('#hiddenlightbox').lightbox_me({
+							centered: true,
+							appearEffect: 'show',
+							lightboxSpeed: 'fast',
+							overlaySpeed: 'fast',
+							closeClick: false,
+							closeEsc: false, 
+							onLoad: function() { 
+                                // do anything after lightbox is loaded?
+                                $('#hiddenlightbox').css('width','400px');
+                            }
+                        });
+				        
+					});
 			});
 			
 			//
