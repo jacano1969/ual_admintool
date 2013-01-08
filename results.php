@@ -72,8 +72,17 @@ if(is_logged_in()){
                       "c.full_description, c.school,c.aos_type " .
                       "from STAFF_ENROLMENTS e " .
                       "inner join COURSES c on c.courseid = e.courseid ";
-    if($programme!=''){
+    
+    if($unit!=''){
+        $enrolments_sql .=" and c.aos_code='$unit' ";
+    }else if($course!=''){
+        $enrolments_sql .=" and c.aos_code='$course' ";
+    }else if($programme!=''){
         $enrolments_sql .=" and c.aos_code='$programme' ";
+    }
+    
+    if($course_year!='') {
+        $enrolments_sql .=" and c.acad_period='$course_year' ";
     }
     
     $enrolments_sql .= "inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
