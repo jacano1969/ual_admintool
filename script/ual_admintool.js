@@ -153,7 +153,7 @@ var ual_admintool = ual_admintool || (function(){
 						$('#hiddenresultslightbox').html(data);
 						
 						$('#hiddenresultslightbox').lightbox_me({
-							centered: true,
+							centered: false,
 							appearEffect: 'show',
 							lightboxSpeed: 'fast',
 							overlaySpeed: 'fast',
@@ -162,6 +162,7 @@ var ual_admintool = ual_admintool || (function(){
 							onLoad: function() { 
                                 // do anything after lightbox is loaded?
                                 $('#hiddenresultslightbox').css('width','400px');
+								$('#hiddenresultslightbox').css('background','#ffffff');
                             }
                         });
 				        
