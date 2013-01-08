@@ -11,20 +11,20 @@ if(is_logged_in()){
     $course='';
     $unit='';
     
-    if(!empty($_GET['P'])) {
-        $programme = $_GET['P'];
+    if(!empty($_POST['P'])) {
+        $programme = $_POST['P'];
     }
     
-    if(!empty($_GET['Y'])) {
-        $course_year = $_GET['Y'];
+    if(!empty($_POST['Y'])) {
+        $course_year = $_POST['Y'];
     }
     
-    if(!empty($_GET['C'])) {
-        $course = $_GET['C'];
+    if(!empty($_POST['C'])) {
+        $course = $_POST['C'];
     }
     
-    if(!empty($_GET['U'])) {
-        $unit = $_GET['U'];
+    if(!empty($_POST['U'])) {
+        $unit = $_POST['U'];
     }
     
     // get results based on filters
