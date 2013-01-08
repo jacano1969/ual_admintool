@@ -150,7 +150,7 @@ var ual_admintool = ual_admintool || (function(){
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
 						
-						$('div.container').html(data);
+						$('#home-page').html(data);
 						
 						/*$('#hiddenresultslightbox').html(data);
 						
