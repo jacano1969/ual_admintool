@@ -2,7 +2,6 @@
 
 session_start();
 
-require_once('dbconfig.php');
 require_once('lib.php');
 
 $programme='';
@@ -59,6 +58,7 @@ if(is_logged_in()){
         header('Location: login.php?error=4');
         exit;
     }
+    
     $loggedin_username = $_SESSION['USERNAME'];
     
     $enrolments_sql = "SELECT " .
@@ -95,37 +95,34 @@ if(is_logged_in()){
     if ($result = $mysqli->query($enrolments_sql)) {
         if($result->num_rows==0) {
             $content .= '<tr><td>No Data</td></tr>';
+        } else {
+            $content .='<tr>';
+            
+            $content .='<td>Type</td><td>Record Id</td><td>Enrolment Id</td><td>Staff Id</td><td>Stage Id</td>';
+            $content .='<td>Course Id</td><td>AOS Code</td><td>AOS Period</td><td>ACAD Period</td>';
+            $content .='<td>College</td><td>ASO Description</td><td>Full Description</td><td>School</td><td>AOS Type</td>';
+            
+            $content .='</tr>';
+            while ($row = $result->fetch_object()) {
+                $content .="<tr>";
+                $content .="<td>$row->Type</td>";
+                $content .="<td>$row->record_id</td>";
+                $content .="<td>$row->staffid</td>";
+                $content .="<td>$row->stageid</td>";
+                $content .="<td>$row->courseid</td>";
+                $content .="<td>$row->aos_code</td>";
+                $content .="<td>$row->aos_period</td>";
+                $content .="<td>$row->acad_period</td>";
+                $content .="<td>$row->college</td>";
+                $content .="<td>$row->aos_description</td>";
+                $content .="<td>$row->full_description</td>";
+                $content .="<td>$row->school</td>";
+                $content .="<td>$row->aos_type</td>";
+                $content .="</tr>";
+            }
+            
+            $result->close();
         }
-    } else {
-        /*$content .='<tr>';
-        
-        $content .='<td>Type</td><td>Record Id</td><td>Enrolment Id</td><td>Staff Id</td><td>Stage Id</td>';
-        $content .='<td>Course Id</td><td>AOS Code</td><td>AOS Period</td><td>ACAD Period</td>';
-        $content .='<td>College</td><td>ASO Description</td><td>Full Description</td><td>School</td><td>AOS Type</td>';
-        
-        $content .='</tr>';
-        while ($row = $result->fetch_object()) {
-            $content .="<tr>";
-            $content .="<td>$row->Type</td>";
-            $content .="<td>$row->record_id</td>";
-            $content .="<td>$row->staffid</td>";
-            $content .="<td>$row->stageid</td>";
-            $content .="<td>$row->courseid</td>";
-            $content .="<td>$row->aos_code</td>";
-            $content .="<td>$row->aos_period</td>";
-            $content .="<td>$row->acad_period</td>";
-            $content .="<td>$row->college</td>";
-            $content .="<td>$row->aos_description</td>";
-            $content .="<td>$row->full_description</td>";
-            $content .="<td>$row->school</td>";
-            $content .="<td>$row->aos_type</td>";
-            $content .="</tr>";
-        }
-        */
-        
-        print_r($result);
-        
-        $result->close();
     }   
     
     $content .='</table>';
