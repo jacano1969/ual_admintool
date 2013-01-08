@@ -128,7 +128,7 @@ if(is_logged_in()){
             
             while ($row = $result->fetch_object()) {
                 $content .="<tr>";
-                $content .="<td>$row->Type</td>";
+                $content .="<td>$row->Type=='' ? ' ' : $row->Type</td>";
                 $content .="<td>$row->record_id</td>";
                 $content .="<td>$row->enrolmentid</td>";
                 $content .="<td>$row->staffid</td>";
@@ -141,7 +141,7 @@ if(is_logged_in()){
                 $content .="<td>$row->aos_description</td>";
                 $content .="<td>$row->full_description</td>";
                 $content .="<td>$row->school</td>";
-                $content .="<td>$row->aos_type</td>";
+                $content .="<td>$row->aos_type=='' ? ' ' : $row->aos_type</td>";
                 $content .="</tr>";
             }
             
