@@ -93,6 +93,7 @@ if(is_logged_in()){
     if ($result = $mysqli->query($programmes_sql)) {
         if($result->num_rows==0) {
             $content .= '<tr><td>No Data</td></tr>';
+        }
     } else {
         $content .='<tr>';
         
