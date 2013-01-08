@@ -90,8 +90,8 @@ if(is_logged_in()){
     
     $content .='<table>';
     
-    if ($results = $mysqli->query($programmes_sql)) {
-        if($results->num_rows==0) {
+    if ($result = $mysqli->query($programmes_sql)) {
+        if($result->num_rows==0) {
             $content .= '<tr><td>No Data</td></tr>';
     } else {
         $content .='<tr>';
@@ -101,26 +101,30 @@ if(is_logged_in()){
         $content .='<td>College</td><td>ASO Description</td><td>Full Description</td><td>School</td><td>AOS Type</td>';
         
         $content .='</tr>';
-        foreach($results as $result) {
+        while ($row = $result->fetch_object()) {
             $content .="<tr>";
-            $content .="<td>$result->Type</td>";
-            $content .="<td>$result->record_id</td>";
-            $content .="<td>$result->staffid</td>";
-            $content .="<td>$result->stageid</td>";
-            $content .="<td>$result->courseid</td>";
-            $content .="<td>$result->aos_code</td>";
-            $content .="<td>$result->aos_period</td>";
-            $content .="<td>$result->acad_period</td>";
-            $content .="<td>$result->college</td>";
-            $content .="<td>$result->aos_description</td>";
-            $content .="<td>$result->full_description</td>";
-            $content .="<td>$result->school</td>";
-            $content .="<td>$result->aos_type</td>";
+            $content .="<td>$row->Type</td>";
+            $content .="<td>$row->record_id</td>";
+            $content .="<td>$row->staffid</td>";
+            $content .="<td>$row->stageid</td>";
+            $content .="<td>$row->courseid</td>";
+            $content .="<td>$row->aos_code</td>";
+            $content .="<td>$row->aos_period</td>";
+            $content .="<td>$row->acad_period</td>";
+            $content .="<td>$row->college</td>";
+            $content .="<td>$row->aos_description</td>";
+            $content .="<td>$row->full_description</td>";
+            $content .="<td>$row->school</td>";
+            $content .="<td>$row->aos_type</td>";
             $content .="</tr>";
         }
+        
+        $result->close();
     }   
     
     $content .='</table>';
+    
+    $mysqli->close();
     
     echo $content;
     
