@@ -25,8 +25,8 @@ if(is_logged_in()){
         echo '<body id="home-page">';
         echo '<div class="container">';
         echo get_filter_data(false, false);
-        echo '<div id="hiddenresultslightbox">';
-        echo '</div>';
+        //echo '<div id="hiddenresultslightbox">';
+        //echo '</div>';
         echo show_footer();
     }
 } else {
