@@ -97,7 +97,7 @@ if(is_logged_in()){
             $content .= '<tr><td>No Data</td></tr>';
         }
     } else {
-        $content .='<tr>';
+        /*$content .='<tr>';
         
         $content .='<td>Type</td><td>Record Id</td><td>Enrolment Id</td><td>Staff Id</td><td>Stage Id</td>';
         $content .='<td>Course Id</td><td>AOS Code</td><td>AOS Period</td><td>ACAD Period</td>';
@@ -121,6 +121,9 @@ if(is_logged_in()){
             $content .="<td>$row->aos_type</td>";
             $content .="</tr>";
         }
+        */
+        
+        print_r($result);
         
         $result->close();
     }   
