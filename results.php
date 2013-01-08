@@ -110,13 +110,13 @@ if(is_logged_in()){
     
     $content .='<input type="button" class="submit" value="Back">';
     
-    $content .= $enrolments_sql;
+    //$content .= $enrolments_sql;
     
     $content .='<table>';
     
     if ($result = $mysqli->query($enrolments_sql)) {
         if($result->num_rows==0) {
-            $content .= '<th><td>No Data</td></th>';
+            $content .= '<th><td>No Enrolment Data</td></th>';
         } else {
             $content .='<tr>';
             
