@@ -29,6 +29,7 @@ var ual_admintool = ual_admintool || (function(){
                 var selected_programme = $(this).children(":selected").attr("id");
                 
                 if(selected_programme!="0") {
+					$('#mainfilters').html('<h2>Loading ...</h2>');
                     // filter based on selected programme
                     $.get('filter.php?type=P&data='+selected_programme, function(data){
                         $('#mainfilters').hide();
@@ -54,6 +55,7 @@ var ual_admintool = ual_admintool || (function(){
                 var selected_course = $(this).children(":selected").attr("id");
                 
                 if(selected_course!="0") {
+					$('#mainfilters').html('<h2>Loading ...</h2>');
                     // filter based on selected programme
                     $.get('filter.php?type=C&data='+selected_course, function(data){
                         $('#mainfilters').hide();
@@ -83,6 +85,7 @@ var ual_admintool = ual_admintool || (function(){
                 var selected_year = $(this).children(":selected").attr("id");
                 
                 if(selected_year!="0") {
+					$('#mainfilters').html('<h2>Loading ...</h2>');
                     // filter based on selected programme
                     $.get('filter.php?type=Y&data='+selected_year, function(data){
                         $('#mainfilters').hide();
@@ -112,6 +115,7 @@ var ual_admintool = ual_admintool || (function(){
                 var selected_unit = $(this).children(":selected").attr("id");
                 
                 if(selected_unit!="0") {
+					$('#mainfilters').html('<h2>Loading ...</h2>');
                     // filter based on selected unit
                     $.get('filter.php?type=U&data='+selected_unit, function(data){
                         $('#mainfilters').hide();
