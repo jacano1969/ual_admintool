@@ -61,6 +61,7 @@ if(is_logged_in()){
     
     $loggedin_username = $_SESSION['USERNAME'];
     
+    // users entrolments
     $enrolments_sql = "SELECT " .
                       "CASE WHEN c.aos_code like('L%') THEN 'Programme' ELSE " . 
                       "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course' ELSE " .
@@ -74,6 +75,14 @@ if(is_logged_in()){
                       "inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
                       "and e.staffid = '$loggedin_username'";
                       
+                      
+    // course user is NOT enrolled on
+    $not_enroled_sql ="SELECT * FROM COURSE_STRUCTURE cs " .
+                      "INNER JOIN COURSES c " .
+                      "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') " .
+                      "AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
+                      "WHERE e.staffid = '$loggedin_username')";
+                          
     /*if($programme!=0){
         $enrolments_sql .= "inner join ";
         select distinct c.aos_code as id,
