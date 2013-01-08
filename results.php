@@ -88,6 +88,8 @@ if(is_logged_in()){
     
     $content .='<input type="button" class="close" value="close">';
     
+    $content .= $enrolments_sql;
+    
     $content .='<table>';
     
     if ($result = $mysqli->query($enrolments_sql)) {
