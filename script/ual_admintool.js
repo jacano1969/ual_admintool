@@ -138,7 +138,7 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
 			
-			$('#showresults').live("click", function() {
+			$('#showenrolments').live("click", function() {
 				var selected_programme = $('#programmes').children(":selected").attr("id");
 				var selected_courseyear = $('#courseyears').children(":selected").attr("id");
 				var selected_course = $('#courses').children(":selected").attr("id");

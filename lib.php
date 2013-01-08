@@ -841,7 +841,7 @@ function get_filter_data($type=false, $data=false) {
     // TODO: actions
     
     $filters .='<input type="submit" class="submit" value="reset">';
-    $filters .='<input id="showresults" name="showresults" type="submit" class="submit" value="show results">';
+    $filters .='<input id="showenrolments" name="showenrolments" type="submit" class="submit" value="Show enrolments">';
     
     
     $filters .= '</form>';
