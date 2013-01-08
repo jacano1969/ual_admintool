@@ -129,6 +129,7 @@ if(is_logged_in()){
                 $content .="<tr>";
                 $content .="<td>$row->Type</td>";
                 $content .="<td>$row->record_id</td>";
+                $content .="<td>$row->enrolmentid</td>";
                 $content .="<td>$row->staffid</td>";
                 $content .="<td>$row->stageid</td>";
                 $content .="<td>$row->courseid</td>";
