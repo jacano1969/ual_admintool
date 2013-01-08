@@ -70,22 +70,22 @@ if(is_logged_in()){
                       "e.record_id, e.enrolmentid, e.staffid, e.stageid, " .
                       "c.courseid, c.aos_code, c.aos_period, c.acad_period, c.college, c.aos_description," .
                       "c.full_description, c.school,c.aos_type " .
-                      "from STAFF_ENROLMENTS e " .
-                      "inner join COURSES c on c.courseid = e.courseid ";
-    
+                      "from STAFF_ENROLMENTS e ";
+                      
     if($unit!=''){
-        $enrolments_sql .=" and c.aos_code='$unit' ";
+        $enrolments_sql .=" and e.aos_code='$unit'";
     }else if($course!=''){
-        $enrolments_sql .=" and c.aos_code='$course' ";
+        $enrolments_sql .=" and e.aos_code='$course' ";
     }else if($programme!=''){
-        $enrolments_sql .=" and c.aos_code='$programme' ";
+        $enrolments_sql .=" and e.aos_code='$programme' ";
     }
     
     if($course_year!='') {
-        $enrolments_sql .=" and c.acad_period='$course_year' ";
+        $enrolments_sql .=" and e.acad_period='$course_year' ";
     }
     
-    $enrolments_sql .= "inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
+    $enrolments_sql .="inner join COURSES c on c.courseid = e.courseid " .
+                      "inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
                       "and e.staffid = '$loggedin_username'";
                       
                
