@@ -3,7 +3,7 @@
 session_start();
 
 require_once('dbconfig.php');
-//require_once('lib.php');
+require_once('lib.php');
 
 $programme='';
 $course_year='';
