@@ -135,30 +135,36 @@ if(is_logged_in()){
         } else {
             $content .='<tr>';
             
-            $content .='<th>Type</th><th>Record Id</th><th>Enrolment Id</th><th>Staff Id</th><th>Stage Id</th>';
-            $content .='<th>Course Id</th><th>AOS Code</th><th>AOS Period</th><th>ACAD Period</th>';
-            $content .='<th>College</th><th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
-            
-            $content .='</tr>';
-            
-            while ($row = $result->fetch_object()) {
-                $content .="<tr>";
-                $content .="<td>$row->Type</td>";
-                $content .="<td>$row->record_id</td>";
-                $content .="<td>$row->enrolmentid</td>";
-                $content .="<td>$row->staffid</td>";
-                $content .="<td>$row->stageid</td>";
-                $content .="<td>$row->courseid</td>";
-                $content .="<td>$row->aos_code</td>";
-                $content .="<td>$row->aos_period</td>";
-                $content .="<td>$row->acad_period</td>";
-                $content .="<td>$row->college</td>";
-                $content .="<td>$row->aos_description</td>";
-                $content .="<td>$row->full_description</td>";
-                $content .="<td>$row->school</td>";
-                $content .="<td>$row->aos_type</td>";
-                $content .="</tr>";
+            // show users enrolments
+            if($result_type=='ue' || $result_type=='') {
+                $content .='<th>Type</th><th>Record Id</th><th>Enrolment Id</th><th>Staff Id</th><th>Stage Id</th>';
+                $content .='<th>Course Id</th><th>AOS Code</th><th>AOS Period</th><th>ACAD Period</th>';
+                $content .='<th>College</th><th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
+                
+                $content .='</tr>';
+                
+                while ($row = $result->fetch_object()) {
+                    $content .="<tr>";
+                    $content .="<td>$row->Type</td>";
+                    $content .="<td>$row->record_id</td>";
+                    $content .="<td>$row->enrolmentid</td>";
+                    $content .="<td>$row->staffid</td>";
+                    $content .="<td>$row->stageid</td>";
+                    $content .="<td>$row->courseid</td>";
+                    $content .="<td>$row->aos_code</td>";
+                    $content .="<td>$row->aos_period</td>";
+                    $content .="<td>$row->acad_period</td>";
+                    $content .="<td>$row->college</td>";
+                    $content .="<td>$row->aos_description</td>";
+                    $content .="<td>$row->full_description</td>";
+                    $content .="<td>$row->school</td>";
+                    $content .="<td>$row->aos_type</td>";
+                    $content .="</tr>";
+                }
+            } else {
+                print_r($result);
             }
+            
             
             $result->close();
         }

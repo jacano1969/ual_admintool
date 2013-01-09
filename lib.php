@@ -607,7 +607,7 @@ function get_filter_data($type=false, $data=false) {
             $filters .= 'No Programmes<br><br>';
         } else {  
             $filters .= '<label for="programmes">Programme (' .$result->num_rows . '):</label><select id="programmes" name="programmes">';
-            $filters .='<option id="0">Select Programme ...</option>';
+            $filters .='<option id="0">All Programmes ...</option>';
             
             // construct data
             while ($row = $result->fetch_object()) {
@@ -673,7 +673,7 @@ function get_filter_data($type=false, $data=false) {
             $filters .= 'No Course Years<br><br>';
         } else {
             $filters .= '<label for="courseyears">Course Year (' .$result->num_rows . '):</label><select id="courseyears" name="courseyears">';
-            $filters .='<option id="0">Select Course Year ...</option>';
+            $filters .='<option id="0">All Course Years ...</option>';
             
             // construct json data
             while ($row = $result->fetch_object()) {
@@ -748,7 +748,7 @@ function get_filter_data($type=false, $data=false) {
         } else {
             
             $filters .= '<label for="courses">Course (' .$result->num_rows . '):</label><select id="courses" name="courses">';
-            $filters .='<option id="0">Select Course ...</option>';
+            $filters .='<option id="0">All Courses ...</option>';
             
             // construct json data
             while ($row = $result->fetch_object()) {
@@ -811,7 +811,7 @@ function get_filter_data($type=false, $data=false) {
         } else {
             
             $filters .= '<label for="units">Unit (' .$result->num_rows . '):</label><select id="units" name="units">';
-            $filters .='<option id="0">Select Unit ...</option>';
+            $filters .='<option id="0">All Units ...</option>';
             
             // construct json data
             while ($row = $result->fetch_object()) {
