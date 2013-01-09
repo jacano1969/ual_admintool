@@ -138,7 +138,7 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
 			
-			$('#showenrolments').live("click", function() {
+			$('#showuserenrolments').live("click", function() {
 				var selected_programme = $('#programmes').children(":selected").attr("id");
 				var selected_courseyear = $('#courseyears').children(":selected").attr("id");
 				var selected_course = $('#courses').children(":selected").attr("id");
@@ -146,6 +146,43 @@ var ual_admintool = ual_admintool || (function(){
 				
 				// show courses that user is enrolled on
 				$.get('results.php?T=ue&P=' + selected_programme +
+					  '&Y=' + selected_courseyear +
+					  '&C=' + selected_course +
+					  '&U=' + selected_unit, function(data) {
+						
+						$('#home-page').html(data);
+						
+						/*$('#hiddenresultslightbox').html(data);
+						
+						$('#hiddenresultslightbox').lightbox_me({
+							centered: false,
+							appearEffect: 'show',
+							lightboxSpeed: 'fast',
+							overlaySpeed: 'fast',
+							closeClick: false,
+							closeEsc: false, 
+							onLoad: function() { 
+                                // do anything after lightbox is loaded?
+                                $('#hiddenresultslightbox').css('width','400px');
+								$('#hiddenresultslightbox').css('background','#ffffff');
+                            }
+                        });*/
+				        
+					});
+				
+				return false;
+			});
+			
+			
+			// show possible enrolments
+			$('#showpossibleenrolments').live("click", function() {
+				var selected_programme = $('#programmes').children(":selected").attr("id");
+				var selected_courseyear = $('#courseyears').children(":selected").attr("id");
+				var selected_course = $('#courses').children(":selected").attr("id");
+				var selected_unit = $('#units').children(":selected").attr("id");
+				
+				// show courses that user is enrolled on
+				$.get('results.php?T=pe&P=' + selected_programme +
 					  '&Y=' + selected_courseyear +
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
