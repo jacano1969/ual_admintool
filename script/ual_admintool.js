@@ -144,8 +144,8 @@ var ual_admintool = ual_admintool || (function(){
 				var selected_course = $('#courses').children(":selected").attr("id");
 				var selected_unit = $('#units').children(":selected").attr("id");
 				
-				// testing
-				$.get('results.php?P=' + selected_programme +
+				// show courses that user is enrolled on
+				$.get('results.php?T=ue&P=' + selected_programme +
 					  '&Y=' + selected_courseyear +
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {

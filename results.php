@@ -4,10 +4,19 @@ session_start();
 
 require_once('lib.php');
 
+$result_type='';
 $programme='';
 $course_year='';
 $course='';
 $unit='';
+
+if(!empty($_GET['T'])) {
+    $result_type = $_GET['T'];
+    
+    if($result_type=="undefined") {
+        $result_type='';
+    }
+}
 
 if(!empty($_GET['P'])) {
     $programme = $_GET['P'];
@@ -53,6 +62,7 @@ if(is_logged_in()){
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
     $results ='';
+    $sql='';
     
     if (mysqli_connect_error()) {
         header('Location: login.php?error=4');
@@ -61,40 +71,44 @@ if(is_logged_in()){
     
     $loggedin_username = $_SESSION['USERNAME'];
     
-    // users enrolments
-    $enrolments_sql = "SELECT DISTINCT " .
-                      "CASE WHEN c.aos_code like('L%') THEN 'Programme' ELSE " . 
-                      "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course' ELSE " .
-                      "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN 'Unit' " .
-                      "END END END as 'Type', " .
-                      "e.record_id, e.enrolmentid, e.staffid, e.stageid, " .
-                      "c.courseid, c.aos_code, c.aos_period, c.acad_period, c.college, c.aos_description," .
-                      "c.full_description, c.school,c.aos_type " .
-                      "from STAFF_ENROLMENTS e " .
-                      "inner join COURSES c on c.courseid = e.courseid ";
     
-    if($unit!=''){
-        $enrolments_sql .=" and c.aos_code='$unit'";
-    }else if($course!=''){
-        $enrolments_sql .=" and c.aos_code='$course' ";
-    }else if($programme!=''){
-        $enrolments_sql .=" and c.aos_code='$programme' ";
+    // user enrolments / default
+    if($result_type=='ue' || $result_type=='') {
+        // users enrolments
+        $sql = "SELECT DISTINCT " .
+               "CASE WHEN c.aos_code like('L%') THEN 'Programme' ELSE " . 
+               "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course' ELSE " .
+               "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN 'Unit' " .
+               "END END END as 'Type', " .
+               "e.record_id, e.enrolmentid, e.staffid, e.stageid, " .
+               "c.courseid, c.aos_code, c.aos_period, c.acad_period, c.college, c.aos_description," .
+               "c.full_description, c.school,c.aos_type " .
+               "from STAFF_ENROLMENTS e " .
+               "inner join COURSES c on c.courseid = e.courseid ";
+        
+        if($unit!=''){
+            $sql .=" and c.aos_code='$unit'";
+        }else if($course!=''){
+            $sql .=" and c.aos_code='$course' ";
+        }else if($programme!=''){
+            $sql .=" and c.aos_code='$programme' ";
+        }
+        
+        if($course_year!='') {
+            $sql .=" and c.acad_period='$course_year' ";
+        }
+        
+        $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
+                          "and e.staffid = '$loggedin_username'";
+                          
+    } else {
+        // course user is NOT enrolled on
+        $sql ="SELECT * FROM COURSE_STRUCTURE cs " .
+                          "INNER JOIN COURSES c " .
+                          "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') " .
+                          "AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
+                          "WHERE e.staffid = '$loggedin_username')";
     }
-    
-    if($course_year!='') {
-        $enrolments_sql .=" and c.acad_period='$course_year' ";
-    }
-    
-    $enrolments_sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
-                      "and e.staffid = '$loggedin_username'";
-                      
-               
-    // course user is NOT enrolled on
-    $not_enroled_sql ="SELECT * FROM COURSE_STRUCTURE cs " .
-                      "INNER JOIN COURSES c " .
-                      "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') " .
-                      "AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
-                      "WHERE e.staffid = '$loggedin_username')";
                           
     /*if($programme!=0){
         $enrolments_sql .= "inner join ";
@@ -110,11 +124,12 @@ if(is_logged_in()){
     
     $content .='<input type="button" class="submit" value="Back">';
     
+    // testing
     //$content .= $enrolments_sql;
     
     $content .='<table>';
     
-    if ($result = $mysqli->query($enrolments_sql)) {
+    if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
             $content .= '<th><td>No Enrolment Data</td></th>';
         } else {
