@@ -111,7 +111,7 @@ if(is_logged_in()){
               "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') ";
               
               
-        if($unit!=''){
+        /*if($unit!=''){
             $sql .=" and c.aos_code='$unit'";
         }else if($course!=''){
             $sql .=" and c.aos_code='$course' ";
@@ -121,7 +121,7 @@ if(is_logged_in()){
         
         if($course_year!='') {
             $sql .=" and c.acad_period='$course_year' ";
-        }
+        }*/
         
         $sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
                "WHERE e.staffid = '$loggedin_username')";
