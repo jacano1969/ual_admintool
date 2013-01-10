@@ -108,7 +108,7 @@ if(is_logged_in()){
               "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
               "FROM COURSE_STRUCTURE cs " .
               "INNER JOIN COURSES c " .
-              "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') " .
+              "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') ";
               
               
         if($unit!=''){
