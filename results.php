@@ -103,11 +103,28 @@ if(is_logged_in()){
                           
     } else {
         // course user is NOT enrolled on
-        $sql ="SELECT * FROM COURSE_STRUCTURE cs " .
-                          "INNER JOIN COURSES c " .
-                          "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') " .
-                          "AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
-                          "WHERE e.staffid = '$loggedin_username')";
+        $sql ="SELECT c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
+              "cs.aoscd_link, cs.lnk_aos_period, cs.lnk_period, cs.compulsry_yn," .
+              "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
+              "FROM COURSE_STRUCTURE cs " .
+              "INNER JOIN COURSES c " .
+              "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') " .
+              
+              
+        if($unit!=''){
+            $sql .=" and c.aos_code='$unit'";
+        }else if($course!=''){
+            $sql .=" and c.aos_code='$course' ";
+        }else if($programme!=''){
+            $sql .=" and c.aos_code='$programme' ";
+        }
+        
+        if($course_year!='') {
+            $sql .=" and c.acad_period='$course_year' ";
+        }
+        
+        $sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
+               "WHERE e.staffid = '$loggedin_username')";
     }
                           
     /*if($programme!=0){
@@ -162,7 +179,29 @@ if(is_logged_in()){
                     $content .="</tr>";
                 }
             } else {
-                print_r($result);
+                $content .='<th>Course Id</th><th>AOS Code</th><th>Aos Period</th><th>Acad Period</th><th>Aos CD Link</th>';
+                $content .='<th>Link AOS Period</th><th>Link Period</th><th>Compulsory</th><th>College</th>';
+                $content .='<th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
+                
+                $content .='</tr>';
+                
+                while ($row = $result->fetch_object()) {
+                    $content .="<tr>";
+                    $content .="<td>$row->courseid</td>";
+                    $content .="<td>$row->aos_code</td>";
+                    $content .="<td>$row->aos_period</td>";
+                    $content .="<td>$row->acad_period</td>";
+                    $content .="<td>$row->aoscd_link</td>";
+                    $content .="<td>$row->lnk_aos_period</td>";
+                    $content .="<td>$row->lnk_period</td>";
+                    $content .="<td>$row->compulsry_yn</td>";
+                    $content .="<td>$row->college</td>";
+                    $content .="<td>$row->aos_description</td>";
+                    $content .="<td>$row->full_description</td>";
+                    $content .="<td>$row->school</td>";
+                    $content .="<td>$row->aos_type</td>";
+                    $content .="</tr>";
+                }
             }
             
             
