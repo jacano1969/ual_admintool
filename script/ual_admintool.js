@@ -163,6 +163,7 @@ var ual_admintool = ual_admintool || (function(){
 						
 						$('#results_container').html(data);
 						$('#back_to_filter').show();
+						$('#results_container').show();
 						
 						/*$('#hiddenresultslightbox').html(data);
 						
@@ -204,6 +205,7 @@ var ual_admintool = ual_admintool || (function(){
 						
 						$('#results_container').html(data);
 						$('#back_to_filter').show();
+						$('#results_container').show();
 						
 						/*$('#hiddenresultslightbox').html(data);
 						
