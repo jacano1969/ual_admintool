@@ -25,7 +25,9 @@ if(is_logged_in()){
     } else {
         echo show_header();
         echo '<body id="home-page">';
-        echo '<div class="container">';
+        echo '<div id="results_container">';
+        echo '</div>';
+        echo '<div id="filter_container" class="container">';
         echo get_filter_data(false, false);
         //echo '<div id="hiddenresultslightbox">';
         //echo '</div>';
