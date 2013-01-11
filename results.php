@@ -107,8 +107,9 @@ if(is_logged_in()){
             $sql .=" and c.acad_period='$course_year' ";
         }
         
+        $limit = $pagenum * 50;
         $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
-                          "and e.staffid = '$loggedin_username' LIMIT $pagenum, $pagenum * 50";
+                          "and e.staffid = '$loggedin_username' LIMIT $pagenum, $limit";
                           
     } else {
         // course user is NOT enrolled on
@@ -132,8 +133,9 @@ if(is_logged_in()){
             $sql .=" and c.acad_period='$course_year' ";
         }*/
         
+        $limit = $pagenum * 50;
         $sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
-               "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $pagenum * 50";
+               "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $limit";
     }
                           
     /*if($programme!=0){
@@ -154,7 +156,6 @@ if(is_logged_in()){
     //$content .= $enrolments_sql;
     
     $content .='<table>';
-    $content .= $sql;
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
