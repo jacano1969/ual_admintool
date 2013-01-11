@@ -17,6 +17,8 @@ if(is_logged_in()){
         }       
         echo show_header();
         echo '<body id="home-page">';
+        echo '<div class="results_container">';
+        echo '</div>';
         echo '<div class="container">';
         echo get_filter_data($type, $data);
         echo show_footer();

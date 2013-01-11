@@ -150,7 +150,9 @@ var ual_admintool = ual_admintool || (function(){
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
 						
-						$('#home-page').html(data);
+						$('#container').hide();
+						$('#results_container').html('Loading Results');
+						$('#results_container').html(data);
 						
 						/*$('#hiddenresultslightbox').html(data);
 						
@@ -187,7 +189,9 @@ var ual_admintool = ual_admintool || (function(){
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
 						
-						$('#home-page').html(data);
+						$('#container').hide();
+						$('#results_container').html('Loading Results');
+						$('#results_container').html(data);
 						
 						/*$('#hiddenresultslightbox').html(data);
 						
