@@ -144,14 +144,16 @@ var ual_admintool = ual_admintool || (function(){
 				var selected_course = $('#courses').children(":selected").attr("id");
 				var selected_unit = $('#units').children(":selected").attr("id");
 				
+				
+				$('#filter_container').hide();
+				$('#results_container').html('Loading Results ...');
+				
 				// show courses that user is enrolled on
 				$.get('results.php?T=ue&P=' + selected_programme +
 					  '&Y=' + selected_courseyear +
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
 						
-						$('#container').hide();
-						$('#results_container').html('Loading Results');
 						$('#results_container').html(data);
 						
 						/*$('#hiddenresultslightbox').html(data);
@@ -183,14 +185,15 @@ var ual_admintool = ual_admintool || (function(){
 				var selected_course = $('#courses').children(":selected").attr("id");
 				var selected_unit = $('#units').children(":selected").attr("id");
 				
+				$('#filter_container').hide();
+				$('#results_container').html('Loading Results ...');
+				
 				// show courses that user is enrolled on
 				$.get('results.php?T=pe&P=' + selected_programme +
 					  '&Y=' + selected_courseyear +
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
 						
-						$('#container').hide();
-						$('#results_container').html('Loading Results');
 						$('#results_container').html(data);
 						
 						/*$('#hiddenresultslightbox').html(data);
