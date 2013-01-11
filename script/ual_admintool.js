@@ -140,8 +140,8 @@ var ual_admintool = ual_admintool || (function(){
             });
 			
 			$('#back_to_filter').live("click", function() {
-				$('#filter_container').hide();
-				$('#results_container').show();
+				$('#results_container').hide();
+				$('#filter_container').show();
 				$('#back_to_filter').hide();
 			});
 									
