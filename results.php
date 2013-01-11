@@ -157,7 +157,7 @@ if(is_logged_in()){
     // testing
     //$content .= $enrolments_sql;
     
-    $content .='<table>';
+    $content .='<table class="results">';
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
