@@ -9,6 +9,15 @@ $programme='';
 $course_year='';
 $course='';
 $unit='';
+$pagenum=1;
+
+if(!empty($_GET['pagenum'])) {
+    $pagenum = $_GET['pagenum'];
+    
+    if($pagenum=="undefined") {
+        $pagenum=1;
+    }
+}
 
 if(!empty($_GET['T'])) {
     $result_type = $_GET['T'];
@@ -99,7 +108,7 @@ if(is_logged_in()){
         }
         
         $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
-                          "and e.staffid = '$loggedin_username'";
+                          "and e.staffid = '$loggedin_username' LIMIT $pagenum, $pagenum * 50";
                           
     } else {
         // course user is NOT enrolled on
@@ -124,7 +133,7 @@ if(is_logged_in()){
         }*/
         
         $sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
-               "WHERE e.staffid = '$loggedin_username')";
+               "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $pagenum * 50";
     }
                           
     /*if($programme!=0){
@@ -154,7 +163,7 @@ if(is_logged_in()){
             
             // show users enrolments
             if($result_type=='ue' || $result_type=='') {
-                $content .='<th>Type</th><th>Record Id</th><th>Enrolment Id</th><th>Staff Id</th><th>Stage Id</th>';
+                $content .='<th>Remove</th><th>Type</th><th>Record Id</th><th>Enrolment Id</th><th>Staff Id</th><th>Stage Id</th>';
                 $content .='<th>Course Id</th><th>AOS Code</th><th>AOS Period</th><th>ACAD Period</th>';
                 $content .='<th>College</th><th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
                 
@@ -162,6 +171,7 @@ if(is_logged_in()){
                 
                 while ($row = $result->fetch_object()) {
                     $content .="<tr>";
+                    $content .='<td><input type="radio" value="0" name="remove_'.$row->enrolmentid.'"></td>';
                     $content .="<td>$row->Type</td>";
                     $content .="<td>$row->record_id</td>";
                     $content .="<td>$row->enrolmentid</td>";
@@ -179,7 +189,7 @@ if(is_logged_in()){
                     $content .="</tr>";
                 }
             } else {
-                $content .='<th>Course Id</th><th>AOS Code</th><th>Aos Period</th><th>Acad Period</th><th>Aos CD Link</th>';
+                $content .='<th>Add</th><th>Course Id</th><th>AOS Code</th><th>Aos Period</th><th>Acad Period</th><th>Aos CD Link</th>';
                 $content .='<th>Link AOS Period</th><th>Link Period</th><th>Compulsory</th><th>College</th>';
                 $content .='<th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
                 
@@ -187,6 +197,7 @@ if(is_logged_in()){
                 
                 while ($row = $result->fetch_object()) {
                     $content .="<tr>";
+                    $content .='<td><input type="radio" value="0" name="add_'.$row->enrolmentid.'"></td>';
                     $content .="<td>$row->courseid</td>";
                     $content .="<td>$row->aos_code</td>";
                     $content .="<td>$row->aos_period</td>";
@@ -203,7 +214,6 @@ if(is_logged_in()){
                     $content .="</tr>";
                 }
             }
-            
             
             $result->close();
         }
