@@ -154,6 +154,7 @@ if(is_logged_in()){
     //$content .= $enrolments_sql;
     
     $content .='<table>';
+    $content . = $sql;
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
