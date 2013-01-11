@@ -157,6 +157,8 @@ if(is_logged_in()){
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
             $content .= '<tr><th>No Enrolment Data</td></th></tr>';
+            
+            $result->close();
         } else {
             $content .='<tr>';
             
