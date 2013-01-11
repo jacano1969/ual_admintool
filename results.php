@@ -173,7 +173,7 @@ if(is_logged_in()){
                 
                 while ($row = $result->fetch_object()) {
                     $content .="<tr>";
-                    $content .='<td><input type="radio" value="0" name="remove_'.$row->enrolmentid.'"></td>';
+                    $content .='<td><input type="radio" value="0" id="remove_'.$row->enrolmentid.'" name="remove_'.$row->enrolmentid.'"></td>';
                     $content .="<td>$row->Type</td>";
                     $content .="<td>$row->record_id</td>";
                     $content .="<td>$row->enrolmentid</td>";
@@ -199,7 +199,7 @@ if(is_logged_in()){
                 
                 while ($row = $result->fetch_object()) {
                     $content .="<tr>";
-                    $content .='<td><input type="radio" value="0" name="add_'.$row->enrolmentid.'"></td>';
+                    $content .='<td><input type="radio" value="0" id="add_'.$row->enrolmentid.'" name="add_'.$row->enrolmentid.'"></td>';
                     $content .="<td>$row->courseid</td>";
                     $content .="<td>$row->aos_code</td>";
                     $content .="<td>$row->aos_period</td>";
