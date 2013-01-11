@@ -13,12 +13,7 @@ var ual_admintool = ual_admintool || (function(){
 	    function isNumber(n) {
             return !isNaN(parseFloat(n)) && isFinite(n);
         }
-			
-			
-		$('#back_to_filter').live("click", function() {
-			$('#filter_container').hide();
-			$('#results_container').show();	
-		});
+		
 			
         // home page scripts
         if($('#home-page').length>0) {
@@ -163,6 +158,11 @@ var ual_admintool = ual_admintool || (function(){
 						
 						$('#results_container').html(data);
 						
+						
+						$('#back_to_filter').live("click", function() {
+							$('#filter_container').hide();
+							$('#results_container').show();	
+						});
 						/*$('#hiddenresultslightbox').html(data);
 						
 						$('#hiddenresultslightbox').lightbox_me({
@@ -203,6 +203,10 @@ var ual_admintool = ual_admintool || (function(){
 						
 						$('#results_container').html(data);
 						
+						$('#back_to_filter').live("click", function() {
+							$('#filter_container').hide();
+							$('#results_container').show();	
+						});
 						/*$('#hiddenresultslightbox').html(data);
 						
 						$('#hiddenresultslightbox').lightbox_me({
