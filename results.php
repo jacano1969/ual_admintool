@@ -150,7 +150,7 @@ if(is_logged_in()){
     }*/
     
     
-    $content .='<input type="button" class="submit" value="Back">';
+    $content .='<input type="button" id="back_to_filter" class="submit" value="Back">';
     
     // testing
     //$content .= $enrolments_sql;
