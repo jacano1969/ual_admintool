@@ -149,9 +149,6 @@ if(is_logged_in()){
                         and c.aos_code like('L%') order by name
     }*/
     
-    
-    $content .='<input type="button" id="back_to_filter" class="submit" value="Back">';
-    
     // testing
     //$content .= $enrolments_sql;
     

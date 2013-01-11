@@ -139,7 +139,12 @@ var ual_admintool = ual_admintool || (function(){
                 }
             });
 			
-			
+			$('#back_to_filter').live("click", function() {
+				$('#filter_container').hide();
+				$('#results_container').show();
+				$('#back_to_filter').hide();
+			});
+									
 			$('#showuserenrolments').live("click", function() {
 				var selected_programme = $('#programmes').children(":selected").attr("id");
 				var selected_courseyear = $('#courseyears').children(":selected").attr("id");
@@ -157,12 +162,8 @@ var ual_admintool = ual_admintool || (function(){
 					  '&U=' + selected_unit, function(data) {
 						
 						$('#results_container').html(data);
+						$('#back_to_filter').show();
 						
-						
-						$('#back_to_filter').live("click", function() {
-							$('#filter_container').hide();
-							$('#results_container').show();	
-						});
 						/*$('#hiddenresultslightbox').html(data);
 						
 						$('#hiddenresultslightbox').lightbox_me({
@@ -202,11 +203,8 @@ var ual_admintool = ual_admintool || (function(){
 					  '&U=' + selected_unit, function(data) {
 						
 						$('#results_container').html(data);
+						$('#back_to_filter').show();
 						
-						$('#back_to_filter').live("click", function() {
-							$('#filter_container').hide();
-							$('#results_container').show();	
-						});
 						/*$('#hiddenresultslightbox').html(data);
 						
 						$('#hiddenresultslightbox').lightbox_me({

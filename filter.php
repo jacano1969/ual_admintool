@@ -17,6 +17,7 @@ if(is_logged_in()){
         }       
         echo show_header();
         echo '<body id="home-page">';
+        echo '<input type="button" id="back_to_filter" class="submit" style="display:none;" value="Back">';
         echo '<div id="results_container">';
         echo '</div>';
         echo '<div id="filter_container" class="container">';
@@ -25,6 +26,7 @@ if(is_logged_in()){
     } else {
         echo show_header();
         echo '<body id="home-page">';
+        echo '<input type="button" id="back_to_filter" class="submit" style="display:none;" value="Back">';
         echo '<div id="results_container">';
         echo '</div>';
         echo '<div id="filter_container" class="container">';
