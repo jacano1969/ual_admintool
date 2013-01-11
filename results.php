@@ -107,7 +107,7 @@ if(is_logged_in()){
             $sql .=" and c.acad_period='$course_year' ";
         }
         
-        $limit = $pagenum * 20;
+        $limit = $pagenum * 15;
         $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
                           "and e.staffid = '$loggedin_username' LIMIT $pagenum, $limit";
                           
@@ -136,7 +136,7 @@ if(is_logged_in()){
             $sql .=" and c.acad_period='$course_year' ";
         }*/
         
-        $limit = $pagenum * 20;
+        $limit = $pagenum * 15;
         /*$sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
                "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $limit";*/
         $sql .="WHERE c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
