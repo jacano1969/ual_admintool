@@ -195,9 +195,9 @@ if(is_logged_in()){
                     $content .="</tr>";
                 }
             } else {
-                $content .='<th>Add</th><th>Course Id</th><th>AOS Code</th><th>Aos Period</th><th>Acad Period</th><th>Aos CD Link</th>';
-                $content .='<th>Link AOS Period</th><th>Link Period</th><th>Compulsory</th><th>College</th>';
-                $content .='<th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
+                $content .='<th>Add</th><th>Course Id</th><th>AOS Code</th><th>Aos Period</th><th>Acad Period</th>';
+                //$content .='<th>Aos CD Link</th><th>Link AOS Period</th><th>Link Period</th><th>Compulsory</th>';
+                $content .='<th>College</th><th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
                 
                 $content .='</tr>';
                 
