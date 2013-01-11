@@ -113,13 +113,16 @@ if(is_logged_in()){
                           
     } else {
         // course user is NOT enrolled on
-        $sql ="SELECT c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
+        /*$sql ="SELECT c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
               "cs.aoscd_link, cs.lnk_aos_period, cs.lnk_period, cs.compulsry_yn," .
               "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
               "FROM COURSE_STRUCTURE cs " .
               "INNER JOIN COURSES c " .
-              "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') ";
-              
+              "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') ";*/
+        
+        $sql ="SELECT c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
+              "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
+              "FROM COURSES c ";
               
         /*if($unit!=''){
             $sql .=" and c.aos_code='$unit'";
@@ -134,7 +137,9 @@ if(is_logged_in()){
         }*/
         
         $limit = $pagenum * 50;
-        $sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
+        /*$sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
+               "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $limit";*/
+        $sql .="WHERE c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
                "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $limit";
     }
                           
@@ -203,10 +208,10 @@ if(is_logged_in()){
                     $content .="<td>$row->aos_code</td>";
                     $content .="<td>$row->aos_period</td>";
                     $content .="<td>$row->acad_period</td>";
-                    $content .="<td>$row->aoscd_link</td>";
-                    $content .="<td>$row->lnk_aos_period</td>";
-                    $content .="<td>$row->lnk_period</td>";
-                    $content .="<td>$row->compulsry_yn</td>";
+                    //$content .="<td>$row->aoscd_link</td>";
+                    //$content .="<td>$row->lnk_aos_period</td>";
+                    //$content .="<td>$row->lnk_period</td>";
+                    //$content .="<td>$row->compulsry_yn</td>";
                     $content .="<td>$row->college</td>";
                     $content .="<td>$row->aos_description</td>";
                     $content .="<td>$row->full_description</td>";
