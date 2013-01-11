@@ -37,7 +37,8 @@
 #home-page em {font-weight: bold; padding-right: 1em; vertical-align: top;}
 #home-page hr {margin-top:25px; border: 3px double #CCCCCC;}
 
-#home-page table.results tr th td {border: 1px solid #ccc;}
+#home-page table.results tr th {border: 1px solid #ccc;}
+#home-page table.results tr td {border: 1px solid #ccc;}
 
 #data_grid table {
     border: 2px solid #ccc;
