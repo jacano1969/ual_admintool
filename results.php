@@ -180,6 +180,8 @@ if(is_logged_in()){
     for($index=1; $index<=$totalpages; $index++) {
         $content .=' <a href="' .$index .'"'>$index.'</a> ';
     }
+    $content .=$totalpages;
+    
     $content .='<table class="results">';
     
     if ($result = $mysqli->query($sql)) {
