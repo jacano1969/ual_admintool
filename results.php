@@ -111,7 +111,15 @@ if(is_logged_in()){
         
         $limit = $pagenum * 15;
         $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
-               "and e.staffid = '$loggedin_username' LIMIT $pagenum, $limit";
+               "and e.staffid = '$loggedin_username'";
+        
+        // get num of records for full query
+        if ($res = $mysqli->query($sql)) {
+            $numrecords = $res->num_rows;
+            $totalpages = $numrecords/15;
+        }
+        
+        $sql .="LIMIT $pagenum, $limit";
                           
     } else {
         // course user is NOT enrolled on
@@ -148,7 +156,7 @@ if(is_logged_in()){
         // get num of records for full query
         if ($res = $mysqli->query($sql)) {
             $numrecords = $res->num_rows;
-            $totalpages = $numrecords / 15;
+            $totalpages = $numrecords/15;
         }
         
         $sql.= "LIMIT $pagenum, $limit";
