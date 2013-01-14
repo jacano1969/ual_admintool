@@ -178,7 +178,11 @@ if(is_logged_in()){
     
     $content .='Page:';
     for($index=1; $index<$totalpages; $index++) {
-        $content .=' <a href="' .$index .'">'.$index.'</a> ';
+        if($pagenum==$index) {
+            $content .=' '.$index .' ';
+        } else {
+            $content .=' <a href="results.php?pagenum=' .$index .'&T='.$result_type.'&P='.$programme.'&C='.$course.'&U='.$unit.'&Y='.$course_year.'">'.$index.'</a> ';
+        }
     }
     $content .=$totalpages;
     
