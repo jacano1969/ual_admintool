@@ -177,8 +177,8 @@ if(is_logged_in()){
     //$content .= $enrolments_sql;
     
     $content .='Page:';
-    for($index=1; $index<=$totalpages; $index++) {
-        $content .=' <a href="' .$index .'"'>$index.'</a> ';
+    for($index=1; $index<$totalpages; $index++) {
+        $content .=' <a href="' .$index .'">'.$index.'</a> ';
     }
     $content .=$totalpages;
     
