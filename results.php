@@ -10,6 +10,8 @@ $course_year='';
 $course='';
 $unit='';
 $pagenum=1;
+$numrecords=0;
+$totalpages=0;
 
 if(!empty($_GET['pagenum'])) {
     $pagenum = $_GET['pagenum'];
@@ -109,7 +111,7 @@ if(is_logged_in()){
         
         $limit = $pagenum * 15;
         $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
-                          "and e.staffid = '$loggedin_username' LIMIT $pagenum, $limit";
+               "and e.staffid = '$loggedin_username' LIMIT $pagenum, $limit";
                           
     } else {
         // course user is NOT enrolled on
@@ -137,10 +139,19 @@ if(is_logged_in()){
         }*/
         
         $limit = $pagenum * 15;
+        
         /*$sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
                "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $limit";*/
         $sql .="WHERE c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
-               "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $limit";
+               "WHERE e.staffid = '$loggedin_username') ";
+               
+        // get num of records for full query
+        if ($res = $mysqli->query($sql)) {
+            $numrecords = $res->num_rows;
+            $totalpages = $numrecords / 15;
+        }
+        
+        $sql.= "LIMIT $pagenum, $limit";
     }
                           
     /*if($programme!=0){
@@ -157,6 +168,10 @@ if(is_logged_in()){
     // testing
     //$content .= $enrolments_sql;
     
+    $content .='Page:';
+    for($index=1; $index<=$totalpages; $index++) {
+        $content .=' <a href="' .$index .'"'>$index.'</a> ';
+    }
     $content .='<table class="results">';
     
     if ($result = $mysqli->query($sql)) {
