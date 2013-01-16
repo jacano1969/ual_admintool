@@ -228,8 +228,62 @@ var ual_admintool = ual_admintool || (function(){
 				return false;
 			});
 			
+			
+			
 			//
 			// end of filters ---------------------------------->
+			//
+			// show possible enrolments
+			$('#pagenumber').live("click", function() {
+				var selected_programme = $('#programmes').val();
+				var selected_courseyear = $('#courseyears').val();
+				var selected_course = $('#courses').val();
+				var selected_unit = $('#units').val();
+				var result_type = $('#resulttype').val();
+				var pagenum = $(this).attr('href');
+				
+				$('#filter_container').hide();
+				$('#results_container').html('Loading Results ...');
+				
+				// show courses that user is enrolled on
+				$.get('results.php?pagenum='+ pagenum +'&T='+result_type+'&P=' + selected_programme +
+					  '&Y=' + selected_courseyear +
+					  '&C=' + selected_course +
+					  '&U=' + selected_unit, function(data) {
+						
+						$('#results_container').html(data);
+						$('#back_to_filter').show();
+						$('#results_container').show();
+						
+						/*$('#hiddenresultslightbox').html(data);
+						
+						$('#hiddenresultslightbox').lightbox_me({
+							centered: false,
+							appearEffect: 'show',
+							lightboxSpeed: 'fast',
+							overlaySpeed: 'fast',
+							closeClick: false,
+							closeEsc: false, 
+							onLoad: function() { 
+                                // do anything after lightbox is loaded?
+                                $('#hiddenresultslightbox').css('width','400px');
+								$('#hiddenresultslightbox').css('background','#ffffff');
+                            }
+                        });*/
+				        
+					});
+				
+				return false;
+			});
+			
+			//
+			// results
+			//
+			
+			
+			
+			//
+			// end of results ---------------------------------->
 			//
 			
 			

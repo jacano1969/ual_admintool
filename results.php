@@ -181,11 +181,18 @@ if(is_logged_in()){
         if($pagenum==$index) {
             $content .=' '.$index .' ';
         } else {
-            $content .=' <a href="results.php?pagenum=' .$index .'&T='.$result_type.'&P='.$programme.'&C='.$course.'&U='.$unit.'&Y='.$course_year.'">'.$index.'</a> ';
+            $content .=' <a href="'.$index.'" id="pagenumber">'.$index.'</a> ';
         }
     }
     $content .=$totalpages;
     
+    $content .='<form id="results">';
+    $content .='<input type="hidden" id="programmes" value="'.$programme.'">';
+    $content .='<input type="hidden" id="courseyears" value="'.$course_year.'">';
+    $content .='<input type="hidden" id="courses" value="'.$course.'">';
+    $content .='<input type="hidden" id="units" value="'.$unit.'">';
+    $content .='<input type="hidden" id="resulttype" value="'.$result_type.'">';
+    $content .='</form>';
     $content .='<table class="results">';
     
     if ($result = $mysqli->query($sql)) {
