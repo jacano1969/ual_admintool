@@ -233,6 +233,12 @@ var ual_admintool = ual_admintool || (function(){
 			//
 			// end of filters ---------------------------------->
 			//
+			
+			
+			//
+			// results
+			//
+			
 			// show possible enrolments
 			$('#pagenumber').live("click", function() {
 				var selected_programme = $('#programmes').val();
@@ -275,11 +281,6 @@ var ual_admintool = ual_admintool || (function(){
 				
 				return false;
 			});
-			
-			//
-			// results
-			//
-			
 			
 			
 			//
