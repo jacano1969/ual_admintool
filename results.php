@@ -181,7 +181,7 @@ if(is_logged_in()){
         if($pagenum==$index) {
             $content .=' '.$index .' ';
         } else {
-            $content .=' <a href="'.$index.'" id="pagenumber">'.$index.'</a> ';
+            $content .=' <a href="#" name="'.$index.'" id="pagenumber">'.$index.'</a> ';
         }
     }
     $content .=$totalpages;

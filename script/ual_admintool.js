@@ -240,7 +240,7 @@ var ual_admintool = ual_admintool || (function(){
 				var selected_course = $('#courses').val();
 				var selected_unit = $('#units').val();
 				var result_type = $('#resulttype').val();
-				var pagenum = $(this).attr('href');
+				var pagenum = $(this).attr('name');
 				
 				$('#filter_container').hide();
 				$('#results_container').html('Loading Results ...');
