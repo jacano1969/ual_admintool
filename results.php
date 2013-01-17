@@ -194,14 +194,14 @@ if(is_logged_in()){
     $content .='<input type="hidden" id="resulttype" value="'.$result_type.'">';
     $content .='</form>';
     
-    $data_grid .='<div class="data_grid">';
-    $data_grid .='<div class="box">';
-    $data_grid .='<div class="header">';
-    $data_grid .='<img width="16" height="16" src="img/icons/packs/fugue/16x16/shadeless/table-excel.png">';
-    $data_grid .='<h3>Enrolments</h3><span></span>';
-    $data_grid .='</div>';
-    $data_grid .='<div class="content">';
-    $data_grid .='<div class="dataTables_wrapper" id="table-example_wrapper">';
+    $content .='<div class="data_grid">';
+    $content .='<div class="box">';
+    $content .='<div class="header">';
+    $content .='<img width="16" height="16" src="img/icons/packs/fugue/16x16/shadeless/table-excel.png">';
+    $content .='<h3>Enrolments</h3><span></span>';
+    $content .='</div>';
+    $content .='<div class="content">';
+    $content .='<div class="dataTables_wrapper" id="table-example_wrapper">';
     
     $content .='<table class="results" id="table-example">';
     
