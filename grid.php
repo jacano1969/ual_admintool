@@ -194,19 +194,6 @@
                             and c.aos_code like('L%') order by name
         }*/
         
-        // testing
-        //$content .= $enrolments_sql;
-        
-        $content .='Page:';
-        for($index=1; $index<$totalpages; $index++) {
-            if($pagenum==$index) {
-                $content .=' '.$index .' ';
-            } else {
-                $content .=' <a href="#" name="'.$index.'" id="pagenumber">'.$index.'</a> ';
-            }
-        }
-        $content .=$totalpages;
-        
         $content .='<form id="results">';
         $content .='<input type="hidden" id="programmes" value="'.$programme.'">';
         $content .='<input type="hidden" id="courseyears" value="'.$course_year.'">';
