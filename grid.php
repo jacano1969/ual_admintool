@@ -244,20 +244,20 @@
                     while ($row = $result->fetch_object()) {
                         $content .="<tr>";
                         $content .='<td class="sorting_1"><input type="radio" value="0" id="remove_'.$row->enrolmentid.'" name="remove_'.$row->enrolmentid.'"></td>';
-                        $content .='<td class="sorting_1">$row->Type</td>';
-                        $content .='<td class="sorting_1">$row->record_id</td>';
-                        $content .='<td class="sorting_1">$row->enrolmentid</td>';
-                        $content .='<td class="sorting_1">$row->staffid</td>';
-                        $content .='<td class="sorting_1">$row->stageid</td>';
-                        $content .='<td class="sorting_1">$row->courseid</td>';
-                        $content .='<td class="sorting_1">$row->aos_code</td>';
-                        $content .='<td class="sorting_1">$row->aos_period</td>';
-                        $content .='<td class="sorting_1">$row->acad_period</td>';
-                        $content .='<td class="sorting_1">$row->college</td>';
-                        $content .='<td class="sorting_1">$row->aos_description</td>';
-                        $content .='<td class="sorting_1">$row->full_description</td>';
-                        $content .='<td class="sorting_1">$row->school</td>';
-                        $content .='<td class="sorting_1">$row->aos_type</td>';
+                        $content .='<td class="sorting_1">'.$row->Type.'</td>';
+                        $content .='<td class="sorting_1">'.$row->record_id.'</td>';
+                        $content .='<td class="sorting_1">'.$row->enrolmentid.'</td>';
+                        $content .='<td class="sorting_1">'.$row->staffid.'</td>';
+                        $content .='<td class="sorting_1">'.$row->stageid.'</td>';
+                        $content .='<td class="sorting_1">'.$row->courseid.'</td>';
+                        $content .='<td class="sorting_1">'.$row->aos_code.'</td>';
+                        $content .='<td class="sorting_1">'.$row->aos_period.'</td>';
+                        $content .='<td class="sorting_1">'.$row->acad_period.'</td>';
+                        $content .='<td class="sorting_1">'.$row->college.'</td>';
+                        $content .='<td class="sorting_1">'.$row->aos_description.'</td>';
+                        $content .='<td class="sorting_1">'.$row->full_description.'</td>';
+                        $content .='<td class="sorting_1">'.$row->school.'</td>';
+                        $content .='<td class="sorting_1">'.$row->aos_type.'</td>';
                         $content .='</tr>';
                     }
                 } else {
