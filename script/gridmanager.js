@@ -16,7 +16,8 @@ var gridmanager = gridmanager || (function() {
            if(id*1==id) {
                
                if($('body').attr('id')=="user-enrolments") {
-                   if(confirm("Are you sure you want to remove this enrolment?")==true) {
+                   var c=confirm("Are you sure you want to remove this enrolment?");
+                   if(c==true) {
                         alert("record: " + id +" has been removed.");
                    } else {
                         alert('no action');
