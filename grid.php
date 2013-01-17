@@ -232,7 +232,7 @@
                 
                 $result->close();
             } else {
-                $content .='<tr>';
+                $content .='<thead><tr>';
                 
                 // show users enrolments
                 if($result_type=='ue' || $result_type=='') {
@@ -241,7 +241,9 @@
                     $content .='<th class="sorting" rowspan="1" colspan="1">Course Id</th><th class="sorting" rowspan="1" colspan="1">AOS Code</th><th class="sorting" rowspan="1" colspan="1">AOS Period</th><th class="sorting" rowspan="1" colspan="1">ACAD Period</th>';
                     $content .='<th class="sorting" rowspan="1" colspan="1">College</th><th class="sorting" rowspan="1" colspan="1">AOS Description</th><th class="sorting" rowspan="1" colspan="1">Full Description</th><th class="sorting" rowspan="1" colspan="1">School</th><th class="sorting" rowspan="1" colspan="1">AOS Type</th>';
                     
-                    $content .='</tr>';
+                    $content .='</tr></thead>';
+                    
+                    $content .='<tbody>';
                     
                     while ($row = $result->fetch_object()) {
                         $content .='<tr class="gradeA odd">';
@@ -293,7 +295,7 @@
             }
         }   
         
-        $content .='</table>';
+        $content .='</tbody></table>';
         
         $content .='</div> <!-- End of .content -->';
         $content .='<div class="clear"></div>';
