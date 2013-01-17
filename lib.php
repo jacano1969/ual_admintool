@@ -421,7 +421,9 @@ function show_header() {
     
     
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
-    $header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
+    //$header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
+    $header .= '<script src="script/libs/jquery-1.7.1.min.js" type="text/javascript"></script>';
+    
     $header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
     $header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
     $header .= '<script type="text/javascript" src="script/jquery.tablesorter.js"></script>';
