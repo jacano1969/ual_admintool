@@ -11,7 +11,7 @@ var gridmanager = gridmanager || (function() {
         $('table tr').click(function() {
            var id=$(this).closest('tr').children('td:first').text();
            var selectedRow=$(this).closest('tr');
-           var dt = $('#table-example').dataTable();
+           var dt = $('#table-example').dataTable().dataTableExt.oApi;
                     
            // check if id is a valid number
            if(id*1==id) {
