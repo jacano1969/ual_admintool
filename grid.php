@@ -9,6 +9,7 @@
     $header .= '<html lang="en" dir="ltr">';
     $header .= '<head>';
     $header .= '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">';
+    $header .= '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">';
     $header .= '<title>UAL Admn Tool</title>';
     
     // addded ro gdata table
@@ -331,7 +332,7 @@
     $footer .='<script>window.jQuery || document.write(\'<script src="script/libs/jquery-1.7.1.min.js"><\/script>\')</script>';
     $footer .='<script>window.jQuery.ui || document.write(\'<script src="script/libs/jquery-ui-1.8.16.min.js"><\/script>\')</script>';
     
-    $footer .= '<script src="script/gridmanager.js"></script>';
+    //$footer .= '<script src="script/gridmanager.js"></script>';
     
     $footer .='<script defer src="script/plugins.js"></script> <!-- REQUIRED: Different own jQuery plugnis -->';
     $footer .='<script defer src="script/mylibs/jquery.ba-resize.min.js"></script> <!-- RECOMMENDED when using sidebar: page resizing -->';
