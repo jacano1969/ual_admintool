@@ -329,7 +329,7 @@
     $footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
     $footer .='<script defer src="script/mylibs/jquery.validate.js"></script>';
     $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
-    //$footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
+    $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
     $footer .='<!-- end scripts -->';
     $footer .='<script defer>';
     $footer .='$(window).load(function() {';

@@ -476,7 +476,7 @@ if(Function.prototype.bind == null) {
 	/* ==================================================
 	 * 8) Navigation
 	 * ================================================== */
-	(function() {
+	/*(function() {
 		var themed = false;
 		var active = themed ? 'themed' : 'blue';
 		try {
@@ -519,7 +519,7 @@ if(Function.prototype.bind == null) {
 
 			return false;
 		});
-	})();
+	})();*/
 
 
 	/* ==================================================
