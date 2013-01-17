@@ -1,5 +1,8 @@
 <?php
 
+
+echo 'test';
+exit;
 //session_start();
 
 //require_once('lib.php');
