@@ -1,0 +1,35 @@
+
+
+/*body {margin: 0 auto; width: 980px; }*/
+
+.continer .grid {width: 98%; }
+div.data_grid {  }
+
+.box .content { padding: 0 20px; }
+
+#main_content { padding: 0px; }
+
+#table-example { visibility: hidden; }
+
+
+input, textarea, select {
+    width: 200px;
+}
+
+textarea {
+    resize: both;
+}
+
+fieldset {
+    border: 2px groove #CCCCCC;
+    margin: 5px 5px 0;
+    padding: 5px;
+}
+
+.formdiv {
+    float: left;
+    padding: 0 20px 0 0;
+}
+
+#prevcalldata { display: none; }
+

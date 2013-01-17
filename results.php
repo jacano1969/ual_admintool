@@ -193,7 +193,7 @@ if(is_logged_in()){
     $content .='<input type="hidden" id="units" value="'.$unit.'">';
     $content .='<input type="hidden" id="resulttype" value="'.$result_type.'">';
     $content .='</form>';
-    $content .='<table class="results">';
+    $content .='<table class="results" id="table-example">';
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
