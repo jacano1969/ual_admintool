@@ -16,19 +16,23 @@ var gridmanager = gridmanager || (function() {
            // check if id is a valid number
            if(id*1==id) {
                
-               if($('body').attr('id')=="user-enrolments") {
+                if($('body').attr('id')=="user-enrolments") {
                    
-                   if(confirm("Are you sure you want to remove this enrolment?")==true) {
-                        alert("record: " + id +" has been removed.");
-                        //$('#table-example').DataTable().fnDeleteRow(0);
-                        //dt.fnDeleteRow(selectedRow.prev('tr'), null, true);
-                        //$(this).closest('tr').remove();
-                        //$('.paginate_active').click();
-                        $(this).closest('tr').css('color','red');
-                        $(this).closest('tr').css('text-decoration','line-through');
-                   } else {
-                        alert('no action');
-                   }
+                    if($(this).closest('tr').css('color')=='red') {
+                       // do nothing
+                    } else {
+                        if(confirm("Are you sure you want to remove this enrolment?")==true) {
+                            alert("record: " + id +" has been removed.");
+                            //$('#table-example').DataTable().fnDeleteRow(0);
+                            //dt.fnDeleteRow(selectedRow.prev('tr'), null, true);
+                            //$(this).closest('tr').remove();
+                            //$('.paginate_active').click();
+                            $(this).closest('tr').css('color','red');
+                            $(this).closest('tr').css('text-decoration','line-through');
+                       } else {
+                            alert('no action');
+                       }
+                    }
                }
                
                //$.get('ajax/prevcalldata.php', {"id": id }, function(){
