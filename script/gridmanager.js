@@ -11,7 +11,7 @@ var gridmanager = gridmanager || (function() {
         $('table tr').click(function() {
            var id=$(this).closest('tr').children('td:first').text();
            var selectedRow=$(this).closest('tr');
-           var dt = $('#table-example').dataTable();
+           //var dt = $('#table-example').dataTable();
                     
            // check if id is a valid number
            if(id*1==id) {
@@ -20,7 +20,7 @@ var gridmanager = gridmanager || (function() {
                    
                    if(confirm("Are you sure you want to remove this enrolment?")==true) {
                         alert("record: " + id +" has been removed.");
-                        dt.fnDeleteRow(selectedRow);
+                        $('#table-example').dataTable().fnDeleteRow(selectedRow);
                         //$(this).closest('tr').remove();
                         //$('.paginate_active').click();
                    } else {
