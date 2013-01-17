@@ -24,7 +24,8 @@ var gridmanager = gridmanager || (function() {
                         //dt.fnDeleteRow(selectedRow.prev('tr'), null, true);
                         //$(this).closest('tr').remove();
                         //$('.paginate_active').click();
-                        $(this).closest('tr').css('background-color','red');
+                        $(this).closest('tr').css('color','red');
+                        $(this).closest('tr').css('text-decoration','line-through');
                    } else {
                         alert('no action');
                    }
