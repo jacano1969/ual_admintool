@@ -235,9 +235,9 @@
                 
                 // show users enrolments
                 if($result_type=='ue' || $result_type=='') {
-                    $content .='<th>Remove</th><th>Type</th><th>Record Id</th><th>Enrolment Id</th><th>Staff Id</th><th>Stage Id</th>';
-                    $content .='<th>Course Id</th><th>AOS Code</th><th>AOS Period</th><th>ACAD Period</th>';
-                    $content .='<th>College</th><th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
+                    $content .='<th class="sorting_desc">Remove</th><th class="sorting_desc">Type</th><th class="sorting_desc">Record Id</th><th class="sorting_desc">Enrolment Id</th><th class="sorting_desc">Staff Id</th><th class="sorting_desc">Stage Id</th>';
+                    $content .='<th class="sorting_desc">Course Id</th><th class="sorting_desc">AOS Code</th><th class="sorting_desc">AOS Period</th><th class="sorting_desc">ACAD Period</th>';
+                    $content .='<th class="sorting_desc">College</th><th class="sorting_desc">AOS Description</th><th class="sorting_desc">Full Description</th><th class="sorting_desc">School</th><th class="sorting_desc">AOS Type</th>';
                     
                     $content .='</tr>';
                     
