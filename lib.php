@@ -456,8 +456,8 @@ function show_footer() {
     
     
     // Added for grid
-    $footer .='<script>window.jQuery || document.write(\'<script src="js/libs/jquery-1.7.1.min.js"><\/script>\')</script>';
-    $footer .='<script>window.jQuery.ui || document.write(\'<script src="js/libs/jquery-ui-1.8.16.min.js"><\/script>\')</script>';
+    $footer .='<script>window.jQuery || document.write(\'<script src="script/libs/jquery-1.7.1.min.js"><\/script>\')</script>';
+    $footer .='<script>window.jQuery.ui || document.write(\'<script src="script/libs/jquery-ui-1.8.16.min.js"><\/script>\')</script>';
     
     $footer .= '<script src="script/gridmanager.js"></script>';
     
