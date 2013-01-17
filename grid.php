@@ -48,7 +48,7 @@
     $header .= '</head>';
     
     
-    $header .= '<body id="user-enrolments>';
+    $header .= '<body id="user-enrolments">';
     
     
     
