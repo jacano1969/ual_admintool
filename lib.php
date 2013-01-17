@@ -415,7 +415,7 @@ function show_header() {
     $header .= '<link rel="stylesheet" href="css/icons.css">';
     $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
                 
-    $header .= '<script src="js/libs/modernizr-2.0.6.min.js"></script>';
+    $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
     //
     
     
@@ -459,15 +459,15 @@ function show_footer() {
     $footer .='<script>window.jQuery || document.write(\'<script src="js/libs/jquery-1.7.1.min.js"><\/script>\')</script>';
     $footer .='<script>window.jQuery.ui || document.write(\'<script src="js/libs/jquery-ui-1.8.16.min.js"><\/script>\')</script>';
     
-    $footer .= '<script src="js/callmanager.js"></script>';
+    $footer .= '<script src="script/gridmanager.js"></script>';
     
-    $footer .='<script defer src="js/plugins.js"></script> <!-- REQUIRED: Different own jQuery plugnis -->';
-    $footer .='<script defer src="js/mylibs/jquery.ba-resize.min.js"></script> <!-- RECOMMENDED when using sidebar: page resizing -->';
-    $footer .='<script defer src="js/mylibs/jquery.easing.1.3.js"></script> <!-- RECOMMENDED: box animations -->';
-    $footer .='<script defer src="js/mylibs/jquery.chosen.js"></script>';
-    $footer .='<script defer src="js/mylibs/jquery.validate.js"></script>';
-    $footer .='<script defer src="js/mylibs/jquery.dataTables.js"></script>';
-    $footer .='<script defer src="js/script.js"></script> <!-- REQUIRED: Generic scripts -->';
+    $footer .='<script defer src="script/plugins.js"></script> <!-- REQUIRED: Different own jQuery plugnis -->';
+    $footer .='<script defer src="script/mylibs/jquery.ba-resize.min.js"></script> <!-- RECOMMENDED when using sidebar: page resizing -->';
+    $footer .='<script defer src="script/mylibs/jquery.easing.1.3.js"></script> <!-- RECOMMENDED: box animations -->';
+    $footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
+    $footer .='<script defer src="script/mylibs/jquery.validate.js"></script>';
+    $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
+    $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
     $footer .='<!-- end scripts -->';
     $footer .='<script defer>';
     $footer .='$(window).load(function() {';
