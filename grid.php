@@ -328,7 +328,7 @@
     $footer .='<script defer src="script/mylibs/jquery.easing.1.3.js"></script> <!-- RECOMMENDED: box animations -->';
     $footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
     $footer .='<script defer src="script/mylibs/jquery.validate.js"></script>';
-    $footer .='<script defer src="script/mylibs/jquery.dataTables2.js"></script>';
+    $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
     $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
     $footer .='<!-- end scripts -->';
     $footer .='<script defer>';
