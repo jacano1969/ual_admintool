@@ -202,7 +202,7 @@
         $content .='<input type="hidden" id="resulttype" value="'.$result_type.'">';
         $content .='</form>';
         
-        $content .='<div class="data_grid" style="width:95%;">';
+        $content .='<div class="data_grid">';
         $content .='<div class="box">';
         $content .='<div class="header">';
         $content .='<img width="16" height="16" src="img/icons/packs/fugue/16x16/shadeless/table-excel.png">';

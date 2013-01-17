@@ -138,3 +138,9 @@ div.preview {
 }
 
 #designer-page .preview input { width:50%; }
+
+
+.continer .grid {width: 98%; }
+div.data_grid {  }
+
+.box .content { padding: 0 20px; }
