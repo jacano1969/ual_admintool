@@ -119,7 +119,7 @@ if(is_logged_in()){
             $totalpages = $numrecords/15;
         }
         
-        $sql .="LIMIT $pagenum, $limit";
+        #$sql .="LIMIT $pagenum, $limit";
                           
     } else {
         // course user is NOT enrolled on
@@ -159,7 +159,7 @@ if(is_logged_in()){
             $totalpages = $numrecords/15;
         }
         
-        $sql.= "LIMIT $pagenum, $limit";
+        #$sql.= "LIMIT $pagenum, $limit";
     }
                           
     /*if($programme!=0){
