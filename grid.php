@@ -223,7 +223,7 @@
         $content .='<div class="content">';
         $content .='<div class="dataTables_wrapper" id="table-example_wrapper">';
         
-        $content .='<table class="results" id="table-example">';
+        $content .='<table class="table" id="table-example">';
         
         if ($result = $mysqli->query($sql)) {
             if($result->num_rows==0) {
@@ -235,7 +235,8 @@
                 
                 // show users enrolments
                 if($result_type=='ue' || $result_type=='') {
-                    $content .='<th class="sorting_desc" rowspan="1" colspan="1">Remove</th><th class="sorting" rowspan="1" colspan="1">Type</th><th class="sorting" rowspan="1" colspan="1">Record Id</th><th class="sorting" rowspan="1" colspan="1">Enrolment Id</th><th class="sorting" rowspan="1" colspan="1">Staff Id</th><th class="sorting" rowspan="1" colspan="1">Stage Id</th>';
+                    //$content .='<th class="sorting_desc" rowspan="1" colspan="1">Remove</th><th class="sorting" rowspan="1" colspan="1">Type</th><th class="sorting" rowspan="1" colspan="1">Record Id</th><th class="sorting" rowspan="1" colspan="1">Enrolment Id</th><th class="sorting" rowspan="1" colspan="1">Staff Id</th><th class="sorting" rowspan="1" colspan="1">Stage Id</th>';
+                    $content .='<th class="sorting_desc" rowspan="1" colspan="1">Type</th><th class="sorting" rowspan="1" colspan="1">Record Id</th><th class="sorting" rowspan="1" colspan="1">Enrolment Id</th><th class="sorting" rowspan="1" colspan="1">Staff Id</th><th class="sorting" rowspan="1" colspan="1">Stage Id</th>';
                     $content .='<th class="sorting" rowspan="1" colspan="1">Course Id</th><th class="sorting" rowspan="1" colspan="1">AOS Code</th><th class="sorting" rowspan="1" colspan="1">AOS Period</th><th class="sorting" rowspan="1" colspan="1">ACAD Period</th>';
                     $content .='<th class="sorting" rowspan="1" colspan="1">College</th><th class="sorting" rowspan="1" colspan="1">AOS Description</th><th class="sorting" rowspan="1" colspan="1">Full Description</th><th class="sorting" rowspan="1" colspan="1">School</th><th class="sorting" rowspan="1" colspan="1">AOS Type</th>';
                     
@@ -243,7 +244,7 @@
                     
                     while ($row = $result->fetch_object()) {
                         $content .='<tr class="gradeA odd">';
-                        $content .='<td class="sorting_1"><input type="radio" value="0" id="remove_'.$row->enrolmentid.'" name="remove_'.$row->enrolmentid.'"></td>';
+                        //$content .='<td class="sorting_1"><input type="radio" value="0" id="remove_'.$row->enrolmentid.'" name="remove_'.$row->enrolmentid.'"></td>';
                         $content .='<td class="sorting_1">'.$row->Type.'</td>';
                         $content .='<td class="sorting_1">'.$row->record_id.'</td>';
                         $content .='<td class="sorting_1">'.$row->enrolmentid.'</td>';
