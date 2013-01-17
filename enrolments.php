@@ -51,9 +51,9 @@ require_once('lib.php');
     
     
     
+    echo $header;
     
-    
-    
+    exit;
     
     
     
