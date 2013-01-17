@@ -20,7 +20,7 @@ var gridmanager = gridmanager || (function() {
                    
                    if(confirm("Are you sure you want to remove this enrolment?")==true) {
                         alert("record: " + id +" has been removed.");
-                        dt.fnDeleteRow(selectedRow, null, true);
+                        dt._fnDeleteRow(selectedRow, null, true);
                         //$(this).closest('tr').remove();
                         //$('.paginate_active').click();
                    } else {
