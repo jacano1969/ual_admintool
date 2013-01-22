@@ -327,12 +327,12 @@ var ual_admintool = ual_admintool || (function(){
 
                 // user enrolments				
 				if(selected_workflow_step=="1000") {
-				    location.href="grid.php?type=ue";
+				    location.href="grid.php?T=ue";
 				}
 				
 				// potential enrolments
 				if(selected_workflow_step=="1001") {
-				    location.href="grid.php?type=pe";
+				    location.href="grid.php?T=pe";
 				}
 				
 				if(selected_workflow_step=="10000") {
