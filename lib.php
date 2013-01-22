@@ -435,7 +435,7 @@ function show_home() {
 }
 
 
-function show_header() {
+function show_header($grid=false) {
     
     $header = '';
     $header .= '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
@@ -447,30 +447,30 @@ function show_header() {
     
     
     // addded ro gdata table
-    $header .= '<link rel="stylesheet" href="css/960gs/fluid.css">';
-    $header .= '<link rel="stylesheet" href="css/h5bp/normalize.css">';
-    $header .= '<link rel="stylesheet" href="css/h5bp/non-semantic.helper.classes.css">';
-    $header .= '<link rel="stylesheet" href="css/h5bp/print.styles.css">';
-    
-    $header .= '<link rel="stylesheet" href="css/sprites.css">';
-    $header .= '<link rel="stylesheet" href="css/header.css">';
-    $header .= '<link rel="stylesheet" href="css/navigation.css">';   
-    $header .= '<link rel="stylesheet" href="css/content.css">';
-    $header .= '<link rel="stylesheet" href="css/footer.css">';
-    $header .= '<link rel="stylesheet" href="css/typographics.css">';
-    $header .= '<link rel="stylesheet" href="css/ie.fixes.css">';
-    
-    
-    $header .= '<link rel="stylesheet" href="css/sprite.forms.css">';
-    $header .= '<link rel="stylesheet" href="css/sprite.tables.css">';
-    
-    $header .= '<link rel="stylesheet" href="css/sprite.lists.css">';
-    $header .= '<link rel="stylesheet" href="css/icons.css">';
-    $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
-                
-    $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
-    //
-    
+    if($grid==true) {
+        $header .= '<link rel="stylesheet" href="css/960gs/fluid.css">';
+        $header .= '<link rel="stylesheet" href="css/h5bp/normalize.css">';
+        $header .= '<link rel="stylesheet" href="css/h5bp/non-semantic.helper.classes.css">';
+        $header .= '<link rel="stylesheet" href="css/h5bp/print.styles.css">';
+        
+        $header .= '<link rel="stylesheet" href="css/sprites.css">';
+        $header .= '<link rel="stylesheet" href="css/header.css">';
+        $header .= '<link rel="stylesheet" href="css/navigation.css">';   
+        $header .= '<link rel="stylesheet" href="css/content.css">';
+        $header .= '<link rel="stylesheet" href="css/footer.css">';
+        $header .= '<link rel="stylesheet" href="css/typographics.css">';
+        $header .= '<link rel="stylesheet" href="css/ie.fixes.css">';
+        
+        
+        $header .= '<link rel="stylesheet" href="css/sprite.forms.css">';
+        $header .= '<link rel="stylesheet" href="css/sprite.tables.css">';
+        
+        $header .= '<link rel="stylesheet" href="css/sprite.lists.css">';
+        $header .= '<link rel="stylesheet" href="css/icons.css">';
+        $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
+                    
+        $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
+    }
     
     
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
@@ -505,38 +505,39 @@ function show_navigation() {
 }
 
 
-function show_footer() {
+function show_footer($grid=false) {
     
     $footer = '';
     
     
     // Added for grid
-    $footer .='<script>window.jQuery || document.write(\'<script src="script/libs/jquery-1.7.1.min.js"><\/script>\')</script>';
-    $footer .='<script>window.jQuery.ui || document.write(\'<script src="script/libs/jquery-ui-1.8.16.min.js"><\/script>\')</script>';
-    
-    $footer .= '<script src="script/gridmanager.js"></script>';
-    
-    $footer .='<script defer src="script/plugins.js"></script> <!-- REQUIRED: Different own jQuery plugnis -->';
-    $footer .='<script defer src="script/mylibs/jquery.ba-resize.min.js"></script> <!-- RECOMMENDED when using sidebar: page resizing -->';
-    $footer .='<script defer src="script/mylibs/jquery.easing.1.3.js"></script> <!-- RECOMMENDED: box animations -->';
-    $footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
-    $footer .='<script defer src="script/mylibs/jquery.validate.js"></script>';
-    $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
-    $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
-    $footer .='<!-- end scripts -->';
-    $footer .='<script defer>';
-    $footer .='$(window).load(function() {';
-    $footer .='$(\'#table-example\').dataTable();';
-    $footer .='$(\'#table-example\').css(\'visibility\',\'visible\');';
-    $footer .='});';
-    $footer .='</script>';
-    $footer .='<!--[if lt IE 7 ]>';
-    $footer .='<script defer';
-    $footer .='src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
-    $footer .='<script';
-    $footer .='defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
-    $footer .='<![endif]-->';
-    
+    if($grid==true) {
+        $footer .='<script>window.jQuery || document.write(\'<script src="script/libs/jquery-1.7.1.min.js"><\/script>\')</script>';
+        $footer .='<script>window.jQuery.ui || document.write(\'<script src="script/libs/jquery-ui-1.8.16.min.js"><\/script>\')</script>';
+        
+        $footer .= '<script src="script/gridmanager.js"></script>';
+        
+        $footer .='<script defer src="script/plugins.js"></script> <!-- REQUIRED: Different own jQuery plugnis -->';
+        $footer .='<script defer src="script/mylibs/jquery.ba-resize.min.js"></script> <!-- RECOMMENDED when using sidebar: page resizing -->';
+        $footer .='<script defer src="script/mylibs/jquery.easing.1.3.js"></script> <!-- RECOMMENDED: box animations -->';
+        $footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
+        $footer .='<script defer src="script/mylibs/jquery.validate.js"></script>';
+        $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
+        $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
+        $footer .='<!-- end scripts -->';
+        $footer .='<script defer>';
+        $footer .='$(window).load(function() {';
+        $footer .='$(\'#table-example\').dataTable();';
+        $footer .='$(\'#table-example\').css(\'visibility\',\'visible\');';
+        $footer .='});';
+        $footer .='</script>';
+        $footer .='<!--[if lt IE 7 ]>';
+        $footer .='<script defer';
+        $footer .='src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
+        $footer .='<script';
+        $footer .='defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
+        $footer .='<![endif]-->';
+    }
     $footer .='</body>';
     $footer .='</html>';
     
