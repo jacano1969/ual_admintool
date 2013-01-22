@@ -20,7 +20,8 @@ var gridmanager = gridmanager || (function() {
                     if($(this).closest('tr').attr('data')=='removed') {
                        // do nothing
                     } else {
-                        if(confirm("Are you sure you want to remove this enrolment?")==true) {
+                        var remove = confirm("Are you sure you want to remove this enrolment?");
+                        if(remove==true) {
                                                         
                             // remove the enrolment by roecord id
                             // $.get('removeenrolment.php?, {"id":id }, function(data){
