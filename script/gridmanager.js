@@ -11,7 +11,6 @@ var gridmanager = gridmanager || (function() {
         $('table tbody tr').click(function() {
            var id=$(this).closest('tr').children('td:first').text();
            var selectedRow=$(this).closest('tr');
-           //var dt = $('#table-example').DataTable();
                     
            // check if id is a valid number
            if(id*1==id) {
@@ -22,16 +21,17 @@ var gridmanager = gridmanager || (function() {
                        // do nothing
                     } else {
                         if(confirm("Are you sure you want to remove this enrolment?")==true) {
-                            alert("record: " + id +" has been removed.");
-                            //$('#table-example').DataTable().fnDeleteRow(0);
-                            //dt.fnDeleteRow(selectedRow.prev('tr'), null, true);
-                            //$(this).closest('tr').remove();
-                            //$('.paginate_active').click();
-                            $(this).closest('tr').css('color','red');
-                            $(this).closest('tr').css('text-decoration','line-through');
-                            $(this).closest('tr').attr('data','removed');
+                                                        
+                            // remove the enrolment by roecord id
+                            // $.get('removeenrolment.php?, {"id":id }, function(data){
+                                $(this).closest('tr').css('color','red');
+                                $(this).closest('tr').css('text-decoration','line-through');
+                                $(this).closest('tr').attr('data','removed');
+                                alert("Enrolment " + id +" has been removed.");
+                            //});
+                            
                        } else {
-                            alert('no action');
+                            
                        }
                     }
                }
