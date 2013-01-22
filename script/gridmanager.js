@@ -8,7 +8,7 @@ var gridmanager = gridmanager || (function() {
     
     $(document).ready(function(){
         
-        $('table tr').click(function() {
+        $('table tbody tr').click(function() {
            var id=$(this).closest('tr').children('td:first').text();
            var selectedRow=$(this).closest('tr');
            //var dt = $('#table-example').DataTable();
