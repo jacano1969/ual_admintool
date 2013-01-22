@@ -1,21 +1,43 @@
 <?php
     session_start();
 
-    if(!empty($_POST['username']) && !empty($_POST['password'])) {
-        $username=stripcslashes($_POST['username']);
-        $password=stripcslashes($_POST['password']);
-        $username=htmlspecialchars($username, ENT_QUOTES, "ISO-8859-1");
-        $password=htmlspecialchars($password, ENT_QUOTES, "ISO-8859-1");
+    $magic='';
+    $username='';
+    
+    if(!empty($_POST['magic'])){
         
-        if($username !='' && $password !='') {
-            require_once('lib.php');
-            do_login($username,$password);
-        } else {
-            $error=2;
+        $magic=$_POST['magic'];
+        
+        // check if logging in from Moodle
+        if($magic=="qazmagicwsx123") {
+            
+            // must have a username
+            if(!empty($_POST['username'])) {
+                $username = stripcslashes($_POST['username']);
+                $username=htmlspecialchars($username, ENT_QUOTES, "ISO-8859-1");
+            
+                if($username!='') {
+                    require_once('lib.php');
+                    do_moodle_login($username);
+                }
+            }            
         }
     } else {
-        $error=0;
-    }
+        if(!empty($_POST['username']) && !empty($_POST['password'])) {
+            $username=stripcslashes($_POST['username']);
+            $password=stripcslashes($_POST['password']);
+            $username=htmlspecialchars($username, ENT_QUOTES, "ISO-8859-1");
+            $password=htmlspecialchars($password, ENT_QUOTES, "ISO-8859-1");
+            
+            if($username !='' && $password !='') {
+                require_once('lib.php');
+                do_login($username,$password);
+            } else {
+                $error=2;
+            }
+        } else {
+            $error=0;
+        }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en" dir="ltr">
@@ -63,4 +85,8 @@
     </div>
 </body>
 </html>
+<?php
+    }
+?>
+
 

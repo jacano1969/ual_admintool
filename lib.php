@@ -60,6 +60,59 @@ function do_login($username, $password) {
 }
 
 
+function do_moodle_login($username) {
+    global $CFG;
+    
+    $is_user=false;    
+    
+    // connect to db
+    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    // check if user can log in
+    if ($result = $mysqli->query("SELECT id, username FROM staff_login where username='$username'")) {
+        if($result->num_rows==0) {
+            $is_user=false;
+        } else {
+            
+            while ($row = $result->fetch_object()) {
+                $_SESSION['USERID']=$row->id;
+                $_SESSION['USERNAME']=$row->username;
+            }
+            
+            $is_user=true;
+        }
+        
+        /* free result set */
+        $result->close();
+        $mysqli->close();
+    } else {
+        // TODO:
+        // check staff tale for username
+            // add staff username to user_login table with default password
+                // login new user
+                    // $is_user=true;
+        $is_user=false;
+        $mysqli->close();
+    }
+
+    // check if username password are correct
+    if($is_user==true) {
+        // redirect to index page
+        header('Location: index.php');
+        exit;
+    } else {
+        // incorrect username or password
+        header('Location: login.php?error=1');
+        exit;
+    }
+}
+
+
 function do_logout() {
     session_start();
     session_destroy();
