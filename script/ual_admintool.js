@@ -324,6 +324,16 @@ var ual_admintool = ual_admintool || (function(){
 				var selected_workflow_help = $("option:selected", this).attr("help");
 				$('#helptext').html(selected_workflow_help);
 				$('#helpbox').fadeIn('slow');
+
+                // user enrolments				
+				if(selected_workflow_step=="1000") {
+				    location.href="grid.php?type=ue";
+				}
+				
+				// potential enrolments
+				if(selected_workflow_step=="1001") {
+				    location.href="grid.php?type=pe";
+				}
 				
 				if(selected_workflow_step=="10000") {
 				    location.href="designer.php";	

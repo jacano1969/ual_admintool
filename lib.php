@@ -1099,6 +1099,12 @@ function get_workflows($step_id=false) {
             }
             
             $workflow .= '</optgroup>';
+            $workflow .= '<optgroup help="Manage Enrolments" label="Enrolments">';
+            $workflow .= '<option id="1000" help="Enrolments for the logged in user">My Enrolments</option>';
+            $workflow .= '<option id="1001" help="Courses that the logged in user is not enrolled on">Possible Enrolments</option>';
+            $workflow .= '</optgroup>';
+            
+            $workflow .= '</optgroup>';
             $workflow .= '<optgroup help="Create or edit workflows" label="Workflows">';
             $workflow .= '<option id="10000" help="Open the workflow designer">Workflow Designer</option>';
             $workflow .= '</optgroup>';

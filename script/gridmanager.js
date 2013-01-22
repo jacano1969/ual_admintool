@@ -23,8 +23,8 @@ var gridmanager = gridmanager || (function() {
                         var remove = confirm("Are you sure you want to remove this enrolment?");
                         if(remove==true) {
                                                         
-                            // remove the enrolment by roecord id
-                            // $.get('removeenrolment.php?, {"id":id }, function(data){
+                            // remove the enrolment by record id
+                            // $.get('actions/rmenrolment.php?, {"id":id }, function(data){
                                 $(this).closest('tr').css('color','red');
                                 $(this).closest('tr').css('text-decoration','line-through');
                                 $(this).closest('tr').attr('data','removed');
