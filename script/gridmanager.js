@@ -34,7 +34,7 @@ var gridmanager = gridmanager || (function() {
                        } else {
                             
                        }
-                       remove = false;
+                       remove = null;
                     }
                }
                
