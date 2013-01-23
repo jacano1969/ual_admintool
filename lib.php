@@ -956,7 +956,7 @@ function get_filter_data($type=false, $data=false) {
     // TODO: actions
     
     $filters .='<input type="submit" class="submit" value="reset">';
-    $filters .='<input id="showuserenrolments" name="showuserenrolments" type="submit" class="submit" value="Show user enrolments">';
+    //$filters .='<input id="showuserenrolments" name="showuserenrolments" type="submit" class="submit" value="Show user enrolments">';
     $filters .='<input id="showpossibleenrolments" name="showpossibleenrolments" type="submit" class="submit" value="Show possible enrolments">';
     
     
