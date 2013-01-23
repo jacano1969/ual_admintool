@@ -34,8 +34,22 @@ function do_login($username, $password) {
             $is_user=true;
         }
         
+        // get user role
+        if ($result2 = $mysqli->query("SELECT role FROM USERS where username='$username'")) {
+        {
+            if($result2->num_rows==0) {
+                
+            } else {
+            
+                while ($row2 = $result2->fetch_object()) {
+                    $_SESSION['ROLE']=$row2->role;
+                }
+            }
+        }
+        
         /* free result set */
         $result->close();
+        $result2->close();
         $mysqli->close();
     } else {
         // TODO:
@@ -87,8 +101,22 @@ function do_moodle_login($username) {
             $is_user=true;
         }
         
+        // get user role
+        if ($result2 = $mysqli->query("SELECT role FROM USERS where username='$username'")) {
+        {
+            if($result2->num_rows==0) {
+                
+            } else {
+            
+                while ($row2 = $result2->fetch_object()) {
+                    $_SESSION['ROLE']=$row2->role;
+                }
+            }
+        }
+        
         /* free result set */
         $result->close();
+        $result2->close();
         $mysqli->close();
     } else {
         // TODO:
