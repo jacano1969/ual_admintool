@@ -506,6 +506,7 @@ function show_header($grid=false) {
     $header .= '<script src="script/libs/jquery-1.7.1.min.js" type="text/javascript"></script>';
     
     if($MULTI_SELECT_LIST==true) {
+        $header .= '<link href="css/multi_select_list.css" type="text/css" rel="stylesheet">';
         $header .= '<script src="script/jquery.twosidedmultiselect.js"></script>';
     }
     
