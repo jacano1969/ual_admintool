@@ -87,8 +87,7 @@
 			}
 			
 			// Fixes situations where the original name contains a colon - 
-			//var newName = originalName.replace(/:/g, '-').replace(/\./g, '-');
-			
+			var newName = originalName.replace(/:/g, '-').replace(/\./g, '-');
 			modifiedName = newName + nameModifier;
 			
 			var size = $This.attr("size");
