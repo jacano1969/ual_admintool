@@ -28,7 +28,7 @@
     
     $mysqli->set_charset("utf8");
     
-    $sql='select record_id as id, concat(username," - ",lastname, ", ",firstname, ' (', role,')') as value from USERS order by lastname';
+    $sql='select record_id as id, concat(username," - ",lastname, ", ",firstname, " (", role,")") as value from USERS order by lastname';
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
