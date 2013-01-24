@@ -223,6 +223,8 @@
         
         $content .='<table class="table" id="table-example">';
         
+        $mysqli->set_charset("utf8");
+        
         if ($result = $mysqli->query($sql)) {
             if($result->num_rows==0) {
                 $content .= '<tr><th>No Enrolment Data</td></th></tr>';

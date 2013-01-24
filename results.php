@@ -82,7 +82,8 @@ if(is_logged_in()){
     
     $loggedin_username = $_SESSION['USERNAME'];
     
-    
+    $mysqli->set_charset("utf8");
+        
     // user enrolments / default
     if($result_type=='ue' || $result_type=='') {
         // users enrolments

@@ -21,6 +21,8 @@ function do_login($username, $password) {
         exit;
     }
     
+    $mysqli->set_charset("utf8");
+    
     // check if user can log in
     if ($result = $mysqli->query("SELECT id, username FROM staff_login where username='$username' AND password='$password'")) {
         if($result->num_rows==0) {
@@ -86,6 +88,8 @@ function do_moodle_login($username) {
         header('Location: login.php?error=4');
         exit;
     }
+    
+    $mysqli->set_charset("utf8");
     
     // check if user can log in
     if ($result = $mysqli->query("SELECT id, username FROM staff_login where username='$username'")) {
@@ -601,6 +605,8 @@ function sql_insert($sql) {
     // do we need to check this syntax
     $sql_insert = $sql;
     
+    $mysqli->set_charset("utf8");
+    
     if($result = $mysqli->query($sql_insert)){
         $mysqli->close();
         return true;
@@ -627,6 +633,8 @@ function sql_update($sql) {
     // TODO:
     // do we need to check this syntax
     $sql_update = $sql;
+    
+    $mysqli->set_charset("utf8");
     
     if($result = $mysqli->query($sql_update)){
         $mysqli->close();
@@ -656,6 +664,8 @@ function log_user_action($username, $userid, $action, $description, $data) {
     $log_sql= "INSERT INTO workflow_log (username, record_id, time, action, description, data) " .
               "VALUES ('$username',$userid,UNIX_TIMESTAMP(),'$action','$description','$data')";
     
+    $mysqli->set_charset("utf8");
+    
     if($result = $mysqli->query($log_sql)){
         $mysqli->close();
         return true;
@@ -677,6 +687,8 @@ function get_logged_in_user($userid) {
         header('Location: login.php?error=4');
         exit;
     }
+    
+    $mysqli->set_charset("utf8");
     
     // check if user can log in
     if ($result = $mysqli->query("SELECT firstname, lastname FROM users WHERE record_id=$userid")) {
@@ -749,6 +761,8 @@ function get_filter_data($type=false, $data=false) {
     $selected_programme = '';
     $selected_programme_year = '';
     
+    $mysqli->set_charset("utf8");
+    
     // get programmes list
     if ($result = $mysqli->query($programmes_sql)) {
         if($result->num_rows==0) {
@@ -814,6 +828,8 @@ function get_filter_data($type=false, $data=false) {
             $course_years_sql = "select distinct cs.acad_period as name from COURSE_STRUCTURE cs inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(cs.aos_code, cs.aos_period, cs.acad_period) and cs.aos_code='$data' order by name";
         }
     }
+        
+    $mysqli->set_charset("utf8");
         
     // get course years list
     if ($result = $mysqli->query($course_years_sql)) {
@@ -889,6 +905,8 @@ function get_filter_data($type=false, $data=false) {
         }
     }
     
+    $mysqli->set_charset("utf8");
+    
     // get courses list
     if ($result = $mysqli->query($courses_sql)) {
         if($result->num_rows==0) {
@@ -951,6 +969,8 @@ function get_filter_data($type=false, $data=false) {
             $units_sql = "SELECT DISTINCT c.aos_code as id, c.full_description AS name from COURSES c inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username' and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period) and c.aos_code='$data' order by name";
         }
     }
+    
+    $mysqli->set_charset("utf8");
     
     // get units list
     if ($result = $mysqli->query($units_sql)) {
@@ -1067,6 +1087,8 @@ function get_workflow_data($workflow_data_item_id) {
                            "inner join workflow_data_type wfdt on wfd.workflow_data_type_id=wfdt.workflow_data_type_id " .
                            "and workflow_data_item_id=$workflow_data_item_id";
         
+        $mysqli->set_charset("utf8");
+        
         if ($result = $mysqli->query($workflow_data_sql)) {
             if($result->num_rows==0) {
                 return false;
@@ -1124,6 +1146,8 @@ function get_workflows($step_id=false) {
     } else {
         $current_workflow_step_id=$step_id;
     }
+    
+    $mysqli->set_charset("utf8");
     
      // get workflows
     if ($workflow_result = $mysqli->query($workflow_sql)) {
@@ -1250,6 +1274,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
         
         $step_sql = "select name as name, description as description from workflow_step where status=1 and workflow_step_id=$step_id";
         
+        $mysqli->set_charset("utf8");
+        
         if ($result = $mysqli->query($step_sql)) {
             while($row = $result->fetch_object()) {
                 $action_name = $row->name;    
@@ -1263,6 +1289,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     } else if($sub_step_id!=false) {
         
         $sub_step_sql = "select name as name, description as description from workflow_sub_step where status=1 and workflow_sub_step_id=$sub_step_id";
+        
+        $mysqli->set_charset("utf8");
         
         if ($result = $mysqli->query($sub_step_sql)) {
             while($row = $result->fetch_object()) {
@@ -1750,6 +1778,8 @@ function get_designer_workflows() {
         $current_workflow_step_id=$step_id;
     }
     
+    $mysqli->set_charset("utf8");
+    
     // get workflows
     if ($workflow_result = $mysqli->query($workflow_sql)) {
         if($workflow_result->num_rows==0) {
@@ -1955,6 +1985,8 @@ function get_list($list_data_id, $default_value) {
     
     $sql = "select list_data_id, item_id, name, description from list_data where item_id!=0 and list_data_id=$list_data_id and status=1";
     
+    $mysqli->set_charset("utf8");
+    
     // get list data
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
@@ -1993,6 +2025,8 @@ function get_workflow_data_types() {
     }
     
     $sql = "select workflow_data_type_id as id, name, data_type, concat(name,' (', data_type, ')') as fullname from workflow_data_type where status=1";
+    
+    $mysqli->set_charset("utf8");
     
     // get workflow data types data
     if ($result = $mysqli->query($sql)) {
@@ -2033,6 +2067,8 @@ function get_help($list_data_id, $name) {
     }
     
     $sql = "select description from list_data where name='$name' and list_data_id=$list_data_id and item_id!=0";
+    
+    $mysqli->set_charset("utf8");
     
     // get workflow data types data
     if ($result = $mysqli->query($sql)) {
