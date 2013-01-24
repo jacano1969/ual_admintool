@@ -11,6 +11,8 @@
     
     $page ='';
     
+    $MULTI_SELECT_LIST=true;
+    
     $page .= show_header();
     
     // get all users
@@ -34,7 +36,7 @@
             exit;
         } else {
             while ($row = $result->fetch_object()) {
-                $results->id[]=$row->id;
+                $results->id[]=$row->record_id;
                 $results->value[]=$row->username;
             }
             
@@ -43,7 +45,7 @@
     }
     $mysqli->close();
     
-    $MULTI_SELECT_LIST=true;
+    
     $page .= multi_select_list("users", $results);
     
     $page .= show_footer();
