@@ -5,7 +5,7 @@
     require_once('lib.php');
     
     // we're using a multi select list
-    global $MULTI_SELECT_LIST = true;
+    global $MULTI_SELECT_LIST;
     
     global $CFG;
     
@@ -43,6 +43,7 @@
     }
     $mysqli->close();
     
+    $MULTI_SELECT_LIST=true;
     $page .= multi_select_list("users", $results);
     
     $page .= show_footer();
