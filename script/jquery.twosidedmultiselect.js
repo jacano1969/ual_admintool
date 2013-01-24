@@ -18,14 +18,14 @@
 		$("#" + targetName).live("dblclick", function() {
 			$(this).children(":selected").remove().appendTo("#" + targetName + nameModifier);
 			$("#" + targetName + nameModifier + " options").removeAttr("selected");
-			OrderMyList();
+			//OrderMyList();
 			return false;
 		});
 
 		$("#" + targetName + nameModifier).live("dblclick", function() {
 			$(this).children(":selected").remove().appendTo("#" + targetName);
 			$("#" + targetName + nameModifier + " options").removeAttr("selected");
-			OrderMyList();
+			//OrderMyList();
 			return false;
 		});
 	};
@@ -127,28 +127,28 @@
 			$("." + nameModifier + "options .AddOne").click(function() {
 				var targetName = $(this).attr("rel");
 				$("#" + targetName + nameModifier + " option:selected").remove().appendTo("#" + targetName);
-				OrderMyList();
+				//OrderMyList();
 				return false;
 			});
 			
 			$("." + nameModifier + "options .AddAll").click(function() {
 				var targetName = $(this).attr("rel");
 				$("#" + targetName + nameModifier + " option").remove().appendTo("#" + targetName);
-				OrderMyList();
+				//OrderMyList();
 				return false;
 			});
 			
 			$("." + nameModifier + "options .RemoveOne").click(function() {
 				var targetName = $(this).attr("rel");
 				$("#" + targetName + " option:selected").remove().appendTo("#" + targetName + nameModifier);
-				OrderMyList();
+				//OrderMyList();
 				return false;
 			});
 			
 			$("." + nameModifier + "options .RemoveAll").click(function() {
 				var targetName = $(this).attr("rel");
 				$("#" + targetName + " option").remove().appendTo("#" + targetName + nameModifier);
-				OrderMyList();
+				//OrderMyList();
 				return false;
 			});
 		});
