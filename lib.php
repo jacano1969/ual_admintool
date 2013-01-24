@@ -2,6 +2,7 @@
 
 require_once('dbconfig.php');
 
+
 //
 // Login functions
 //
@@ -465,6 +466,8 @@ function show_home() {
 
 function show_header($grid=false) {
     
+    global $MULTI_SELECT_LIST;
+    
     $header = '';
     $header .= '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
     $header .= '<html lang="en" dir="ltr">';
@@ -475,7 +478,7 @@ function show_header($grid=false) {
     
     
     // addded ro gdata table
-    if($grid==true) {
+    if($DATA_GRID==true) {
         $header .= '<link rel="stylesheet" href="css/960gs/fluid.css">';
         $header .= '<link rel="stylesheet" href="css/h5bp/normalize.css">';
         $header .= '<link rel="stylesheet" href="css/h5bp/non-semantic.helper.classes.css">';
@@ -498,6 +501,10 @@ function show_header($grid=false) {
         $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
                     
         $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
+    }
+    
+    if($MULTI_SELECT_LIST==true) {
+        $header .= '<script src="script/jquery.twosidedmultiselect.js"></script>';
     }
     
     
@@ -1002,6 +1009,34 @@ function get_filter_data($type=false, $data=false) {
 
 
 
+
+//
+// components
+//
+
+// TODO: datagrid
+
+
+/*
+ * function to generate a multi-select list
+ *
+ */
+function multi_select_list($name, $select_data)
+{
+    $multi_select ='';
+    $multi_select .='<select id="'.$name.'" class="multiselect">';
+    
+    foreach($select_data as $data) {
+        $multi_select.='<option value="'.$data->id.'">'.$select_data->value.'</option>';
+    }
+    
+    $multi_select .='</select>';
+    $multi_select .='<script type="text/javascript">$(".multiselect").twosidedmultiselect();</script>';
+    
+    return $multi_select;
+}
+    
+    
 //
 // Workflow
 //
@@ -2015,3 +2050,4 @@ function get_help($list_data_id, $name) {
     
     return $list_data_description;    
 }
+
