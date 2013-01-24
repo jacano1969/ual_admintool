@@ -1022,6 +1022,7 @@ function get_filter_data($type=false, $data=false) {
 function multi_select_list($name, $select_data) {
     
     $multi_select='';
+    $multi_select.='<small>Hold Ctrl key to select multiple items in the list</small>';
     $multi_select.='<select multiple="multiple" name="'.$name.'" id="'.$name.'" class="multiselect">';
     
     while ($row = $select_data->fetch_object()) {
