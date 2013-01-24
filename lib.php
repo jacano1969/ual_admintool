@@ -1023,6 +1023,8 @@ function multi_select_list($name, $select_data) {
     
     $multi_select='';
     
+    $multi_select.='<small>Hold Ctrl key to select multiple items in the list</small>';
+    $multi_select.='<div id="multi_select">';
     $multi_select.='<select multiple="multiple" name="'.$name.'" id="'.$name.'" class="multiselect">';
     
     while ($row = $select_data->fetch_object()) {
@@ -1031,7 +1033,9 @@ function multi_select_list($name, $select_data) {
     
     $multi_select.='</select>';
     $multi_select.='<script type="text/javascript">$(".multiselect").twosidedmultiselect();</script>';
-    $multi_select.='<small>Hold Ctrl key to select multiple items in the list</small>';
+    
+    $multi_select.='</div>';
+    
     return $multi_select;
 }
     
