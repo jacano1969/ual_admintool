@@ -1023,7 +1023,7 @@ function multi_select_list($name, $select_data) {
     
     $multi_select='';
     
-    $multi_select.='<small>Hold Ctrl key to select multiple items in the list</small>';
+    $multi_select.='<small><b> Hold the Ctrl key to select multiple items in the list</b></small>';
     $multi_select.='<div id="multi_select">';
     $multi_select.='<select multiple="multiple" name="'.$name.'" id="'.$name.'" class="multiselect">';
     
