@@ -46,7 +46,7 @@
     }
     
     
-    $page .= multi_select_list("users", $result);
+    $page .= multi_select_list("users", $result, 20);
     
     $page .= show_footer();
     
