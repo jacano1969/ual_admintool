@@ -37,7 +37,6 @@ function do_login($username, $password) {
         
         // get user role
         if ($result2 = $mysqli->query("SELECT role FROM USERS where username='$username'")) {
-        {
             if($result2->num_rows==0) {
                 
             } else {
@@ -104,7 +103,6 @@ function do_moodle_login($username) {
         
         // get user role
         if ($result2 = $mysqli->query("SELECT role FROM USERS where username='$username'")) {
-        {
             if($result2->num_rows==0) {
                 
             } else {
@@ -1021,8 +1019,8 @@ function get_filter_data($type=false, $data=false) {
  * function to generate a multi-select list
  *
  */
-function multi_select_list($name, $select_data)
-{
+function multi_select_list($name, $select_data) {
+    
     $multi_select='';
     $multi_select.='<select id="'.$name.'" class="multiselect">';
     
