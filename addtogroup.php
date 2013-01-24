@@ -19,7 +19,6 @@
     $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
         
     $result ='';
-    $results = new stdClass();
     $sql='';
         
     if (mysqli_connect_error()) {
@@ -27,7 +26,7 @@
         exit;
     }
     
-    $sql='select record_id, username from USERS';
+    $sql='select record_id as id, username as value from USERS';
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
@@ -35,18 +34,18 @@
             header('Location: login.php?error=4');
             exit;
         } else {
-            while ($row = $result->fetch_object()) {
-                $results->id[]=$row->record_id;
-                $results->value[]=$row->username;
-            }
+            //while ($row = $result->fetch_object()) {
+            //    $results->id[]=$row->record_id;
+            //    $results->value[]=$row->username;
+            //}
             
-            $result->close();
+            //$result->close();
         }
     }
     $mysqli->close();
     
     
-    $page .= multi_select_list("users", $results);
+    $page .= multi_select_list("users", $result);
     
     $page .= show_footer();
     
