@@ -42,12 +42,14 @@
             //$result->close();
         }
     }
-    $mysqli->close();
     
     
     $page .= multi_select_list("users", $result);
     
     $page .= show_footer();
+    
+    $result->close();
+    $mysqli->close();
     
     echo $page;
     
