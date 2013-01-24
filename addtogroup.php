@@ -26,7 +26,7 @@
         exit;
     }
     
-    $sql='select record_id as id, concat(username,' - ',lastname, ' ',firstname) as value from USERS';
+    $sql='select record_id as id, concat(username," - ",lastname, " ",firstname) as value from USERS';
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
