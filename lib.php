@@ -478,7 +478,7 @@ function show_header($grid=false) {
     
     
     // addded ro gdata table
-    if($DATA_GRID==true) {
+    if($grid==true) {
         $header .= '<link rel="stylesheet" href="css/960gs/fluid.css">';
         $header .= '<link rel="stylesheet" href="css/h5bp/normalize.css">';
         $header .= '<link rel="stylesheet" href="css/h5bp/non-semantic.helper.classes.css">';
@@ -1023,15 +1023,15 @@ function get_filter_data($type=false, $data=false) {
  */
 function multi_select_list($name, $select_data)
 {
-    $multi_select ='';
-    $multi_select .='<select id="'.$name.'" class="multiselect">';
+    $multi_select='';
+    $multi_select.='<select id="'.$name.'" class="multiselect">';
     
     foreach($select_data as $data) {
-        $multi_select.='<option value="'.$data->id.'">'.$select_data->value.'</option>';
+        $multi_select.='<option value="'.$data->id.'">'.$data->value.'</option>';
     }
     
-    $multi_select .='</select>';
-    $multi_select .='<script type="text/javascript">$(".multiselect").twosidedmultiselect();</script>';
+    $multi_select.='</select>';
+    $multi_select.='<script type="text/javascript">$(".multiselect").twosidedmultiselect();</script>';
     
     return $multi_select;
 }
