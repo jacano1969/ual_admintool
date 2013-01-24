@@ -1023,8 +1023,8 @@ function multi_select_list($name, $select_data) {
     $multi_select='';
     $multi_select.='<select name="'.$name.'" id="'.$name.'" class="multiselect">';
     
-    foreach($select_data as $data) {
-        $multi_select.='<option value="'.$data->id.'">'.$data->value.'</option>';
+    while ($row = $select_data->fetch_object()) {
+        $multi_select.='<option value="'.$row->id.'">'.$row->value.'</option>';
     }
     
     $multi_select.='</select>';
