@@ -1021,7 +1021,7 @@ function get_filter_data($type=false, $data=false) {
 function multi_select_list($name, $select_data) {
     
     $multi_select='';
-    $multi_select.='<select name="'.$name.'" id="'.$name.'" class="multiselect">';
+    $multi_select.='<select multiple="multiple" name="'.$name.'" id="'.$name.'" class="multiselect">';
     
     while ($row = $select_data->fetch_object()) {
         $multi_select.='<option value="'.$row->id.'">'.$row->value.'</option>';
