@@ -499,16 +499,15 @@ function show_header($grid=false) {
         $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
                     
         $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
-    }
-    
-    if($MULTI_SELECT_LIST==true) {
-        $header .= '<script src="script/jquery.twosidedmultiselect.js"></script>';
-    }
-    
+    }    
     
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
     //$header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
     $header .= '<script src="script/libs/jquery-1.7.1.min.js" type="text/javascript"></script>';
+    
+    if($MULTI_SELECT_LIST==true) {
+        $header .= '<script src="script/jquery.twosidedmultiselect.js"></script>';
+    }
     
     $header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
     $header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
