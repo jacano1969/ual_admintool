@@ -222,6 +222,10 @@
         $content .='<div class="header">';
         $content .='<img width="16" height="16" src="img/icons/packs/fugue/16x16/shadeless/table-excel.png">';
         $content .='<h3>Enrolments</h3><span></span>';
+        $content .='Filter: ';
+        $content .='<input type="button" name="Programmes" onclick="$(\'#table-example_filter input\').val(\'L0\'); $(\'#table-example_filter input\').keyup();">';
+        $content .='<input type="button" name="Courses" onclick="$(\'#table-example_filter input\').val(\'course\'); $(\'#table-example_filter input\').keyup();">';
+        $content .='<input type="button" name="Units" onclick="$(\'#table-example_filter input\').val(\'unit\'); $(\'#table-example_filter input\').keyup();">';
         $content .='</div>';
         $content .='<div class="content">';
         $content .='<div class="dataTables_wrapper" id="table-example_wrapper">';
