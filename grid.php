@@ -209,21 +209,22 @@
         
         if($result_type=='ue' || $result_type=='') {
             $content .='<h2>User enrolments</h2>';
-            $content .='<p>The grid below lists the enrolments for the logged in user.</p>';
-            $content .='<p>To remove an enrolment entry, just click on the entry in the grid.</p>';
+            $content .='The grid below lists the enrolments for the logged in user.<br>';
+            $content .='To remove an enrolment entry, just click on the entry in the grid.';
         } else {
             $content .='<h2>Possible user enrolments</h2>';
-            $content .='<p>The grid below lists all possible courses the logged in user can be enrolled on.</p>';
-            $content .='<p>To add a course enrolment for the logged in user, just click on an entry in the grid.</p>';
+            $content .='The grid below lists all possible courses the logged in user can be enrolled on.<br>';
+            $content .='To add a course enrolment for the logged in user, just click on an entry in the grid.';
         }
         
         $content .='<div class="data_grid">';
 
-        $content .='Filter: ';
+        $content .='<b>Quick Filter: ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'\'); $(\'#table-example_filter input\').keyup();">All</a> | ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'(Programme)\'); $(\'#table-example_filter input\').keyup();">Programmes</a> | ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'(Course)\'); $(\'#table-example_filter input\').keyup();">Courses</a> | ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'(Unit)\'); $(\'#table-example_filter input\').keyup();">Units</a>';
+        $content .='</b>';
 
         $content .='<div class="box">';
         $content .='<div class="header">';
