@@ -217,15 +217,14 @@
             $content .='To add a course enrolment for the logged in user, just click on an entry in the grid.';
         }
         
-        $content .='<div class="data_grid">';
-
-        $content .='<b>Quick Filter: ';
+        $content .='<p><b>Quick Filter: ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'\'); $(\'#table-example_filter input\').keyup();">All</a> | ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'(Programme)\'); $(\'#table-example_filter input\').keyup();">Programmes</a> | ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'(Course)\'); $(\'#table-example_filter input\').keyup();">Courses</a> | ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'(Unit)\'); $(\'#table-example_filter input\').keyup();">Units</a>';
-        $content .='</b>';
-
+        $content .='</b/</p>';
+        
+        $content .='<div class="data_grid">';
         $content .='<div class="box">';
         $content .='<div class="header">';
         $content .='<img width="16" height="16" src="img/icons/packs/fugue/16x16/shadeless/table-excel.png">';
