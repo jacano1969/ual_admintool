@@ -155,3 +155,5 @@ div.data_grid {  }
 h2 {
 	margin-bottom:0px;
 }
+
+#quick_filter { float:right; }
