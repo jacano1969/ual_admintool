@@ -144,3 +144,11 @@ div.preview {
 div.data_grid {  }
 
 .box .content { padding: 0 20px; }
+
+
+
+#user-enrolments .container {
+    margin: 0 auto;
+    width: 99%;
+}
+
