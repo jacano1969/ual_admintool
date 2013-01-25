@@ -126,9 +126,9 @@
         if($result_type=='ue' || $result_type=='') {
             // users enrolments
             $sql = "SELECT DISTINCT " .
-                   "CASE WHEN c.aos_code like('L%') THEN 'Programme' ELSE " . 
-                   "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course' ELSE " .
-                   "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN 'Unit' " .
+                   "CASE WHEN c.aos_code like('L%') THEN 'Programme:' ELSE " . 
+                   "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course:' ELSE " .
+                   "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN 'Unit:' " .
                    "END END END as 'Type', " .
                    "e.record_id, e.enrolmentid, e.staffid, e.stageid, " .
                    "c.courseid, c.aos_code, c.aos_period, c.acad_period, c.college, c.aos_description," .
@@ -161,9 +161,9 @@
                   "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') ";*/
             
             $sql ="SELECT DISTINCT " .
-                   "CASE WHEN c.aos_code like('L%') THEN 'Programme' ELSE " . 
-                   "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course' ELSE " .
-                   "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN 'Unit' " .
+                   "CASE WHEN c.aos_code like('L%') THEN 'Programme:' ELSE " . 
+                   "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course:' ELSE " .
+                   "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN 'Unit:' " .
                    "END END END as 'Type', " .
                    "c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
                    "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
@@ -221,9 +221,9 @@
 
         $content .='Filter: ';
         $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'\'); $(\'#table-example_filter input\').keyup();">All</a> | ';
-        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'L0\'); $(\'#table-example_filter input\').keyup();">Programmes</a> | ';
-        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'course\'); $(\'#table-example_filter input\').keyup();">Courses</a> | ';
-        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'unit\'); $(\'#table-example_filter input\').keyup();">Units</a>';
+        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'Programme:\'); $(\'#table-example_filter input\').keyup();">Programmes</a> | ';
+        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'Course:\'); $(\'#table-example_filter input\').keyup();">Courses</a> | ';
+        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'Unit:\'); $(\'#table-example_filter input\').keyup();">Units</a>';
 
         $content .='<div class="box">';
         $content .='<div class="header">';
