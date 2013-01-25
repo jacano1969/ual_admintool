@@ -160,9 +160,14 @@
                   "INNER JOIN COURSES c " .
                   "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') ";*/
             
-            $sql ="SELECT c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
-                  "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
-                  "FROM COURSES c ";
+            $sql ="SELECT DISTINCT " .
+                   "CASE WHEN c.aos_code like('L%') THEN 'Programme' ELSE " . 
+                   "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN 'Course' ELSE " .
+                   "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN 'Unit' " .
+                   "END END END as 'Type', " .
+                   "c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
+                   "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
+                   "FROM COURSES c ";
                   
             /*if($unit!=''){
                 $sql .=" and c.aos_code='$unit'";
@@ -264,7 +269,7 @@
                     }
                 } else {
 
-                    $content .='<th class="sorting_desc" rowspan="1" colspan="1">Course Id</th><th class="sorting" rowspan="1" colspan="1">AOS Code</th><th class="sorting" rowspan="1" colspan="1">Aos Period</th><th class="sorting" rowspan="1" colspan="1">Acad Period</th>';
+                    $content .='<th class="sorting_desc" rowspan="1" colspan="1">Type</th><th class="sorting" rowspan="1" colspan="1">Course Id</th><th class="sorting" rowspan="1" colspan="1">AOS Code</th><th class="sorting" rowspan="1" colspan="1">Aos Period</th><th class="sorting" rowspan="1" colspan="1">Acad Period</th>';
                     $content .='<th class="sorting" rowspan="1" colspan="1">College</th><th class="sorting" rowspan="1" colspan="1">AOS Description</th><th class="sorting" rowspan="1" colspan="1">Full Description</th><th class="sorting" rowspan="1" colspan="1">School</th><th class="sorting" rowspan="1" colspan="1">AOS Type</th>';
                     
                     $content .='</tr></thead>';
@@ -273,6 +278,7 @@
                     
                     while ($row = $result->fetch_object()) {
                         $content .='<tr class="gradeA odd">';
+                        $content .='<td class="sorting_1">'.$row->Type.'</td>';
                         $content .='<td class="sorting_1">'.$row->courseid.'</td>';
                         $content .='<td class="sorting_1">'.$row->aos_code.'</td>';
                         $content .='<td class="sorting_1">'.$row->aos_period.'</td>';
