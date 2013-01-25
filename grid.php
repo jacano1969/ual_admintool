@@ -220,9 +220,9 @@
         $content .='<div class="data_grid">';
 
         $content .='Filter: ';
-        $content .='<input type="submit" name="Programmes" onclick="$(\'#table-example_filter input\').val(\'L0\'); $(\'#table-example_filter input\').keyup();">';
-        $content .='<input type="submit" name="Courses" onclick="$(\'#table-example_filter input\').val(\'course\'); $(\'#table-example_filter input\').keyup();">';
-        $content .='<input type="submit" name="Units" onclick="$(\'#table-example_filter input\').val(\'unit\'); $(\'#table-example_filter input\').keyup();">';
+        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'L0\'); $(\'#table-example_filter input\').keyup();">Programmes</a>';
+        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'course\'); $(\'#table-example_filter input\').keyup();">Courses</a>';
+        $content .='<a href="#" onclick="$(\'#table-example_filter input\').val(\'unit\'); $(\'#table-example_filter input\').keyup();">Units</a>';
 
         $content .='<div class="box">';
         $content .='<div class="header">';
