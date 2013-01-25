@@ -246,7 +246,6 @@
                     
                     while ($row = $result->fetch_object()) {
                         $content .='<tr class="gradeA odd">';
-                        //$content .='<td class="sorting_1"><input type="radio" value="0" id="remove_'.$row->enrolmentid.'" name="remove_'.$row->enrolmentid.'"></td>';
                         $content .='<td class="sorting_1">'.$row->record_id.'</td>';
                         $content .='<td class="sorting_1">'.$row->Type.'</td>';
                         $content .='<td class="sorting_1">'.$row->enrolmentid.'</td>';
