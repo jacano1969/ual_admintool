@@ -264,29 +264,30 @@
                         $content .='</tr>';
                     }
                 } else {
-                    $content .='<th>Add</th><th>Course Id</th><th>AOS Code</th><th>Aos Period</th><th>Acad Period</th>';
+                    $content .='<thead><tr><th class="sorting_desc" rowspan="1" colspan="1">Course Id</th><th class="sorting" rowspan="1" colspan="1">AOS Code</th><th class="sorting" rowspan="1" colspan="1">Aos Period</th><th class="sorting" rowspan="1" colspan="1">Acad Period</th>';
                     //$content .='<th>Aos CD Link</th><th>Link AOS Period</th><th>Link Period</th><th>Compulsory</th>';
-                    $content .='<th>College</th><th>AOS Description</th><th>Full Description</th><th>School</th><th>AOS Type</th>';
+                    $content .='<th class="sorting" rowspan="1" colspan="1">College</th><th class="sorting" rowspan="1" colspan="1">AOS Description</th><th class="sorting" rowspan="1" colspan="1">Full Description</th><th class="sorting" rowspan="1" colspan="1">School</th><th class="sorting" rowspan="1" colspan="1">AOS Type</th>';
                     
-                    $content .='</tr>';
+                    $content .='</tr></thead>';
+                    
+                    $content .='<tbody>';
                     
                     while ($row = $result->fetch_object()) {
-                        $content .="<tr>";
-                        $content .='<td><input type="radio" value="0" id="add_'.$row->enrolmentid.'" name="add_'.$row->enrolmentid.'"></td>';
-                        $content .="<td>$row->courseid</td>";
-                        $content .="<td>$row->aos_code</td>";
-                        $content .="<td>$row->aos_period</td>";
-                        $content .="<td>$row->acad_period</td>";
-                        //$content .="<td>$row->aoscd_link</td>";
-                        //$content .="<td>$row->lnk_aos_period</td>";
-                        //$content .="<td>$row->lnk_period</td>";
-                        //$content .="<td>$row->compulsry_yn</td>";
-                        $content .="<td>$row->college</td>";
-                        $content .="<td>$row->aos_description</td>";
-                        $content .="<td>$row->full_description</td>";
-                        $content .="<td>$row->school</td>";
-                        $content .="<td>$row->aos_type</td>";
-                        $content .="</tr>";
+                        $content .='<tr class="gradeA odd">';
+                        $content .='<td class="sorting_1">$row->courseid</td>';
+                        $content .='<td class="sorting_1">$row->aos_code</td>';
+                        $content .='<td class="sorting_1">$row->aos_period</td>';
+                        $content .='<td class="sorting_1">$row->acad_period</td>';
+                        //$content .='<td>$row->aoscd_link</td>';
+                        //$content .='<td>$row->lnk_aos_period</td>';
+                        //$content .='<td>$row->lnk_period</td>';
+                        //$content .='<td>$row->compulsry_yn</td>';
+                        $content .='<td class="sorting_1">$row->college</td>';
+                        $content .='<td class="sorting_1">$row->aos_description</td>';
+                        $content .='<td class="sorting_1">$row->full_description</td>';
+                        $content .='<td class="sorting_1">$row->school</td>';
+                        $content .='<td class="sorting_1">$row->aos_type</td>';
+                        $content .='</tr>';
                     }
                 }
                 
