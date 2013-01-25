@@ -12,7 +12,7 @@
     $header .= '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">';
     $header .= '<title>UAL Admn Tool</title>';
     
-    // addded ro gdata table
+    // added for data table
     $header .= '<link rel="stylesheet" href="css/960gs/fluid.css">';
     $header .= '<link rel="stylesheet" href="css/h5bp/normalize.css">';
     $header .= '<link rel="stylesheet" href="css/h5bp/non-semantic.helper.classes.css">';

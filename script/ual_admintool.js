@@ -156,7 +156,7 @@ var ual_admintool = ual_admintool || (function(){
 				$('#results_container').html('Loading Results ...');
 				
 				// show courses that user is enrolled on
-				$.get('results.php?T=ue&P=' + selected_programme +
+				$.get('grid.php?T=ue&P=' + selected_programme +
 					  '&Y=' + selected_courseyear +
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
@@ -198,7 +198,7 @@ var ual_admintool = ual_admintool || (function(){
 				$('#results_container').html('Loading Results ...');
 				
 				// show courses that user is enrolled on
-				$.get('results.php?T=pe&P=' + selected_programme +
+				$.get('grid.php?T=pe&P=' + selected_programme +
 					  '&Y=' + selected_courseyear +
 					  '&C=' + selected_course +
 					  '&U=' + selected_unit, function(data) {
