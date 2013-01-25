@@ -9,17 +9,7 @@ $programme='';
 $course_year='';
 $course='';
 $unit='';
-$pagenum=1;
-$numrecords=0;
-$totalpages=0;
 
-if(!empty($_GET['pagenum'])) {
-    $pagenum = $_GET['pagenum'];
-    
-    if($pagenum=="undefined") {
-        $pagenum=1;
-    }
-}
 
 if(!empty($_GET['T'])) {
     $result_type = $_GET['T'];
@@ -110,18 +100,9 @@ if(is_logged_in()){
             $sql .=" and c.acad_period='$course_year' ";
         }
         
-        $limit = $pagenum * 15;
         $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
                "and e.staffid = '$loggedin_username'";
-        
-        // get num of records for full query
-        if ($res = $mysqli->query($sql)) {
-            $numrecords = $res->num_rows;
-            $totalpages = $numrecords/15;
-        }
-        
-        #$sql .="LIMIT $pagenum, $limit";
-                          
+
     } else {
         // course user is NOT enrolled on
         /*$sql ="SELECT c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
@@ -147,20 +128,10 @@ if(is_logged_in()){
             $sql .=" and c.acad_period='$course_year' ";
         }*/
         
-        $limit = $pagenum * 15;
-        
         /*$sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
                "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $limit";*/
         $sql .="WHERE c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
                "WHERE e.staffid = '$loggedin_username') ";
-               
-        // get num of records for full query
-        if ($res = $mysqli->query($sql)) {
-            $numrecords = $res->num_rows;
-            $totalpages = $numrecords/15;
-        }
-        
-        #$sql.= "LIMIT $pagenum, $limit";
     }
                           
     /*if($programme!=0){
@@ -176,16 +147,6 @@ if(is_logged_in()){
     
     // testing
     //$content .= $enrolments_sql;
-    
-    $content .='Page:';
-    for($index=1; $index<$totalpages; $index++) {
-        if($pagenum==$index) {
-            $content .=' '.$index .' ';
-        } else {
-            $content .=' <a href="#" name="'.$index.'" id="pagenumber">'.$index.'</a> ';
-        }
-    }
-    $content .=$totalpages;
     
     $content .='<form id="results">';
     $content .='<input type="hidden" id="programmes" value="'.$programme.'">';

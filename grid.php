@@ -50,7 +50,7 @@
     
     $header .= '<body id="user-enrolments">';
     
-    
+    $header .= '<div class="container">';
     
     
     $result_type='';
@@ -356,6 +356,7 @@
     $footer .='defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
     $footer .='<![endif]-->';
     
+    $footer .='</div>';
     $footer .='</body>';
     $footer .='</html>';
     
