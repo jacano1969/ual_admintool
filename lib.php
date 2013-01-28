@@ -1690,9 +1690,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         foreach ($data_table_cols as $table_col) {
                             
                             if($cols==0) {
-                                $workflow_form .= '<th class="sorting_desc" rowspan="1" colspan="1">$table_col->name</td>';
+                                $workflow_form .= '<th class="sorting_desc" rowspan="1" colspan="1">'.$table_col->name.'</td>';
                             } else {
-                                $workflow_form .= '<th class="sorting" rowspan="1" colspan="1">$table_col->name</td>';
+                                $workflow_form .= '<th class="sorting" rowspan="1" colspan="1">'.$table_col->name.'</td>';
                             }
                             // record that column is a status field
                             if(in_array($table_col->name,$switch_status_columns)) {
