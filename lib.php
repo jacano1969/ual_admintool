@@ -1257,7 +1257,7 @@ function get_workflows($step_id=false) {
     }
     
     // show disabled ok button
-    $workflow .='<input type="button" class="submit" value="Reset" name="reset" id="reset">';
+    $workflow .='<input type="submit" class="submit" value="Reset" name="reset" id="reset">';
     
     // get action for workflow step
     if($workflow_action!='0') {
