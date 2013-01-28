@@ -1732,7 +1732,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                 }
                             }
                             
-                            $workflow_form .= '</tbody></tr>';
+                            $workflow_form .= '</tr></tbody>';
                         }
                         
                         $data_result->close();
