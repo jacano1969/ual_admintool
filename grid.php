@@ -354,15 +354,13 @@
     $footer .='<!-- end scripts -->';
     $footer .='<script defer>';
     $footer .='$(window).load(function() {';
-    $footer .='$(\'#table-example\').dataTable();';
-    $footer .='$(\'#table-example\').css(\'visibility\',\'visible\');';
+    $footer .='    $(\'#table-example\').dataTable();';
+    $footer .='    $(\'#table-example\').css(\'visibility\',\'visible\');';
     $footer .='});';
     $footer .='</script>';
     $footer .='<!--[if lt IE 7 ]>';
-    $footer .='<script defer';
-    $footer .='src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
-    $footer .='<script';
-    $footer .='defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
+    $footer .='<script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
+    $footer .='<script defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
     $footer .='<![endif]-->';
     
     $footer .='</div>';
