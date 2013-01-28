@@ -1668,7 +1668,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 $workflow_form .='<div class="content">';
                 $workflow_form .='<div class="dataTables_wrapper" id="table-example_wrapper">';
 
-                $workflow_form .= '<table class="table" id="table-example" name="data-grid">';
+                $workflow_form .= '<table class="table" id="table-example">';
                                
                 // get grid data
                 if($row->data_type=='data') {
