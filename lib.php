@@ -1743,7 +1743,6 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $workflow_form .='<div class="clear"></div>';
                     $workflow_form .='</div> <!-- End of .box -->';
                     $workflow_form .='</div>';
-                    $workflow_form .='</div>';
                 }
             }
         }
