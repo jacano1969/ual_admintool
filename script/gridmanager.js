@@ -24,12 +24,17 @@ var gridmanager = gridmanager || (function() {
                         if(remove==true) {
                                                         
                             // remove the enrolment by record id
-                            // $.get('actions/rmenrolment.php?, {"id":id }, function(data){
-                                $(this).closest('tr').css('color','red');
-                                $(this).closest('tr').css('text-decoration','line-through');
-                                $(this).closest('tr').attr('data','removed');
-                                alert("Enrolment " + id +" has been removed.");
-                            //});
+                            $.get('actions/rmenrolment.php', {"id":id }, function(data){
+                                if(data) {
+                                    $(this).closest('tr').css('color','red');
+                                    $(this).closest('tr').css('text-decoration','line-through');
+                                    $(this).closest('tr').attr('data','removed');
+                                    alert("Enrolment " + id +" has been removed.");
+                                } else {
+                                    alert("An error has occurred deleting enrolment " + id +".");
+                                }
+                                
+                            });
                             
                        } else {
                             

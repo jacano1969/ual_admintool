@@ -385,7 +385,7 @@ function process_record($record_data, $action_desc) {
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record",$action_desc,$sql_full)) {            
                     // add records
                     if(sql_update($sql_full)) {
-                        echo $sql_full ; //"ok";  // send back some data to show everyting went as planned
+                        echo $sql_full; //"ok";  // send back some data to show everyting went as planned
                     }
                 } else {
                     return false;                
@@ -637,6 +637,35 @@ function sql_update($sql) {
     $mysqli->set_charset("utf8");
     
     if($result = $mysqli->query($sql_update)){
+        $mysqli->close();
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+/**
+ * Description: function to do an sql delete
+ * 
+ */
+function sql_delete($sql) {
+    global $CFG;
+    
+    // connect to db
+    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    if (mysqli_connect_error()) {
+        return false;
+    }
+
+    // TODO:
+    // do we need to check this syntax
+    $sql_delete = $sql;
+    
+    $mysqli->set_charset("utf8");
+    
+    if($result = $mysqli->query($sql_delete)){
         $mysqli->close();
         return true;
     } else {
@@ -1336,13 +1365,13 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     $workflow_data_details = "select wfd.workflow_data_item_id as item_id, wfd.label as label, wfd.name as name,".
                              "wfd.description as description, wfd.mandatory as mandatory, wfd.validate_for as validate, wfdt.name as type,".
                              "wfdm.data_type as data_type,wfdm.data_origin as value,wfdm.data_origin_criteria as criteria from workflow_data wfd ".
-                             "inner join workflow_action wfa on wfa.workflow_action_id=$action_id and wfa.status=1 ".
+                             "inner join workflow_action wfa on wfa.workflow_action_id=$action_id and wfd.status=1 and wfa.status=1 ".
                              "and wfa.workflow_data_id=wfd.workflow_data_id ".
                              "inner join workflow_data_type wfdt on ".
                              "wfd.workflow_data_type_id=wfdt.workflow_data_type_id ".
                              "left join workflow_data_mapping wfdm on ".
                              "wfdm.workflow_data_item_id = wfd.workflow_data_item_id ".
-                             "and wfd.status=1 and wfdt.status=1 order by wfd.display_order";
+                             "and wfdt.status=1 order by wfd.display_order";
     
     $workflow_form = '';
     
