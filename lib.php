@@ -568,9 +568,6 @@ function show_footer($grid=true) {
         $footer .='    $(\'#table-example\').dataTable();';
         $footer .='    $(\'#table-example\').css(\'visibility\',\'visible\');';
         $footer .='}';
-        $footer .='if($(\'#data_grid\').length>0){';
-        $footer .='    $(\'#data_grid\').dataTable();';
-        $footer .='}';
         $footer .='});';
         $footer .='</script>';
         $footer .='<!--[if lt IE 7 ]>';
@@ -1662,8 +1659,16 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             // draw a data grid
             if($row->type=='grid') {
                 
-                $workflow_form .= '<h3>'.$row->name.'</h3>';
-                $workflow_form .= '<table id="data_grid" name="data-grid">';
+                $workflow_form .='<div class="data_grid">';
+                $workflow_form .='<div class="box">';
+                $workflow_form .='<div class="header">';
+                $workflow_form .='<img width="16" height="16" src="img/icons/packs/fugue/16x16/shadeless/table-excel.png">';
+                $workflow_form .='<h3>'.$row->name.'</h3><span></span>';
+                $workflow_form .='</div>';
+                $workflow_form .='<div class="content">';
+                $workflow_form .='<div class="dataTables_wrapper" id="table-example_wrapper">';
+
+                $workflow_form .= '<table class="table" id="table-example" name="data-grid">';
                                
                 // get grid data
                 if($row->data_type=='data') {
@@ -1681,10 +1686,14 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     if ($data_result = $mysqli->query($sql)) {
                         
                         $data_table_cols = $data_result->fetch_fields();
-                        $workflow_form .= '<tr>';
+                        $workflow_form .= '<thead><tr>';
                         foreach ($data_table_cols as $table_col) {
-                            $workflow_form .= "<td>$table_col->name</td>";
                             
+                            if($cols==0) {
+                                $workflow_form .= '<th class="sorting_desc" rowspan="1" colspan="1">$table_col->name</td>';
+                            } else {
+                                $workflow_form .= '<th class="sorting" rowspan="1" colspan="1">$table_col->name</td>';
+                            }
                             // record that column is a status field
                             if(in_array($table_col->name,$switch_status_columns)) {
                                 $switch_status_cols[] = $cols;
@@ -1699,37 +1708,42 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                             $cols++;
                         }
                         $workflow_form .= '';
-                        $workflow_form .= '</tr>';
+                        $workflow_form .= '</tr></thead>';
                         
                         while($data_row = $data_result->fetch_array(MYSQLI_NUM)) {
                             
-                            $workflow_form .= '<tr>';
+                            $workflow_form .= '<tbody><tr class="gradeA odd">';
                             for($index=0; $index<$cols; $index++) {
                                 
                                 // show status column check box
                                 if(in_array($index,$switch_status_cols)) {
                                     $checked = $data_row[$index] == 1 ? 'checked' : '';
-                                    $workflow_form .= '<td><input name="'.$data_row[0].'" id="'.$switch_status_col_names[$index].$data_row[0].'" value="'.$data_row[$index].'" type="radio" '.$checked.'></td>';
+                                    $workflow_form .= '<td class="sorting_1"><input name="'.$data_row[0].'" id="'.$switch_status_col_names[$index].$data_row[0].'" value="'.$data_row[$index].'" type="radio" '.$checked.'></td>';
                                 } else if(in_array($index,$status_cols)) {
                                     $checked = $data_row[$index] == 1 ? 'checked' : '';
-                                    $workflow_form .= '<td><input name="'.$status_col_names[$index].'" id="'.$status_col_names[$index].$data_row[0].'" type="checkbox" value="'.$data_row[$index].'" '.$checked.'></td>';
+                                    $workflow_form .= '<td class="sorting_1"><input name="'.$status_col_names[$index].'" id="'.$status_col_names[$index].$data_row[0].'" type="checkbox" value="'.$data_row[$index].'" '.$checked.'></td>';
                                 } else {
                                     if($index==0) {
                                         // first column is unique id
-                                        $workflow_form .= '<td>'.$data_row[$index].'<input type="hidden" name="id'.$data_row[$index].'" id="id'.$data_row[$index].'" value="'.$data_row[$index].'"></td>';
+                                        $workflow_form .= '<td class="sorting_1">'.$data_row[$index].'<input type="hidden" name="id'.$data_row[$index].'" id="id'.$data_row[$index].'" value="'.$data_row[$index].'"></td>';
                                     } else {
-                                        $workflow_form .= "<td>$data_row[$index]</td>";
+                                        $workflow_form .= '<td class="sorting_1">'.$data_row[$index].'</td>';
                                     }
                                 }
                             }
                             
-                            $workflow_form .= '</tr>';
+                            $workflow_form .= '</tbody></tr>';
                         }
                         
                         $data_result->close();
                     }
                     
                     $workflow_form .= '</table>';
+                    $workflow_form .='</div> <!-- End of .content -->';
+                    $workflow_form .='<div class="clear"></div>';
+                    $workflow_form .='</div> <!-- End of .box -->';
+                    $workflow_form .='</div>';
+                    $workflow_form .='</div>';
                 }
             }
         }
