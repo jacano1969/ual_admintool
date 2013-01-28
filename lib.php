@@ -506,7 +506,7 @@ function show_header($grid=true) {
     
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
     //$header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
-    //$header .= '<script src="script/libs/jquery-1.7.1.min.js" type="text/javascript"></script>';
+    $header .= '<script src="script/libs/jquery-1.7.1.min.js" type="text/javascript"></script>';
     
     if($MULTI_SELECT_LIST==true) {
         $header .= '<link href="css/multi_select_list.css" type="text/css" rel="stylesheet">';
@@ -570,10 +570,8 @@ function show_footer($grid=true) {
         $footer .='});';
         $footer .='</script>';
         $footer .='<!--[if lt IE 7 ]>';
-        $footer .='<script defer';
-        $footer .='src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
-        $footer .='<script';
-        $footer .='defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
+        $footer .='<script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
+        $footer .='<script defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
         $footer .='<![endif]-->';
     }
     $footer .='</body>';
