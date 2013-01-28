@@ -466,7 +466,7 @@ function show_home() {
 }
 
 
-function show_header($grid=false) {
+function show_header($grid=true) {
     
     global $MULTI_SELECT_LIST;
     
@@ -542,7 +542,7 @@ function show_navigation() {
 }
 
 
-function show_footer($grid=false) {
+function show_footer($grid=true) {
     
     $footer = '';
     
