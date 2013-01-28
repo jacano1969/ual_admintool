@@ -516,7 +516,7 @@ function show_header($grid=true) {
     
     $header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
     $header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
-    $header .= '<script type="text/javascript" src="script/jquery.tablesorter.js"></script>';
+    //$header .= '<script type="text/javascript" src="script/jquery.tablesorter.js"></script>';
     $header .= '<script src="script/ual_admintool.js" type="text/javascript"></script>';
     $header .= '</head>';
     
