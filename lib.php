@@ -567,7 +567,6 @@ function show_footer($grid=true) {
         //$footer .='    setTimeout("$(\'#table-example\').dataTable();",2500);';
         $footer .='    $(\'#table-example\').dataTable();';
         $footer .='    $(\'#table-example\').css(\'visibility\',\'visible\');';
-        $footer .='    $(\'#table-example\').dataTable();';
         $footer .='});';
         $footer .='</script>';
         $footer .='<!--[if lt IE 7 ]>';

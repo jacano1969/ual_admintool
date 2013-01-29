@@ -290,9 +290,9 @@ var ual_admintool = ual_admintool || (function(){
 			// data grid
 			//
 			
-			if($("data-grid").length>0) {
-			    $("data-grid").tablesorter();
-		    }
+			//if($("data-grid").length>0) {
+			//    $("data-grid").tablesorter();
+		    //}
 			
             //
             // Workflow
