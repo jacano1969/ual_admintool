@@ -875,15 +875,6 @@ var ual_admintool = ual_admintool || (function(){
 				});
 			}
 		}
-
-
-        //
-		// data gird
-		//
-		
-		if($('div.data_grid').length>0) {
-			$('#table-example').dataTable();
-		}
 			
     }); // end of document ready
 
