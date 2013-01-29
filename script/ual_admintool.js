@@ -16,16 +16,7 @@ var ual_admintool = ual_admintool || (function(){
 		
 			
         // home page scripts
-        if($('#home-page').length>0) {
-            
-			//
-			// data gird
-			//
-			
-			if($('#data_grid').length>0) {
-				$('#table-example').dataTable();
-			}
-			
+        if($('#home-page').length>0) {			
 			//
             // Filters
             //
