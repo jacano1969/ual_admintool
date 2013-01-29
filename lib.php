@@ -561,18 +561,18 @@ function show_footer($grid=true) {
         $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
         $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
         $footer .='<!-- end scripts -->';
-        $footer .='<script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
         $footer .='<script defer>';
         $footer .='$(window).load(function() {';
-        //$footer .='    setTimeout("$(\'#table-example\').dataTable();",2500);';
         $footer .='    $(\'#table-example\').dataTable();';
         $footer .='    $(\'#table-example\').css(\'visibility\',\'visible\');';
         $footer .='});';
         $footer .='</script>';
         $footer .='<!--[if lt IE 7 ]>';
+        $footer .='<script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
         $footer .='<script defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
         $footer .='<![endif]-->';
-    }
+        }
+        
     $footer .='</body>';
     $footer .='</html>';
     
