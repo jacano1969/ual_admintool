@@ -1702,12 +1702,14 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                             
                             $cols++;
                         }
-                        $workflow_form .= '';
+                        //$workflow_form .= '';
                         $workflow_form .= '</tr></thead>';
+                        
+                        $workflow_form .= '<tbody>';
                         
                         while($data_row = $data_result->fetch_array(MYSQLI_NUM)) {
                             
-                            $workflow_form .= '<tbody><tr class="gradeA odd">';
+                            $workflow_form .= '<tr class="gradeA odd">';
                             for($index=0; $index<$cols; $index++) {
                                 
                                 // show status column check box
@@ -1727,8 +1729,10 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                 }
                             }
                             
-                            $workflow_form .= '</tr></tbody>';
+                            $workflow_form .= '</tr>';
                         }
+                        
+                        $workflow_form .= '</tbody>';
                         
                         $data_result->close();
                     }
