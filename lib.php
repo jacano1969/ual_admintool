@@ -494,7 +494,7 @@ function show_header($grid=true) {
         $header .= '<link rel="stylesheet" href="css/ie.fixes.css">';
         
         
-        $header .= '<link rel="stylesheet" href="css/sprite.forms.css">';
+        //$header .= '<link rel="stylesheet" href="css/sprite.forms.css">';
         $header .= '<link rel="stylesheet" href="css/sprite.tables.css">';
         
         $header .= '<link rel="stylesheet" href="css/sprite.lists.css">';
@@ -556,7 +556,7 @@ function show_footer($grid=true) {
         $footer .='<script defer src="script/plugins.js"></script> <!-- REQUIRED: Different own jQuery plugnis -->';
         $footer .='<script defer src="script/mylibs/jquery.ba-resize.min.js"></script> <!-- RECOMMENDED when using sidebar: page resizing -->';
         $footer .='<script defer src="script/mylibs/jquery.easing.1.3.js"></script> <!-- RECOMMENDED: box animations -->';
-        $footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
+        //$footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
         $footer .='<script defer src="script/mylibs/jquery.validate.js"></script>';
         $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
         $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
