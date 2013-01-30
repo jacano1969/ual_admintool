@@ -1541,7 +1541,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         }                  
                     }
                     
-                    $workflow_form .= '</textarea>';
+                    $workflow_form .= '</textarea><br>';
                 }
             }
             
@@ -1649,7 +1649,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     }                    
                 }
                 
-                $workflow_form .= '</select>';
+                $workflow_form .= '</select><br>';
             }
             
             // draw a data grid
