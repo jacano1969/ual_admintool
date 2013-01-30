@@ -309,17 +309,6 @@ var ual_admintool = ual_admintool || (function(){
                 onLoad: function() { 
                     // do anything after lightbox is loaded?
                     $('#hiddenlightbox').css('width','400px');
-				
-					if($.fn.chosen) {
-						$('select').chosen();
-						$(window).resize(function(){
-							$('.chzn-container').each(function(){
-								var $chzn = $(this), $select = $('#' + $chzn.attr('id').replace('_chzn', ''));
-								$chzn.css('width', parseFloat($select.show().css('widthExact')) + 3 + 'px');
-								$select.hide();
-							});
-						});
-					}
                 }
             });
             
@@ -365,6 +354,18 @@ var ual_admintool = ual_admintool || (function(){
 						});
 					}
 				}
+				
+				if($.fn.chosen) {
+					$('select').chosen();
+					$(window).resize(function(){
+						$('.chzn-container').each(function(){
+							var $chzn = $(this), $select = $('#' + $chzn.attr('id').replace('_chzn', ''));
+							$chzn.css('width', parseFloat($select.show().css('widthExact')) + 3 + 'px');
+							$select.hide();
+						});
+					});
+				}
+				
             });
             
             // workflow sub step selected
