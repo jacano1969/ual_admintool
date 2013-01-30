@@ -398,6 +398,8 @@ var ual_admintool = ual_admintool || (function(){
 						if($('#table-example').length>0) {
 						    $('#table-example').dataTable();
 						}
+						
+						$('select').chosen();
                     });
                     
                     return false;
@@ -418,6 +420,9 @@ var ual_admintool = ual_admintool || (function(){
 						if($('#table-example').length>0) {
 						    $('#table-example').dataTable();
 						}
+						
+						$('select').chosen();
+						
 						
                     });
                     
