@@ -494,7 +494,7 @@ function show_header($grid=true) {
         $header .= '<link rel="stylesheet" href="css/ie.fixes.css">';
         
         
-        //$header .= '<link rel="stylesheet" href="css/sprite.forms.css">';
+        $header .= '<link rel="stylesheet" href="css/sprite.forms.css">';
         $header .= '<link rel="stylesheet" href="css/sprite.tables.css">';
         
         $header .= '<link rel="stylesheet" href="css/sprite.lists.css">';
