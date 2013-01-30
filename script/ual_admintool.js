@@ -343,6 +343,7 @@ var ual_admintool = ual_admintool || (function(){
 							// replace workflow with new data
 							$('#hiddenlightbox').html(data);
 							$('#hiddenlightbox').show();
+							$('select').chosen();
 						});
 					} else {
 						// show all workflows
@@ -351,11 +352,10 @@ var ual_admintool = ual_admintool || (function(){
 							// replace filters with new data
 							$('#hiddenlightbox').html(data);
 							$('#hiddenlightbox').show();
+							$('select').chosen();
 						});
 					}
 				}
-				
-				$('select').chosen();
 				
             });
             
@@ -374,8 +374,6 @@ var ual_admintool = ual_admintool || (function(){
                     $('#sub_step_action').val(0);
                     $('#ok').attr('disabled','disabled');
                 }
-				
-				$('select').chosen();
             });
             
             // commence workflow action
