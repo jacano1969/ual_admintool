@@ -33,7 +33,7 @@
 #home-page .error {color: #ff0000; font-weight: bold; font-size: 0.8em;}
 #home-page select {display:block; margin: 0 auto; width: 350px;  background: none repeat scroll 0 0 #E0E0E0; border: 2px groove #CCCCCC; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px; margin-bottom: 4px;}
 */
-home-page select {width:100px;}
+#home-page select {width:100px;}
 /*#home-page img {float: right; margin-left: 200px; margin-top: 10px;  position: absolute;  background: none repeat scroll 0 0 #FFFFFF; border: 2px ridge #CCCCCC; border-radius: 7px 7px 7px 7px; padding: 6px;}*/
 #home-page #hiddenlightbox {display:none; background: none repeat scroll 0 0 #FFFFFF; border: 2px ridge #CCCCCC; border-radius: 7px 7px 7px 7px; padding: 6px;}
 
