@@ -149,7 +149,7 @@
             }
             
             $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
-                   "and e.staffid = '$loggedin_username'";
+                   "where e.staffid = '$loggedin_username'";
                               
         } else {
             // course user is NOT enrolled on
