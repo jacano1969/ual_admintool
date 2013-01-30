@@ -48,7 +48,12 @@ function do_login($username, $password) {
                     $_SESSION['FIRSTNAME']=$row2->firstname;
                     $_SESSION['LASTNAME']=$row2->lastname;
                     $_SESSION['EMAIL']=$row2->email;
-                    $_SESSION['MOBILEPHONE']=$row2->mobile_phone;                    
+                    if($row2->mobile_phone!='') {
+                        $_SESSION['MOBILEPHONE']=$row2->mobile_phone;                        
+                    } else {
+                        $_SESSION['MOBILEPHONE']='Not given';                    
+                    }
+                    
                 }
             }
         }
