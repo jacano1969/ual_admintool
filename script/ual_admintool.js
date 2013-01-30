@@ -632,6 +632,12 @@ var ual_admintool = ual_admintool || (function(){
 				
 				if (thisId.match(/approved.*/)) {
 					if(confirm("Are you sure you want to approve this item?")==true) {
+						
+						// TODO:
+						//$.get('actions/approve.php', []) {
+							
+						//});
+						
 					} else {
 						// uncheck
 						$(this).prop('checked', false);
@@ -640,6 +646,12 @@ var ual_admintool = ual_admintool || (function(){
 				
 				if (thisId.match(/rejected.*/)) {
 					if(confirm("Are you sure you want to reject this item?")==true) {
+						
+						// TODO:
+						//$.get('actions/reject.php', []) {
+							
+						//});
+						
 					} else {
 						// uncheck
 						$(this).prop('checked', false);
