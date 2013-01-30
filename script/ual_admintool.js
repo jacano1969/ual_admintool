@@ -400,6 +400,7 @@ var ual_admintool = ual_admintool || (function(){
 						}
 						
 						$('select').chosen();
+						$('#helpbox').hide();
                     });
                     
                     return false;
@@ -422,6 +423,7 @@ var ual_admintool = ual_admintool || (function(){
 						}
 						
 						$('select').chosen();
+						$('#helpbox').hide();
 						
 						
                     });
