@@ -432,7 +432,7 @@ if(Function.prototype.bind == null) {
 		if($.fn.dataTable) {
 			$(document).data('datatables', $.fn.dataTable);
 			$.fn.dataTable = function(options) {
-				//$(document).data('datatables').bind(this, options)().parent().find('select').chosen().next().find('input').remove();
+				$(document).data('datatables').bind(this, options)().parent().find('select').chosen().next().find('input').remove();
 				return $(this);
 			}
 		}
