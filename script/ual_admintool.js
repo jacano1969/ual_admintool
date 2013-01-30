@@ -470,13 +470,17 @@ var ual_admintool = ual_admintool || (function(){
                         
                         // for text box data
                         $("#action input[type='text']").each(function(){
-                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+							if(typeof($(this).attr("data"))!='undefined') {
+                                jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+							}
                         });
                         
                         // for dropdown selects
                         $("#action select").each(function(){
 							// get the value from the selected option id
-                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $("option:selected", this).attr("id") +'"},';
+							if(typeof($(this).attr("data"))!='undefined') {
+                                jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $("option:selected", this).attr("id") +'"},';
+							}
                         });
                         
 						// for hidden values
