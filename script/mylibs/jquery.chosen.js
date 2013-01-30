@@ -81,12 +81,12 @@
   };
   this.SelectParser = SelectParser;
 }).call(this);
-(function() {
+//(function() {
   /*
   Chosen source: generate output using 'cake build'
   Copyright (c) 2011 by Harvest
   */
-  var AbstractChosen, root;
+  /*var AbstractChosen, root;
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
   root = this;
   AbstractChosen = (function() {
@@ -228,13 +228,13 @@
     return AbstractChosen;
   })();
   root.AbstractChosen = AbstractChosen;
-}).call(this);
-(function() {
+}).call(this);*/
+//(function() {
   /*
   Chosen source: generate output using 'cake build'
   Copyright (c) 2011 by Harvest
   */
-  var $, Chosen, get_side_border_padding, root;
+/*  var $, Chosen, get_side_border_padding, root;
   var __hasProp = Object.prototype.hasOwnProperty, __extends = function(child, parent) {
     for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; }
     function ctor() { this.constructor = child; }
@@ -890,4 +890,4 @@
     return side_border_padding = elmt.outerWidth() - elmt.width();
   };
   root.get_side_border_padding = get_side_border_padding;
-}).call(this);
+}).call(this);*/
