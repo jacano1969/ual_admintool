@@ -655,6 +655,8 @@ var ual_admintool = ual_admintool || (function(){
                 // hide all errors
                 $('label.error').each(function(){  $(this).hide(); });
                 
+				$('select').chosen();
+				
                 return false;
             });
             
