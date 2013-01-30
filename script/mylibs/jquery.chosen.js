@@ -228,7 +228,7 @@
     return AbstractChosen;
   })();
   root.AbstractChosen = AbstractChosen;
-}).call(this);*/
+}).call(this);
 (function() {
   /*
   Chosen source: generate output using 'cake build'
