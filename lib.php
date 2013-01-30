@@ -37,14 +37,18 @@ function do_login($username, $password) {
             $is_user=true;
         }
         
-        // get user role
-        if ($result2 = $mysqli->query("SELECT role FROM USERS where username='$username'")) {
+        // get other user details
+        if ($result2 = $mysqli->query("SELECT role,firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
             if($result2->num_rows==0) {
                 
             } else {
             
                 while ($row2 = $result2->fetch_object()) {
                     $_SESSION['ROLE']=$row2->role;
+                    $_SESSION['FIRSTNAME']=$row2->firstname;
+                    $_SESSION['LASTNAME']=$row2->lastname;
+                    $_SESSION['EMAIL']=$row2->email;
+                    $_SESSION['MOBILEPHONE']=$row2->mobile_phone;                    
                 }
             }
         }
@@ -105,14 +109,18 @@ function do_moodle_login($username) {
             $is_user=true;
         }
         
-        // get user role
-        if ($result2 = $mysqli->query("SELECT role FROM USERS where username='$username'")) {
+        // get other user details
+        if ($result2 = $mysqli->query("SELECT role,firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
             if($result2->num_rows==0) {
                 
             } else {
             
                 while ($row2 = $result2->fetch_object()) {
                     $_SESSION['ROLE']=$row2->role;
+                    $_SESSION['FIRSTNAME']=$row2->firstname;
+                    $_SESSION['LASTNAME']=$row2->lastname;
+                    $_SESSION['EMAIL']=$row2->email;
+                    $_SESSION['MOBILEPHONE']=$row2->mobile_phone;                    
                 }
             }
         }
@@ -312,6 +320,14 @@ function process_record($record_data, $action_desc) {
                 $headers .= 'From: UAL AdminTool' . "\r\n";
                 
                 if($message!='') {
+                    
+                    // replace any user fields
+                    $message=str_ireplace('$FIRSTNAME',$_SESSION['FIRSTNAME'],$message);
+                    $message=str_ireplace('$LASTNAME',$_SESSION['LASTNAME'],$message);
+                    $message=str_ireplace('$USERNAME',$_SESSION['USERNAME'],$message);
+                    $message=str_ireplace('$EMAIL',$_SESSION['EMAIL'],$message);
+                    $message=str_ireplace('$MOBILEPHONE',$_SESSION['MOBILEPHONE'],$message);
+                    
                     mail($mailto, $subject, $message, $headers);
                 }
             }
@@ -1542,6 +1558,11 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     }
                     
                     $workflow_form .= '</textarea><br>';
+                }
+                
+                if($row->name=="message") {
+                    // show user fields
+                    $workflow_form .= '<fieldset><legend>User Fields</legend>You can add the following fields to the email message<ul><li>Firstname : $FIRSTNAME</li><li>Lastname : $LASTNAME</li><li>Username : $USERNAME</li><li>Email : $EMAIL</li><li>Mobile Phone : $MOBILEPHONE</li></ul></fieldset>';
                 }
             }
             
