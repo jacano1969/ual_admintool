@@ -354,6 +354,17 @@ var ual_admintool = ual_admintool || (function(){
 						});
 					}
 				}
+				
+				if($.fn.chosen) {
+					$('select').chosen();
+					$(window).resize(function(){
+						$('.chzn-container').each(function(){
+							var $chzn = $(this), $select = $('#' + $chzn.attr('id').replace('_chzn', ''));
+							$chzn.css('width', parseFloat($select.show().css('widthExact')) + 3 + 'px');
+							$select.hide();
+						});
+					});
+				}
             });
             
             // workflow sub step selected
@@ -371,6 +382,17 @@ var ual_admintool = ual_admintool || (function(){
                     $('#sub_step_action').val(0);
                     $('#ok').attr('disabled','disabled');
                 }
+				
+				if($.fn.chosen) {
+					$('select').chosen();
+					$(window).resize(function(){
+						$('.chzn-container').each(function(){
+							var $chzn = $(this), $select = $('#' + $chzn.attr('id').replace('_chzn', ''));
+							$chzn.css('width', parseFloat($select.show().css('widthExact')) + 3 + 'px');
+							$select.hide();
+						});
+					});
+				}
             });
             
             // commence workflow action
@@ -415,6 +437,7 @@ var ual_admintool = ual_admintool || (function(){
 						if($('#table-example').length>0) {
 						    $('#table-example').dataTable();
 						}
+						
                     });
                     
                     return false;
