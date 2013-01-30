@@ -20,7 +20,7 @@
 #home-page label {font-size: 0.8em; font-weight: bold; display: inline;}
 #home-page form {margin-top: 10px; }
 #home-page input {display: block; margin-bottom: 5px; margin-right: 2px;}
-#home-page input[type=text] {border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
+#home-page input[type=text] {width: 45%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page textarea {border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page input[type=password] {border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page fieldset {background: #ffffff; border: 3px solid #CCCCCC; border-radius: 6px 6px 6px 6px;}
