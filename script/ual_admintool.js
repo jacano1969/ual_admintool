@@ -300,7 +300,7 @@ var ual_admintool = ual_admintool || (function(){
             
             // show workflow
             $('#hiddenlightbox').lightbox_me({
-                centered: false,
+                centered: true,
                 appearEffect: 'show',
                 lightboxSpeed: 'fast',
                 overlaySpeed: 'fast',
