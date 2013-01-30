@@ -391,6 +391,7 @@ var ual_admintool = ual_admintool || (function(){
                         $('div.container fieldset').hide();
                         $('div.container fieldset').html(data);
                         $('div.container fieldset').show();
+						$('#table-example').dataTable();
                     });
                     
                     return false;
@@ -407,6 +408,7 @@ var ual_admintool = ual_admintool || (function(){
                         $('div.container fieldset').hide();
                         $('div.container fieldset').html(data);
                         $('div.container fieldset').show();
+						$('#table-example').dataTable();
                     });
                     
                     return false;
