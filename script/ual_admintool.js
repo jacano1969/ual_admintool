@@ -391,7 +391,10 @@ var ual_admintool = ual_admintool || (function(){
                         $('div.container fieldset').hide();
                         $('div.container fieldset').html(data);
                         $('div.container fieldset').show();
-						$('#table-example').dataTable();
+						
+						if($('#table-example').length>0) {
+						    $('#table-example').dataTable();
+						}
                     });
                     
                     return false;
@@ -408,7 +411,10 @@ var ual_admintool = ual_admintool || (function(){
                         $('div.container fieldset').hide();
                         $('div.container fieldset').html(data);
                         $('div.container fieldset').show();
-						$('#table-example').dataTable();
+						
+						if($('#table-example').length>0) {
+						    $('#table-example').dataTable();
+						}
                     });
                     
                     return false;
