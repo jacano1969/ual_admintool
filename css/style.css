@@ -158,3 +158,5 @@ h2 {
 
 #quick_filter {float:right;}
 
+#table-example_filter label {display: inherit;}
+#table-example_filter input[type=text] {width: auto;}
