@@ -633,14 +633,22 @@ var ual_admintool = ual_admintool || (function(){
 			$('input[type="radio"]').live("click", function() {
 				var thisId = $(this).attr('id');
 				var uniqueId = this.id.match(/[\d]+$/);
+				var workflow_action_id = $('#action_id').val();
 				
 				if (thisId.match(/approved.*/)) {
 					if(confirm("Are you sure you want to approve this item?")==true) {
 						
-						// TODO:
-						//$.get('actions/approve.php', []) {
+						// approve record
+						$.get("actions/approve.php", {"id": uniqueId, "action_id": workflow_action_id}, function(data) {
 							
-						//});
+							// show that ercord has been approved
+							alert(data);
+							
+							// refresh grid
+							if($('#table-example').length>0) {
+						        $('#table-example').dataTable();
+						    }
+						});
 						
 					} else {
 						// uncheck

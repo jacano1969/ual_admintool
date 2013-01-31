@@ -9,7 +9,7 @@
     if(!empty($_GET['id'])) {
         $id = $_GET['id'];
     } else {
-        exit;
+        return false;
     }
     
     //
