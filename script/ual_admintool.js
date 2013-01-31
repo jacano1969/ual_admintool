@@ -642,12 +642,16 @@ var ual_admintool = ual_admintool || (function(){
 						$.get("actions/approve.php?id="+uniqueId+"&action_id="+workflow_action_id, function(data) {
 							
 							// show that ercord has been approved
-							alert(data);
+							if(data && data!=false) {    
 							
-							// refresh grid
-							if($('#table-example').length>0) {
-						        $('#table-example').dataTable();
-						    }
+							    alert(data);
+							
+								// refresh grid
+								if($('#table-example').length>0) {
+									$('#table-example').dataTable();
+								}
+							}
+							
 						});
 						
 					} else {
