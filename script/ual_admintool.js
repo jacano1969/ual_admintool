@@ -639,7 +639,7 @@ var ual_admintool = ual_admintool || (function(){
 					if(confirm("Are you sure you want to approve this item?")==true) {
 						
 						// approve record
-						$.get("actions/approve.php", {"id": uniqueId, "action_id": workflow_action_id}, function(data) {
+						$.get("actions/approve.php?id="+uniqueId+"&action_id="+workflow_action_id, function(data) {
 							
 							// show that ercord has been approved
 							alert(data);
