@@ -1,7 +1,7 @@
 <?php
 
     // get action_id
-    $workflow_action_id='';
+    $workflow_action_id=0;
     if(!empty($_GET['action_id'])) {
         $workflow_action_id=$_GET['action_id'];
     } else {
@@ -35,13 +35,13 @@
     if ($result = $mysqli->query($sql)) {
         
         while($row = $result->fetch_object()) {
-            $workflow_data_id=$row->workflow_action_id;
+            $workflow_data_id=$row->workflow_data_id;
         }
         
         $result->close();
     } else{
         $mysqli->close();
-        return "error excecutintg sql";
+        return "error excecuting sql 1";
     }
         
     // get workflow data
@@ -56,7 +56,7 @@
         $result2->close();
     } else{
         $mysqli->close();
-        return false;
+        return "error excecuting sql 2";
     }
     
     if(sql_update("update $table_name set approved=1 where id=$id")==true){
@@ -64,7 +64,7 @@
         return "This record has been approved.";
     } else {
         $mysqli->close();
-        return false;
+        return "An Error occurred.";
     }
     
     // log to workflow_log
