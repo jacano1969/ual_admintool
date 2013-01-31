@@ -648,7 +648,7 @@ var ual_admintool = ual_admintool || (function(){
 							    alert(data);
 							
 								// remove approved item from grid
-								$(this).closest('tr').remove();
+								selectedRow.css('display','none');
 							}
 							
 						});
