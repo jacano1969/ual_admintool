@@ -1696,6 +1696,11 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($row->data_type=='data') {
                     
                     $sql = $row->value;
+                    
+                    if(!empty($row->criteria)) {
+                        $sql .=" WHERE $row->criteria";    
+                    }
+                    
                     $cols=0;
                     $status_cols = array();
                     $status_col_names = array();
