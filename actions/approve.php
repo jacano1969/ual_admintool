@@ -5,7 +5,7 @@
     if(!empty($_GET['action_id'])) {
         $workflow_action_id=$_GET['action_id'];
     } else {
-        return false;
+        return "action_id false";
     }
     
     
@@ -14,7 +14,7 @@
     if(!empty($_GET['id'])) {
         $id=$_GET['id'];
     } else {
-        return false;
+        return "id false";
     }
     
     include_once('../dbconfig.php');
@@ -41,7 +41,7 @@
         $result->close();
     } else{
         $mysqli->close();
-        return false;
+        return "error excecutintg sql";
     }
         
     // get workflow data
