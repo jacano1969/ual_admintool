@@ -634,6 +634,7 @@ var ual_admintool = ual_admintool || (function(){
 				var thisId = $(this).attr('id');
 				var uniqueId = this.id.match(/[\d]+$/);
 				var workflow_action_id = $('#action_id').val();
+				var selectedRow=$(this).closest('tr');
 				
 				if (thisId.match(/approved.*/)) {
 					if(confirm("Are you sure you want to approve this item?")==true) {
@@ -646,10 +647,8 @@ var ual_admintool = ual_admintool || (function(){
 							
 							    alert(data);
 							
-								// refresh grid
-								if($('#table-example').length>0) {
-									$('#table-example').dataTable();
-								}
+								// remove approved item from grid
+								$(this).closest('tr').remove();
 							}
 							
 						});
