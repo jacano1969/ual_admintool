@@ -1701,8 +1701,6 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         $sql .=" WHERE $row->criteria";    
                     }
                     
-                    return $sql;
-                    
                     $cols=0;
                     $status_cols = array();
                     $status_col_names = array();
