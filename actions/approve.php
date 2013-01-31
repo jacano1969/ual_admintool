@@ -5,7 +5,7 @@
     if(!empty($_GET['action_id'])) {
         $workflow_action_id=$_GET['action_id'];
     } else {
-        return "action_id false";
+        echo "action_id false";
     }
     
     
@@ -14,7 +14,7 @@
     if(!empty($_GET['id'])) {
         $id=$_GET['id'];
     } else {
-        return "id false";
+        echo "id false";
     }
     
     include_once('../dbconfig.php');
@@ -41,7 +41,7 @@
         $result->close();
     } else{
         $mysqli->close();
-        return "error excecuting sql 1";
+        echo "error excecuting sql 1";
     }
         
     // get workflow data
@@ -56,15 +56,15 @@
         $result2->close();
     } else{
         $mysqli->close();
-        return "error excecuting sql 2";
+        echo "error excecuting sql 2";
     }
     
     if(sql_update("update $table_name set approved=1 where id=$id")==true){
         $mysqli->close();
-        return "This record has been approved.";
+        echo "This record has been approved.";
     } else {
         $mysqli->close();
-        return "An Error occurred.";
+        echo "An Error occurred.";
     }
     
     // log to workflow_log
