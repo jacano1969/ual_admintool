@@ -1701,6 +1701,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         $sql .=" WHERE $row->criteria";    
                     }
                     
+                    return $sql;
+                    
                     $cols=0;
                     $status_cols = array();
                     $status_col_names = array();
@@ -1711,7 +1713,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
-                        echo $sql; exit;
+                        
                         $data_table_cols = $data_result->fetch_fields();
                         $workflow_form .= '<thead><tr>';
                         foreach ($data_table_cols as $table_col) {
