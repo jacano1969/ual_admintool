@@ -1172,7 +1172,7 @@ function get_workflows($step_id=false) {
     // get wokflows, steps and sub steps
     $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
     
-    $workflows ='';
+    $workflow ='';
     $workflow_action = 0;
     
     if (mysqli_connect_error()) {

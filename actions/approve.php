@@ -67,9 +67,17 @@
         echo "An Error occurred.";
     }
     
+    // TODO:
     // log to workflow_log
     
-    // get linked work flow (if any)
+    // TODO:
+    // get linked work flow
+    
+    // 1: create new course based on approved data
+    
+    // 2: enrol staff member on approved course
+    
+    // 3: send approval email
     
     
     
