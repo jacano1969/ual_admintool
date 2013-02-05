@@ -354,8 +354,6 @@ function process_record($record_data, $action_desc) {
                 $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
-                $new_data = nl2br($new_data);  // preserve line breaks
-                
                 $unique_id = 0;
                 if($data['data']=='id') {
                     $unique_id = $data['id'];
@@ -624,7 +622,7 @@ function sql_insert($sql) {
 
     // TODO:
     // do we need to check this syntax
-    $sql_insert = $sql;
+    $sql_insert = $mysqli->real_escape_string($sql);  // preserve line breaks
     
     $mysqli->set_charset("utf8");
     
@@ -653,7 +651,7 @@ function sql_update($sql) {
 
     // TODO:
     // do we need to check this syntax
-    $sql_update = $sql;
+    $sql_update = $mysqli->real_escape_string($sql);  // preserve line breaks
     
     $mysqli->set_charset("utf8");
     
