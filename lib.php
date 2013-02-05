@@ -354,6 +354,8 @@ function process_record($record_data, $action_desc) {
                 $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
+                $new_data = nl2br($new_data);  // preserve line breaks
+                
                 $unique_id = 0;
                 if($data['data']=='id') {
                     $unique_id = $data['id'];
@@ -1518,7 +1520,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         // get records
                         if ($data_result = $mysqli->query($sql)) {
                             while($data_row = $data_result->fetch_object()) {
-                                $workflow_form .= nl2br($data_row->name);
+                                $workflow_form .= $data_row->name;
                             }
                             
                             $data_result->close();
@@ -1555,7 +1557,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         // get records
                         if ($data_result = $mysqli->query($sql)) {
                             while($data_row = $data_result->fetch_object()) {
-                                $workflow_form .= nl2br($data_row->name);
+                                $workflow_form .= $data_row->name;
                             }
                             
                             $data_result->close();
