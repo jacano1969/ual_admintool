@@ -1518,7 +1518,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         // get records
                         if ($data_result = $mysqli->query($sql)) {
                             while($data_row = $data_result->fetch_object()) {
-                                $workflow_form .= $data_row->name;
+                                $workflow_form .= nl2br($data_row->name);
                             }
                             
                             $data_result->close();
@@ -1555,7 +1555,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         // get records
                         if ($data_result = $mysqli->query($sql)) {
                             while($data_row = $data_result->fetch_object()) {
-                                $workflow_form .= $data_row->name;
+                                $workflow_form .= nl2br($data_row->name);
                             }
                             
                             $data_result->close();
