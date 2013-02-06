@@ -5,13 +5,13 @@
     require_once('lib.php');
     
     // we're using a multi select list
-    global $MULTI_SELECT_LIST;
+    //global $MULTI_SELECT_LIST;
     
     global $CFG;
     
     $page ='';
     
-    $MULTI_SELECT_LIST=true;
+    //$MULTI_SELECT_LIST=true;
     
     $page .= show_header();
     

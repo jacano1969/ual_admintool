@@ -24,13 +24,14 @@ function do_login($username, $password) {
     $mysqli->set_charset("utf8");
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT id, username FROM staff_login where username='$username' AND password='$password'")) {
+    if ($result = $mysqli->query("SELECT id, role, username FROM staff_login where username='$username' AND password='$password'")) {
         if($result->num_rows==0) {
             $is_user=false;
         } else {
             
             while ($row = $result->fetch_object()) {
                 $_SESSION['USERID']=$row->id;
+                $_SESSION['ROLE']=$row->role;
                 $_SESSION['USERNAME']=$row->username;
             }
             
@@ -38,13 +39,12 @@ function do_login($username, $password) {
         }
         
         // get other user details
-        if ($result2 = $mysqli->query("SELECT role,firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
+        if ($result2 = $mysqli->query("SELECT firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
             if($result2->num_rows==0) {
                 
             } else {
             
                 while ($row2 = $result2->fetch_object()) {
-                    $_SESSION['ROLE']=$row2->role;
                     $_SESSION['FIRSTNAME']=$row2->firstname;
                     $_SESSION['LASTNAME']=$row2->lastname;
                     $_SESSION['EMAIL']=$row2->email;
@@ -101,13 +101,14 @@ function do_moodle_login($username) {
     $mysqli->set_charset("utf8");
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT id, username FROM staff_login where username='$username'")) {
+    if ($result = $mysqli->query("SELECT id, role, username FROM staff_login where username='$username'")) {
         if($result->num_rows==0) {
             $is_user=false;
         } else {
             
             while ($row = $result->fetch_object()) {
                 $_SESSION['USERID']=$row->id;
+                $_SESSION['ROLE']=$row->role;
                 $_SESSION['USERNAME']=$row->username;
             }
             
@@ -115,13 +116,12 @@ function do_moodle_login($username) {
         }
         
         // get other user details
-        if ($result2 = $mysqli->query("SELECT role,firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
+        if ($result2 = $mysqli->query("SELECT firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
             if($result2->num_rows==0) {
                 
             } else {
             
                 while ($row2 = $result2->fetch_object()) {
-                    $_SESSION['ROLE']=$row2->role;
                     $_SESSION['FIRSTNAME']=$row2->firstname;
                     $_SESSION['LASTNAME']=$row2->lastname;
                     $_SESSION['EMAIL']=$row2->email;
@@ -344,9 +344,6 @@ function process_record($record_data, $action_desc) {
             echo $process_data;
         }
         
-        
-        
-// TODO: find UQ ID to update record
         // update existing record
         if(!empty($update_data)) {
             foreach($update_data as $data) {
@@ -417,8 +414,6 @@ function process_record($record_data, $action_desc) {
             echo $process_data;
         }
         
-        
-        
         // delete existing record
         if(!empty($delete_data)) {
             
@@ -459,8 +454,9 @@ function show_home() {
     $home .= '<fieldset>';
     $home .= '<legend>';
     $home .= 'Welcome ' . get_logged_in_user($_SESSION['USERID']);
-    $home .= '</legend>';
+    $home .= '</legend>';    
     
+    $home .= 'Role: ' .get_list_item_name(10,$_SESSION['ROLE']);
     //$home .= show_navigation();
     $home .= '</fieldset>';
     
@@ -489,7 +485,7 @@ function show_home() {
 
 function show_header($grid=true) {
     
-    global $MULTI_SELECT_LIST;
+    //global $MULTI_SELECT_LIST;
     
     $header = '';
     $header .= '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
@@ -500,7 +496,7 @@ function show_header($grid=true) {
     $header .= '<title>UAL Admn Tool</title>';
     
     // addded ro gdata table
-    if($grid==true) {
+    //if($grid==true) {
         $header .= '<link rel="stylesheet" href="css/960gs/fluid.css">';
         $header .= '<link rel="stylesheet" href="css/h5bp/normalize.css">';
         $header .= '<link rel="stylesheet" href="css/h5bp/non-semantic.helper.classes.css">';
@@ -523,16 +519,16 @@ function show_header($grid=true) {
         $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
                     
         $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
-    }    
+    //}    
     
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
     //$header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
     $header .= '<script src="script/libs/jquery-1.7.1.min.js" type="text/javascript"></script>';
     
-    if($MULTI_SELECT_LIST==true) {
+    //if($MULTI_SELECT_LIST==true) {
         $header .= '<link href="css/multi_select_list.css" type="text/css" rel="stylesheet">';
         $header .= '<script src="script/jquery.twosidedmultiselect.js"></script>';
-    }
+    //}
     
     $header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
     //$header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
@@ -1197,6 +1193,8 @@ function get_workflows($step_id=false) {
     
     $mysqli->set_charset("utf8");
     
+    $user_role = $_SESSION['ROLE'];
+    
      // get workflows
     if ($workflow_result = $mysqli->query($workflow_sql)) {
         if($workflow_result->num_rows==0) {
@@ -1211,7 +1209,10 @@ function get_workflows($step_id=false) {
                 $workflow_id = $workflow_row->id;
                 
                 // get all active workflow steps for each workflow
-                $workflow_step_sql="select workflow_step_id as id, name as name, description as description, workflow_action_id as action from workflow_step where status=1 and workflow_id=$workflow_id";
+                $workflow_step_sql="select workflow_step_id as id, name as name, " .
+                                   "description as description, workflow_action_id as action " .
+                                   "from workflow_step where status=1 and min_role_required<=$user_role " .
+                                   "and workflow_id=$workflow_id";
                
                 if ($workflow_step_result = $mysqli->query($workflow_step_sql)) {
                     if($workflow_step_result->num_rows==0) {
@@ -1253,7 +1254,11 @@ function get_workflows($step_id=false) {
     
     // get all active workflow sub steps for the currently selected workflow step
     if($step_id!='0') {
-        $workflow_sub_step_sql="select workflow_sub_step_id as id, name as name, workflow_action_id as action, description as description from workflow_sub_step where status=1 and workflow_step_id=$step_id";
+        $workflow_sub_step_sql="select workflow_sub_step_id as id, " .
+                               "name as name, workflow_action_id as action, " .
+                               "description as description from workflow_sub_step " .
+                               "where status=1 and min_role_required<=$user_role " .
+                               "and workflow_step_id=$step_id";
 
         if ($workflow_sub_step_result = $mysqli->query($workflow_sub_step_sql)) {
             if($workflow_sub_step_result->num_rows==0) {
@@ -2101,6 +2106,44 @@ function get_list($list_data_id, $default_value) {
     return $list_data;    
 }
 
+
+function get_list_item_name($list_data_id, $item_id) {
+    global $CFG;
+    
+    // get list data
+    $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $list_data_name ='';
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    $sql = "select name from list_data where item_id!=0 and list_data_id=$list_data_id and item_id=$item_id and status=1";
+    
+    $mysqli->set_charset("utf8");
+    
+    // get list data
+    if ($result = $mysqli->query($sql)) {
+        if($result->num_rows==0) {
+            return $list_data_name;
+        } else {  
+
+            // construct data
+            while ($row = $result->fetch_object()) {
+                $list_data_name .=$row->name;
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    $mysqli->close();
+    
+    return $list_data_name;    
+}
 
 
 function get_workflow_data_types() {
