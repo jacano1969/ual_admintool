@@ -35,16 +35,7 @@
     $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
                 
     $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
-    //
-    
-    
-    
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
-    //$header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
-    //$header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
-    //$header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
-    //$header .= '<script type="text/javascript" src="script/jquery.tablesorter.js"></script>';
-    //$header .= '<script src="script/ual_admintool.js" type="text/javascript"></script>';
     $header .= '</head>';
     
     
@@ -135,32 +126,12 @@
                    "c.full_description, c.school,c.aos_type " .
                    "from STAFF_ENROLMENTS e " .
                    "inner join COURSES c on c.courseid = e.courseid ";
-            
-            if($unit!=''){
-                $sql .=" and c.aos_code='$unit'";
-            }else if($course!=''){
-                $sql .=" and c.aos_code='$course' ";
-            }else if($programme!=''){
-                $sql .=" and c.aos_code='$programme' ";
-            }
-            
-            if($course_year!='') {
-                $sql .=" and c.acad_period='$course_year' ";
-            }
-            
-            $sql .="inner join COURSE_STRUCTURE cs on cs.aos_code = c.aos_code " .
-                   "where e.staffid = '$loggedin_username'";
-                              
+
+            $sql .="where e.staffid = '$loggedin_username'";
+                   
         } else {
-            // course user is NOT enrolled on
-            /*$sql ="SELECT c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
-                  "cs.aoscd_link, cs.lnk_aos_period, cs.lnk_period, cs.compulsry_yn," .
-                  "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
-                  "FROM COURSE_STRUCTURE cs " .
-                  "INNER JOIN COURSES c " .
-                  "ON c.aos_code LIKE CONCAT('%', cs.AOS_CODE ,'%') ";*/
-            
-            $sql ="SELECT DISTINCT " .
+            // course user is NOT enrolled on            
+            $sql = "SELECT DISTINCT " .
                    "CASE WHEN c.aos_code like('L%') THEN '(Programme)' ELSE " . 
                    "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN '(Course)' ELSE " .
                    "CASE WHEN c.aos_code REGEXP '^[A-Z]' THEN '(Unit)' " .
@@ -169,35 +140,9 @@
                    "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
                    "FROM COURSES c ";
                   
-            /*if($unit!=''){
-                $sql .=" and c.aos_code='$unit'";
-            }else if($course!=''){
-                $sql .=" and c.aos_code='$course' ";
-            }else if($programme!=''){
-                $sql .=" and c.aos_code='$programme' ";
-            }
-            
-            if($course_year!='') {
-                $sql .=" and c.acad_period='$course_year' ";
-            }*/
-    
-            
-            /*$sql .="AND c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
-                   "WHERE e.staffid = '$loggedin_username') LIMIT $pagenum, $limit";*/
             $sql .="WHERE c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
-                   "WHERE e.staffid = '$loggedin_username') ";
+                   "WHERE e.staffid = '$loggedin_username')";
         }
-                              
-        /*if($programme!=0){
-            $enrolments_sql .= "inner join ";
-            select distinct c.aos_code as id,
-                            c.full_description as name,
-                            c.acad_period as year
-                            from COURSES c
-                            inner join STAFF_ENROLMENTS e on e.staffid='$loggedin_username'
-                            and e.courseid=concat(c.aos_code, c.aos_period, c.acad_period)
-                            and c.aos_code like('L%') order by name
-        }*/
         
         $content .='<form id="results">';
         $content .='<input type="hidden" id="programmes" value="'.$programme.'">';
@@ -236,8 +181,9 @@
         $content .='<table class="table" id="table-example">';
         
         $mysqli->set_charset("utf8");
-        
+                
         if ($result = $mysqli->query($sql)) {
+            
             if($result->num_rows==0) {
                 $content .= '<tr><th>No Enrolment Data</td></th></tr>';
                 
@@ -298,10 +244,10 @@
                         $content .='</tr>';
                     }
                 }
-                
-                $result->close();
-            }
+            }    
         }   
+        
+        $result->close();
         
         $content .='</tbody></table>';
         
