@@ -335,43 +335,47 @@ var ual_admintool = ual_admintool || (function(){
 				// set the help text
 				$('#helpbox').hide();
 				var selected_workflow_help = $("option:selected", this).attr("help");
-				$('#helptext').html(selected_workflow_help);
-				$('#helpbox').fadeIn('slow');
-
-                // user enrolments				
-				if(selected_workflow_step=="1000") {
-				    location.href="grid.php?T=ue";
-				}
 				
-				// potential enrolments
-				if(selected_workflow_step=="1001") {
-				    location.href="grid.php?T=pe";
-				}
-				
-				if(selected_workflow_step=="10000") {
-				    location.href="designer.php";	
+				if(typeof(selected_workflow_help)=='undefined' || selected_workflow_help=="") {
+				    // if there is no help text
 				} else {
-					if(selected_workflow_step!="0") {
-						// get workflow sub steps
-						$.get('workflow.php?step='+selected_workflow_step, function(data){
-							$('#hiddenlightbox').hide();
-							// replace workflow with new data
-							$('#hiddenlightbox').html(data);
-							$('#hiddenlightbox').show();
-							$('select').chosen();
-						});
+					$('#helptext').html(selected_workflow_help);
+					$('#helpbox').fadeIn('slow');
+	
+					// user enrolments				
+					if(selected_workflow_step=="1000") {
+						location.href="grid.php?T=ue";
+					}
+					
+					// potential enrolments
+					if(selected_workflow_step=="1001") {
+						location.href="grid.php?T=pe";
+					}
+					
+					if(selected_workflow_step=="10000") {
+						location.href="designer.php";	
 					} else {
-						// show all workflows
-						$.get('workflow.php?step=false', function(data){
-							$('#hiddenlightbox').hide();
-							// replace filters with new data
-							$('#hiddenlightbox').html(data);
-							$('#hiddenlightbox').show();
-							$('select').chosen();
-						});
+						if(selected_workflow_step!="0") {
+							// get workflow sub steps
+							$.get('workflow.php?step='+selected_workflow_step, function(data){
+								$('#hiddenlightbox').hide();
+								// replace workflow with new data
+								$('#hiddenlightbox').html(data);
+								$('#hiddenlightbox').show();
+								$('select').chosen();
+							});
+						} else {
+							// show all workflows
+							$.get('workflow.php?step=false', function(data){
+								$('#hiddenlightbox').hide();
+								// replace filters with new data
+								$('#hiddenlightbox').html(data);
+								$('#hiddenlightbox').show();
+								$('select').chosen();
+							});
+						}
 					}
 				}
-				
             });
             
             // workflow sub step selected
