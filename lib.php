@@ -453,10 +453,23 @@ function show_home() {
     $home .= '<div class="container">';
     $home .= '<fieldset>';
     $home .= '<legend>';
-    $home .= 'Welcome ' . get_logged_in_user($_SESSION['USERID']);
+    $home .= 'Welcome ' . get_logged_in_user($_SESSION['USERNAME']);
     $home .= '</legend>';    
     
-    $home .= 'Role: ' .get_list_item_name(10,$_SESSION['ROLE']);
+    $home .= '<b>Role: </b>' .get_list_item_name(10,$_SESSION['ROLE']);
+    
+    $home .= '<br><b>Username: </b>' .$_SESSION['USERNAME'];
+    $home .= '<br><b>Email: </b>' .$_SESSION['EMAIL'];
+    $home .= '<br><b>Mobile phone: </b>' .$_SESSION['MOBILEPHONE'];
+    
+    // if admin
+    if($_SESSION['ROLE']==2) {
+        $pending_course_requests=0;
+        $pending_course_requests=get_pending_course_requests();
+        if($pending_course_requests>0) {
+            $home .= '<br><b>Pending site requests: </b>' .$pending_course_requests;
+        }
+    }
     //$home .= show_navigation();
     $home .= '</fieldset>';
     
@@ -719,7 +732,7 @@ function log_user_action($username, $userid, $action, $description, $data) {
 }
 
 
-function get_logged_in_user($userid) {
+function get_logged_in_user($username) {
     global $CFG;
     
     // connect to db
@@ -735,7 +748,7 @@ function get_logged_in_user($userid) {
     $mysqli->set_charset("utf8");
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT firstname, lastname FROM users WHERE record_id=$userid")) {
+    if ($result = $mysqli->query("SELECT firstname, lastname FROM users WHERE username='$username'")) {
         if($result->num_rows==0) {
             return $logged_in_user;
         } else {
@@ -2143,6 +2156,47 @@ function get_list_item_name($list_data_id, $item_id) {
     $mysqli->close();
     
     return $list_data_name;    
+}
+
+
+// function to get pending course requests
+function get_pending_course_requests()
+{
+    global $CFG;
+    
+    // get list data
+    $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    $pending_course_requests ='';
+    
+    if (mysqli_connect_error()) {
+        header('Location: login.php?error=4');
+        exit;
+    }
+    
+    $sql = "select count(id) as num from course_request where approved=0 and rejected=0";
+    
+    $mysqli->set_charset("utf8");
+    
+    // get list data
+    if ($result = $mysqli->query($sql)) {
+        if($result->num_rows==0) {
+            return $pending_course_requests;
+        } else {  
+
+            // construct data
+            while ($row = $result->fetch_object()) {
+                $pending_course_requests.=$row->num;
+            }
+        }
+        
+        /* free result set */
+        $result->close();
+    }
+    
+    $mysqli->close();
+    
+    return $pending_course_requests;        
 }
 
 
