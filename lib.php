@@ -1681,6 +1681,21 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             // draw a data grid
             if($row->type=='grid') {
                 
+                // if grid is for deletions (i.e. delete records from hidden courses table to show courses)
+                if($delete_button==1) {
+                    $workflow_form .='<div id="grid_delete_records"></div>';
+                }
+                
+                // if grid is for adding records to
+                if($add_button==1) {
+                    $workflow_form .='<div id="grid_add_records"></div>';
+                }
+                
+                // if grid is for updating records
+                if($update_button==1) {
+                    $workflow_form .='<div id="grid_update_records"></div>';
+                }
+                
                 $workflow_form .='<div class="data_grid">';
                 $workflow_form .='<div class="box">';
                 $workflow_form .='<div class="header">';

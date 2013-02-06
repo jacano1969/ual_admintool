@@ -160,3 +160,20 @@ h2 {
 
 #table-example_filter label {display: inherit;}
 #table-example_filter input[type=text] {width: auto;}
+
+
+#user-enrolments button, input[type="submit"], a.button {
+	color: #58646D;
+    display: inline;
+    float: right;
+    font-size: 12px;
+    margin: 5px;
+}
+
+#possible-enrolments button, input[type="submit"], a.button {
+	color: #58646D;
+    display: inline;
+    float: right;
+    font-size: 12px;
+    margin: 5px;
+}

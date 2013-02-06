@@ -38,18 +38,7 @@
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
     $header .= '</head>';
     
-    
-    $header .= '<body id="user-enrolments">';
-    
-    $header .= '<div class="container">';
-    
-    
     $result_type='';
-    $programme='';
-    $course_year='';
-    $course='';
-    $unit='';
-    
     
     if(!empty($_GET['T'])) {
         $result_type = $_GET['T'];
@@ -59,37 +48,13 @@
         }
     }
     
-    if(!empty($_GET['P'])) {
-        $programme = $_GET['P'];
-        
-        if($programme=="undefined") {
-            $programme='';
-        }
+    if($result_type=='ue' || $result_type=='') {
+        $header .= '<body id="user-enrolments">';
+    } else {
+        $header .= '<body id="possible-enrolments">';
     }
     
-    if(!empty($_GET['Y'])) {
-        $course_year = $_GET['Y'];
-        
-        if($course_year=="undefined") {
-            $course_year='';
-        }
-    }
-    
-    if(!empty($_GET['C'])) {
-        $course = $_GET['C'];
-        
-        if($course=="undefined") {
-            $course='';
-        }
-    }
-    
-    if(!empty($_GET['U'])) {
-        $unit = $_GET['U'];
-        
-        if($unit=="undefined") {
-            $unit='';
-        }
-    }
+    $header .= '<div class="container">';
     
     if(is_logged_in()){
             
@@ -125,9 +90,8 @@
                    "c.courseid, c.aos_code, c.aos_period, c.acad_period, c.college, c.aos_description," .
                    "c.full_description, c.school,c.aos_type " .
                    "from STAFF_ENROLMENTS e " .
-                   "inner join COURSES c on c.courseid = e.courseid ";
-
-            $sql .="where e.staffid = '$loggedin_username'";
+                   "inner join COURSES c on c.courseid = e.courseid " .
+                   "where e.staffid = '$loggedin_username'";
                    
         } else {
             // course user is NOT enrolled on            
@@ -138,19 +102,16 @@
                    "END END END as 'Type', " .
                    "c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
                    "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
-                   "FROM COURSES c ";
-                  
-            $sql .="WHERE c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
+                   "FROM COURSES c " .
+                   "WHERE c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
                    "WHERE e.staffid = '$loggedin_username')";
         }
         
         $content .='<form id="results">';
-        $content .='<input type="hidden" id="programmes" value="'.$programme.'">';
-        $content .='<input type="hidden" id="courseyears" value="'.$course_year.'">';
-        $content .='<input type="hidden" id="courses" value="'.$course.'">';
-        $content .='<input type="hidden" id="units" value="'.$unit.'">';
         $content .='<input type="hidden" id="resulttype" value="'.$result_type.'">';
+        $content .='<input type="submit" class="submit" name="reload" id="reload" value="Reload">';
         $content .='</form>';
+        $content .='<input type="submit" class="submit" name="back" id="back" value="Back">';
         
         if($result_type=='ue' || $result_type=='') {
             $content .='<h2>User enrolments</h2>';
@@ -222,7 +183,7 @@
                     }
                 } else {
 
-                    $content .='<th class="sorting_desc" rowspan="1" colspan="1">Type</th><th class="sorting" rowspan="1" colspan="1">Course Id</th><th class="sorting" rowspan="1" colspan="1">AOS Code</th><th class="sorting" rowspan="1" colspan="1">Aos Period</th><th class="sorting" rowspan="1" colspan="1">Acad Period</th>';
+                    $content .='<th class="sorting_desc" rowspan="1" colspan="1">Course Id</th><th class="sorting" rowspan="1" colspan="1">Type</th><th class="sorting" rowspan="1" colspan="1">AOS Code</th><th class="sorting" rowspan="1" colspan="1">Aos Period</th><th class="sorting" rowspan="1" colspan="1">Acad Period</th>';
                     $content .='<th class="sorting" rowspan="1" colspan="1">College</th><th class="sorting" rowspan="1" colspan="1">AOS Description</th><th class="sorting" rowspan="1" colspan="1">Full Description</th><th class="sorting" rowspan="1" colspan="1">School</th><th class="sorting" rowspan="1" colspan="1">AOS Type</th>';
                     
                     $content .='</tr></thead>';
@@ -231,8 +192,8 @@
                     
                     while ($row = $result->fetch_object()) {
                         $content .='<tr class="gradeA odd">';
-                        $content .='<td class="sorting_1">'.$row->Type.'</td>';
                         $content .='<td class="sorting_1">'.$row->courseid.'</td>';
+                        $content .='<td class="sorting_1">'.$row->Type.'</td>';                        
                         $content .='<td class="sorting_1">'.$row->aos_code.'</td>';
                         $content .='<td class="sorting_1">'.$row->aos_period.'</td>';
                         $content .='<td class="sorting_1">'.$row->acad_period.'</td>';
@@ -260,29 +221,7 @@
         $mysqli->close();
     }   
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     $footer = '';
-    
     
     // Added for grid
     $footer .='<script>window.jQuery || document.write(\'<script src="script/libs/jquery-1.7.1.min.js"><\/script>\')</script>';

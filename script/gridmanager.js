@@ -8,6 +8,15 @@ var gridmanager = gridmanager || (function() {
     
     $(document).ready(function(){
         
+        // back button clicked
+        $('#back').live("click", function() {
+        
+            // show the home screen
+            window.location.href='index.php';
+                
+        });
+            
+            
         $('table tbody tr').click(function() {
            var id=$(this).closest('tr').children('td:first').text();
            var selectedRow=$(this).closest('tr');
@@ -25,16 +34,11 @@ var gridmanager = gridmanager || (function() {
                                                         
                             // remove the enrolment by record id
                             $.get('actions/rmenrolment.php', {"id":id }, function(data){
-                                if(data) {
-                                    $(this).closest('tr').css('color','red');
-                                    $(this).closest('tr').css('text-decoration','line-through');
-                                    $(this).closest('tr').attr('data','removed');
-                                    alert("Enrolment " + id +" has been removed.");
-                                } else {
-                                    alert("An error has occurred deleting enrolment " + id +".");
-                                }
-                                
-                            });
+                                selectedRow.css('color','red');
+                                selectedRow.css('text-decoration','line-through');
+                                selectedRow.attr('data','removed');
+                                alert("Enrolment " + id +" has been removed.");                                
+                            }).fail(function() { alert("An error has occurred deleting enrolment " + id +"."); });
                             
                        } else {
                             
@@ -42,10 +46,31 @@ var gridmanager = gridmanager || (function() {
                        remove = null;
                     }
                }
-               
-               //$.get('ajax/prevcalldata.php', {"id": id }, function(){
-               //    $('#prevcalldata').show();
-               //});
+           } else {
+                
+                // add new course enrollments
+                if($('body').attr('id')=="possible-enrolments") {
+                    
+                    if($(this).closest('tr').attr('data')=='added') {
+                       // do nothing
+                    } else {
+                        var add = confirm("Are you sure you want to add this enrolment?");
+                        if(add==true) {
+                                                        
+                            // add the enrolment by course id
+                            $.get('actions/adenrolment.php', {"courseid":id }, function(data){
+                                selectedRow.css('color','green');
+                                selectedRow.css('font-weight','bold');
+                                selectedRow.attr('data','added');
+                                alert("Course " + id +" has been added.");
+                            }).fail(function() { alert("An error has occurred adding enrolment for course: " + id +"."); });
+                            
+                       } else {
+                            
+                       }
+                       add = null;
+                    }                    
+                }
            }
         });
        

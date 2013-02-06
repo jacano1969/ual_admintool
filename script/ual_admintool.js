@@ -290,6 +290,21 @@ var ual_admintool = ual_admintool || (function(){
 			// data grid
 			//
 			
+			// grid used for deleting records
+			if($('#grid_delete_records').length>0) {
+				
+			}
+			
+			// grid used for adding records
+			if($('#grid_add_records').length>0) {
+				
+			}
+			
+			// grid used for updating records
+			if($('#grid_update_records').length>0) {
+				
+			}
+			
 			//if($("data-grid").length>0) {
 			//    $("data-grid").tablesorter();
 		    //}
@@ -700,7 +715,15 @@ var ual_admintool = ual_admintool || (function(){
 		
 		
 		
+		
+		
+		//
 		// workflow designer scripts
+		//
+		
+		
+		
+		
         if($('#designer-page').length>0) {
 			
 			// check the stage
