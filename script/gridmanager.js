@@ -29,7 +29,7 @@ var gridmanager = gridmanager || (function() {
                     if($(this).closest('tr').attr('data')=='removed') {
                        // do nothing
                     } else {
-                        var remove = confirm("Are you sure you want to remove this enrolment?");
+                        var remove = confirm("Are you sure you want to remove this enrollment?");
                         if(remove==true) {
                                                         
                             // remove the enrolment by record id
@@ -37,13 +37,14 @@ var gridmanager = gridmanager || (function() {
                                 selectedRow.css('color','red');
                                 selectedRow.css('text-decoration','line-through');
                                 selectedRow.attr('data','removed');
-                                alert("Enrolment " + id +" has been removed.");                                
-                            }).fail(function() { alert("An error has occurred deleting enrolment " + id +"."); });
+                                remove = null;
+                                alert("Enrollment " + id +" has been removed.");                                
+                            }).fail(function() { alert("An error has occurred deleting enrollment " + id +"."); });
                             
                        } else {
                             
                        }
-                       remove = null;
+                       
                     }
                }
            } else {
@@ -54,7 +55,7 @@ var gridmanager = gridmanager || (function() {
                     if($(this).closest('tr').attr('data')=='added') {
                        // do nothing
                     } else {
-                        var add = confirm("Are you sure you want to add this enrolment?");
+                        var add = confirm("Are you sure you want to add this enrollment?");
                         if(add==true) {
                                                         
                             // add the enrolment by course id
@@ -62,13 +63,13 @@ var gridmanager = gridmanager || (function() {
                                 selectedRow.css('color','green');
                                 selectedRow.css('font-weight','bold');
                                 selectedRow.attr('data','added');
-                                alert("Course " + id +" has been added.");
-                            }).fail(function() { alert("An error has occurred adding enrolment for course: " + id +"."); });
+                                add = null;
+                                alert("Enrollment for course " + id +" has been added.");
+                            }).fail(function() { alert("An error has occurred adding enrollment for course: " + id +"."); });
                             
                        } else {
                             
                        }
-                       add = null;
                     }                    
                 }
            }

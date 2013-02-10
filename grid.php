@@ -63,7 +63,7 @@
         
         global $CFG;
         
-        // get all enrolments for the currently logged in user
+        // get all enrollments for the currently logged in user
         // based on filter
         $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
         
@@ -78,9 +78,9 @@
         $loggedin_username = $_SESSION['USERNAME'];
         
         
-        // user enrolments / default
+        // user enrollments / default
         if($result_type=='ue' || $result_type=='') {
-            // users enrolments
+            // users enrollments
             $sql = "SELECT DISTINCT " .
                    "CASE WHEN c.aos_code like('L%') THEN '(Programme)' ELSE " . 
                    "CASE WHEN c.aos_code REGEXP '^[0-9]' THEN '(Course)' ELSE " .
@@ -114,13 +114,13 @@
         $content .='<input type="submit" class="submit" name="back" id="back" value="Back">';
         
         if($result_type=='ue' || $result_type=='') {
-            $content .='<h2>User enrolments</h2>';
-            $content .='The grid below lists the enrolments for the logged in user.<br>';
-            $content .='To remove an enrolment entry, just click on the entry in the grid.';
+            $content .='<h2>My enrollments</h2>';
+            $content .='The grid below lists the enrollments for the logged in user.<br>';
+            $content .='To remove an enrollment entry, just click on the entry in the grid.';
         } else {
-            $content .='<h2>Possible user enrolments</h2>';
+            $content .='<h2>Possible user enrollments</h2>';
             $content .='The grid below lists all possible courses the logged in user can be enrolled on.<br>';
-            $content .='To add a course enrolment for the logged in user, just click on an entry in the grid.';
+            $content .='To add a course enrollment for the logged in user, just click on an entry in the grid.';
         }
         
         $content .='<div id="quick_filter"><b>Quick Filter: ';
@@ -152,7 +152,7 @@
             } else {
                 $content .='<thead><tr>';
                 
-                // show users enrolments
+                // show users enrollments
                 if($result_type=='ue' || $result_type=='') {
 
                     $content .='<th class="sorting_desc" rowspan="1" colspan="1">Record Id</th><th class="sorting" rowspan="1" colspan="1">Type</th><th class="sorting" rowspan="1" colspan="1">Enrolment Id</th><th class="sorting" rowspan="1" colspan="1">Staff Id</th><th class="sorting" rowspan="1" colspan="1">Stage Id</th>';

@@ -1221,6 +1221,13 @@ function get_workflows($step_id=false) {
                 $workflow .= '<optgroup help="'.$workflow_row->description.'" label="'.$workflow_row->name.'">';
                 $workflow_id = $workflow_row->id;
                 
+                // TODO: these need to be created as workflows - currently hard-coded (for worflow creation testing)
+                if($workflow_row->name=="Enrollments") {
+                    $workflow .= '<option id="1000" help="Enrolments for the logged in user">My Enrolments</option>';
+                    $workflow .= '<option id="1001" help="Courses that the logged in user is not enrolled on">My Possible Enrolments</option>';
+                    $workflow .= '</optgroup>';
+                }
+                                
                 // get all active workflow steps for each workflow
                 $workflow_step_sql="select workflow_step_id as id, name as name, " .
                                    "description as description, workflow_action_id as action " .
@@ -1250,12 +1257,7 @@ function get_workflows($step_id=false) {
                 }
             }
             
-            $workflow .= '</optgroup>';
-            $workflow .= '<optgroup help="Manage Enrolments" label="Enrolments">';
-            $workflow .= '<option id="1000" help="Enrolments for the logged in user">My Enrolments</option>';
-            $workflow .= '<option id="1001" help="Courses that the logged in user is not enrolled on">Possible Enrolments</option>';
-            $workflow .= '</optgroup>';
-            
+            // TODO: workflow designer 
             //$workflow .= '<optgroup help="Create or edit workflows" label="Workflows">';
             //$workflow .= '<option id="10000" help="Open the workflow designer">Workflow Designer</option>';
             //$workflow .= '</optgroup>';
@@ -1437,13 +1439,23 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         $temp = array();
                         foreach($data_details as $detail) {
                            $temp = explode(".",$detail);
-                           $database[] = $temp[0];
-                           $tables[] = $temp[1];
-                           $columns[] = $temp[2];
+                           
+                           if(isset($temp[2])) {
+                               $database[] = $temp[0];
+                               $tables[] = $temp[1];
+                               $columns[] = $temp[2];
+                           } else {
+                               $tables[] = $temp[0];
+                               $columns[] = $temp[1];
+                           }
                         }
                         
                         // create sql
-                        $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                        if(isset($temp[2])) {
+                            $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                        } else {
+                            $sql = "SELECT ".$columns[0]." as name FROM ".$tables[0];
+                        }
                         
                         if(!empty($row->criteria)) {
                             $sql .=" WHERE $row->criteria";    
@@ -1473,14 +1485,24 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         
                         $temp = array();
                         foreach($data_details as $detail) {
-                           $temp = explode(".",$detail);
-                           $database[] = $temp[0];
-                           $tables[] = $temp[1];
-                           $columns[] = $temp[2];
+                            $temp = explode(".",$detail);
+                           
+                            if(isset($temp[2])) {
+                                $database[] = $temp[0];
+                                $tables[] = $temp[1];
+                                $columns[] = $temp[2];
+                            } else {
+                                $tables[] = $temp[0];
+                                $columns[] = $temp[1];
+                            }
                         }
                         
                         // create sql
-                        $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                        if(isset($temp[2])) {
+                            $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                        } else {
+                            $sql = "SELECT ".$columns[0]." as name FROM ".$tables[0];
+                        }
                         
                         if(!empty($row->criteria)) {
                             $sql .=" WHERE $row->criteria";    
@@ -1520,14 +1542,24 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         
                         $temp = array();
                         foreach($data_details as $detail) {
-                           $temp = explode(".",$detail);
-                           $database[] = $temp[0];
-                           $tables[] = $temp[1];
-                           $columns[] = $temp[2];
+                            $temp = explode(".",$detail);
+                           
+                            if(isset($temp[2])) {
+                                $database[] = $temp[0];
+                                $tables[] = $temp[1];
+                                $columns[] = $temp[2];
+                            } else {
+                                $tables[] = $temp[0];
+                                $columns[] = $temp[1];
+                            }
                         }
                         
                         // create sql
-                        $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                        if(isset($temp[2])) {
+                            $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                        } else {
+                            $sql = "SELECT ".$columns[0]." as name FROM ".$tables[0];
+                        }
                         
                         if(!empty($row->criteria)) {
                             $sql .=" WHERE $row->criteria";    
@@ -1557,14 +1589,24 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         
                         $temp = array();
                         foreach($data_details as $detail) {
-                           $temp = explode(".",$detail);
-                           $database[] = $temp[0];
-                           $tables[] = $temp[1];
-                           $columns[] = $temp[2];
+                            $temp = explode(".",$detail);
+                           
+                            if(isset($temp[2])) {
+                                $database[] = $temp[0];
+                                $tables[] = $temp[1];
+                                $columns[] = $temp[2];
+                            } else {
+                                $tables[] = $temp[0];
+                                $columns[] = $temp[1];
+                            }
                         }
                         
                         // create sql
-                         $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                        if(isset($temp[2])) {
+                            $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                        } else {
+                            $sql = "SELECT ".$columns[0]." as name FROM ".$tables[0];
+                        }
                         
                         if(!empty($row->criteria)) {
                             $sql .=" WHERE $row->criteria";    
@@ -1613,14 +1655,24 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     
                     $temp = array();
                     foreach($data_details as $detail) {
-                       $temp = explode(".",$detail);
-                       $database[] = $temp[0];
-                       $tables[] = $temp[1];
-                       $columns[] = $temp[2];
+                        $temp = explode(".",$detail);
+                       
+                        if(isset($temp[2])) {
+                            $database[] = $temp[0];
+                            $tables[] = $temp[1];
+                            $columns[] = $temp[2];
+                        } else {
+                            $tables[] = $temp[0];
+                            $columns[] = $temp[1];
+                        }
                     }
                     
                     // create sql
-                     $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                    if(isset($temp[2])) {
+                        $sql = "SELECT ".$columns[0]." as name FROM ".$database[0].".".$tables[0];
+                    } else {
+                        $sql = "SELECT ".$columns[0]." as name FROM ".$tables[0];
+                    }
                     
                     if(!empty($row->criteria)) {
                         $sql .=" WHERE $row->criteria";    
@@ -1670,14 +1722,24 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     
                     $temp = array();
                     foreach($data_details as $detail) {
-                       $temp = explode(".",$detail);
-                       $database[] = $temp[0];
-                       $tables[] = $temp[1];
-                       $columns[] = $temp[2];
+                        $temp = explode(".",$detail);
+                       
+                        if(isset($temp[2])) {
+                            $database[] = $temp[0];
+                            $tables[] = $temp[1];
+                            $columns[] = $temp[2];
+                        } else {
+                            $tables[] = $temp[0];
+                            $columns[] = $temp[1];
+                        }
                     }
                     
                     // create sql
-                    $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                    if(isset($temp[2])) {
+                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                    } else {
+                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$tables[0];
+                    }
                     
                     if(!empty($row->criteria)) {
                         $sql .=" WHERE $row->criteria";    
@@ -1835,7 +1897,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     if($cancel_button==1) {
         // show reset and cancel buttons
         $buttons .= '<input type="submit" class="submit" name="resetform" id="resetform" value="Reset">';
-        $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Cancel">';
+        $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Home">';
     }
     
     if($send_email==1) {

@@ -324,6 +324,7 @@ var ual_admintool = ual_admintool || (function(){
                 onLoad: function() { 
                     // do anything after lightbox is loaded?
                     $('#hiddenlightbox').css('width','400px');
+					$('#hiddenlightbox').css('top','20%');
                 }
             });
             
@@ -420,6 +421,10 @@ var ual_admintool = ual_admintool || (function(){
 						
 						$('select').chosen();
 						$('#helpbox').hide();
+						
+						if($('.data_grid').length>0) {
+				            $('.container').css('width','100%');
+		                }
                     });
                     
                     return false;
@@ -444,6 +449,9 @@ var ual_admintool = ual_admintool || (function(){
 						$('select').chosen();
 						$('#helpbox').hide();
 						
+						if($('.data_grid').length>0) {
+				            $('.container').css('width','100%');
+		                }
 						
                     });
                     
@@ -715,6 +723,8 @@ var ual_admintool = ual_admintool || (function(){
                 window.location.href='index.php';
                 
             });
+			
+			
         }
 		
 		
