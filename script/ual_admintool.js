@@ -305,6 +305,38 @@ var ual_admintool = ual_admintool || (function(){
 				
 			}
 			
+			
+			$('table tbody tr').live("click",function() {
+                var id=$(this).closest('tr').children('td:first').text();
+                var selectedRow=$(this).closest('tr');
+		        var action_id=$('#action_id').val();
+								
+			    // grid used for copying records
+			    if($('#grid_copy_records').length>0) {
+						// hide (courses, etc)
+						if($(this).closest('tr').attr('data')=='hidden') {
+						   // do nothing
+						} else {
+							var hidden = confirm("Are you sure you want to hide this record?");
+							if(hidden==true) {
+															
+								// hide course 
+								$.get('actions/hide.php', {"id":id, "action_id":action_id }, function(data){
+									selectedRow.css('color','#BEBEBE');
+									selectedRow.css('font-style','italic');
+									selectedRow.attr('data','hidden');
+									hidden = null;
+									alert(data);
+								}).fail(function() { alert("An error has occurred hiding record id: " + id +"."); });
+								
+						   } else {
+								
+						   }
+						}
+				}
+		    });
+			
+			
 			//if($("data-grid").length>0) {
 			//    $("data-grid").tablesorter();
 		    //}
