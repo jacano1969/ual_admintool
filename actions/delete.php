@@ -21,6 +21,22 @@
     include_once('../dbconfig.php');
     include_once('../lib.php');
     
+    
+    
+    ///
+    
+    
+    /// TODO : chnage to delete
+    
+    ///
+    exit;
+    
+    
+    
+    
+    
+    
+    
     // get workflow mapping data origin and destination by workflow action id
     $sql="select wfdm.data_origin as origin_table,wfdm.data_origin_criteria as origin_criteria, " .
          "wfdm.data_destination as destination_table from workflow_data wfd " .

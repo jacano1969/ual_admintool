@@ -334,6 +334,30 @@ var ual_admintool = ual_admintool || (function(){
 						   }
 						}
 				}
+				
+				// grid used for deleting records
+			    if($('#grid_delete_records').length>0) {
+						// delete (hidden courses, etc)
+						if($(this).closest('tr').attr('data')=='hidden') {
+						   // do nothing
+						} else {
+							var deletethis = confirm("Are you sure you want to delete this record?");
+							if(deletethis==true) {
+															
+								// delete record
+								$.get('actions/delete.php', {"id":id, "action_id":action_id }, function(data){
+									selectedRow.css('color','#BEBEBE');
+									selectedRow.css('font-style','italic');
+									selectedRow.attr('data','hidden');
+									deletethis = null;
+									alert(data);
+								}).fail(function() { alert("An error has occurred deleting record id: " + id +"."); });
+								
+						   } else {
+								
+						   }
+						}
+				}
 		    });
 			
 			

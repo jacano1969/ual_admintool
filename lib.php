@@ -1385,6 +1385,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     $copy_table = '';
     $workflow_data_id = '';
     
+    $grid_used = false;
+    
     if ($result = $mysqli->query($workflow_action_sql)) {
         while($row = $result->fetch_object()) {
             $add_button = $row->add_button;
@@ -1763,6 +1765,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             // draw a data grid
             if($row->type=='grid') {
                 
+                $grid_used = true;
+                
                 // if grid is for deletions (i.e. delete records from hidden courses table to show courses)
                 if($delete_button==1) {
                     $workflow_form .='<div id="grid_delete_records"></div>';
@@ -1782,6 +1786,8 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 if($copy_table==1) {
                     $workflow_form .='<div id="grid_copy_records"></div>';
                 }
+                
+                $workflow_form .=$row->description;
                 
                 $workflow_form .='<div class="data_grid">';
                 $workflow_form .='<div class="box">';
@@ -1889,22 +1895,25 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
     
     $buttons ='<hr>';
     
-    if($add_button==1) {
+    if($add_button==1 && $grid_used==false) {
         $buttons .= '<input type="submit" class="submit" name="add" id="add" value="Add">';
     }
 
-    if($update_button==1) {
+    if($update_button==1 && $grid_used==false) {
         $buttons .= '<input type="submit" class="submit" name="update" id="update" value="Update">';
     }
     
-    if($delete_button==1) {
+    if($delete_button==1 && $grid_used==false) {
         $buttons .= '<input type="submit" class="submit" name="delete" id="delete" value="Delete">';
     }
     
     if($cancel_button==1) {
         // show reset and cancel buttons
-        $buttons .= '<input type="submit" class="submit" name="resetform" id="resetform" value="Reset">';
-        $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Home">';
+        if($grid_used==false){
+            $buttons .= '<input type="submit" class="submit" name="resetform" id="resetform" value="Reset">';    
+        }
+        
+        $buttons .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Back">';
     }
     
     if($send_email==1) {
