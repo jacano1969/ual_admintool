@@ -192,10 +192,22 @@ function process_record($record_data, $action_desc) {
             
         // extract json data
         $process_data = json_decode($record_data,true);
-           
-        $add_data = $process_data['add'];
-        $update_data = $process_data['update'];
-        $delete_data = $process_data['delete'];
+        
+        $add_data = '';
+        $update_data = '';
+        $delete_data = '';
+        
+        if(isset($process_data['add'])) {   
+            $add_data = $process_data['add'];
+        }
+        
+        if(isset($process_data['update'])) {   
+            $update_data = $process_data['update'];
+        }
+        
+        if(isset($process_data['delete'])) {
+            $delete_data = $process_data['delete'];
+        }
         
         $create_data = new stdClass();
         //$create_data->tables = array();
@@ -214,7 +226,7 @@ function process_record($record_data, $action_desc) {
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
                 // check if we have a mailto
-                if($data['mailto']) {
+                if(isset($data['mailto'])) {
                     
                     $mailto = str_replace("'","''",$data['mailto']);  // escape quotes
             
@@ -259,13 +271,14 @@ function process_record($record_data, $action_desc) {
                     $workflow_data = get_workflow_data($workflow_data_item_id);
                     
                     $table_and_row = explode(".", $workflow_data, 3);
+                    
                     $table_name = $table_and_row[0];
                     $row_name = $table_and_row[1];
                     $new_data_type = $table_and_row[2];
                     
                     // collect table names                
                     if(array_key_exists($table_name, $create_data->sqla)) {
-            
+                        
                         // add to sql field list
                         $create_data->sqla[$table_name] .=", $row_name";
                         
@@ -281,6 +294,7 @@ function process_record($record_data, $action_desc) {
                         
                         // just add new insert statement for table
                         $create_data->sqla[$table_name]="INSERT INTO $table_name (";
+                        $create_data->sqlb[$table_name]='';
                         
                         if($new_data_type=="string") {
                             // create field list
@@ -631,7 +645,8 @@ function sql_insert($sql) {
 
     // TODO:
     // do we need to check this syntax
-    $sql_insert = $mysqli->real_escape_string($sql);  // preserve line breaks
+    //$sql_insert = $mysqli->real_escape_string($sql);  // preserve line breaks
+    $sql_insert = $sql;
     
     $mysqli->set_charset("utf8");
     
@@ -1721,34 +1736,41 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $databases = array();
                     $tables = array();
                     $columns = array();
+                    
+                    // check if data is a select statement
+                    if(stripos($row->value,"select")===false) {
                                         
-                    $data_details = explode(",",$row->value);  // split into db.table.col array
                     
-                    $temp = array();
-                    foreach($data_details as $detail) {
-                        $temp = explode(".",$detail);
-                       
-                        if(isset($temp[2])) {
-                            $database[] = $temp[0];
-                            $tables[] = $temp[1];
-                            $columns[] = $temp[2];
-                        } else {
-                            $tables[] = $temp[0];
-                            $columns[] = $temp[1];
+                        $data_details = explode(",",$row->value);  // split into db.table.col array
+                        
+                        $temp = array();
+                        foreach($data_details as $detail) {
+                            $temp = explode(".",$detail);
+                           
+                            if(isset($temp[2])) {
+                                $database[] = $temp[0];
+                                $tables[] = $temp[1];
+                                $columns[] = $temp[2];
+                            } else {
+                                $tables[] = $temp[0];
+                                $columns[] = $temp[1];
+                            }
                         }
-                    }
-                    
-                    // create sql
-                    if(isset($temp[2])) {
-                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        
+                        // create sql
+                        if(isset($temp[2])) {
+                            $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$database[0].".".$tables[0];
+                        } else {
+                            $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$tables[0];
+                        }
                     } else {
-                        $sql = "SELECT ".$columns[0]." as id, ".$columns[1]." as name FROM ".$tables[0];
-                    }
-                    
+                        $sql = $row->value; // sql is data origin
+                    }                        
+                        
                     if(!empty($row->criteria)) {
                         $sql .=" WHERE $row->criteria";    
                     }
-                    
+                
                     // get records
                     if ($data_result = $mysqli->query($sql)) {
                         while($data_row = $data_result->fetch_object()) {

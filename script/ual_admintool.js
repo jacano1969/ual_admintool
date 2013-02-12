@@ -338,7 +338,7 @@ var ual_admintool = ual_admintool || (function(){
 				// grid used for deleting records
 			    if($('#grid_delete_records').length>0) {
 						// delete (hidden courses, etc)
-						if($(this).closest('tr').attr('data')=='hidden') {
+						if($(this).closest('tr').attr('data')=='deleted') {
 						   // do nothing
 						} else {
 							var deletethis = confirm("Are you sure you want to delete this record?");
@@ -346,9 +346,9 @@ var ual_admintool = ual_admintool || (function(){
 															
 								// delete record
 								$.get('actions/delete.php', {"id":id, "action_id":action_id }, function(data){
-									selectedRow.css('color','#BEBEBE');
-									selectedRow.css('font-style','italic');
-									selectedRow.attr('data','hidden');
+									selectedRow.css('color','red');
+                                    selectedRow.css('text-decoration','line-through');
+									selectedRow.attr('data','deleted');
 									deletethis = null;
 									alert(data);
 								}).fail(function() { alert("An error has occurred deleting record id: " + id +"."); });
@@ -401,15 +401,13 @@ var ual_admintool = ual_admintool || (function(){
 	
 					// user enrolments				
 					if(selected_workflow_step=="1000") {
+						$('#hiddenlightbox').html('<h1>Loading, please wait ...</h1>');
 						location.href="grid.php?T=ue";
-					}
-					
-					// potential enrolments
-					if(selected_workflow_step=="1001") {
+					} else if(selected_workflow_step=="1001") {   // potential enrolments
+						$('#hiddenlightbox').html('<h1>Loading, please wait ...</h1>');
 						location.href="grid.php?T=pe";
-					}
-					
-					if(selected_workflow_step=="10000") {
+					} else if(selected_workflow_step=="10000") {    // workflow designer
+						$('#hiddenlightbox').html('<h1>Loading, please wait ...</h1>');
 						location.href="designer.php";	
 					} else {
 						if(selected_workflow_step!="0") {

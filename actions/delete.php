@@ -22,21 +22,6 @@
     include_once('../lib.php');
     
     
-    
-    ///
-    
-    
-    /// TODO : chnage to delete
-    
-    ///
-    exit;
-    
-    
-    
-    
-    
-    
-    
     // get workflow mapping data origin and destination by workflow action id
     $sql="select wfdm.data_origin as origin_table,wfdm.data_origin_criteria as origin_criteria, " .
          "wfdm.data_destination as destination_table from workflow_data wfd " .
@@ -50,14 +35,12 @@
     
     $mysqli->set_charset("utf8");
     
-    $origin_table = '';
     $origin_criteria = '';
     $destination_table = '';
     
     // hide record (copy from origin to destination)
     if ($result = $mysqli->query($sql)) {
         while($row = $result->fetch_object()) {
-            $origin_table=$row->origin_table;
             $origin_criteria=$row->origin_criteria;
             $destination_table=$row->destination_table;
         }
@@ -72,15 +55,16 @@
     $sql2="select * from $destination_table LIMIT 1";
     
     $data_table_cols = '';
-    $field_list = '(';
+    $id_col = '';
     
     if ($data_result = $mysqli->query($sql2)) {
         $data_table_cols = $data_result->fetch_fields();
         
         foreach ($data_table_cols as $table_col) {
             
-            if($table_col->name!='id') {
-                $field_list .="$table_col->name,";                            
+            // todo: possibly change this programatically !!!!
+            if($table_col->name=='id') {
+                $id_col =$table_col->name;                            
             }
         }
         
@@ -90,35 +74,21 @@
         echo "error excecuting sql";
     }
     
-    // remove last comma from field list
-    $field_list = rtrim($field_list, ",");
+    $delete_sql = '';
     
-    $field_list .= ') ';
-    
-    // create sql for copy
+    // create sql for delete
     if($origin_criteria!='') {
-        $copy_sql="insert into $destination_table $field_list $origin_table WHERE $origin_criteria AND ";
+        $delete_sql="delete from $destination_table WHERE $origin_criteria AND $id_col=$id";
     } else {
-        $copy_sql="insert into $destination_table $field_list $origin_table WHERE ";
+        $delete_sql="delete from $destination_table WHERE $id_col=$id";
     }
     
-    // get id column
-    $id_cols = array();
-    $id_cols = explode(" ",$origin_table);
-    $id_col = $id_cols[1];
-    
-    if($id_col="DISTINCT") {
-        $id_col = $id_cols[2];
-    }
-    
-    $copy_sql .=" $id_col='$id'";
-    
-    // hide (copy) record 
-    if($mysqli->query($copy_sql)==true){
+    // delete record 
+    if($mysqli->query($delete_sql)==true){
         $mysqli->close();
         
-         if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Hide Record","Hide Record",$copy_sql)) {   
-            echo "This record $id has been hidden.";
+        if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Delete Record","Delete Record",$delete_sql)) {   
+            echo "The record $id has been deleted.";
         }
     } else {
         $mysqli->close();

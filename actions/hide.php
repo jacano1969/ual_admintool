@@ -102,7 +102,7 @@
         $mysqli->close();
         
          if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Hide Record","Hide Record",$copy_sql)) {   
-            echo "This record $id has been hidden.";
+            echo "The record $id has been hidden.";
         }
     } else {
         $mysqli->close();

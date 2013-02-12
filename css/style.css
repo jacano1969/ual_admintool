@@ -8,7 +8,7 @@
 #login-page input {display: block; margin-bottom: 5px;}
 #login-page input[type=text] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page input[type=password] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
-#login-page fieldset {background: #ffffff; padding: 20px; border: 3px solid #CCCCCC; border-radius: 6px 6px 6px 6px;}
+#login-page fieldset {background: #ffffff; padding: 20px; border: 3px solid #333; border-radius: 6px 6px 6px 6px;}
 #login-page legend {font-weight: bold; font-size: 0.9em;}
 #login-page .submit {display: inline-block; float: right; margin-right: 10px; background-color: #cccccc; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page .submit.down {display: inline-block; float: right; margin-right: 10px; background-color: #ffffff; border:2px groove #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
@@ -16,7 +16,7 @@
 
 
 #home-page {background: #E0E0E0; font-family: Arial,Helvetica,sans-serif; font-size: 1.0em;}
-#home-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px;}
+#home-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px; position: relative; z-index: 1002;}
 #home-page label {font-size: 0.8em; font-weight: bold; display: inline;}
 #home-page form {margin-top: 10px; }
 #home-page input {display: block; margin-bottom: 5px; margin-right: 2px;}
@@ -32,7 +32,7 @@
 #home-page select {display: inline; margin: 0 auto; width: 350px;  background: none repeat scroll 0 0 #E0E0E0; border: 2px groove #CCCCCC; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px; margin-bottom: 4px;}
 #home-page #hiddenlightbox {display:none; background: none repeat scroll 0 0 #FFFFFF; border: 2px solid #333; border-radius: 7px 7px 7px 7px; padding: 10px;}
 #home-page * {font-family: Arial,Helvetica,sans-serif; font-size: 1.0em;}
-#home-page label.error {color: red; left: 25%; margin-top: -5%; position: fixed;}
+#home-page label.error {color: red; float: left; margin-left: 300px; margin-top: -3%;}
 #home-page em {font-weight: bold; padding-right: 1em; vertical-align: top;}
 /*#home-page hr {margin-top: 25px; border: 3px double #CCCCCC;}*/
 
@@ -108,7 +108,7 @@
     width: 200px;
     z-index: 1002;
     position: fixed;
-    border: 2px ridge #CCCCCC;
+    border: 2px solid #333;
     border-radius: 7px 7px 7px 7px;
     padding: 6px;
     top: 10%;
@@ -122,9 +122,9 @@
 #helplabel {
     color: #333333;
     font-size: 0.8em;
-    left: 650px;
+    /*left: 650px;
     margin-top: 5px;
-    position: fixed;
+    position: fixed;*/
 }
 
 div.preview {
