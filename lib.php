@@ -1835,8 +1835,11 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                 // get grid data
                 if($row->data_type=='data') {
                     
+                    // check for session vars
                     $sql = $row->value;
-                    
+                    $sql = str_ireplace('$USERID$', $_SESSION['USERID'],$sql);
+                    $sql = str_ireplace('$USERNAME$', $_SESSION['USERNAME'],$sql);
+                                       
                     if(!empty($row->criteria)) {
                         $sql .=" WHERE $row->criteria";    
                     }
