@@ -63,7 +63,8 @@
         foreach ($data_table_cols as $table_col) {
             
             // todo: possibly change this programatically !!!!
-            if($table_col->name=='id') {
+            // check id column for delete
+            if($table_col->name=='id' || $table_col->name=='RECORD_ID') {
                 $id_col =$table_col->name;                            
             }
         }

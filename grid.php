@@ -118,7 +118,7 @@
             $content .='The grid below lists the enrollments for the logged in user.<br>';
             $content .='To remove an enrollment entry, just click on the entry in the grid.';
         } else {
-            $content .='<h2>Possible user enrollments</h2>';
+            $content .='<h2>My possible enrollments</h2>';
             $content .='The grid below lists all possible courses the logged in user can be enrolled on.<br>';
             $content .='To add a course enrollment for the logged in user, just click on an entry in the grid.';
         }

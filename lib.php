@@ -197,11 +197,11 @@ function process_record($record_data, $action_desc) {
         $update_data = '';
         $delete_data = '';
         
-        if(isset($process_data['add'])) {   
+        if(isset($process_data['add'])) {
             $add_data = $process_data['add'];
         }
         
-        if(isset($process_data['update'])) {   
+        if(isset($process_data['update'])) {
             $update_data = $process_data['update'];
         }
         
@@ -219,7 +219,7 @@ function process_record($record_data, $action_desc) {
         $subject='';
         
         // add new record
-        if(!empty($add_data)) {
+        if(isset($process_data['add'])) {
             foreach($add_data as $data) {
                 
                 $workflow_data_item_id = $data['id'];
@@ -353,20 +353,21 @@ function process_record($record_data, $action_desc) {
             
             echo "ok";  // if we get to here, send back some data to show everything went as planned
             
-        } else {
-            // TODO: handle error
-            echo $process_data;
         }
         
         // update existing record
-        if(!empty($update_data)) {
+        if(isset($process_data['update'])) {
+            
+            // id for update
+            $unique_id = 0;
+            $unique_identifier = '';
+            
             foreach($update_data as $data) {
                 
                 $workflow_data_item_id = $data['id'];
                 $new_data = str_replace("'","''",$data['data']);  // escape quotes
                 
-                $unique_id = 0;
-                if($data['data']=='id') {
+                if($data['data']=='id' && $unique_id==0) {
                     $unique_id = $data['id'];
                 } else {
                 
@@ -400,6 +401,11 @@ function process_record($record_data, $action_desc) {
                             
                             // create field list
                             $create_data->sqla[$table_name] .= "'$new_data',";
+                            
+                            // get unique identifier for update (use only if specified id is missing)
+                            if($unique_identifier=='') {
+                                $unique_identifier="$row_name='$new_data'";
+                            }
                         }
                     } 
                 }
@@ -412,8 +418,15 @@ function process_record($record_data, $action_desc) {
                         
                 $sql_full = substr($sql_full,0,-1);
                 
-                $sql_full .= " WHERE id=" . $unique_id;
-                
+                // no unique id set, use first column from origin table 
+                if($unique_id==0) {
+                    $sql_full .= " WHERE $unique_identifier";
+                    
+                    // if this is 
+                } else {
+                    $sql_full .= " WHERE id=" . $unique_id;    
+                }
+                                
                 if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Update Record",$action_desc,$sql_full)) {            
                     // add records
                     if(sql_update($sql_full)) {
@@ -423,13 +436,10 @@ function process_record($record_data, $action_desc) {
                     return false;                
                 }
             }
-        } else {
-            // TODO: handle error
-            echo $process_data;
         }
         
         // delete existing record
-        if(!empty($delete_data)) {
+        if(isset($process_data['delete'])) {
             
         }
         
@@ -675,7 +685,7 @@ function sql_update($sql) {
 
     // TODO:
     // do we need to check this syntax
-    $sql_update = $mysqli->real_escape_string($sql);  // preserve line breaks
+    //$sql_update = $mysqli->real_escape_string($sql);  // preserve line breaks
     
     $mysqli->set_charset("utf8");
     
