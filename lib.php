@@ -1849,7 +1849,7 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                     $status_col_names = array();
                     $switch_status_cols = array();
                     $switch_status_col_names = array();
-                    $switch_status_columns = array('approved', 'rejected');
+                    $switch_status_columns = array('approve','reject','approved', 'rejected');
                     $status_columns = array('status','visible');
                     
                     // get records
@@ -1865,12 +1865,12 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                 $workflow_form .= '<th class="sorting" rowspan="1" colspan="1">'.$table_col->name.'</td>';
                             }
                             // record that column is a status field
-                            if(in_array($table_col->name,$switch_status_columns)) {
+                            if(in_array(strtolower($table_col->name),$switch_status_columns)) {
                                 $switch_status_cols[] = $cols;
                                 $switch_status_col_names[$cols] = $table_col->name;
                             }
                             
-                            if(in_array($table_col->name, $status_columns)) {
+                            if(in_array(strtolower($table_col->name), $status_columns)) {
                                 $status_cols[] = $cols;
                                 $status_col_names[$cols] = $table_col->name;
                             }
