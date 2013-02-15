@@ -1,30 +1,28 @@
 
 
-#login-page {background: #E0E0E0; font-family: Arial,Helvetica,sans-serif; font-size: 1.0em;}
-#login-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px;}
+#login-page {background: #E0E0E0;}
+#login-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px; top: 10px;}
 #login-page .login {margin: 25% 33%;}
-#login-page label {font-size: 0.8em;}
 #login-page form {margin-top: 10px;}
 #login-page input {display: block; margin-bottom: 5px;}
 #login-page input[type=text] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page input[type=password] {width: 90%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page fieldset {background: #ffffff; padding: 20px; border: 3px solid #333; border-radius: 6px 6px 6px 6px;}
-#login-page legend {font-weight: bold; font-size: 0.9em;}
+#login-page legend {background: none repeat scroll 0 0 #FFFFFF; border: 3px solid #CCCCCC; border-radius: 3px 3px 3px 3px; font-size: 0.9em; font-weight: bold; padding: 2px;}
 #login-page .submit {display: inline-block; float: right; margin-right: 10px; background-color: #cccccc; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page .submit.down {display: inline-block; float: right; margin-right: 10px; background-color: #ffffff; border:2px groove #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #login-page .error {color: #ff0000; font-weight: bold; font-size: 0.8em;}
 
-
-#home-page {background: #E0E0E0; font-family: Arial,Helvetica,sans-serif; font-size: 1.0em;}
-#home-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px; position: relative; z-index: 1002;}
-#home-page label {font-size: 0.8em; font-weight: bold; display: inline;}
+#home-page {background: #E0E0E0;}
+#home-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px; position: relative; z-index: 1002; top: 10px;}
+#home-page label {font-weight: bold; display: inline;}
 #home-page form {margin-top: 10px; }
 #home-page input {display: block; margin-bottom: 5px; margin-right: 2px;}
 #home-page input[type=text] {width: 45%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page textarea {resize: both; width: 45%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page input[type=password] {border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page fieldset {background: #ffffff; border: 3px solid #CCCCCC; border-radius: 6px 6px 6px 6px; padding:10px;}
-#home-page legend {font-weight: bold; font-size: 0.9em;}
+#home-page legend {background: none repeat scroll 0 0 #FFFFFF; border: 3px solid #CCCCCC; border-radius: 3px 3px 3px 3px; font-size: 0.9em; font-weight: bold; padding: 2px;}
 #home-page .submit {display: inline-block; background-color: #cccccc; border:2px ridge #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page .close {display: inline-block; background-color: #cccccc; border:2px ridge #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #home-page .submit.down {display: inline-block; background-color: #ffffff; border:2px groove #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
@@ -34,7 +32,6 @@
 #home-page * {font-family: Arial,Helvetica,sans-serif; font-size: 1.0em;}
 #home-page label.error {color: red; float: left; margin-left: 300px; margin-top: -3%;}
 #home-page em {font-weight: bold; padding-right: 1em; vertical-align: top;}
-/*#home-page hr {margin-top: 25px; border: 3px double #CCCCCC;}*/
 
 #home-page table.results {height:500px; overflow: auto;}
 #home-page table.results tr th {border: 1px solid #ccc;}
@@ -63,7 +60,7 @@
 	border: 1px solid #DDD; clear: left; font: 10px verdana; width: 500px;
 	-khtml-border-radius: 3px; -moz-border-radius: 3px; -opera-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px;
 }
-#designer-page .step label { color: #444; display: block; font: bold 10px verdana; margin: 10px 0 3px 7px; }
+#designer-page .step label { color: #444; display: block; margin: 10px 0 3px 7px; }
 #designer-page .step legend { color: #4080BF; font: bold 14px verdana; padding: 0 2px 3px 2px; }
 #designer-page .step input, .step textarea, .step select { border: 1px solid #AAA; font: 10px verdana; margin-left: 7px; }
 #designer-page .error-image { background: url('images/error.png') no-repeat right top; }
@@ -76,15 +73,15 @@
 #designer-page label.error { background: url('images/alert.png') no-repeat; color: #DE5130; display: block; float: left; font: 10px verdana; height: 13px; margin: 3px 3px 0 10px; padding-left: 21px; padding-top: 2px; }
 
 #designer-page {background: #E0E0E0; font-family: Arial,Helvetica,sans-serif; font-size: 1.0em;}
-#designer-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px;}
-#designer-page label {font-size: 0.8em; font-weight: bold;}
+#designer-page .container {width: 980px; margin: 0 auto; margin-top: 0px; margin-bottom: 0px; top: 10px;}
+/*#designer-page label {font-size: 0.8em; font-weight: bold;}*/
 #designer-page form {margin-top: 10px; float:left;}
 #designer-page input {display: block; margin-bottom: 5px; margin-right: 2px;}
 #designer-page input[type=text] {width:95%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #designer-page textarea {width:95%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #designer-page input[type=password] {width: 95%; border:2px ridge #dbdbdb; padding:5px; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #designer-page fieldset {background: #ffffff; border: 3px solid #CCCCCC; border-radius: 6px 6px 6px 6px;}
-#designer-page legend {font-weight: bold; font-size: 0.9em;}
+#designer-page legend {background: none repeat scroll 0 0 #FFFFFF; border: 1px solid #CCCCCC; border-radius: 3px 3px 3px 3px; font-size: 0.9em; font-weight: bold; padding: 2px;}
 #designer-page .submit {display: inline-block; background-color: #cccccc; border:2px ridge #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #designer-page .close {display: inline-block; background-color: #cccccc; border:2px ridge #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
 #designer-page .submit.down {display: inline-block; background-color: #ffffff; border:2px groove #dbdbdb; border-radius: 7px; -webkit-border-radius:7px; -moz-border-radius:7px;}
@@ -121,10 +118,6 @@
 
 #helplabel {
     color: #333333;
-    font-size: 0.8em;
-    /*left: 650px;
-    margin-top: 5px;
-    position: fixed;*/
 }
 
 div.preview {
@@ -139,7 +132,7 @@ div.preview {
 #designer-page .preview input { width:50%; }
 
 
-.continer .grid {width: 98%; }
+.continer .grid {width: 98%; top: 10px;}
 div.data_grid {  }
 
 .box .content {padding: 0 20px;}
