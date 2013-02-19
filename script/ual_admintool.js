@@ -290,22 +290,7 @@ var ual_admintool = ual_admintool || (function(){
 			// data grid
 			//
 			
-			// grid used for deleting records
-			if($('#grid_delete_records').length>0) {
-				
-			}
-			
-			// grid used for adding records
-			if($('#grid_add_records').length>0) {
-				
-			}
-			
-			// grid used for updating records
-			if($('#grid_update_records').length>0) {
-				
-			}
-			
-			
+
 			$('table tbody tr').live("click",function() {
                 var id=$(this).closest('tr').children('td:first').text();
                 var selectedRow=$(this).closest('tr');
@@ -358,6 +343,40 @@ var ual_admintool = ual_admintool || (function(){
 						   }
 						}
 				}
+				
+				// grid used for adding records
+			    if($('#grid_add_records').length>0) {
+				    
+					var addthis = confirm("Are you sure you want to add this record?");
+					if(addthis==true) {
+						
+						
+						// check for other data values on the form
+						$.get('actions/worflowdata.php', {"action_id":action_id}, function(data) {
+						    
+							// TODO: get all ids and values to sdend to add.php
+							
+						});
+						
+						// add record
+						// todo: get data values from above and set here:
+						$.get('actions/add.php', {"id":id, "action_id":action_id }, function(data){
+								
+								// TODO: 
+								// check if value has already been added
+								
+								addthis = null;
+								alert(data);
+						}).fail(function() { alert("An error has occurred adding record id: " + id +"."); });
+								
+				    }
+			    }
+				
+				// grid used for updating records
+			    if($('#grid_update_records').length>0) {
+				 
+			    }  
+			
 		    });
 			
 			

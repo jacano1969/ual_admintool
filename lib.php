@@ -1663,6 +1663,11 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
             // draw hidden field
             if($row->type=='hidden') {
                 
+                // hidden value for preset values
+                if($row->data_type=='preset') {
+                    $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$row->value.'">';
+                }
+                
                 // construct hidden value for mailto
                 if($row->data_type=='mailto') {
                     $workflow_form .= '<input data="'.$row->item_id.'" type="hidden" id="'.$row->name.'" name="'.$row->name.'" value="'.$row->value.'">';
