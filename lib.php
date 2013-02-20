@@ -1148,6 +1148,108 @@ function multi_select_list($name, $select_data, $size) {
 
 
 /**
+ * Description: function to get the workflow_data_item_id for a grid based on the worfkflow_action_id
+ *
+ */
+function get_workflow_data_item_for_grid($workflow_action_id) {
+    
+    global $CFG;
+    
+    $workflow_data_item_id = '';
+    
+    if(!empty($workflow_action_id) && $workflow_action_id!='') {
+        // get workflow data mapping
+        $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+        
+        if (mysqli_connect_error()) {
+            return false;
+        }
+        
+        $workflow_data_sql="select wfd.workflow_data_item_id as 'data_item' from workflow_action wfa " .
+                           "inner join workflow_data wfd on wfa.workflow_data_id=wfd.workflow_data_id " .
+                           "inner join workflow_data_type wfdt on wfdt.name='grid' " .
+                           "and wfdt.workflow_data_type_id=wfd.workflow_data_type_id " .
+                           "where wfa.workflow_action_id=$workflow_action_id";
+        
+        $mysqli->set_charset("utf8");
+        
+        if ($result = $mysqli->query($workflow_data_sql)) {
+            if($result->num_rows==0) {
+                return false;
+            } else {  
+
+                // construct data
+                while ($row = $result->fetch_object()) {
+                    $workflow_data_item_id = $row->data_item;
+                }
+            }
+        }
+        
+        $result->close();
+        
+        $mysqli->close();
+    } else {
+        return false;
+    }
+    
+    return $workflow_data_item_id;
+}
+
+
+/**
+ * Description: function to retreive workflow data mapping
+ *
+ */
+function get_workflow_data_mapping($workflow_data_item_id) {
+
+    global $CFG;
+    
+    $data_mapping = '';
+    $data_type = '';
+    
+    if(!empty($workflow_data_item_id) && $workflow_data_item_id!='') {
+        // get wokflow data mapping
+        $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+        
+        if (mysqli_connect_error()) {
+            return false;
+        }
+        
+        $workflow_data_sql="SELECT wfdm.data_destination as 'data_mapping',wfdt.data_type as 'data_type' " .
+                           "FROM workflow_data_mapping wfdm " .
+                           "inner join workflow_data wfd " .
+                           "on wfdm.workflow_data_item_id=wfd.workflow_data_item_id " .
+                           "inner join workflow_data_type wfdt " .
+                           "on wfdt.workflow_data_type_id=wfd.workflow_data_type_id " .
+                           "where wfdm.workflow_data_item_id=$workflow_data_item_id";
+        
+        $mysqli->set_charset("utf8");
+        
+        if ($result = $mysqli->query($workflow_data_sql)) {
+            if($result->num_rows==0) {
+                return false;
+            } else {  
+
+                // construct data
+                while ($row = $result->fetch_object()) {
+                    $data_mapping = $row->data_mapping;
+                    $data_type = $row->data_type;
+                }
+            }
+        }
+        
+        $result->close();
+        
+        $mysqli->close();
+    } else {
+        return false;
+    }
+    
+    return $data_mapping .'.'. $data_type;
+}
+
+
+/**
  * Description: function to retreive workflow data
  *
  */

@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+    
 $action_id = '';
 $record_data = '';
 $action_desc='';
@@ -8,11 +10,11 @@ $grid_id = '';
 require_once('../lib.php');
 
 if(!empty($_GET['action_id'])) {
-    $action = $_GET['action_id'];
+    $action_id = $_GET['action_id'];
 }
 
 if(!empty($_GET['grid_id'])) {
-    $action = $_GET['grid_id'];
+    $grid_id = $_GET['grid_id'];
 }
 
 if(!empty($_GET['action_desc'])) {
@@ -38,6 +40,16 @@ if(!empty($record_data)) {
     $create_data->sqla = array();
     $create_data->sqlb = array();
    
+    // get grid data to be processed
+    $grid_data=array();
+    
+    // get workflow_data_items_id for grid using the worklflow_action_id
+    $grid_data['id']=get_workflow_data_item_for_grid($action_id);
+    $grid_data['data']=$grid_id;
+    
+    // add grid data to items to be processed
+    $add_data[]=$grid_data;
+    
     // add new record
     if(isset($process_data['add'])) {
         foreach($add_data as $data) {
@@ -45,22 +57,10 @@ if(!empty($record_data)) {
             $workflow_data_item_id = $data['id'];
             $new_data = str_replace("'","''",$data['data']);  // escape quotes
             
+            // get workflow mapping for this item
+            $workflow_data_mapping = get_workflow_data_mapping($workflow_data_item_id);
 
-
-
-
-            // TODO: get workflow mapping for this item
-            $workflow_data = get_workflow_mapping($workflow_data_item_id);
-            //$workflow_data = get_workflow_data($workflow_data_item_id);
-
-
-
-
-
-
-
-            
-            $table_and_row = explode(".", $workflow_data, 3);
+            $table_and_row = explode(".", $workflow_data_mapping, 3);
             
             $table_name = $table_and_row[0];
             $row_name = $table_and_row[1];
@@ -79,6 +79,10 @@ if(!empty($record_data)) {
                 
                 if($new_data_type=="integer") {
                     $create_data->sqlb[$table_name] .= ", $new_data";
+                }
+                
+                if($data['id']==$grid_data['id']){
+                    $create_data->sqlb[$table_name] .= ", '$grid_id'";
                 }
             } else {
                 
@@ -101,6 +105,10 @@ if(!empty($record_data)) {
                     // create data values
                     $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "($new_data";
                 }
+                
+                if($data['id']==$grid_data['id']){
+                    $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$grid_id'";
+                }
             }
         }
         
@@ -108,16 +116,17 @@ if(!empty($record_data)) {
         foreach($create_data->sqla as $key => $value) {
             $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
 
-            //if(log_user_action($_SESSION['USERNAME'], $_SESSION['USERID'], "Insert Record", $action_desc, $sql_full)) {            
+            if(log_user_action($_SESSION['USERNAME'], $_SESSION['USERID'], "Insert Record", $action_desc, $sql_full)) {            
                 // add records
-            //    sql_insert($sql_full);
-            //} else {
-            //    return false;                
-            //}
+                sql_insert($sql_full);
+            } else {
+                return false;                
+            }
         }
         
-        echo $sql_full;  // if we get to here, send back some data to show everything went as planned
+        echo "ok";  // if we get to here, send back some data to show everything went as planned
     }    
 } else {
     return false;
 }
+

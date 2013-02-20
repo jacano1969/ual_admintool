@@ -399,7 +399,6 @@ var ual_admintool = ual_admintool || (function(){
                             
                             if(data && data!=false) {
 								
-								alert(data);
                                 alert(action_desc+":\n\nNew record created successfully.");
                                 
                                 // TODO: 
@@ -409,7 +408,7 @@ var ual_admintool = ual_admintool || (function(){
                                 //}
                                 //else {
                                     // show the home screen (and all workflows)
-                                    window.location.href='index.php';
+                                    //window.location.href='index.php';
                                 //}
                                 
                                 return false;
