@@ -1,0 +1,123 @@
+<?php
+
+$action_id = '';
+$record_data = '';
+$action_desc='';
+$grid_id = '';
+
+require_once('../lib.php');
+
+if(!empty($_GET['action_id'])) {
+    $action = $_GET['action_id'];
+}
+
+if(!empty($_GET['grid_id'])) {
+    $action = $_GET['grid_id'];
+}
+
+if(!empty($_GET['action_desc'])) {
+    $action_desc = $_GET['action_desc'];
+}
+
+if(!empty($_GET['record_data'])) {
+    $record_data = $_GET['record_data'];
+}
+
+if(!empty($record_data)) {
+            
+    // extract json data
+    $process_data = json_decode($record_data,true);
+    
+    $add_data = '';
+    
+    if(isset($process_data['add'])) {
+        $add_data = $process_data['add'];
+    }
+    
+    $create_data = new stdClass();
+    $create_data->sqla = array();
+    $create_data->sqlb = array();
+   
+    // add new record
+    if(isset($process_data['add'])) {
+        foreach($add_data as $data) {
+            
+            $workflow_data_item_id = $data['id'];
+            $new_data = str_replace("'","''",$data['data']);  // escape quotes
+            
+
+
+
+
+            // TODO: get workflow mapping for this item
+            $workflow_data = get_workflow_mapping($workflow_data_item_id);
+            //$workflow_data = get_workflow_data($workflow_data_item_id);
+
+
+
+
+
+
+
+            
+            $table_and_row = explode(".", $workflow_data, 3);
+            
+            $table_name = $table_and_row[0];
+            $row_name = $table_and_row[1];
+            $new_data_type = $table_and_row[2];
+            
+            // collect table names                
+            if(array_key_exists($table_name, $create_data->sqla)) {
+                
+                // add to sql field list
+                $create_data->sqla[$table_name] .=", $row_name";
+                
+                // add to sql data values
+                if($new_data_type=="string") {
+                    $create_data->sqlb[$table_name] .= ", '$new_data'";
+                }
+                
+                if($new_data_type=="integer") {
+                    $create_data->sqlb[$table_name] .= ", $new_data";
+                }
+            } else {
+                
+                // just add new insert statement for table
+                $create_data->sqla[$table_name]="INSERT INTO $table_name (";
+                $create_data->sqlb[$table_name]='';
+                
+                if($new_data_type=="string") {
+                    // create field list
+                    $create_data->sqla[$table_name] .= " $row_name";
+                    
+                    // create data values
+                    $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                }
+                
+                if($new_data_type=="integer") {
+                    // create field list
+                    $create_data->sqla[$table_name] .= " $row_name";
+                    
+                    // create data values
+                    $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "($new_data";
+                }
+            }
+        }
+        
+        // add sqla to sqlb
+        foreach($create_data->sqla as $key => $value) {
+            $sql_full = $create_data->sqla[$key] .") VALUES " . $create_data->sqlb[$key] .")";
+
+            //if(log_user_action($_SESSION['USERNAME'], $_SESSION['USERID'], "Insert Record", $action_desc, $sql_full)) {            
+                // add records
+            //    sql_insert($sql_full);
+            //} else {
+            //    return false;                
+            //}
+        }
+        
+        echo $sql_full;  // if we get to here, send back some data to show everything went as planned
+    }    
+} else {
+    return false;
+}

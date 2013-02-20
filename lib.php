@@ -1245,13 +1245,6 @@ function get_workflows($step_id=false) {
             while ($workflow_row = $workflow_result->fetch_object()) {
                 $workflow .= '<optgroup help="'.$workflow_row->description.'" label="'.$workflow_row->name.'">';
                 $workflow_id = $workflow_row->id;
-                
-                // TODO: these need to be created as workflows - currently hard-coded (for worflow creation testing)
-                if($workflow_row->name=="Enrollments") {
-                    $workflow .= '<option id="1000" help="Enrolments for the logged in user">My Enrolments</option>';
-                    $workflow .= '<option id="1001" help="Courses that the logged in user is not enrolled on">My Possible Enrolments</option>';
-                    $workflow .= '</optgroup>';
-                }
                                 
                 // get all active workflow steps for each workflow
                 $workflow_step_sql="select workflow_step_id as id, name as name, " .
@@ -1279,6 +1272,13 @@ function get_workflows($step_id=false) {
                     }
                     
                     $workflow_step_result->close();
+                }
+                
+                // TODO: these need to be created as workflows - currently hard-coded (for worflow creation testing)
+                if($workflow_row->name=="Enrollments") {
+                    $workflow .= '<option id="1000" help="Enrolments for the logged in user">My Enrolments</option>';
+                    $workflow .= '<option id="1001" help="Courses that the logged in user is not enrolled on">My Possible Enrolments</option>';
+                    $workflow .= '</optgroup>';
                 }
             }
             
