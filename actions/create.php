@@ -39,7 +39,12 @@ if(!empty($record_data)) {
     $create_data = new stdClass();
     $create_data->sqla = array();
     $create_data->sqlb = array();
-   
+    
+    // check for record already existing
+    $check_data = "select 1 as '1' ";
+    $check_table = '';
+    $check_data_criteria= '';
+    
     // get grid data to be processed
     $grid_data=array();
     
@@ -83,6 +88,7 @@ if(!empty($record_data)) {
                 
                 if($data['id']==$grid_data['id']){
                     $create_data->sqlb[$table_name] .= ", '$grid_id'";
+                    $check_data_criteria .= "$row_name='$grid_id'";                    
                 }
             } else {
                 
@@ -90,12 +96,18 @@ if(!empty($record_data)) {
                 $create_data->sqla[$table_name]="INSERT INTO $table_name (";
                 $create_data->sqlb[$table_name]='';
                 
+                // set check table name
+                $check_table=" from $table_name where ";
+                
                 if($new_data_type=="string") {
                     // create field list
                     $create_data->sqla[$table_name] .= " $row_name";
                     
                     // create data values
                     $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$new_data'";
+                    
+                    // check if data already exists
+                    $check_data_criteria = "$row_name='$new_data' and ";
                 }
                 
                 if($new_data_type=="integer") {
@@ -104,13 +116,28 @@ if(!empty($record_data)) {
                     
                     // create data values
                     $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "($new_data";
+                    
+                    // check if data already exists
+                    $check_data_criteria = "$row_name='$new_data' and ";
                 }
                 
                 if($data['id']==$grid_data['id']){
                     $create_data->sqlb[$table_name] .= $create_data->sqlb[$table_name] . "('$grid_id'";
+                    
+                    // check if data already exists
+                    $check_data_criteria = "$row_name='$grid_id' and ";
                 }
             }
         }
+        
+        // now check to see if record alredy exists
+        $check_sql = $check_data . $check_table . $check_data_criteria;
+        
+        if(sql_record_exists($check_sql)==true) {
+            echo "Error:Duplicate";
+            exit;
+        }
+        
         
         // add sqla to sqlb
         foreach($create_data->sqla as $key => $value) {

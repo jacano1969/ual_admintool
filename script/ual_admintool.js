@@ -399,8 +399,12 @@ var ual_admintool = ual_admintool || (function(){
                             
                             if(data && data!=false) {
 								
-                                alert(action_desc+":\n\nNew record created successfully.");
-                                
+								if(data=="Error:Duplicate") {
+								    alert(action_desc+":\n\nError: Record already exists.");		
+								} else {
+								    alert(action_desc+":\n\nNew record created successfully.");
+								}
+								
                                 // TODO: 
                                 // check for workflow links
                                 // if(there are workflow links){

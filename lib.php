@@ -640,6 +640,37 @@ function show_footer($grid=true) {
 
 
 /**
+ * Description: function to check if a record exists
+ *
+ */
+function sql_record_exists($sql) {
+    global $CFG;
+    
+    // connect to db
+    $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+    
+    if (mysqli_connect_error()) {
+        return false;
+    }
+
+    $sql_check = $sql;
+    
+    $mysqli->set_charset("utf8");
+    
+    if($result = $mysqli->query($sql_check)){
+        if($result->num_rows==0) {
+            $mysqli->close();
+            return false;
+        } else {
+            return true;
+        }
+    } else {
+        return false;
+    }
+}
+
+
+/**
  * Description: function to do an sql insert
  * 
  */
