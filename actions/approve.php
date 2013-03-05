@@ -60,24 +60,91 @@
     }
     
     if(sql_update("update $table_name set approved=1 where id=$id")==true){
-        $mysqli->close();
-        echo "This record has been approved.";
+        
+        // create new course
+        if(sql_insert("insert into new_courses (FULL_DESCRIPTION, AOS_DESCRIPTION, COLLEGE) select description,fullname,college from course_request where id=$id")==true) {
+
+            // send approval email
+            $sql = "SELECT message FROM course_request_email where email_type=2 and status=1";
+
+            $mailto = '';
+            $message = '';
+            $subject = '';
+            
+            // get records
+            $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+
+            if ($message_result = $mysqli->query($sql)) {
+                if($message_result->num_rows!=0) {
+                    while($message_row = $message_result->fetch_object()) {
+                        $message = $message_row->message;
+                    }
+                }
+                $message_result->close();
+            }                  
+            
+            // create sql
+            $sql = "SELECT subject FROM course_request_email where email_type=2 and status=1";
+
+            // get records
+            if ($subject_result = $mysqli->query($sql)) {
+                if($subject_result->num_rows!=0) {
+                    while($subject_row = $subject_result->fetch_object()) {
+                        $subject = $subject_row->subject;
+                    }
+                }
+                
+                $subject_result->close();
+            }
+                    
+            // get the user to send the email to
+            $sql="SELECT EMAIL from users where RECORD_ID=(select requested_by from course_request where id=$id)";
+    
+            if ($result = $mysqli->query($sql)) {
+                while($row = $result->fetch_object()) {
+                    $mailto=$row->EMAIL;
+                }
+                
+                $result->close();
+            } else{
+                $mysqli->close();
+                echo "error excecuting sql 3";
+            }
+            
+            // check if an email is to be sent        
+            if($mailto!='') {
+                
+                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+                $headers .= 'To: ' . $mailto . "\r\n";
+                $headers .= 'From: UAL AdminTool' . "\r\n";
+                
+                if($message!='') {
+                    
+                    // replace any user fields
+                    $message=str_ireplace('$FIRSTNAME',$_SESSION['FIRSTNAME'],$message);
+                    $message=str_ireplace('$LASTNAME',$_SESSION['LASTNAME'],$message);
+                    $message=str_ireplace('$USERNAME',$_SESSION['USERNAME'],$message);
+                    $message=str_ireplace('$EMAIL',$_SESSION['EMAIL'],$message);
+                    $message=str_ireplace('$MOBILEPHONE',$_SESSION['MOBILEPHONE'],$message);
+                    
+                    mail($mailto, $subject, $message, $headers);
+                }
+            }
+            
+            $mysqli->close();
+            
+            echo "This record has been approved.";
+            
+        }        
     } else {
         $mysqli->close();
         echo "An Error occurred.";
     }
     
-    // TODO:
-    // log to workflow_log
     
-    // TODO:
-    // get linked work flow
     
-    // 1: create new course based on approved data
-    
-    // 2: enrol staff member on approved course
-    
-    // 3: send approval email
+
     
     
     
