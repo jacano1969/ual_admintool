@@ -270,6 +270,19 @@ function process_record($record_data, $action_desc) {
                     // get the table and column for this new data
                     $workflow_data = get_workflow_data($workflow_data_item_id);
                     
+                    // NEW - TESTING - carry out workflow data checks on this value
+                    $errors=do_workflow_data_checks($workflow_data_item_id, $new_data);
+                    
+                    // failed workflow data checks
+                    if($errors!='') {
+                        foreach($errors as $error) {
+                            echo $error;
+                        }
+                        return;
+                    }
+                    
+                    // NEW- TESTING
+                    
                     $table_and_row = explode(".", $workflow_data, 3);
                     
                     $table_name = $table_and_row[0];
@@ -1325,6 +1338,63 @@ function get_workflow_data($workflow_data_item_id) {
     }
     
     return $data .'.'. $data_type;
+}
+
+
+/**
+ * Description: function to retreive and carry out workflow data checks
+ *
+ */
+function do_workflow_data_checks($workflow_data_item_id, $value) {
+    global $CFG;
+    
+    $errors = array();
+    
+    if(!empty($workflow_data_item_id) && $workflow_data_item_id!='') {
+        // get wokflow data
+        $mysqli =  new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
+        
+        if (mysqli_connect_error()) {
+            return false;
+        }
+        
+        $workflow_data_sql="SELECT wfdc.value as data_check,error_message as error FROM workflow_data_check wfdc inner join " .
+                            "workflow_data wfd on wfd.workflow_data_item_id=$workflow_data_item_id " .
+                            "and wfd.workflow_data_check_id=wfdc.workflow_data_check_id";
+        
+        $mysqli->set_charset("utf8");
+        
+        if ($result = $mysqli->query($workflow_data_sql)) {
+            if($result->num_rows==0) {
+                return false;
+            } else {  
+
+                // construct data
+                while ($row = $result->fetch_object()) {
+                    $data_check = $row->data_check;
+                    
+                    // run data check
+                    if($check = $mysqli->query($data_check)) {
+                        while($check_row = $check->fetch_object()) {
+                            if($check_row->value==$value) {
+                                $errors[] = $row->error;
+                                break;
+                            }
+                        }
+                    }
+                    $check->close();
+                }
+            }
+        }
+        
+        $result->close();
+        
+        $mysqli->close();
+    } else {
+        return false;
+    }
+    
+    return $errors;
 }
 
 

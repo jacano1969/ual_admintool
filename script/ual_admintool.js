@@ -678,11 +678,15 @@ var ual_admintool = ual_admintool || (function(){
                         // submit data 
                         $.get('index.php?action=add&action_desc='+action_desc+'&record_data='+jsonString, function(data){
                             
-                            
-                            
-                            if(data  && data!=false) {    
-                                alert(action_desc+":\n\nNew record created successfully.");
-                                
+                            if(data && data!=false) {
+								
+							    // check if there were workflow data check errors
+								if(data.indexOf("Error")==0) {
+								    alert(action_desc+":\n\n"+data);	
+								} else {
+                                    alert(action_desc+":\n\nNew record created successfully.");
+								}
+								
                                 // TODO: 
                                 // check for workflow links
                                 // if(there are workflow links){
