@@ -28,7 +28,7 @@
     
     $mysqli->set_charset("utf8");
     
-    $sql='select record_id as id, concat(username," - ",lastname, ", ",firstname, " (", COALESCE(role,"NO ROLE"),")") as value from USERS order by lastname';
+    $sql='select record_id as id, concat(username," - ",lastname, ", ",firstname, " (", COALESCE(role,"NO ROLE"),")") as value from USERS order by lastname ASC';
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
@@ -48,7 +48,7 @@
     
     $page .= multi_select_list("users", $result, 20);
     
-    $page .= show_footer();
+    //$page .= show_footer();
     
     $result->close();
     $mysqli->close();

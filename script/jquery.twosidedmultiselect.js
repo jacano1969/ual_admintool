@@ -103,9 +103,17 @@
 			$This.attr("id", modifiedName).attr("name", modifiedName);
 			
 			// Create our element to hold the selections and the buttons for moving elements
-			var htmlBlock = "<div class=\"" + nameModifier + "options\">" +
+			/*var htmlBlock = "<div class=\"" + nameModifier + "options\">" +
 			"<p>&nbsp;</p><p class=\"AddOne\" rel=\"" + newName + "\" title=\"Add Selected\">Add &rsaquo;</p>" +
 			"<p>&nbsp;</p><p class=\"AddAll\" rel=\"" + newName + "\" title=\"Add All\">Add all &raquo;</p>" +
+			"<p>&nbsp;</p><p class=\"RemoveOne\" rel=\"" + newName + "\" title=\"Remove Selected\">&lsaquo; Remove</p>" +
+			"<p>&nbsp;</p><p class=\"RemoveAll\" rel=\"" + newName + "\" title=\"Remove All\">&laquo; Remove all</p>" +
+			"</div>" +
+			"<div class=\"" + nameModifier + "select\">" +
+			"<select name=\"" + originalName + arrayName + "\" id=\"" + newName + "\" size=\"" + size + "\"multiple=\"multiple\" size=\"8\" class=\"" + originalClass + "TakeOver\"></select>" +
+			"</div>";*/
+			var htmlBlock = "<div class=\"" + nameModifier + "options\">" +
+			"<p>&nbsp;</p><p class=\"AddOne\" rel=\"" + newName + "\" title=\"Add Selected\">Add &rsaquo;</p>" +
 			"<p>&nbsp;</p><p class=\"RemoveOne\" rel=\"" + newName + "\" title=\"Remove Selected\">&lsaquo; Remove</p>" +
 			"<p>&nbsp;</p><p class=\"RemoveAll\" rel=\"" + newName + "\" title=\"Remove All\">&laquo; Remove all</p>" +
 			"</div>" +
