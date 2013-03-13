@@ -205,10 +205,10 @@
                         $content .='</tr>';
                     }
                 }
-            }    
-        }   
-        
-        $result->close();
+                
+                $result->close();
+            }
+        }
         
         $content .='</tbody></table>';
         

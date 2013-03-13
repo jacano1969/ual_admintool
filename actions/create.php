@@ -134,7 +134,7 @@ if(!empty($record_data)) {
         $check_sql = $check_data . $check_table . $check_data_criteria;
         
         if(sql_record_exists($check_sql)==true) {
-            echo "Error:Duplicate";
+            echo "Error:Duplicate" .$check_sql;
             exit;
         }
         
@@ -151,7 +151,7 @@ if(!empty($record_data)) {
             }
         }
         
-        echo "ok";  // if we get to here, send back some data to show everything went as planned
+        echo $sql_full;//"ok";  // if we get to here, send back some data to show everything went as planned
     }    
 } else {
     return false;

@@ -1,5 +1,7 @@
 <?php
 
+    session_start();
+
     // get action_id
     $workflow_action_id=0;
     if(!empty($_GET['action_id'])) {
@@ -96,9 +98,57 @@
                 
                 $subject_result->close();
             }
-                    
-            // get the user to send the email to
-            $sql="SELECT EMAIL from users where RECORD_ID=(select requested_by from course_request where id=$id)";
+                     
+            // get the new course name
+            $sql="select fullname from course_request where id=$id";
+            
+            $requested_course = '';
+            
+            if ($result = $mysqli->query($sql)) {
+                while($row = $result->fetch_object()) {
+                    $requested_course=$row->fullname;
+                }
+                
+                $result->close();
+            } else{
+                $mysqli->close();
+                echo "error excecuting sql: $sql";
+            }
+            
+            // get the course id to ber updated
+            $sql="SELECT id from new_courses where AOS_DESCRIPTION='$requested_course'";
+            
+            $course_id = '';
+            
+            if ($result = $mysqli->query($sql)) {
+                while($row = $result->fetch_object()) {
+                    $course_id=$row->id;
+                }
+                
+                $result->close();
+            } else{
+                $mysqli->close();
+                echo "error excecuting sql: $sql";
+            }
+            
+            // get the username to enrol on course
+            $sql="SELECT requested_by from course_request where id=$id";
+            
+            $requesting_user = '';
+            
+            if ($result = $mysqli->query($sql)) {
+                while($row = $result->fetch_object()) {
+                    $requesting_user=$row->requested_by;
+                }
+                
+                $result->close();
+            } else{
+                $mysqli->close();
+                echo "error excecuting sql: $sql";
+            }
+            
+            // get email address for requesting user
+            $sql="SELECT EMAIL from users where USERNAME='$requesting_user'";
     
             if ($result = $mysqli->query($sql)) {
                 while($row = $result->fetch_object()) {
@@ -108,7 +158,23 @@
                 $result->close();
             } else{
                 $mysqli->close();
-                echo "error excecuting sql 3";
+                echo "error excecuting sql: $sql";
+            }
+            
+            // check if requesting user is a new user
+            if($mailto=='') {
+                $sql="SELECT EMAIL from new_users where USERNAME='$requesting_user'";
+    
+                if ($result = $mysqli->query($sql)) {
+                    while($row = $result->fetch_object()) {
+                        $mailto=$row->EMAIL;
+                    }
+                    
+                    $result->close();
+                } else{
+                    $mysqli->close();
+                    echo "error excecuting sql: $sql";
+                }   
             }
             
             // check if an email is to be sent        
@@ -128,13 +194,23 @@
                     $message=str_ireplace('$EMAIL',$_SESSION['EMAIL'],$message);
                     $message=str_ireplace('$MOBILEPHONE',$_SESSION['MOBILEPHONE'],$message);
                     
-                    mail($mailto, $subject, $message, $headers);
+                    // if debugging
+                    if(!empty($CFG->debug) && $CFG->debug==true) {
+                        // print out mail instead of sending
+                        //echo "Headers: $headers \nMailto: $mailto \nMessage: $message";
+                    } else {
+                        mail($mailto, $subject, $message, $headers);
+                    }
+                    
                 }
             }
             
             $mysqli->close();
             
-            echo "This record has been approved.";
+            // construct JSON string
+            $json_data= '{ "username" : "'.$requesting_user.'", "course_id" : '.$course_id.', "message" : "This course has been approved."}';
+            
+            echo $json_data;
             
         }        
     } else {

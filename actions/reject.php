@@ -1,5 +1,7 @@
 <?php
 
+    //session_start();
+
     // get action_id
     // $workflow_action_id='';
     // if(!empty($_POST['action_id'])) {

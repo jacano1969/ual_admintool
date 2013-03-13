@@ -809,7 +809,7 @@ var ual_admintool = ual_admintool || (function(){
 				var workflow_action_id = $('#action_id').val();
 				var selectedRow=$(this).closest('tr');
 				
-				if (thisId.match(/approved.*/)) {
+				if (thisId.match(/Approve.*/)) {
 					if(confirm("Are you sure you want to approve this item?")==true) {
 						
 						// approve record
@@ -818,10 +818,36 @@ var ual_admintool = ual_admintool || (function(){
 							// show that ercord has been approved
 							if(data && data!=false) {    
 							
-							    alert(data);
-							
-								// remove approved item from grid
+							    // remove approved item from grid
 								selectedRow.css('display','none');
+							    
+								// get approval data
+								var approval_data = jQuery.parseJSON(data);
+								
+								// check we have approval data
+								if(typeof(approval_data.username)!='undefined') {
+									
+									// get new course name and user requesting
+									var requesting_user = approval_data.username;
+									var new_course_id = approval_data.course_id;
+									var message = approval_data.message;
+									
+									alert(approval_data.message);
+									
+									// new course details must be filled out and the requesting user enrolled on the new course
+									$.get("actions/newsite.php?requesting_user="+requesting_user+"&new_course_id="+new_course_id, function(data) {
+									    
+										if(data && data!=false) {
+										    $('#hiddenlightbox').hide();
+									        $('#hiddenlightbox').html(data);
+								            $('#hiddenlightbox').show();
+										}
+								    });
+									
+								} else {								
+								    // an error occurred
+								    alert(data);
+								}								
 							}
 							
 						});
@@ -832,7 +858,7 @@ var ual_admintool = ual_admintool || (function(){
 					}
 				}
 				
-				if (thisId.match(/rejected.*/)) {
+				if (thisId.match(/Reject.*/)) {
 					if(confirm("Are you sure you want to reject this item?")==true) {
 						
 						// TODO:

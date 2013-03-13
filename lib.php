@@ -24,13 +24,12 @@ function do_login($username, $password) {
     $mysqli->set_charset("utf8");
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT id, role, username FROM staff_login where username='$username' AND password='$password'")) {
+    if ($result = $mysqli->query("SELECT role, username FROM staff_login where username='$username' AND password='$password'")) {
         if($result->num_rows==0) {
             $is_user=false;
         } else {
             
             while ($row = $result->fetch_object()) {
-                $_SESSION['USERID']=$row->id;
                 $_SESSION['ROLE']=$row->role;
                 $_SESSION['USERNAME']=$row->username;
             }
@@ -39,22 +38,23 @@ function do_login($username, $password) {
         }
         
         // get other user details
-        if ($result2 = $mysqli->query("SELECT firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
-            if($result2->num_rows==0) {
-                
-            } else {
+        if ($result2 = $mysqli->query("SELECT record_id,firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
             
-                while ($row2 = $result2->fetch_object()) {
-                    $_SESSION['FIRSTNAME']=$row2->firstname;
-                    $_SESSION['LASTNAME']=$row2->lastname;
-                    $_SESSION['EMAIL']=$row2->email;
-                    if($row2->mobile_phone!='') {
-                        $_SESSION['MOBILEPHONE']=$row2->mobile_phone;                        
-                    } else {
-                        $_SESSION['MOBILEPHONE']='Not given';                    
-                    }
-                    
-                }
+            // check new users
+            if($result2->num_rows==0) {
+                $result2 = $mysqli->query("SELECT record_id,firstname,lastname,email,mobile_phone FROM new_users where username='$username'");
+            }
+                        
+            while ($row2 = $result2->fetch_object()) {
+                $_SESSION['USERID']=$row2->record_id;
+                $_SESSION['FIRSTNAME']=$row2->firstname;
+                $_SESSION['LASTNAME']=$row2->lastname;
+                $_SESSION['EMAIL']=$row2->email;
+                if($row2->mobile_phone!='') {
+                    $_SESSION['MOBILEPHONE']=$row2->mobile_phone;                        
+                } else {
+                    $_SESSION['MOBILEPHONE']='Not given';                    
+                }        
             }
         }
         
@@ -101,13 +101,12 @@ function do_moodle_login($username) {
     $mysqli->set_charset("utf8");
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT id, role, username FROM staff_login where username='$username'")) {
+    if ($result = $mysqli->query("SELECT role, username FROM staff_login where username='$username'")) {
         if($result->num_rows==0) {
             $is_user=false;
         } else {
             
             while ($row = $result->fetch_object()) {
-                $_SESSION['USERID']=$row->id;
                 $_SESSION['ROLE']=$row->role;
                 $_SESSION['USERNAME']=$row->username;
             }
@@ -116,17 +115,19 @@ function do_moodle_login($username) {
         }
         
         // get other user details
-        if ($result2 = $mysqli->query("SELECT firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
-            if($result2->num_rows==0) {
-                
-            } else {
+        if ($result2 = $mysqli->query("SELECT record_id,firstname,lastname,email,mobile_phone FROM USERS where username='$username'")) {
             
-                while ($row2 = $result2->fetch_object()) {
-                    $_SESSION['FIRSTNAME']=$row2->firstname;
-                    $_SESSION['LASTNAME']=$row2->lastname;
-                    $_SESSION['EMAIL']=$row2->email;
-                    $_SESSION['MOBILEPHONE']=$row2->mobile_phone;                    
-                }
+            // check new users
+            if($result2->num_rows==0) {
+                $result2 = $mysqli->query("SELECT record_id,firstname,lastname,email,mobile_phone FROM new_users where username='$username'");
+            }
+            
+            while ($row2 = $result2->fetch_object()) {
+                $_SESSION['USERID']=$row2->record_id;
+                $_SESSION['FIRSTNAME']=$row2->firstname;
+                $_SESSION['LASTNAME']=$row2->lastname;
+                $_SESSION['EMAIL']=$row2->email;
+                $_SESSION['MOBILEPHONE']=$row2->mobile_phone;                    
             }
         }
         
@@ -223,7 +224,11 @@ function process_record($record_data, $action_desc) {
             foreach($add_data as $data) {
                 
                 $workflow_data_item_id = $data['id'];
-                $new_data = str_replace("'","''",$data['data']);  // escape quotes
+                $new_data = '';
+                
+                if(isset($data['data'])) {
+                    $new_data = str_replace("'","''",$data['data']);  // escape quotes
+                }
                 
                 // check if we have a mailto
                 if(isset($data['mailto'])) {
@@ -360,7 +365,13 @@ function process_record($record_data, $action_desc) {
                     $message=str_ireplace('$EMAIL',$_SESSION['EMAIL'],$message);
                     $message=str_ireplace('$MOBILEPHONE',$_SESSION['MOBILEPHONE'],$message);
                     
-                    mail($mailto, $subject, $message, $headers);
+                    // if debugging
+                    if(!empty($CFG->debug) && $CFG->debug==true) {
+                        // print out mail instead of sending
+                        echo "Headers: $headers \nMailto: $mailto \nMessage: $message";
+                    } else {
+                        mail($mailto, $subject, $message, $headers);
+                    }
                 }
             }
             
@@ -733,7 +744,7 @@ function sql_update($sql) {
     
     $mysqli->set_charset("utf8");
     
-    if($result = $mysqli->query($sql_update)){
+    if($result = $mysqli->query($sql)){
         $mysqli->close();
         return true;
     } else {
@@ -1480,7 +1491,8 @@ function get_workflows($step_id=false) {
                 // TODO: these need to be created as workflows - currently hard-coded (for worflow creation testing)
                 if($workflow_row->name=="Enrollments") {
                     $workflow .= '<option id="1000" help="Enrolments for the logged in user">My Enrolments</option>';
-                    $workflow .= '<option id="1001" help="Courses that the logged in user is not enrolled on">My Possible Enrolments</option>';
+                    // not required
+                    //$workflow .= '<option id="1001" help="Courses that the logged in user is not enrolled on">My Possible Enrolments</option>';
                     $workflow .= '</optgroup>';
                 }
             }
