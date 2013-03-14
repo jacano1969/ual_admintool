@@ -279,7 +279,7 @@ function process_record($record_data, $action_desc) {
                     $errors=do_workflow_data_checks($workflow_data_item_id, $new_data);
                     
                     // failed workflow data checks
-                    if($errors!='') {
+                    if(!empty($errors)) {
                         foreach($errors as $error) {
                             echo $error;
                         }

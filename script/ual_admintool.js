@@ -403,6 +403,8 @@ var ual_admintool = ual_admintool || (function(){
 								    alert(action_desc+":\n\nError: Record already exists.");		
 								} else {
 								    alert(action_desc+":\n\nNew record created successfully.");
+									// remove approved item from grid
+								    selectedRow.css('display','none');
 								}
 								
                                 // TODO: 
