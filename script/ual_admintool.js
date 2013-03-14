@@ -838,9 +838,9 @@ var ual_admintool = ual_admintool || (function(){
 									$.get("actions/newsite.php?requesting_user="+requesting_user+"&new_course_id="+new_course_id, function(data) {
 									    
 										if(data && data!=false) {
-										    $('#hiddenlightbox').hide();
-									        $('#hiddenlightbox').html(data);
-								            $('#hiddenlightbox').show();
+										    $('div.container').hide();
+                                            $('div.container').html(data);
+                                            $('div.container').show();
 										}
 								    });
 									
@@ -873,6 +873,49 @@ var ual_admintool = ual_admintool || (function(){
 				}
 			});
 			
+			// new course creation
+			$('#addsite').live("click", function() {
+				$("#newsite").validate({
+                    submitHandler: function(form) {
+				        var id = $('#id').val();
+						var requesting_user = $('#requesting_user').val();
+						var courseid = $('#courseid').val();
+						var aos_code= $('#aos_code').val();
+                        var aos_period = $('#aos_period').val();
+                        var acad_period = $('#acad_period').val();
+                        var college = $('#college').val();
+                        var aos_description = $('#aos_description').val();
+                        var full_description = $('#full_description').val();
+                        var school = $('#school').val();
+                        var aos_type = $('#aos_type').val();
+						
+						var jsonString = '{ "id" : ' + id +
+						                 ',"requesting_user" : "' + requesting_user + '"' +
+										 ',"courseid" : "' + courseid + '"' +
+										 ',"aos_code" : "' + aos_code + '"' +
+										 ',"aos_period" : "' + aos_period + '"' +
+										 ',"acad_period" : "' + acad_period + '"' +
+										 ',"college" : "' + college + '"' +
+										 ',"aos_description" : "' + aos_description + '"' +
+										 ',"full_description" : "' + full_description + '"' +
+										 ',"school" : "' + school + '"' +
+										 ',"aos_type" : "' + aos_type + '"' +
+						                 ' }';
+					    
+						// update new course and enrol user as course leader
+						$.get("actions/createsite.php?site_data="+jsonString, function(data) {
+							
+							if(data && data!=false) {
+								
+								alert(data);
+								
+								// show the home screen
+                                window.location.href='index.php';
+							}
+						});
+					}
+				});
+			});
 			
             // reset button clicked
             $('#resetform').live("click", function() {
