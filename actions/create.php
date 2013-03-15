@@ -134,7 +134,7 @@ if(!empty($record_data)) {
         $check_sql = $check_data . $check_table . $check_data_criteria;
         
         if(sql_record_exists($check_sql)==true) {
-            echo "Error:Duplicate" .$check_sql;
+            echo "Error:Duplicate";
             exit;
         }
         
