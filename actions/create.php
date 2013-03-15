@@ -99,7 +99,7 @@ if(!empty($record_data)) {
                 // set check table name
                 $check_table=" from $table_name where ";
                 
-                if($new_data_type=="string") {
+                if($new_data_type=="string"  || $new_data_type=="data") {
                     // create field list
                     $create_data->sqla[$table_name] .= " $row_name";
                     
