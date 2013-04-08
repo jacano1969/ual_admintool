@@ -4,16 +4,14 @@
    
     require_once('lib.php');
     
-    // we're using a multi select list
-    //global $MULTI_SELECT_LIST;
-    
     global $CFG;
     
     $page ='';
     
-    //$MULTI_SELECT_LIST=true;
-    
     $page .= show_header();
+    
+    // TODO:
+    //$page .= show_group_page();
     
     // get all users
     $mysqli = new mysqli($CFG->db_host, $CFG->db_user, $CFG->db_pass, $CFG->db_name);
@@ -28,8 +26,10 @@
     
     $mysqli->set_charset("utf8");
     
-    $sql='select record_id as id, concat(username," - ",lastname, ", ",firstname, " (", COALESCE(role,"NO ROLE"),")") as value from USERS order by lastname ASC';
+    //$sql='select username as id, concat(username," - ",lastname, ", ",firstname, " (", COALESCE(role,"NO ROLE"),")") as value from USERS order by lastname ASC';
     
+    $sql="select USERNAME as id, concat(USERNAME,' - ',COALESCE(LASTNAME,''), ', ',COALESCE(FIRSTNAME,''), ' (', COALESCE(ROLE,'NO ROLE'),')') as value from USERS union select USERNAME as id, concat(USERNAME,' - ',COALESCE(LASTNAME,''), ', ', COALESCE(FIRSTNAME,''), ' (', COALESCE(ROLE,'NO ROLE'),')') as value from new_users order by value ASC";
+
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
             $result->close();
@@ -48,6 +48,7 @@
     
     $page .= multi_select_list("users", $result, 20);
     
+    $page .= '<input type="button" id="sort" name="sort" value="Sort">';
     //$page .= show_footer();
     
     $result->close();
