@@ -863,10 +863,33 @@ var ual_admintool = ual_admintool || (function(){
 				if (thisId.match(/Reject.*/)) {
 					if(confirm("Are you sure you want to reject this item?")==true) {
 						
-						// TODO:
-						//$.get('actions/reject.php', []) {
+						// reject record
+						$.get("actions/reject.php?id="+uniqueId+"&action_id="+workflow_action_id, function(data) {
 							
-						//});
+							// show that record has been rejected
+							if(data && data!=false) {    
+							
+							    // remove approved item from grid
+								selectedRow.css('display','none');
+							    
+								// get reject data
+								var reject_data = jQuery.parseJSON(data);
+								
+								// check we have reject data
+								if(typeof(reject_data.username)!='undefined') {
+									
+									// get rejected message and user requesting
+									var requesting_user = reject_data.username;
+									var message = reject_data.message;
+									
+									alert(reject_data.message);
+								} else {								
+								    // an error occurred
+								    alert(data);
+								}								
+							}
+							
+						});
 						
 					} else {
 						// uncheck
