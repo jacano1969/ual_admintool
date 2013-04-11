@@ -375,7 +375,7 @@ function process_record($record_data, $action_desc) {
                 }
             }
             
-            echo "ok";  // if we get to here, send back some data to show everything went as planned
+            echo $sql_full; //"ok";  // if we get to here, send back some data to show everything went as planned
             
         }
         
@@ -1182,7 +1182,7 @@ function multi_select_list($name, $select_data, $size) {
     
     $multi_select.='<small><b> Hold the Ctrl key (Command Key on Mac) to select multiple items in the list</b></small>';
     $multi_select.='<div id="multi_select">';
-    $multi_select.='<select size="'.$size.'" multiple="multiple" name="'.$name.'" id="'.$name.'" class="multiselect">';
+    $multi_select.='<label for="'.$name.'">Group members </label><select size="'.$size.'" multiple="multiple" name="'.$name.'" id="'.$name.'" class="multiselect">';
     
     while ($row = $select_data->fetch_object()) {
         $multi_select.='<option value="'.$row->id.'">'.$row->value.'</option>';

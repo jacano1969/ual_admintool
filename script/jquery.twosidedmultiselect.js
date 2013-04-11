@@ -113,9 +113,9 @@
 			"<select name=\"" + originalName + arrayName + "\" id=\"" + newName + "\" size=\"" + size + "\"multiple=\"multiple\" size=\"8\" class=\"" + originalClass + "TakeOver\"></select>" +
 			"</div>";*/
 			var htmlBlock = "<div class=\"" + nameModifier + "options\">" +
-			"<p>&nbsp;</p><p class=\"AddOne\" rel=\"" + newName + "\" title=\"Add Selected\">Add &rsaquo;</p>" +
-			"<p>&nbsp;</p><p class=\"RemoveOne\" rel=\"" + newName + "\" title=\"Remove Selected\">&lsaquo; Remove</p>" +
-			"<p>&nbsp;</p><p class=\"RemoveAll\" rel=\"" + newName + "\" title=\"Remove All\">&laquo; Remove all</p>" +
+			"<br><p class=\"AddOne\" rel=\"" + newName + "\" title=\"Add Selected\">Add &rsaquo;</p>" +
+			"<br><p class=\"RemoveOne\" rel=\"" + newName + "\" title=\"Remove Selected\">&lsaquo; Remove</p>" +
+			"<br></p><p class=\"RemoveAll\" rel=\"" + newName + "\" title=\"Remove All\">&laquo; Remove all</p>" +
 			"</div>" +
 			"<div class=\"" + nameModifier + "select\">" +
 			"<select name=\"" + originalName + arrayName + "\" id=\"" + newName + "\" size=\"" + size + "\"multiple=\"multiple\" size=\"8\" class=\"" + originalClass + "TakeOver\"></select>" +
