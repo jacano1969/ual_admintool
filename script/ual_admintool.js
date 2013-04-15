@@ -485,6 +485,12 @@ var ual_admintool = ual_admintool || (function(){
 					$('#helptext').html(selected_workflow_help);
 					$('#helpbox').fadeIn('slow');
 	
+	                // groups
+					if(selected_workflow_step=="999") {
+						$('#hiddenlightbox').html('<h1>Loading, please wait ...</h1>');
+						location.href="addtogroup.php";
+					}
+					
 					// user enrolments				
 					if(selected_workflow_step=="1000") {
 						$('#hiddenlightbox').html('<h1>Loading, please wait ...</h1>');

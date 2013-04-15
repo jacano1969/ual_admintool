@@ -115,7 +115,7 @@
 			var htmlBlock = "<div class=\"" + nameModifier + "options\">" +
 			"<br><p class=\"AddOne\" rel=\"" + newName + "\" title=\"Add Selected\">Add &rsaquo;</p>" +
 			"<br><p class=\"RemoveOne\" rel=\"" + newName + "\" title=\"Remove Selected\">&lsaquo; Remove</p>" +
-			"<br></p><p class=\"RemoveAll\" rel=\"" + newName + "\" title=\"Remove All\">&laquo; Remove all</p>" +
+			/*"<br></p><p class=\"RemoveAll\" rel=\"" + newName + "\" title=\"Remove All\">&laquo; Remove all</p>" +*/
 			"</div>" +
 			"<div class=\"" + nameModifier + "select\">" +
 			"<select name=\"" + originalName + arrayName + "\" id=\"" + newName + "\" size=\"" + size + "\"multiple=\"multiple\" size=\"8\" class=\"" + originalClass + "TakeOver\"></select>" +
