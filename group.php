@@ -39,13 +39,6 @@
             $result->close();
             header('Location: login.php?error=4');
             exit;
-        } else {
-            //while ($row = $result->fetch_object()) {
-            //    $results->id[]=$row->record_id;
-            //    $results->value[]=$row->username;
-            //}
-            
-            //$result->close();
         }
     }
      

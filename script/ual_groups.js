@@ -8,9 +8,10 @@ var ual_groups = ual_groups || (function(){
         $('#group').live("change", function() {
            
             var groupId = $(this).children(":selected").attr("id");
-           
+            
+			$('#groupmembers').hide();
+			
             if(groupId!=0) {
-                $('#groupmembers').show();
                 $('#loading').html('<h1>Loading, please wait ...</h1>');
                
                 // load group members

@@ -69,7 +69,7 @@
                 }
             }
             
-            $page .='</select><br>';
+            $page .='</select><br><br>';
             
             $result->close();
         }
