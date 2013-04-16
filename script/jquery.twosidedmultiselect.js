@@ -132,10 +132,62 @@
 			//AddDoubleClickEvents(originalName);
 	
 			$("." + nameModifier + "options .AddOne").click(function() {
+				
 				var targetName = $(this).attr("rel");
+				
+				// get group to add to 
+				var groupId = $('#group').children(":selected").attr("id");
+				
+				$("#" + targetName + nameModifier + " option:selected").each(function() {
+				    
+					// get user to add
+					var username = $(this).val();
+					
+					// add user to current group
+				    $.get('groupmembers.php?action=add&groupId='+groupId + '&username='+username, function(usernames){
+					
+				    });
+					
+				});
+				
+				// get user to add
+			    //var username = $("#" + targetName + nameModifier + " option:selected").val();
+				
 				$("#" + targetName + nameModifier + " option:selected").remove().appendTo("#" + targetName);
 				//OrderMyList();
+				
+			    //alert('group: ' + groupId + ' username: ' +username);
 				return false;
+			
+			});
+			
+			$("." + nameModifier + "options .RemoveOne").click(function() {
+				
+				var targetName = $(this).attr("rel");
+				
+				// get group to remove from 
+				var groupId = $('#group').children(":selected").attr("id");
+				
+				$("#" + targetName + " option:selected").each(function() {
+				    
+					// get user to remove
+			        var username = $(this).val();
+					
+					// remove user from current group				
+					$.get('groupmembers.php?action=remove&groupId='+groupId + '&username='+username, function(usernames){
+						
+					});
+					
+				});
+				
+				// get user to remove
+			    //var username = $("#" + targetName + " option:selected").val();				
+    			$("#" + targetName + " option:selected").remove().appendTo("#" + targetName + nameModifier);
+				//OrderMyList();
+
+				//alert('group: ' + groupId + ' username: ' +username);
+				return false;
+			
 			});
 			
 			$("." + nameModifier + "options .AddAll").click(function() {
@@ -145,12 +197,6 @@
 				return false;
 			});
 			
-			$("." + nameModifier + "options .RemoveOne").click(function() {
-				var targetName = $(this).attr("rel");
-				$("#" + targetName + " option:selected").remove().appendTo("#" + targetName + nameModifier);
-				//OrderMyList();
-				return false;
-			});
 			
 			$("." + nameModifier + "options .RemoveAll").click(function() {
 				var targetName = $(this).attr("rel");

@@ -82,7 +82,9 @@
         }
     }
     
+    $page .='<div id="loading"> </div>';
     $page .='<div id="groupmembers">';
+    
     
     //  TODO: make ajax request for group members!
     if($selected_group==0) {

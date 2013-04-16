@@ -16,7 +16,7 @@ var ual_groups = ual_groups || (function(){
                 
                 $('#groupmembers').show();
                 
-                $('#groupmembers').html('<h1>Loading, please wait ...</h1>');
+                $('#loading').html('<h1>Loading, please wait ...</h1>');
                
                 // load group members
                 $.get('group.php?groupId='+groupId, function(data){
@@ -33,29 +33,31 @@ var ual_groups = ual_groups || (function(){
                         //      - if($.inArray($(this).val(),usernames)!=-1) {
                         // but this is slower
                         
-                        // loop through members of this group
-                        $.each(usernames, function(index, row) {
-                                
-                            // check through list of users to add
-                            $('#userstsms').children().each(function() {
-                                     
-                                // is this user a group member?
-                                if($(this).val()==row) {
-                                    
-                                    // add user to group members
-                                    $(this).remove().appendTo('#users');
-                                    
-                                    // break out - no need to keep searching this time
-                                    return;
-                                }
-                                
-                            });
-                            
-                        });
-                        
+						if(usernames) {
+							// loop through members of this group
+							$.each(usernames, function(index, row) {
+									
+								// check through list of users to add
+								$('#userstsms').children().each(function() {
+										 
+									// is this user a group member?
+									if($(this).val()==row) {
+										
+										// add user to group members
+										$(this).remove().appendTo('#users');
+										
+										// break out - no need to keep searching this time
+										return;
+									}
+									
+								});
+								
+							});
+						}
+						
                         
                         $('#groupmembers').show();
-                        
+                        $('#loading').html('');
                     }, "json");
                     
                 });
@@ -65,8 +67,8 @@ var ual_groups = ual_groups || (function(){
             }
             
         });
-        
-        
+		
+		
         // cancel button clicked
         $('#cancel').live("click", function() {
                 
