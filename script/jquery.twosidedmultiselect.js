@@ -7,7 +7,7 @@
     // Contributions by: 
     //     Mat Schaffer (http://matschaffer.com/)
     //     Eric Van Bocxlaer
-
+	//  modified by djsomers
 	var selectIds = new Array();
 	var nameModifier = "tsms";
 	var orderTimer;
@@ -18,14 +18,12 @@
 		$("#" + targetName).live("dblclick", function() {
 			$(this).children(":selected").remove().appendTo("#" + targetName + nameModifier);
 			$("#" + targetName + nameModifier + " options").removeAttr("selected");
-			//OrderMyList();
 			return false;
 		});
 
 		$("#" + targetName + nameModifier).live("dblclick", function() {
 			$(this).children(":selected").remove().appendTo("#" + targetName);
 			$("#" + targetName + nameModifier + " options").removeAttr("selected");
-			//OrderMyList();
 			return false;
 		});
 	};
@@ -103,19 +101,9 @@
 			$This.attr("id", modifiedName).attr("name", modifiedName);
 			
 			// Create our element to hold the selections and the buttons for moving elements
-			/*var htmlBlock = "<div class=\"" + nameModifier + "options\">" +
-			"<p>&nbsp;</p><p class=\"AddOne\" rel=\"" + newName + "\" title=\"Add Selected\">Add &rsaquo;</p>" +
-			"<p>&nbsp;</p><p class=\"AddAll\" rel=\"" + newName + "\" title=\"Add All\">Add all &raquo;</p>" +
-			"<p>&nbsp;</p><p class=\"RemoveOne\" rel=\"" + newName + "\" title=\"Remove Selected\">&lsaquo; Remove</p>" +
-			"<p>&nbsp;</p><p class=\"RemoveAll\" rel=\"" + newName + "\" title=\"Remove All\">&laquo; Remove all</p>" +
-			"</div>" +
-			"<div class=\"" + nameModifier + "select\">" +
-			"<select name=\"" + originalName + arrayName + "\" id=\"" + newName + "\" size=\"" + size + "\"multiple=\"multiple\" size=\"8\" class=\"" + originalClass + "TakeOver\"></select>" +
-			"</div>";*/
 			var htmlBlock = "<div class=\"" + nameModifier + "options\">" +
 			"<br><p class=\"AddOne\" rel=\"" + newName + "\" title=\"Add Selected\">Add &rsaquo;</p>" +
 			"<br><p class=\"RemoveOne\" rel=\"" + newName + "\" title=\"Remove Selected\">&lsaquo; Remove</p>" +
-			/*"<br></p><p class=\"RemoveAll\" rel=\"" + newName + "\" title=\"Remove All\">&laquo; Remove all</p>" +*/
 			"</div>" +
 			"<div class=\"" + nameModifier + "select\">" +
 			"<select name=\"" + originalName + arrayName + "\" id=\"" + newName + "\" size=\"" + size + "\"multiple=\"multiple\" size=\"8\" class=\"" + originalClass + "TakeOver\"></select>" +
@@ -128,11 +116,7 @@
 			$("#" + modifiedName + " option:selected").remove().appendTo("#" + newName);
 			
 			// Events
-			
-			//AddDoubleClickEvents(originalName);
-	
-			$("." + nameModifier + "options .AddOne").click(function() {
-				
+     	    $("." + nameModifier + "options .AddOne").click(function() {
 				var targetName = $(this).attr("rel");
 				
 				// get group to add to 
@@ -150,19 +134,12 @@
 					
 				});
 				
-				// get user to add
-			    //var username = $("#" + targetName + nameModifier + " option:selected").val();
-				
+				// move user
 				$("#" + targetName + nameModifier + " option:selected").remove().appendTo("#" + targetName);
-				//OrderMyList();
-				
-			    //alert('group: ' + groupId + ' username: ' +username);
 				return false;
-			
 			});
 			
 			$("." + nameModifier + "options .RemoveOne").click(function() {
-				
 				var targetName = $(this).attr("rel");
 				
 				// get group to remove from 
@@ -177,23 +154,16 @@
 					$.get('groupmembers.php?action=remove&groupId='+groupId + '&username='+username, function(usernames){
 						
 					});
-					
 				});
 				
-				// get user to remove
-			    //var username = $("#" + targetName + " option:selected").val();				
+				// move user
     			$("#" + targetName + " option:selected").remove().appendTo("#" + targetName + nameModifier);
-				//OrderMyList();
-
-				//alert('group: ' + groupId + ' username: ' +username);
 				return false;
-			
 			});
 			
 			$("." + nameModifier + "options .AddAll").click(function() {
 				var targetName = $(this).attr("rel");
 				$("#" + targetName + nameModifier + " option").remove().appendTo("#" + targetName);
-				//OrderMyList();
 				return false;
 			});
 			
@@ -201,7 +171,6 @@
 			$("." + nameModifier + "options .RemoveAll").click(function() {
 				var targetName = $(this).attr("rel");
 				$("#" + targetName + " option").remove().appendTo("#" + targetName + nameModifier);
-				//OrderMyList();
 				return false;
 			});
 		});

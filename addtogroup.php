@@ -22,9 +22,6 @@
     $page .= '<link href="css/multi_select_list.css" type="text/css" rel="stylesheet">';
     $page .= '<script src="script/jquery.twosidedmultiselect.js"></script>';
     $page .= '<script src="script/ual_groups.js" type="text/javascript"></script>';
-    
-    // TODO: individual jquery file for this page
-    
     $page .= '</head>';
     
     $page .= '<body id="home-page">';
@@ -51,13 +48,9 @@
     
     if ($result = $mysqli->query($sql)) {
         if($result->num_rows==0) {
-            
-            // TODO:
             // no groups - need to add a group first
-            
+            $page .='No groups have been created yet.';
             $result->close();
-            header('Location: login.php?error=4');
-            exit;
         } else {
             
             $page .='<label for="group">Select group </label><select class="required" id="group" name="group">';
@@ -85,12 +78,10 @@
     $page .='<div id="loading"> </div>';
     $page .='<div id="groupmembers">';
     
-    
-    //  TODO: make ajax request for group members!
     if($selected_group==0) {
         
     } else {
-        // get users in/out of group
+        // get users in and out of selected group
         $mysqli->set_charset("utf8");
         
         $sql="select USERNAME as id, concat(USERNAME,' - ',COALESCE(LASTNAME,''), ', ',COALESCE(FIRSTNAME,''), ' (', COALESCE(ROLE,'NO ROLE'),')') as value from USERS union select USERNAME as id, concat(USERNAME,' - ',COALESCE(LASTNAME,''), ', ', COALESCE(FIRSTNAME,''), ' (', COALESCE(ROLE,'NO ROLE'),')') as value from new_users order by value ASC";
@@ -100,13 +91,6 @@
                 $result->close();
                 header('Location: login.php?error=4');
                 exit;
-            } else {
-                //while ($row = $result->fetch_object()) {
-                //    $results->id[]=$row->record_id;
-                //    $results->value[]=$row->username;
-                //}
-                
-                //$result->close();
             }
         }
          
@@ -120,7 +104,6 @@
     $page .= '<input type="submit" class="submit" name="cancel" id="cancel" value="Back">';
     $page .= '</fieldset>';
     $page .= '</div>';
-    //$page .= show_footer();
     
     $mysqli->close();
     
