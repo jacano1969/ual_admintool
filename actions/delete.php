@@ -64,8 +64,8 @@
             
             // todo: possibly change this programatically !!!!
             // check id column for delete
-            if($table_col->name=='id' || $table_col->name=='RECORD_ID') {
-                $id_col =$table_col->name;                            
+            if($table_col->name=='id' || $table_col->name=='RECORD_ID' || $table_col->name=='group_id') {
+                $id_col=$table_col->name;                            
             }
         }
         
@@ -89,7 +89,7 @@
         $mysqli->close();
         
         if(log_user_action($_SESSION['USERNAME'],$_SESSION['USERID'],"Delete Record","Delete Record",$delete_sql)) {   
-            echo "The record $id has been deleted.";
+            echo "The record has been deleted.";
         }
     } else {
         $mysqli->close();
