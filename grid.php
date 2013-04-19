@@ -89,7 +89,7 @@
                    "e.record_id, e.enrolmentid, e.staffid, e.stageid, " .
                    "c.courseid, c.aos_code, c.aos_period, c.acad_period, c.college, c.aos_description," .
                    "c.full_description, c.school,c.aos_type " .
-                   "from STAFF_ENROLMENTS e " .
+                   "from staff_enrolments e " .
                    "inner join COURSES c on c.courseid = e.courseid " .
                    "where e.staffid = '$loggedin_username'";
                    
@@ -103,7 +103,7 @@
                    "c.courseid, c.aos_code, c.aos_period, c.acad_period, " .
                    "c.college, c.aos_description, c.full_description, c.school, c.aos_type " .
                    "FROM COURSES c " .
-                   "WHERE c.courseid NOT IN (SELECT e.courseid FROM STAFF_ENROLMENTS e " .
+                   "WHERE c.courseid NOT IN (SELECT e.courseid FROM staff_enrolments e " .
                    "WHERE e.staffid = '$loggedin_username')";
         }
         
