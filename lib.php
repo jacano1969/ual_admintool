@@ -1488,10 +1488,10 @@ function get_workflows($step_id=false) {
                     $workflow_step_result->close();
                 }
                 
-                if($workflow_row->name=="Groups") {
+                /*if($workflow_row->name=="Groups") {
                     $workflow .= '<option id="999" help="Add or remove members from groups">Manage group members</option>';
                     $workflow .= '</optgroup>';
-                }
+                }*/
                                 
                 // TODO: these need to be created as workflows - currently hard-coded (for worflow creation testing)
                 if($workflow_row->name=="Enrollments") {
