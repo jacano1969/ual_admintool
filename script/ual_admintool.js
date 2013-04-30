@@ -739,7 +739,9 @@ var ual_admintool = ual_admintool || (function(){
 						
 						// for text area data
                         $("#action textarea").each(function(){
-                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + $(this).val() +'"},';
+							var text = $(this).val();
+							text = text.replace(/\n\r?/g, '<br>');
+                            jsonString += '{ "id": ' + $(this).attr("data") + ',"data": "' + text +'"},';
                         });
                         
                         // for dropdown selects

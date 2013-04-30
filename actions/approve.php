@@ -194,12 +194,15 @@
                     $message=str_ireplace('$EMAIL',$_SESSION['EMAIL'],$message);
                     $message=str_ireplace('$MOBILEPHONE',$_SESSION['MOBILEPHONE'],$message);
                     
+                    $breaks = array("<br />","<br>","<br/>");  
+                    $message_ready = str_ireplace($breaks, "\r\n", $message);
+                    
                     // if debugging
                     if(!empty($CFG->debug) && $CFG->debug==true) {
                         // print out mail instead of sending
                         //echo "Headers: $headers \nMailto: $mailto \nMessage: $message";
                     } else {
-                        mail($mailto, $subject, $message, $headers);
+                        mail($mailto, $subject, $message_ready, $headers);
                     }
                     
                 }

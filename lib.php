@@ -365,12 +365,15 @@ function process_record($record_data, $action_desc) {
                     $message=str_ireplace('$EMAIL',$_SESSION['EMAIL'],$message);
                     $message=str_ireplace('$MOBILEPHONE',$_SESSION['MOBILEPHONE'],$message);
                     
+                    $breaks = array("<br />","<br>","<br/>");  
+                    $message_ready = str_ireplace($breaks, "\r\n", $message);
+                    
                     // if debugging
                     if(!empty($CFG->debug) && $CFG->debug==true) {
                         // print out mail instead of sending
                         echo "Headers: $headers \nMailto: $mailto \nMessage: $message";
                     } else {
-                        mail($mailto, $subject, $message, $headers);
+                        mail($mailto, $subject, $message_ready, $headers);
                     }
                 }
             }
@@ -1817,7 +1820,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         // get records
                         if ($data_result = $mysqli->query($sql)) {
                             while($data_row = $data_result->fetch_object()) {
-                                $workflow_form .= $data_row->name;
+                                $breaks = array("<br />","<br>","<br/>");  
+                                $text = str_ireplace($breaks, "\r\n", $data_row->name);
+                                $workflow_form .= $text;
                             }
                             
                             $data_result->close();
@@ -1864,7 +1869,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         // get records
                         if ($data_result = $mysqli->query($sql)) {
                             while($data_row = $data_result->fetch_object()) {
-                                $workflow_form .= $data_row->name;
+                                $breaks = array("<br />","<br>","<br/>");  
+                                $text = str_ireplace($breaks, "\r\n", $data_row->name);
+                                $workflow_form .= $text;
                             }
                             
                             $data_result->close();
