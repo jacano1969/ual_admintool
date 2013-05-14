@@ -43,7 +43,7 @@
         $result->close();
     } else{
         $mysqli->close();
-        echo "error excecuting sql 1";
+        echo "error excecuting sql: $sql";
     }
         
     // get workflow data
@@ -58,7 +58,7 @@
         $result2->close();
     } else{
         $mysqli->close();
-        echo "error excecuting sql 2";
+        echo "error excecuting sql: $sql";
     }
     
     if(sql_update("update $table_name set approved=1 where id=$id")==true){
@@ -115,8 +115,8 @@
                 echo "error excecuting sql: $sql";
             }
             
-            // get the course id to ber updated
-            $sql="SELECT id from new_courses where AOS_DESCRIPTION='$requested_course'";
+            // get the course id to be updated
+            $sql="SELECT id from new_courses where AOS_DESCRIPTION='".str_replace("'","''",$requested_course)."'";
             
             $course_id = '';
             
@@ -148,7 +148,7 @@
             }
             
             // get email address for requesting user
-            $sql="SELECT EMAIL from users where USERNAME='$requesting_user'";
+            $sql="SELECT EMAIL from USERS where USERNAME='$requesting_user'";
     
             if ($result = $mysqli->query($sql)) {
                 while($row = $result->fetch_object()) {

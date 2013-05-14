@@ -42,7 +42,7 @@
         $result->close();
     } else{
         $mysqli->close();
-        echo "error excecuting sql 1";
+        echo "error excecuting sql: $sql";
     }
         
     // get workflow data
@@ -57,7 +57,7 @@
         $result2->close();
     } else{
         $mysqli->close();
-        echo "error excecuting sql 2";
+        echo "error excecuting sql: $sql";
     }
     
     if(sql_update("update $table_name set rejected=1 where id=$id")==true){
@@ -112,7 +112,7 @@
         }
         
         // get email address for requesting user
-        $sql="SELECT EMAIL from users where USERNAME='$requesting_user'";
+        $sql="SELECT EMAIL from USERS where USERNAME='$requesting_user'";
 
         if ($result = $mysqli->query($sql)) {
             while($row = $result->fetch_object()) {

@@ -831,7 +831,7 @@ function get_logged_in_user($username) {
     $mysqli->set_charset("utf8");
     
     // check if user can log in
-    if ($result = $mysqli->query("SELECT firstname, lastname FROM users WHERE username='$username'")) {
+    if ($result = $mysqli->query("SELECT firstname, lastname FROM USERS WHERE username='$username'")) {
         if($result->num_rows==0) {
             return $logged_in_user;
         } else {

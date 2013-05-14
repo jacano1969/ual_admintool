@@ -29,16 +29,16 @@
     
     // process new site data
     $id = $new_site_data['id'];
-    $requesting_user = $new_site_data['requesting_user'];
-    $courseid = $new_site_data['courseid'];
-    $aos_code = $new_site_data['aos_code'];
-    $aos_period = $new_site_data['aos_period'];
-    $acad_period = $new_site_data['acad_period'];
-    $college = $new_site_data['college'];
-    $aos_description = $new_site_data['aos_description'];
-    $full_description = $new_site_data['full_description'];
-    $school = $new_site_data['school'];
-    $aos_type = $new_site_data['aos_type'];
+    $requesting_user = str_replace("'","''",$new_site_data['requesting_user']);
+    $courseid = str_replace("'","''",$new_site_data['courseid']);
+    $aos_code = str_replace("'","''",$new_site_data['aos_code']);
+    $aos_period = str_replace("'","''",$new_site_data['aos_period']);
+    $acad_period = str_replace("'","''",$new_site_data['acad_period']);
+    $college = str_replace("'","''",$new_site_data['college']);
+    $aos_description = str_replace("'","''",$new_site_data['aos_description']);
+    $full_description = str_replace("'","''",$new_site_data['full_description']);
+    $school = str_replace("'","''",$new_site_data['school']);
+    $aos_type = str_replace("'","''",$new_site_data['aos_type']);
     
     // update new course
     $sql="UPDATE new_courses SET COURSEID='$courseid '," .
@@ -57,8 +57,6 @@
     if (mysqli_connect_error()) {
         return false;
     }
-
-    //$sql_update = $mysqli->real_escape_string($sql);  // preserve line breaks
     
     $mysqli->set_charset("utf8");
     
@@ -70,8 +68,6 @@
         if (mysqli_connect_error()) {
             return false;
         }
-        
-        //$sql_insert = $mysqli->real_escape_string($sql);  // preserve line breaks
     
         $mysqli->set_charset("utf8");
         
@@ -80,11 +76,11 @@
             
             echo "New site created and requesting user enrolled as course leader.";
         } else {
-            echo "An error occured.";
+            echo "error excecuting sql: $sql";
             $mysqli->close();
         }
     } else {
-        echo "An error occured.";
+        echo "error excecuting sql: $sql";
         $mysqli->close();
     }
     
