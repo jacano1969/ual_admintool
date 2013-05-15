@@ -1,6 +1,6 @@
 // usage: log('inside coolFunc', this, arguments);
 // paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
-window.log = function() {
+/*window.log = function() {
 	log.history = log.history || [];
 	// store logs to an array for reference
 	log.history.push(arguments);
@@ -8,9 +8,9 @@ window.log = function() {
 		arguments.callee = arguments.callee.caller;
 		var newarr = [].slice.call(arguments); ( typeof console.log === 'object' ? log.apply.call(console.log, console, newarr) : console.log.apply(console, newarr));
 	}
-};
+};*/
 // make it safe to use console.log always
-(function(b) {
+/*(function(b) {
 	function c() {
 	}
 
@@ -24,7 +24,7 @@ window.log = function() {
 		return window.console = {};
 	}
 })());
-
+*/
 /*
  * Peach - Clean & Smooth Admin Template
  * by Stammi <http://themeforest.net/user/Stammi>
@@ -48,7 +48,7 @@ window.log = function() {
 /* ==================================================
  * 1) Menu by Simon Stamm
  * ================================================== */
-jQuery.fn.initMenu = function() {
+/*jQuery.fn.initMenu = function() {
 	return $(this).each(function() {
 		var $menu = $(this);
 		
@@ -92,7 +92,7 @@ jQuery.fn.initMenu = function() {
 			}
 		});
 	});
-};
+};*/
 /* ==================================================
  * 2) Alert Boxes by Simon Stamm
  * ================================================== */
@@ -100,7 +100,7 @@ jQuery.fn.initMenu = function() {
 /* ==================================================
  * 2a) Alert Boxes: Create
  * ================================================== */
-(function($) {
+/*(function($) {
 	$.fn.alertBox = function(message, options) {
 		var settings = $.extend({}, $.fn.alertBox.defaults, options);
 
@@ -132,11 +132,11 @@ jQuery.fn.initMenu = function() {
 		icon: false
 	};
 })(jQuery);
-
+*/
 /* ==================================================
  * 2b) Alert Boxes: Remove
  * ================================================== */
-
+/*
 (function($) {
 	$.fn.removeAlertBoxes = function() {
 		var block = $(this);
@@ -145,11 +145,11 @@ jQuery.fn.initMenu = function() {
 		alertMessages.fadeOut(function(){$(this).remove()});
 	};
 })(jQuery);
-
+*/
 /* ==================================================
  * 3) Tabs by Simon Stamm
  * ================================================== */
-
+/*
 (function($){
 	$.fn.createTabs = function(){
 		var container = $(this), tab_nr = 0;
@@ -188,7 +188,7 @@ jQuery.fn.initMenu = function() {
 		
 	};
 })(jQuery);
-
+*/
 /* ==================================================
  * 4) CSS height/width hook
  * ================================================== */

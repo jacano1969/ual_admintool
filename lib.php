@@ -549,8 +549,6 @@ function show_home() {
 
 function show_header($grid=true) {
     
-    //global $MULTI_SELECT_LIST;
-    
     $header = '';
     $header .= '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">';
     $header .= '<html lang="en" dir="ltr">';
@@ -559,44 +557,36 @@ function show_header($grid=true) {
     $header .= '<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">';
     $header .= '<title>UAL Admn Tool</title>';
     
-    // addded ro gdata table
-    //if($grid==true) {
-        $header .= '<link rel="stylesheet" href="css/960gs/fluid.css">';
-        $header .= '<link rel="stylesheet" href="css/h5bp/normalize.css">';
-        $header .= '<link rel="stylesheet" href="css/h5bp/non-semantic.helper.classes.css">';
-        $header .= '<link rel="stylesheet" href="css/h5bp/print.styles.css">';
-        
-        $header .= '<link rel="stylesheet" href="css/sprites.css">';
-        $header .= '<link rel="stylesheet" href="css/header.css">';
-        $header .= '<link rel="stylesheet" href="css/navigation.css">';   
-        $header .= '<link rel="stylesheet" href="css/content.css">';
-        $header .= '<link rel="stylesheet" href="css/footer.css">';
-        $header .= '<link rel="stylesheet" href="css/typographics.css">';
-        $header .= '<link rel="stylesheet" href="css/ie.fixes.css">';
-        
-        
-        $header .= '<link rel="stylesheet" href="css/sprite.forms.css">';
-        $header .= '<link rel="stylesheet" href="css/sprite.tables.css">';
-        
-        $header .= '<link rel="stylesheet" href="css/sprite.lists.css">';
-        $header .= '<link rel="stylesheet" href="css/icons.css">';
-        $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
-                    
-        $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
-    //}    
+    // addded for data table
+    $header .= '<link rel="stylesheet" href="css/960gs/fluid.css">';
+    $header .= '<link rel="stylesheet" href="css/h5bp/normalize.css">';
+    $header .= '<link rel="stylesheet" href="css/h5bp/non-semantic.helper.classes.css">';
+    $header .= '<link rel="stylesheet" href="css/h5bp/print.styles.css">';
+    
+    $header .= '<link rel="stylesheet" href="css/sprites.css">';
+    $header .= '<link rel="stylesheet" href="css/header.css">';
+    $header .= '<link rel="stylesheet" href="css/navigation.css">';   
+    $header .= '<link rel="stylesheet" href="css/content.css">';
+    $header .= '<link rel="stylesheet" href="css/footer.css">';
+    $header .= '<link rel="stylesheet" href="css/typographics.css">';
+    $header .= '<link rel="stylesheet" href="css/ie.fixes.css">';
+    
+    $header .= '<link rel="stylesheet" href="css/sprite.forms.css">';
+    $header .= '<link rel="stylesheet" href="css/sprite.tables.css">';
+    
+    $header .= '<link rel="stylesheet" href="css/sprite.lists.css">';
+    $header .= '<link rel="stylesheet" href="css/icons.css">';
+    $header .= '<link rel="stylesheet" href="css/external/jquery-ui-1.8.16.custom.css">';
+                
+    $header .= '<script src="script/libs/modernizr-2.0.6.min.js"></script>';
     
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
-    //$header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
     $header .= '<script src="script/libs/jquery-1.7.1.min.js" type="text/javascript"></script>';
     
-    //if($MULTI_SELECT_LIST==true) {
-        $header .= '<link href="css/multi_select_list.css" type="text/css" rel="stylesheet">';
-        $header .= '<script src="script/jquery.twosidedmultiselect.js"></script>';
-    //}
+    $header .= '<link href="css/multi_select_list.css" type="text/css" rel="stylesheet">';
+    $header .= '<script src="script/jquery.twosidedmultiselect.js"></script>';
     
     $header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
-    //$header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
-    //$header .= '<script type="text/javascript" src="script/jquery.tablesorter.js"></script>';
     $header .= '<script src="script/ual_admintool.js" type="text/javascript"></script>';
     $header .= '</head>';
     
@@ -626,32 +616,16 @@ function show_footer($grid=true) {
     
     $footer = '';
     
-    
     // Added for grid
     if($grid==true) {
         $footer .='<script>window.jQuery || document.write(\'<script src="script/libs/jquery-1.7.1.min.js"><\/script>\')</script>';
         $footer .='<script>window.jQuery.ui || document.write(\'<script src="script/libs/jquery-ui-1.8.16.min.js"><\/script>\')</script>';
-        
         $footer .= '<script src="script/gridmanager.js"></script>';
-        
         $footer .='<script defer src="script/plugins.js"></script> <!-- REQUIRED: Different own jQuery plugnis -->';
-        $footer .='<script defer src="script/mylibs/jquery.ba-resize.min.js"></script> <!-- RECOMMENDED when using sidebar: page resizing -->';
-        $footer .='<script defer src="script/mylibs/jquery.easing.1.3.js"></script> <!-- RECOMMENDED: box animations -->';
         $footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
-        $footer .='<script defer src="script/mylibs/jquery.validate.js"></script>';
+        $footer .='<script defer src="script/jquery.validate.min.js"></script>';
         $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
-        $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
-        $footer .='<!-- end scripts -->';
-        $footer .='<script defer>';
-        $footer .='$(window).load(function() {';
-        $footer .='    $(\'#table-example\').dataTable();';
-        $footer .='    $(\'#table-example\').css(\'visibility\',\'visible\');';
-        $footer .='});';
-        $footer .='</script>';
-        $footer .='<!--[if lt IE 7 ]>';
-        $footer .='<script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
-        $footer .='<script defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
-        $footer .='<![endif]-->';
+        $footer .='<script defer src="script/script.js"></script>';
         }
         
     $footer .='</body>';
@@ -2092,9 +2066,9 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                         foreach ($data_table_cols as $table_col) {
                             
                             if($cols==0) {
-                                $workflow_form .= '<th class="sorting_desc" rowspan="1" colspan="1">'.$table_col->name.'</td>';
+                                $workflow_form .= '<th class="sorting_desc" rowspan="1" colspan="1">'.$table_col->name.'</th>';
                             } else {
-                                $workflow_form .= '<th class="sorting" rowspan="1" colspan="1">'.$table_col->name.'</td>';
+                                $workflow_form .= '<th class="sorting" rowspan="1" colspan="1">'.$table_col->name.'</th>';
                             }
                             // record that column is a status field
                             if(in_array(strtolower($table_col->name),$switch_status_columns)) {
@@ -2109,7 +2083,11 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                             
                             $cols++;
                         }
-                        //$workflow_form .= '';
+                        
+                        if($copy_table==1) {
+                            $workflow_form .= '<th class="sorting" rowspan="1" colspan="1"></th>';
+                        }
+                            
                         $workflow_form .= '</tr></thead>';
                         
                         $workflow_form .= '<tbody>';
@@ -2134,6 +2112,10 @@ function get_workflow_action($step_id, $sub_step_id, $action_id) {
                                         $workflow_form .= '<td class="sorting_1">'.$data_row[$index].'</td>';
                                     }
                                 }
+                            }
+                            
+                            if($copy_table==1) {
+                                $workflow_form .= '<td class="sorting_1"><div class="hide_sort">1</div><input name="chk_'.$data_row[0].'" id="chk_'.$data_row[0].'" type="checkbox"></td>';
                             }
                             
                             $workflow_form .= '</tr>';

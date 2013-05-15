@@ -2,7 +2,7 @@
  * Function.prototype.bind for IE
  * @see http://webreflection.blogspot.com/2010/02/functionprototypebind.html
  */
-if(Function.prototype.bind == null) {
+/*if(Function.prototype.bind == null) {
 
 	Function.prototype.bind = ( function(slice) {
 
@@ -41,7 +41,7 @@ if(Function.prototype.bind == null) {
 
 	}(Array.prototype.slice));
 }
-
+*/
 
 /*
  * Peach - Clean & Smooth Admin Template
@@ -72,7 +72,7 @@ if(Function.prototype.bind == null) {
 
 (function($) {
 
-	$.extend($.fn, {
+	/*$.extend($.fn, {
 		contains: function(el){
 			var ret = false;
 			if (typeof el == 'string') {
@@ -83,7 +83,7 @@ if(Function.prototype.bind == null) {
 			
 			return ret;
 		}
-	});
+	});*/
 
 	/* ==================================================
 	 * 1) Forms
@@ -92,7 +92,7 @@ if(Function.prototype.bind == null) {
 		/*
 		 * The sidebar navigation
 		 */
-		$('aside').find('.menu').initMenu();
+		/*$('aside').find('.menu').initMenu();*/
 		/*
 		 * Form validation
 		 */
@@ -147,7 +147,7 @@ if(Function.prototype.bind == null) {
 		/*
 		 * Custom form elements
 		 */
-		if($.fn.checkbox) {
+		/*if($.fn.checkbox) {
 			$('input[type="checkbox"]').checkbox({
 				cls : 'checkbox',
 				empty : 'img/sprites/forms/checkboxes/empty.png'
@@ -156,7 +156,7 @@ if(Function.prototype.bind == null) {
 				cls : 'radio-button',
 				empty : 'img/sprites/forms/checkboxes/empty.png'
 			});
-		}
+		}*/
 		/*
 		 * Select Box
 		 */
@@ -173,19 +173,19 @@ if(Function.prototype.bind == null) {
 		/*
 		 * File Input
 		 */
-		if($.fn.customFileInput && $.fn.ellipsis) {
+		/*if($.fn.customFileInput && $.fn.ellipsis) {
 			$('input[type=file]').customFileInput();
-		}
+		}*/
 		/*
 		 * Placeholders
 		 */
-		if($.fn.placeholder) {
+		/*if($.fn.placeholder) {
 			$('input, textarea').placeholder();
-		}
+		}*/
 		/* 
 		 * Date Pickers
 		 */
-		if ($.fn.datepicker && $.fn.datetimepicker && !$.browser.opera) {
+		/*if ($.fn.datepicker && $.fn.datetimepicker && !$.browser.opera) {
 			var defaults = {
 				hourGrid: 23,
 				minuteGrid: 59
@@ -217,30 +217,30 @@ if(Function.prototype.bind == null) {
 					$.datepicker._gotoToday('#' + id);
 				}
 			});
-		}
+		}*/
 		/* Color input */
-		if(!$.browser.opera && $.fn.miniColors) {
+		/*if(!$.browser.opera && $.fn.miniColors) {
 			$("input[type=color]").miniColors();
-		}
+		}*/
 	})();
 
 
 	/* ==================================================
 	 * 2) Boxes
 	 * ================================================== */
-	(function() {
+	/*(function() {*/
 		/*
 		 * Hide the alert boxes
 		 */
 		// .alert .hide
-		$(".alert").find(".hide").click(function() {
+		/*$(".alert").find(".hide").click(function() {
 			$(this).parent().slideUp();
-		});
+		});*/
 		/*
 		 * Show/hide the boxes
 		 */
 		// .box .header > span
-		$('.box').find('.header').children('span').click(function() {
+		/*$('.box').find('.header').children('span').click(function() {
 			var $this = $(this);
 			var $box = $this.parents('.box');
 			var $content = $box.find('.content');
@@ -277,13 +277,13 @@ if(Function.prototype.bind == null) {
 			$this.find('.header').hasClass('grey') && $content.addClass('grey');
 			!$this.contains('.header') && $content.addClass('no-header');
 		});
-	})();
+	})();*/
 
 
 	/* ==================================================
 	 * 3) Wizard
 	 * ================================================== */
-	(function() {
+	/*(function() {
 		if($.fn.equalHeights) {
 			// Show an wizard page
 			var showWizPage = function(page_nr, $wiz) {
@@ -342,13 +342,13 @@ if(Function.prototype.bind == null) {
 			// .wizard .wiz_page
 			$('.wizard').find('.wiz_page').equalHeights().not(':first').hide();
 		}
-	})();
+	})();*/
 
 
 	/* ==================================================
 	 * 4) Page resize: Resize the #content-wrapper and the sidebar to fill the page
 	 * ================================================== */
-	(function() {
+	/*(function() {
 		// http://stackoverflow.com/questions/7785691/using-javascript-to-resize-a-div-to-screen-height-causes-flickering-when-shrinki
 		if($('aside').length) {
 			$('#content-wrapper').css('margin-bottom', '0');
@@ -407,7 +407,7 @@ if(Function.prototype.bind == null) {
 				$.resize.throttleWindow = false;
 			}
 		}
-	})();
+	})();*/
 
 
 	/* ==================================================
@@ -442,7 +442,7 @@ if(Function.prototype.bind == null) {
 	/* ==================================================
 	 * 7) Tooltips
 	 * ================================================== */
-	(function() {
+	/*(function() {
 		if($.fn.tipsy) {
 			$('a[rel=tooltip]').tipsy({
 				fade : true
@@ -470,7 +470,7 @@ if(Function.prototype.bind == null) {
 				fade : true
 			});
 		}
-	})();
+	})();*/
 
 
 	/* ==================================================
@@ -525,7 +525,7 @@ if(Function.prototype.bind == null) {
 	/* ==================================================
 	 * 9) Charts
 	 * ================================================== */
-	$('.graph').bind("plothover", function(event, pos, item) {
+	/*$('.graph').bind("plothover", function(event, pos, item) {
 		if(item) {
 			var x = item.datapoint[0].toFixed(2), y = item.datapoint[1].toFixed(2);
 			$(this).tipsy({
@@ -538,11 +538,11 @@ if(Function.prototype.bind == null) {
 		} else {
 			$(this).tipsy('hide');
 		}
-	});
+	});*/
 	/* ==================================================
 	 * 10) Gallery
 	 * ================================================== */
-	(function() {
+	/*(function() {
 		if($.fn.prettyPhoto) {
 			$('.gallery .action-list').hide();
 			$('.gallery').children('li').mouseenter(function() {
@@ -557,13 +557,13 @@ if(Function.prototype.bind == null) {
 			});
 			$(".gallery").find("a[rel^='prettyPhoto']").prettyPhoto();
 		}
-	})();
+	})();*/
 
 
 	/* ==================================================
 	 * 11) Toolbar buttons
 	 * ================================================== */
-	(function() {
+	/*(function() {
 		var noPropagation = function(e) {
 			e.stopPropagation();
 		};
@@ -589,11 +589,11 @@ if(Function.prototype.bind == null) {
 				$button.next().hide();
 			}
 
-		});
+		});*/
 		/*
 		 * The toolbar menu
 		 */
-		$('.toolbar_large').each(function() {
+		/*$('.toolbar_large').each(function() {
 			var $toolbar = $(this), $dropdown = $toolbar.find('.dropdown');
 			$toolbar.find('.toolcaption').css('min-width', $dropdown.width() - 5 + 'px');
 			
@@ -609,22 +609,22 @@ if(Function.prototype.bind == null) {
 			});
 			$dropdown.hide();
 		});
-	})();
+	})();*/
 
 
 	/* ==================================================
 	 * 12) jGrowl
 	 * ================================================== */
-	if($.jGrowl) {
+	/*if($.jGrowl) {
 		$.jGrowl.defaults.life = 8000
 		$.jGrowl.defaults.pool = 5
-	}
+	}*/
 
 
 	/* ==================================================
 	 * 13) Activity Stream: Equal widths
 	 * ================================================== */
-	(function() {
+	/*(function() {
 		var max = -1;
 		var elements = $('.activity.fixed.equal').find('.description');
 
@@ -638,6 +638,6 @@ if(Function.prototype.bind == null) {
 		elements.each(function() {
 			$(this).width(max);
 		});
-	})();
+	})();*/
 	
 })(jQuery);

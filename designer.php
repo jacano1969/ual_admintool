@@ -23,10 +23,7 @@ if(is_logged_in()){
     $header .= '<title>UAL Admn Tool Designer</title>';
     $header .= '<link href="css/style.css" type="text/css" rel="stylesheet">';
     $header .= '<script src="script/jquery-1.8.1.min.js" type="text/javascript"></script>';
-    #$header .= '<script src="script/jquery.lightbox_me.js" type="text/javascript"></script>';
     $header .= '<script src="script/jquery.validate.min.js" type="text/javascript"></script>';
-    #$header .= '<script src="script/jquery.stepy.min.js" type="text/javascript"></script>';
-    #$header .= '<script type="text/javascript" src="script/jquery.tablesorter.js"></script>';
     $header .= '<script src="script/ual_admintool.js" type="text/javascript"></script>';
     $header .= '</head>';
     

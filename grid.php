@@ -230,24 +230,16 @@
     $footer .= '<script src="script/gridmanager.js"></script>';
     
     $footer .='<script defer src="script/plugins.js"></script> <!-- REQUIRED: Different own jQuery plugnis -->';
-    $footer .='<script defer src="script/mylibs/jquery.ba-resize.min.js"></script> <!-- RECOMMENDED when using sidebar: page resizing -->';
-    $footer .='<script defer src="script/mylibs/jquery.easing.1.3.js"></script> <!-- RECOMMENDED: box animations -->';
     $footer .='<script defer src="script/mylibs/jquery.chosen.js"></script>';
-    $footer .='<script defer src="script/mylibs/jquery.validate.js"></script>';
+    $footer .='<script defer src="script/jquery.validate.min.js"></script>';
     $footer .='<script defer src="script/mylibs/jquery.dataTables.js"></script>';
     $footer .='<script defer src="script/script.js"></script> <!-- REQUIRED: Generic scripts -->';
-    $footer .='<!-- end scripts -->';
     $footer .='<script defer>';
     $footer .='$(window).load(function() {';
     $footer .='    $(\'#table-example\').dataTable();';
     $footer .='    $(\'#table-example\').css(\'visibility\',\'visible\');';
     $footer .='});';
     $footer .='</script>';
-    $footer .='<!--[if lt IE 7 ]>';
-    $footer .='<script defer src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>';
-    $footer .='<script defer>window.attachEvent(\'onload\',function(){CFInstall.check({mode:\'overlay\'})})</script>';
-    $footer .='<![endif]-->';
-    
     $footer .='</div>';
     $footer .='</body>';
     $footer .='</html>';
